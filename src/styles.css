@@ -1,0 +1,419 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap");
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system definition.
+ *
+ * The @theme inline block maps CSS custom properties to Tailwind utility
+ * classes (e.g. --color-primary -> bg-primary, text-primary).
+ *
+ * The :root and .dark blocks define the actual color values using oklch.
+ * All colors MUST use oklch format.
+ *
+ * To add a new semantic color:
+ * 1. Add the variable to :root (light value) and .dark (dark value)
+ * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-surface-cyan: var(--surface-cyan);
+  --color-surface-lavender: var(--surface-lavender);
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.875rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.18 0.02 260);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.02 260);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.02 260);
+  --primary: #00E5FF;
+  --primary-foreground: oklch(0.18 0.02 260);
+  --secondary: oklch(0.97 0.01 250);
+  --secondary-foreground: oklch(0.18 0.02 260);
+  --muted: oklch(0.97 0.01 250);
+  --muted-foreground: oklch(0.5 0.02 260);
+  --accent: oklch(0.62 0.18 290);
+  --accent-foreground: oklch(0.99 0 0);
+  --destructive: oklch(0.6 0.22 27);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.93 0.01 255);
+  --input: oklch(0.93 0.01 255);
+  --ring: oklch(0.78 0.13 200);
+  --surface-cyan: oklch(0.96 0.03 200);
+  --surface-lavender: oklch(0.95 0.04 295);
+  --gradient-cta: url('/cta-banner.svg') center/cover no-repeat;
+  --gradient-hero-text: linear-gradient(135deg, oklch(0.62 0.18 290), oklch(0.55 0.2 270));
+  --shadow-card: 0 1px 2px oklch(0.18 0.02 260 / 0.04), 0 8px 24px -12px oklch(0.18 0.02 260 / 0.12);
+  --shadow-cta: 0 20px 60px -20px oklch(0.5 0.22 270 / 0.5);
+  --chart-1: oklch(0.78 0.13 200);
+  --chart-2: oklch(0.62 0.18 290);
+  --chart-3: oklch(0.7 0.12 220);
+  --chart-4: oklch(0.82 0.1 195);
+  --chart-5: oklch(0.55 0.2 280);
+  --sidebar: oklch(0.99 0.003 250);
+  --sidebar-foreground: oklch(0.18 0.02 260);
+  --sidebar-primary: #00E5FF;
+  --sidebar-primary-foreground: oklch(0.18 0.02 260);
+  --sidebar-accent: oklch(0.96 0.01 250);
+  --sidebar-accent-foreground: oklch(0.18 0.02 260);
+  --sidebar-border: oklch(0.93 0.01 255);
+  --sidebar-ring: oklch(0.78 0.13 200);
+}
+
+.dark {
+  --background: oklch(0.129 0.042 264.695);
+  --foreground: oklch(0.984 0.003 247.858);
+  --card: oklch(0.208 0.042 265.755);
+  --card-foreground: oklch(0.984 0.003 247.858);
+  --popover: oklch(0.208 0.042 265.755);
+  --popover-foreground: oklch(0.984 0.003 247.858);
+  --primary: oklch(0.929 0.013 255.508);
+  --primary-foreground: oklch(0.208 0.042 265.755);
+  --secondary: oklch(0.279 0.041 260.031);
+  --secondary-foreground: oklch(0.984 0.003 247.858);
+  --muted: oklch(0.279 0.041 260.031);
+  --muted-foreground: oklch(0.704 0.04 256.788);
+  --accent: oklch(0.279 0.041 260.031);
+  --accent-foreground: oklch(0.984 0.003 247.858);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.551 0.027 264.364);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.208 0.042 265.755);
+  --sidebar-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-accent: oklch(0.279 0.041 260.031);
+  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.551 0.027 264.364);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    font-family: var(--font-body);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+  }
+
+  h1 { font-size: 48px; }
+  h2 { font-size: 44px; }
+  h3 { font-size: 40px; }
+  h4 { font-size: 36px; }
+  h5 { font-size: 32px; }
+}
+
+@utility font-display {
+  font-family: var(--font-display);
+}
+@utility font-body {
+  font-family: var(--font-body);
+}
+
+/* Button system per brand spec — unified rounded-full corners */
+@utility btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 16px;
+  color: oklch(0.22 0.08 270);
+  background-color: #00E5FF;
+  transition: background-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+  box-shadow: 0 6px 18px -8px oklch(0.78 0.13 200 / 0.55);
+}
+@utility btn-primary {
+  &:hover {
+    background-color: #33EBFF;
+    box-shadow: 0 10px 24px -10px oklch(0.78 0.13 200 / 0.45);
+  }
+}
+@utility btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 16px;
+  color: oklch(0.22 0.08 270);
+  background-color: oklch(1 0 0);
+  border: 1px solid oklch(0.9 0.01 250);
+  transition: background-color 200ms ease, border-color 200ms ease;
+}
+@utility btn-secondary {
+  &:hover {
+    background-color: oklch(0.97 0.02 200);
+    border-color: oklch(0.85 0.04 200);
+  }
+}
+@utility btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding: 0.6rem 1rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 16px;
+  color: #1A3A5C;
+  background-color: transparent;
+  transition: color 200ms ease, background-color 200ms ease;
+}
+@utility btn-ghost {
+  &::after {
+    content: "→";
+    display: inline-block;
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity 200ms ease, transform 200ms ease;
+  }
+  &:hover {
+    color: #165AA3;
+  }
+  &:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; transform: translateY(0); }
+  50% { opacity: 0.85; transform: translateY(-2px); }
+}
+
+@keyframes fade-in-up {
+  0% { opacity: 0; transform: translateY(16px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer-x {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@utility animate-fade-in-up {
+  animation: fade-in-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@utility animate-fade-in-soft {
+  animation: fade-in 0.8s ease-out both;
+}
+@utility animate-float {
+  animation: float-y 6s ease-in-out infinite;
+}
+@utility hover-lift {
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 300ms ease;
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px -20px oklch(0 0 0 / 0.18);
+  }
+}
+@utility hover-pop {
+  transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+  &:hover { transform: scale(1.04); }
+  &:active { transform: scale(0.98); }
+}
+
+img { content-visibility: auto; }
+
+/* ───────────────────────────────────────────────
+   Global gradient text reveal on scroll
+   Inspired by cruip.com gradient reveal pattern.
+   Uses CSS scroll-driven animations (animation-timeline: view())
+   with an IntersectionObserver fallback (.reveal-text.is-in).
+   ─────────────────────────────────────────────── */
+@keyframes reveal-sweep {
+  from { background-position: 100% 0; }
+  to   { background-position: 0% 0;   }
+}
+
+@utility reveal-text {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-foreground) 0%,
+    var(--color-foreground) 50%,
+    color-mix(in oklab, var(--color-foreground) 18%, transparent) 50%,
+    color-mix(in oklab, var(--color-foreground) 18%, transparent) 100%
+  );
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  transition: background-position 900ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@utility reveal-text {
+  &.is-in { background-position: 0% 0; }
+}
+
+@supports (animation-timeline: view()) {
+  .reveal-text {
+    animation: reveal-sweep linear both;
+    animation-timeline: view();
+    animation-range: entry 15% cover 45%;
+  }
+}
+
+/* Reveal container — fades + lifts any block as it enters the viewport */
+@utility reveal-area {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+@utility reveal-area {
+  &.is-in { opacity: 1; transform: translateY(0); }
+}
+
+@supports (animation-timeline: view()) {
+  .reveal-area {
+    animation: reveal-area-in linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 35%;
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes reveal-area-in {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Auto-apply reveal to section headings on every page.
+   Headings that already use a gradient (bg-clip-text) are excluded. */
+main :where(section h2, section h3):not([class*="bg-clip-text"]):not([data-no-reveal]) {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-foreground) 0%,
+    var(--color-foreground) 50%,
+    color-mix(in oklab, var(--color-foreground) 18%, transparent) 50%,
+    color-mix(in oklab, var(--color-foreground) 18%, transparent) 100%
+  );
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+@supports (animation-timeline: view()) {
+  main :where(section h2, section h3):not([class*="bg-clip-text"]):not([data-no-reveal]) {
+    animation: reveal-sweep linear both;
+    animation-timeline: view();
+    animation-range: entry 15% cover 45%;
+  }
+}
+@supports not (animation-timeline: view()) {
+  main :where(section h2, section h3):not([class*="bg-clip-text"]):not([data-no-reveal]) {
+    transition: background-position 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  main :where(section h2, section h3).is-in:not([class*="bg-clip-text"]):not([data-no-reveal]) {
+    background-position: 0% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  main :where(section h2, section h3):not([class*="bg-clip-text"]):not([data-no-reveal]) {
+    background: none;
+    color: var(--color-foreground);
+    -webkit-text-fill-color: currentColor;
+  }
+}
