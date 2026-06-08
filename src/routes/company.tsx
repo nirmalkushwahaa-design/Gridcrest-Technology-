@@ -62,10 +62,9 @@ function Hero() {
           </span>
           <h1 className="mt-6 text-balance text-5xl font-display font-bold leading-[1.05] lg:text-[64px]">
             Building the digital backbone of{" "}
-            <span className="bg-[var(--gradient-hero-text)] bg-clip-text text-transparent">
-              modern utilities
+            <span style={{ color: "var(--brand-cyan)" }}>
+              modern utilities.
             </span>
-            .
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
             GridCrest delivers integrated smart-grid technologies — intelligent metering,
@@ -239,7 +238,7 @@ function VisionMission() {
           <h2 className="mx-auto max-w-3xl text-balance text-4xl font-display font-bold leading-tight lg:text-5xl">
             Invisible technology.{" "}
             <span className="relative">
-              <span className="bg-[var(--gradient-hero-text)] bg-clip-text text-transparent">
+              <span style={{ color: "var(--brand-cyan)" }}>
                 Visible impact.
               </span>
               <span
@@ -505,7 +504,7 @@ function ClosingCTA() {
             backgroundSize: "32px 32px",
             maskImage: "radial-gradient(ellipse at center, black, transparent 70%)",
           }} aria-hidden />
-          <h2 className="relative mx-auto max-w-3xl text-balance text-4xl font-display font-bold leading-tight text-white lg:text-5xl">
+          <h2 data-no-reveal className="relative mx-auto max-w-3xl text-balance text-4xl font-display font-bold leading-tight text-white lg:text-5xl">
             Ready to build the future grid?
           </h2>
           <p className="relative mx-auto mt-4 max-w-xl text-white/85">

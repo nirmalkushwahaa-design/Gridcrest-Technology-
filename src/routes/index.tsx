@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   ArrowRight,
   Gauge,
@@ -16,6 +16,11 @@ import {
   Youtube,
   Mail,
 } from "lucide-react";
+import IndiaMapInteractive from "@/components/IndiaMapInteractive";
+import logoUGVCL from "@/assets/logo-ugvcl.svg";
+import logoCESC from "@/assets/logo-cesc.svg";
+import logoKSEB from "@/assets/logo-kseb.svg";
+import logoWBSEDCL from "@/assets/logo-wbsedcl.svg";
 import heroImg from "@/assets/hero-ecosystem.png";
 import utilitiesImg from "@/assets/utilities.jpg";
 import governmentImg from "@/assets/government.jpg";
@@ -46,7 +51,7 @@ export const Route = createFileRoute("/")({
 const solutions = [
   {
     tag: "FIELD",
-    title: "Smart Metering",
+    title: "Smart Meter",
     icon: Gauge,
     text: "Purpose-built AMI for electricity, water and gas — covering smart metering, MDM, advanced data analytics, and connectivity across regions.",
     color: "cyan",
@@ -59,8 +64,8 @@ const solutions = [
     color: "lavender",
   },
   {
-    tag: "DATA",
-    title: "Data & Intelligence",
+    tag: "ANANTYA",
+    title: "Anantya Intelligence",
     icon: BarChart3,
     text: "Cloud-native analytics for AMI, MDM and beyond — turning raw operational data into clear decisions, faster.",
     color: "cyan",
@@ -102,12 +107,14 @@ const differentiators = [
 ];
 
 const milestones = [
-  { year: "2020", text: "Kaynes Investment into Pinnacles Industries" },
-  { year: "2022", text: "Rebranded as GridCrest. Pinnacle.exit" },
-  { year: "2023", text: "Launched the 4G DCU smart meter" },
-  { year: "2024", text: "Deployed 1.5 Million units in customer base" },
-  { year: "2025", text: "5 Million meters pipeline secured" },
-  { year: "2026", text: "Scale expansion into Europe, Americas and Africa", active: true },
+  { year: "2019", text: "Establishment of Iskraemeco India Private Limited. Operations begin with a single employee." },
+  { year: "2020", text: "Core founding team joins. First office in Kolkata. First meter testing lab built in a residential bedroom." },
+  { year: "2020–21", text: "Regulatory approvals and technical capability building across key utility verticals." },
+  { year: "2021", text: "First major smart metering order secured from WBSEDCL." },
+  { year: "2022", text: "Major project secured from Power Grid Corporation of India." },
+  { year: "2022–24", text: "Rapid organisational growth and large-scale project expansion across India." },
+  { year: "2024–25", text: "Strategic acquisition by Kaynes Technologies, enabling industrial-scale manufacturing." },
+  { year: "2025–26", text: "Rebranding and launch of GridCrest — one ecosystem, every layer of the grid.", active: true },
 ];
 
 function Index() {
@@ -127,7 +134,7 @@ function Index() {
             </p>
             <h1 className="text-4xl font-bold leading-[1.05] tracking-tight md:text-6xl">
               One Ecosystem. <br />
-              <span className="bg-[image:var(--gradient-hero-text)] bg-clip-text text-transparent">
+              <span style={{ color: "var(--brand-cyan)" }}>
                 Every Layer of the Grid.
               </span>
             </h1>
@@ -143,15 +150,18 @@ function Index() {
                 Contact Sales
               </button>
             </div>
-            <div className="mt-12 grid max-w-md grid-cols-3 gap-6">
+            <div className="mt-12 flex flex-wrap gap-x-10 gap-y-6">
               {[
-                { v: "2M+", l: "Meters Deployed" },
-                { v: "98.7%", l: "Network Uptime" },
-                { v: "40+", l: "Utility Partners" },
+                { prefix: "", target: 2, suffix: "M+", decimals: 0, l: "Meters Deployed" },
+                { prefix: "₹", target: 600, suffix: "Cr+", decimals: 0, l: "Annual Revenue" },
+                { prefix: "", target: 5, suffix: "L+", decimals: 0, l: "Monthly Production" },
+                { prefix: "", target: 2500, suffix: "+", decimals: 0, l: "Employees" },
               ].map((s, i) => (
                 <div key={s.l} className="animate-fade-in-up" style={{ animationDelay: `${0.2 + i * 0.1}s` }}>
-                  <div className="text-2xl font-bold text-accent md:text-3xl">{s.v}</div>
-                  <div className="mt-1 text-xs text-muted-foreground">{s.l}</div>
+                  <div className="text-2xl font-bold text-accent md:text-3xl">
+                    <CountUp prefix={s.prefix} target={s.target} suffix={s.suffix} decimals={s.decimals} />
+                  </div>
+                  <div className="mt-1 text-xs text-muted-foreground whitespace-nowrap">{s.l}</div>
                 </div>
               ))}
             </div>
@@ -185,7 +195,7 @@ function Index() {
 
         {/* Pipeline tabs */}
         <div className="mx-auto mt-8 flex max-w-3xl flex-wrap items-center justify-center gap-2">
-          {["FIELD", "COMMUNICATION", "DATA", "INTEGRATED"].map((tag, i) => (
+          {["FIELD", "COMMUNICATION", "ANANTYA", "INTEGRATED"].map((tag, i) => (
             <div key={tag} className="flex items-center gap-2">
               <button
                 onClick={() => setActiveSolution(i)}
@@ -281,8 +291,8 @@ function Index() {
         </div>
       </section>
 
-      {/* INDUSTRY */}
-      <section className="mx-auto max-w-7xl px-6 py-20">
+      {/* INDUSTRY — hidden for phase 1 */}
+      <section className="mx-auto max-w-7xl px-6 py-20 hidden">
         <SectionLabel>RELEVANCE LAYER</SectionLabel>
         <h2 className="mx-auto mt-3 max-w-3xl text-center text-3xl font-bold tracking-tight md:text-4xl">
           Built for Your Industry
@@ -385,35 +395,11 @@ function Index() {
           From a regional metering company to a global smart-grid force — every year, a new chapter.
         </p>
 
-        <div className="mt-12 grid gap-4 sm:grid-cols-3 lg:grid-cols-6">
-          {milestones.map((m) => (
-            <div
-              key={m.year}
-              className={`flex min-h-[150px] flex-col rounded-2xl p-5 transition ${
-                m.active
-                  ? "bg-primary text-primary-foreground shadow-[var(--shadow-card)]"
-                  : "bg-surface-lavender"
-              }`}
-            >
-              {m.active && <Calendar className="mb-2 h-4 w-4" />}
-              <div
-                className={`text-2xl font-bold ${
-                  m.active ? "text-primary-foreground" : "text-accent"
-                }`}
-              >
-                {m.year}
-              </div>
-              <p
-                className={`mt-2 text-xs leading-snug ${
-                  m.active ? "text-primary-foreground/90" : "text-muted-foreground"
-                }`}
-              >
-                {m.text}
-              </p>
-            </div>
-          ))}
-        </div>
+        <MilestonesTrack />
       </section>
+
+      {/* PRESENCE */}
+      <PresenceSection />
 
       {/* CTA */}
       <section className="px-6 pb-20">
@@ -423,7 +409,7 @@ function Index() {
           <p className="relative text-xs font-semibold uppercase tracking-[0.22em] text-white/80">
             ENGAGEMENT
           </p>
-          <h2 className="relative mx-auto mt-3 max-w-3xl text-3xl font-bold tracking-tight text-white md:text-5xl">
+          <h2 data-no-reveal className="relative mx-auto mt-3 max-w-3xl text-3xl font-bold tracking-tight text-white md:text-5xl">
             Ready to Transform Your Grid?
           </h2>
           <p className="relative mx-auto mt-4 max-w-2xl text-white/85">
@@ -449,6 +435,276 @@ function Index() {
 
       <Footer />
     </div>
+  );
+}
+
+const projectLocations = ["Gujarat", "Kerala", "West Bengal", "Nagaland", "Delhi"];
+const manufacturingSites  = ["Hyderabad", "Mysuru"];
+const utilityPartners = [
+  { name: "UGVCL",    logo: logoUGVCL },
+  { name: "KSEB",     logo: logoKSEB },
+  { name: "CESC",     logo: logoCESC },
+  { name: "WBSEDCL", logo: logoWBSEDCL },
+];
+
+
+function PresenceSection() {
+  const [activeLocation, setActiveLocation] = useState<string | null>(null);
+
+  const allLocations = [
+    ...projectLocations.map((l) => ({ label: l, type: "project" as const })),
+    ...manufacturingSites.map((l) => ({ label: l, type: "mfg" as const })),
+  ];
+
+  return (
+    <section className="relative bg-background py-24" style={{ overflow: "clip" }}>
+
+      <div className="mx-auto max-w-7xl px-6">
+        {/* TOP: content + map */}
+        <div className="grid items-stretch gap-16 lg:grid-cols-2">
+
+          {/* LEFT */}
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">
+              Our Reach
+            </p>
+            <h2 className="mt-4 text-4xl font-bold leading-tight tracking-tight lg:text-5xl">
+              Pan-India Presence,{" "}
+              <span style={{ color: "var(--brand-cyan)" }}>Global Ambitions</span>
+            </h2>
+            <p className="mt-5 max-w-md text-sm text-muted-foreground">
+              From remote North-East deployments to coastal utilities — GridCrest is
+              delivering intelligent grid infrastructure across India's most demanding
+              programs, with global expansion on the horizon.
+            </p>
+
+            <div className="mt-10 space-y-7">
+              {/* Project Locations */}
+              <div className="flex gap-5">
+                <div className="mt-1 w-0.5 shrink-0 self-stretch rounded-full bg-accent" />
+                <div>
+                  <p className="text-sm font-semibold text-accent">Project Locations</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {projectLocations.map((loc) => (
+                      <span
+                        key={loc}
+                        onMouseEnter={() => setActiveLocation(loc)}
+                        onMouseLeave={() => setActiveLocation(null)}
+                        className={`cursor-pointer rounded-full border px-3 py-1 text-xs font-medium transition-all ${
+                          activeLocation === loc
+                            ? "border-accent bg-accent text-white"
+                            : "border-border bg-secondary text-foreground hover:border-accent/50 hover:bg-accent/10"
+                        }`}
+                      >
+                        {loc}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Manufacturing */}
+              <div className="flex gap-5">
+                <div className="mt-1 w-0.5 shrink-0 self-stretch rounded-full bg-[#A258DA]" />
+                <div>
+                  <p className="text-sm font-semibold text-[#A258DA]">Manufacturing Sites</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {manufacturingSites.map((loc) => (
+                      <span
+                        key={loc}
+                        onMouseEnter={() => setActiveLocation(loc)}
+                        onMouseLeave={() => setActiveLocation(null)}
+                        className={`cursor-pointer rounded-full border px-3 py-1 text-xs font-medium transition-all ${
+                          activeLocation === loc
+                            ? "border-[#A258DA] bg-[#A258DA] text-white"
+                            : "border-border bg-secondary text-foreground hover:border-[#A258DA]/50 hover:bg-[#A258DA]/10"
+                        }`}
+                      >
+                        {loc}
+                      </span>
+                    ))}
+                    <span className="rounded-full border border-[#A258DA]/30 bg-[#A258DA]/8 px-3 py-1 text-xs font-medium text-[#A258DA]">
+                      +2 new factories planned
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* 2026 & Beyond */}
+              <div className="flex gap-5">
+                <div className="mt-1 w-0.5 shrink-0 self-stretch rounded-full bg-border" />
+                <div>
+                  <p className="text-sm font-semibold text-foreground">2026 &amp; Beyond</p>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    Global expansion into Europe, Americas and Africa
+                  </p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {["Europe", "Americas", "Africa"].map((r) => (
+                      <span
+                        key={r}
+                        className="rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-muted-foreground"
+                      >
+                        {r}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Trusted by */}
+              <div className="mt-10 border-t border-border pt-8">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-muted-foreground">
+                  Trusted by Leading Utilities
+                </p>
+                <div className="mt-5 flex flex-wrap items-center gap-6">
+                  {utilityPartners.map((p) => (
+                    <div key={p.name} className="opacity-80 transition-all duration-300 hover:opacity-100">
+                      <img src={p.logo} alt={p.name} className="h-8 w-auto object-contain" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT: India map — clipped to left column height */}
+          <div className="flex flex-col overflow-hidden">
+            <div className="flex flex-1 flex-col">
+              <IndiaMapInteractive
+                activeLocation={activeLocation}
+                onStateHover={(label) => setActiveLocation(label)}
+              />
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
+function MilestonesTrack() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+
+  const onMouseDown = (e: React.MouseEvent) => {
+    isDragging.current = true;
+    startX.current = e.pageX - (trackRef.current?.offsetLeft ?? 0);
+    scrollLeft.current = trackRef.current?.scrollLeft ?? 0;
+    if (trackRef.current) trackRef.current.style.cursor = "grabbing";
+  };
+  const onMouseLeave = () => {
+    isDragging.current = false;
+    if (trackRef.current) trackRef.current.style.cursor = "grab";
+  };
+  const onMouseUp = () => {
+    isDragging.current = false;
+    if (trackRef.current) trackRef.current.style.cursor = "grab";
+  };
+  const onMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging.current || !trackRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - trackRef.current.offsetLeft;
+    const walk = (x - startX.current) * 1.2;
+    trackRef.current.scrollLeft = scrollLeft.current - walk;
+  };
+
+  return (
+    <div
+      ref={trackRef}
+      className="mt-12 flex gap-4 overflow-x-auto pb-2 select-none"
+      style={{ cursor: "grab" }}
+      onMouseDown={onMouseDown}
+      onMouseLeave={onMouseLeave}
+      onMouseUp={onMouseUp}
+      onMouseMove={onMouseMove}
+    >
+      {milestones.map((m) => (
+        <div
+          key={m.year}
+          className={`flex min-h-[160px] w-56 shrink-0 flex-col rounded-2xl p-5 transition ${
+            m.active
+              ? "bg-primary text-primary-foreground shadow-[var(--shadow-card)]"
+              : "bg-surface-lavender"
+          }`}
+        >
+          {m.active && <Calendar className="mb-2 h-4 w-4" />}
+          <div
+            className={`text-2xl font-bold ${
+              m.active ? "text-primary-foreground" : "text-accent"
+            }`}
+          >
+            {m.year}
+          </div>
+          <p
+            className={`mt-2 text-xs leading-snug ${
+              m.active ? "text-primary-foreground/90" : "text-muted-foreground"
+            }`}
+          >
+            {m.text}
+          </p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function CountUp({
+  target,
+  suffix = "",
+  prefix = "",
+  decimals = 0,
+  duration = 2000,
+}: {
+  target: number;
+  suffix?: string;
+  prefix?: string;
+  decimals?: number;
+  duration?: number;
+}) {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const started = useRef(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started.current) {
+          started.current = true;
+          const startTime = performance.now();
+          const step = (now: number) => {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // ease out cubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            setCount(parseFloat((eased * target).toFixed(decimals)));
+            if (progress < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [target, duration, decimals]);
+
+  const display =
+    target >= 1000
+      ? Math.round(count).toLocaleString()
+      : decimals > 0
+      ? count.toFixed(decimals)
+      : Math.round(count).toString();
+
+  return (
+    <span ref={ref}>
+      {prefix}{display}{suffix}
+    </span>
   );
 }
 

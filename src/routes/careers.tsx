@@ -68,7 +68,7 @@ function Hero() {
         </span>
         <h1 className="mt-6 max-w-4xl text-balance text-5xl font-display font-bold leading-[1.05] lg:text-[64px]">
           Join the team building{" "}
-          <span className="bg-[var(--gradient-hero-text)] bg-clip-text text-transparent">
+          <span style={{ color: "var(--brand-cyan)" }}>
             tomorrow's grid.
           </span>
         </h1>
@@ -294,7 +294,7 @@ function CTA() {
           className="relative overflow-hidden rounded-[2rem] p-10 text-center lg:p-16"
           style={{ background: "var(--gradient-cta)" }}
         >
-          <h2 className="relative mx-auto max-w-3xl text-balance text-4xl font-display font-bold leading-tight text-white lg:text-5xl">
+          <h2 data-no-reveal className="relative mx-auto max-w-3xl text-balance text-4xl font-display font-bold leading-tight text-white lg:text-5xl">
             Don't see your role? Tell us anyway.
           </h2>
           <p className="relative mx-auto mt-4 max-w-xl text-white/85">

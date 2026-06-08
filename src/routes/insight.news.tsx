@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+﻿import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight, Mail } from "lucide-react";
 import { CtaBanner } from "@/components/CtaBanner";
 
@@ -64,13 +64,13 @@ const NEWS: NewsItem[] = [
 export const Route = createFileRoute("/insight/news")({
   head: () => ({
     meta: [
-      { title: "News — GridCrest" },
+      { title: "News â€” GridCrest" },
       {
         name: "description",
         content:
           "The latest press releases, deployments and company milestones from GridCrest.",
       },
-      { property: "og:title", content: "News — GridCrest" },
+      { property: "og:title", content: "News â€” GridCrest" },
       { property: "og:description", content: "The latest from GridCrest." },
       { property: "og:url", content: "https://gridcrest-canvas-craft.lovable.app/insight/news" },
       { property: "og:type", content: "website" },
@@ -119,7 +119,7 @@ function NewsPage() {
               <p className="mt-2 text-sm text-muted-foreground">{n.summary}</p>
               <Link
                 to="/insight/news"
-                className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-[#165AA3] transition-colors"
+                className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-[var(--brand-navy-hover)] transition-colors"
               >
                 Read release
                 <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -142,7 +142,7 @@ function NewsPage() {
             </p>
             <a
               href="mailto:press@gridcrest.com"
-              className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1A3A5C] px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#165AA3]"
+              className="mt-6 inline-flex items-center gap-2 rounded-full bg-[var(--brand-navy)] px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[var(--brand-navy-hover)]"
             >
               <Mail className="h-4 w-4" /> press@gridcrest.com
             </a>

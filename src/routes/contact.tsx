@@ -79,7 +79,7 @@ function Hero() {
         </span>
         <h1 className="mt-6 max-w-4xl text-balance text-5xl font-display font-bold leading-[1.05] lg:text-[64px]">
           Let's build the future grid{" "}
-          <span className="bg-[var(--gradient-hero-text)] bg-clip-text text-transparent">
+          <span style={{ color: "var(--brand-cyan)" }}>
             together.
           </span>
         </h1>
@@ -367,7 +367,7 @@ function FinalCTA() {
           className="relative overflow-hidden rounded-[2rem] p-10 text-center lg:p-16"
           style={{ background: "var(--gradient-cta)" }}
         >
-          <h2 className="relative mx-auto max-w-3xl text-balance text-4xl font-display font-bold leading-tight text-white lg:text-5xl">
+          <h2 data-no-reveal className="relative mx-auto max-w-3xl text-balance text-4xl font-display font-bold leading-tight text-white lg:text-5xl">
             Ready to transform energy infrastructure?
           </h2>
           <div className="relative mt-8 flex flex-wrap items-center justify-center gap-3">

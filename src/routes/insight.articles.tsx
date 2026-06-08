@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+﻿import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight, Calendar } from "lucide-react";
 import { CtaBanner } from "@/components/CtaBanner";
 
@@ -15,7 +15,7 @@ const FEATURED: Article = {
   slug: "ai-grid-orchestration",
   title: "From Smart Meters to AI-Orchestrated Grids: The Next Decade",
   excerpt:
-    "How machine learning, digital twins and real-time telemetry are quietly reshaping the way utilities run distribution networks — and what operators need to do now to stay ahead.",
+    "How machine learning, digital twins and real-time telemetry are quietly reshaping the way utilities run distribution networks â€” and what operators need to do now to stay ahead.",
   category: "Perspective",
   date: "May 12, 2026",
   readTime: "9 min read",
@@ -35,7 +35,7 @@ const ARTICLES: Article[] = [
     slug: "digital-twin-distribution",
     title: "Digital Twins for Distribution: Beyond the Buzzword",
     excerpt:
-      "A practical framework for utilities evaluating digital twin platforms — what to measure, what to ignore, and what to pilot first.",
+      "A practical framework for utilities evaluating digital twin platforms â€” what to measure, what to ignore, and what to pilot first.",
     category: "Insight",
     date: "Apr 24, 2026",
     readTime: "7 min read",
@@ -62,7 +62,7 @@ const ARTICLES: Article[] = [
     slug: "cyber-hardening-amr",
     title: "Cyber-Hardening AMR Networks Without Slowing Rollout",
     excerpt:
-      "A pragmatic threat model for advanced metering infrastructure — and the controls that actually move the needline.",
+      "A pragmatic threat model for advanced metering infrastructure â€” and the controls that actually move the needline.",
     category: "Security",
     date: "Mar 18, 2026",
     readTime: "10 min read",
@@ -81,13 +81,13 @@ const ARTICLES: Article[] = [
 export const Route = createFileRoute("/insight/articles")({
   head: () => ({
     meta: [
-      { title: "Insights — GridCrest" },
+      { title: "Insights â€” GridCrest" },
       {
         name: "description",
         content:
           "Long-form perspectives on smart metering, grid intelligence and the modernization of energy infrastructure.",
       },
-      { property: "og:title", content: "Insights — GridCrest" },
+      { property: "og:title", content: "Insights â€” GridCrest" },
       {
         property: "og:description",
         content: "Perspectives on the future of energy infrastructure from the GridCrest team.",
@@ -121,7 +121,7 @@ function InsightsPage() {
             Insights &amp; perspectives on the modern grid
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-            Long-form writing from the GridCrest team and our partners — on grid intelligence,
+            Long-form writing from the GridCrest team and our partners â€” on grid intelligence,
             smart metering, manufacturing, and the policy shaping it all.
           </p>
         </div>
@@ -133,7 +133,7 @@ function InsightsPage() {
           <div className="aspect-[4/3] md:aspect-auto bg-gradient-to-br from-surface-cyan to-surface-lavender" />
           <div className="flex flex-col justify-center p-8 md:p-12">
             <span className="inline-flex w-fit rounded-full bg-accent/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-accent">
-              Featured · {FEATURED.category}
+              Featured Â· {FEATURED.category}
             </span>
             <h2 className="mt-4 text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
               {FEATURED.title}
@@ -148,7 +148,7 @@ function InsightsPage() {
             </div>
             <Link
               to="/insight/articles"
-              className="group mt-6 inline-flex w-fit items-center gap-1.5 text-sm font-medium text-foreground hover:text-[#165AA3] transition-colors"
+              className="group mt-6 inline-flex w-fit items-center gap-1.5 text-sm font-medium text-foreground hover:text-[var(--brand-navy-hover)] transition-colors"
             >
               Read article
               <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -180,7 +180,7 @@ function InsightsPage() {
                 </div>
                 <Link
                   to="/insight/articles"
-                  className="group mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-[#165AA3] transition-colors"
+                  className="group mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-[var(--brand-navy-hover)] transition-colors"
                 >
                   Read more
                   <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -191,13 +191,13 @@ function InsightsPage() {
         </div>
 
         <div className="mt-12 flex justify-center gap-2">
-          {["1", "2", "3", "→"].map((p, i) => (
+          {["1", "2", "3", "â†’"].map((p, i) => (
             <button
               key={p}
               className={`h-9 w-9 rounded-full border text-sm transition-colors ${
                 i === 0
-                  ? "border-[#1A3A5C] bg-[#1A3A5C] text-white"
-                  : "border-border text-muted-foreground hover:border-[#165AA3] hover:text-[#165AA3]"
+                  ? "border-[var(--brand-navy)] bg-[var(--brand-navy)] text-white"
+                  : "border-border text-muted-foreground hover:border-[var(--brand-navy-hover)] hover:text-[var(--brand-navy-hover)]"
               }`}
             >
               {p}

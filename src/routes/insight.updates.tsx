@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+﻿import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { CtaBanner } from "@/components/CtaBanner";
 
@@ -31,7 +31,7 @@ const UPDATES: Update[] = [
     date: "May 02, 2026",
     type: "Partnership",
     title: "New SI partner certified in Southeast Asia",
-    body: "Regional systems integrator completes the GridCrest implementation certification program — expanding our delivery footprint.",
+    body: "Regional systems integrator completes the GridCrest implementation certification program â€” expanding our delivery footprint.",
   },
   {
     id: "u-09",
@@ -52,7 +52,7 @@ const UPDATES: Update[] = [
     date: "Mar 21, 2026",
     type: "Partnership",
     title: "Joint reference design with leading SoC vendor",
-    body: "Co-developed reference design for next-generation communication modules — optimized for cost, security and field upgradability.",
+    body: "Co-developed reference design for next-generation communication modules â€” optimized for cost, security and field upgradability.",
   },
 ];
 
@@ -61,13 +61,13 @@ const FILTERS: ("All" | UpdateType)[] = ["All", "Product", "Program", "Partnersh
 export const Route = createFileRoute("/insight/updates")({
   head: () => ({
     meta: [
-      { title: "Updates — GridCrest" },
+      { title: "Updates â€” GridCrest" },
       {
         name: "description",
         content:
-          "Product, program and partnership updates from GridCrest — what shipped, what's live and what's next.",
+          "Product, program and partnership updates from GridCrest â€” what shipped, what's live and what's next.",
       },
-      { property: "og:title", content: "Updates — GridCrest" },
+      { property: "og:title", content: "Updates â€” GridCrest" },
       {
         property: "og:description",
         content: "Product, program and partnership updates from GridCrest.",
@@ -114,8 +114,8 @@ function UpdatesPage() {
               onClick={() => setFilter(f)}
               className={`rounded-full border px-4 py-2 text-xs font-medium uppercase tracking-wider transition-colors ${
                 filter === f
-                  ? "border-[#1A3A5C] bg-[#1A3A5C] text-white"
-                  : "border-border text-muted-foreground hover:border-[#165AA3] hover:text-[#165AA3]"
+                  ? "border-[var(--brand-navy)] bg-[var(--brand-navy)] text-white"
+                  : "border-border text-muted-foreground hover:border-[var(--brand-navy-hover)] hover:text-[var(--brand-navy-hover)]"
               }`}
             >
               {f}

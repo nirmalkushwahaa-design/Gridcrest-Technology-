@@ -41,7 +41,7 @@ export function LegalPage({
                 <li key={s.id}>
                   <a
                     href={`#${s.id}`}
-                    className="text-muted-foreground hover:text-[#A258DA] transition-colors"
+                    className="text-muted-foreground hover:text-[--brand-cyan] transition-colors" style={{ ["--brand-cyan" as string]: "var(--brand-cyan)" }}
                   >
                     {s.heading}
                   </a>
@@ -58,7 +58,7 @@ export function LegalPage({
                 <h2 className="text-2xl font-semibold tracking-tight text-foreground">
                   {s.heading}
                 </h2>
-                <div className="mt-4 space-y-4 text-sm leading-relaxed text-muted-foreground [&_a]:text-foreground [&_a]:underline [&_a:hover]:text-[#165AA3] [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-2">
+                <div className="mt-4 space-y-4 text-sm leading-relaxed text-muted-foreground [&_a]:text-foreground [&_a]:underline [&_a:hover]:text-[--brand-navy-hover] [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-2">
                   {s.body}
                 </div>
               </div>

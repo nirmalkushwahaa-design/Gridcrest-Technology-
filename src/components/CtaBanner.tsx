@@ -1,9 +1,9 @@
-import { Link } from "@tanstack/react-router";
+﻿import { Link } from "@tanstack/react-router";
 
 export function CtaBanner({
   eyebrow = "ENGAGEMENT",
   title = "Ready to Transform Your Grid?",
-  description = "Whether you're modernizing an existing network or building a smart grid from the ground up — GridCrest has the platform, the hardware, and the expertise to deliver.",
+  description = "Whether you're modernizing an existing network or building a smart grid from the ground up â€” GridCrest has the platform, the hardware, and the expertise to deliver.",
   primary = { label: "Explore Solutions", to: "/solutions" },
   secondary = { label: "Talk to our Team", to: "/contact" },
 }: {
@@ -31,7 +31,7 @@ export function CtaBanner({
         <div className="relative mt-8 flex flex-wrap justify-center gap-3">
           <Link
             to={primary.to}
-            className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#1A3A5C] transition hover:bg-white/90"
+            className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-[var(--brand-navy)] transition hover:bg-white/90"
           >
             {primary.label}
           </Link>

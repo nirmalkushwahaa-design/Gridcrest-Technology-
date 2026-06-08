@@ -62,6 +62,19 @@
   --color-sidebar-ring: var(--sidebar-ring);
   --color-surface-cyan: var(--surface-cyan);
   --color-surface-lavender: var(--surface-lavender);
+
+  /* ── Brand palette ── */
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-navy-hover: var(--brand-navy-hover);
+  --color-brand-cyan: var(--brand-cyan);
+  --color-brand-cyan-hover: var(--brand-cyan-hover);
+  --color-brand-cyan-light: var(--brand-cyan-light);
+  --color-nav-default: var(--nav-default);
+  --color-nav-active-bg-from: var(--nav-active-bg-from);
+  --color-text-heading: var(--text-heading);
+  --color-text-paragraph: var(--text-paragraph);
+  --color-text-title: var(--text-title);
+
   --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Montserrat", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
@@ -75,7 +88,7 @@
   --card-foreground: oklch(0.18 0.02 260);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.18 0.02 260);
-  --primary: #00E5FF;
+  --primary: var(--brand-cyan-hover);
   --primary-foreground: oklch(0.18 0.02 260);
   --secondary: oklch(0.97 0.01 250);
   --secondary-foreground: oklch(0.18 0.02 260);
@@ -90,6 +103,22 @@
   --ring: oklch(0.78 0.13 200);
   --surface-cyan: oklch(0.96 0.03 200);
   --surface-lavender: oklch(0.95 0.04 295);
+
+  /* ── Brand palette ── */
+  --brand-navy:          #1A3A5C;   /* ghost button default, active nav text */
+  --brand-navy-hover:    #165AA3;   /* navy hover shade */
+  --brand-cyan:          #1DC0D2;   /* nav hover, active border, links */
+  --brand-cyan-hover:    #00E5FF;   /* primary button bg */
+  --brand-cyan-light:    #DBFBFF;   /* active nav gradient start */
+  --nav-default:         #888888;   /* default nav text */
+  --nav-active-bg-from:  #DBFBFF;   /* active nav gradient top */
+  --nav-active-gradient: linear-gradient(180deg, #DBFBFF 0%, #FFF 100%);
+
+  /* ── Typography ── */
+  --text-heading:        #222222;   /* H1–H6 */
+  --text-paragraph:      #454545;   /* body / paragraph text */
+  --text-title:          #A258DA;   /* section titles / eyebrows */
+
   --gradient-cta: url('/cta-banner.svg') center/cover no-repeat;
   --gradient-hero-text: linear-gradient(135deg, oklch(0.62 0.18 290), oklch(0.55 0.2 270));
   --shadow-card: 0 1px 2px oklch(0.18 0.02 260 / 0.04), 0 8px 24px -12px oklch(0.18 0.02 260 / 0.12);
@@ -101,7 +130,7 @@
   --chart-5: oklch(0.55 0.2 280);
   --sidebar: oklch(0.99 0.003 250);
   --sidebar-foreground: oklch(0.18 0.02 260);
-  --sidebar-primary: #00E5FF;
+  --sidebar-primary: var(--brand-cyan-hover);
   --sidebar-primary-foreground: oklch(0.18 0.02 260);
   --sidebar-accent: oklch(0.96 0.01 250);
   --sidebar-accent-foreground: oklch(0.18 0.02 260);
@@ -155,10 +184,23 @@
 
   body {
     background-color: var(--color-background);
-    color: var(--color-foreground);
+    color: var(--text-paragraph);
     font-family: var(--font-body);
     font-size: 16px;
     line-height: 1.6;
+  }
+
+  /* Hide scrollbar for horizontal scroll containers */
+  .overflow-x-auto::-webkit-scrollbar {
+    display: none;
+  }
+  .overflow-x-auto {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  p {
+    color: var(--text-paragraph);
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -166,6 +208,11 @@
     font-weight: 700;
     letter-spacing: -0.01em;
     line-height: 1.15;
+  }
+
+  /* Zero-specificity heading color — any Tailwind text-* class will override */
+  :where(h1, h2, h3, h4, h5, h6) {
+    color: var(--text-heading);
   }
 
   h1 { font-size: 48px; }
@@ -194,13 +241,13 @@
   font-weight: 600;
   font-size: 16px;
   color: oklch(0.22 0.08 270);
-  background-color: #00E5FF;
+  background-color: var(--brand-cyan-hover);
   transition: background-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
   box-shadow: 0 6px 18px -8px oklch(0.78 0.13 200 / 0.55);
 }
 @utility btn-primary {
   &:hover {
-    background-color: #33EBFF;
+    background-color: color-mix(in srgb, var(--brand-cyan-hover) 85%, white);
     box-shadow: 0 10px 24px -10px oklch(0.78 0.13 200 / 0.45);
   }
 }
@@ -235,7 +282,7 @@
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 16px;
-  color: #1A3A5C;
+  color: var(--brand-navy);
   background-color: transparent;
   transition: color 200ms ease, background-color 200ms ease;
 }
@@ -248,7 +295,7 @@
     transition: opacity 200ms ease, transform 200ms ease;
   }
   &:hover {
-    color: #165AA3;
+    color: var(--brand-navy-hover);
   }
   &:hover::after {
     opacity: 1;

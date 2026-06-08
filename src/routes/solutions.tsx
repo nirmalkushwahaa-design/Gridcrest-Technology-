@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+﻿import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -18,13 +18,13 @@ import {
 export const Route = createFileRoute("/solutions")({
   head: () => ({
     meta: [
-      { title: "Solutions — Integrated Digital Grid for Modern Utilities" },
+      { title: "Solutions â€” Integrated Digital Grid for Modern Utilities" },
       {
         name: "description",
         content:
-          "Smart metering, HES, MDM and integrated utility platforms — one connected ecosystem from GridCrest.",
+          "Smart metering, HES, MDM and integrated utility platforms â€” one connected ecosystem from GridCrest.",
       },
-      { property: "og:title", content: "Solutions — GridCrest" },
+      { property: "og:title", content: "Solutions â€” GridCrest" },
       {
         property: "og:description",
         content:
@@ -69,7 +69,7 @@ function Hero() {
           </span>
           <h1 className="mt-6 max-w-3xl text-balance text-5xl font-display font-bold leading-[1.05] lg:text-[64px]">
             Integrated digital grid solutions for{" "}
-            <span style={{ color: "#1E63E0" }}>
+            <span style={{ color: "var(--brand-cyan)" }}>
               modern utilities.
             </span>
           </h1>
@@ -135,7 +135,7 @@ function OverviewStrip() {
             One ecosystem. Multiple intelligent layers.
           </h2>
           <p className="mt-5 text-muted-foreground">
-            GridCrest solutions are designed to work together seamlessly — combining
+            GridCrest solutions are designed to work together seamlessly â€” combining
             hardware, communication systems, data intelligence, and operational platforms
             into one connected utility ecosystem.
           </p>
@@ -287,7 +287,7 @@ function Architecture() {
           </h2>
           <p className="mt-5 text-muted-foreground">
             Every GridCrest solution is designed to integrate seamlessly across the utility
-            value chain — enabling connected operations, scalable intelligence and future-ready
+            value chain â€” enabling connected operations, scalable intelligence and future-ready
             digital infrastructure.
           </p>
         </div>
@@ -396,7 +396,7 @@ function CTA() {
           className="relative overflow-hidden rounded-[2rem] p-10 text-center lg:p-16"
           style={{ background: "var(--gradient-cta)" }}
         >
-          <h2 className="relative mx-auto max-w-3xl text-balance text-4xl font-display font-bold leading-tight lg:text-5xl" style={{ color: "#ffffff" }}>
+          <h2 data-no-reveal className="relative mx-auto max-w-3xl text-balance text-4xl font-display font-bold leading-tight text-white lg:text-5xl">
             Powering the future of intelligent utilities.
           </h2>
           <p className="relative mx-auto mt-4 max-w-xl text-white/85">

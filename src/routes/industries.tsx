@@ -73,10 +73,9 @@ function Hero() {
           </span>
           <h1 className="mt-6 text-balance text-5xl font-display font-bold leading-[1.05] lg:text-[64px]">
             Powering industries through{" "}
-            <span className="bg-[var(--gradient-hero-text)] bg-clip-text text-transparent">
-              intelligent grid infrastructure
+            <span style={{ color: "var(--brand-cyan)" }}>
+              intelligent grid infrastructure.
             </span>
-            .
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
             GridCrest delivers scalable smart-grid technologies for utilities, government
@@ -498,7 +497,7 @@ function CTA() {
               maskImage: "radial-gradient(ellipse at center, black, transparent 70%)",
             }}
           />
-          <h2 className="relative mx-auto max-w-3xl text-balance text-4xl font-display font-bold leading-tight text-white lg:text-5xl">
+          <h2 data-no-reveal className="relative mx-auto max-w-3xl text-balance text-4xl font-display font-bold leading-tight text-white lg:text-5xl">
             Building the next generation of intelligent infrastructure.
           </h2>
           <p className="relative mx-auto mt-4 max-w-xl text-white/85">
