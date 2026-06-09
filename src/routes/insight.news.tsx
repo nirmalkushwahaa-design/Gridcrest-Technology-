@@ -159,11 +159,11 @@ function NewsPage() {
       </section>
 
       <CtaBanner
-        eyebrow="STAY UPDATED"
-        title="Be the first to hear what we're building"
-        description="Subscribe to receive new releases and program announcements directly."
-        primary={{ label: "Subscribe", to: "/contact" }}
-        secondary={{ label: "Talk to our team", to: "/contact" }}
+        eyebrow="GET IN TOUCH"
+        title="Want to Learn More About GridCrest?"
+        description="Connect with our team to discuss smart metering deployments, partnerships and utility programmes across India."
+        primary={{ label: "Contact Us", to: "/contact" }}
+        secondary={{ label: "Explore Solutions", to: "/solutions" }}
       />
     </main>
   );

@@ -1,4 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
+import { CtaBanner } from "@/components/CtaBanner";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -44,7 +45,13 @@ function CareersPage() {
       <Beyond />
       <Growth />
       <OpenRoles />
-      <CTA />
+      <CtaBanner
+        eyebrow="JOIN US"
+        title="Don't See Your Role? Tell Us Anyway."
+        description="We're always meeting future teammates. Share your story and we'll be in touch — we're building the next generation of grid technology."
+        primary={{ label: "Send Your CV", href: "mailto:careers@gridcrest.tech" }}
+        secondary={{ label: "About GridCrest", to: "/company" }}
+      />
     </main>
   );
 }
@@ -286,30 +293,3 @@ function OpenRoles() {
   );
 }
 
-function CTA() {
-  return (
-    <section className="py-24">
-      <div className="mx-auto max-w-7xl px-6">
-        <div
-          className="relative overflow-hidden rounded-[2rem] p-10 text-center lg:p-16"
-          style={{ background: "var(--gradient-cta)" }}
-        >
-          <h2 data-no-reveal className="relative mx-auto max-w-3xl text-balance text-4xl font-display font-bold leading-tight text-white lg:text-5xl">
-            Don't see your role? Tell us anyway.
-          </h2>
-          <p className="relative mx-auto mt-4 max-w-xl text-white/85">
-            We're always meeting future teammates. Share your story and we'll be in touch.
-          </p>
-          <div className="relative mt-8 flex flex-wrap items-center justify-center gap-3">
-            <a href="mailto:careers@gridcrest.tech" className="btn-primary">
-              Send us your story <ArrowRight className="h-4 w-4" />
-            </a>
-            <Link to="/company" className="btn-secondary">
-              About GridCrest
-            </Link>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}

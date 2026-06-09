@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { CtaBanner } from "@/components/CtaBanner";
+import { PageHero } from "@/components/PageHero";
+import heroInsight from "@/assets/hero-insight.svg";
 
 type Tag = "News" | "Post" | "Highlights";
 
@@ -136,18 +138,19 @@ function InsightPage() {
   return (
     <main className="bg-background">
       {/* Hero */}
-      <section className="border-b border-border bg-surface-cyan/30">
-        <div className="mx-auto max-w-7xl px-6 pt-20 pb-14">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">Insight</p>
-          <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
-            Ideas, updates &amp; stories
-          </h1>
-          <p className="mt-4 max-w-2xl text-muted-foreground">
-            News, perspectives and milestones from the GridCrest team — covering smart metering, grid intelligence, deployments and company growth.
-          </p>
+      <PageHero
+        eyebrow="Insight"
+        title="Ideas, updates &"
+        titleAccent="stories."
+        description="News, perspectives and milestones from the GridCrest team — covering smart metering, grid intelligence, deployments and company growth."
+        image={heroInsight}
+        imageAlt="GridCrest Insight"
+      />
 
-          {/* Filter chips */}
-          <div className="mt-8 flex flex-wrap gap-2">
+      {/* Filter chips */}
+      <section className="border-b border-border bg-white">
+        <div className="mx-auto max-w-7xl px-6 py-5">
+          <div className="flex flex-wrap gap-2">
             {(["All", "News", "Post", "Highlights"] as const).map((tag) => (
               <button
                 key={tag}
@@ -209,11 +212,11 @@ function InsightPage() {
       </section>
 
       <CtaBanner
-        eyebrow="STAY UPDATED"
-        title="Be the first to hear what we're building"
-        description="Subscribe to receive new releases and program announcements directly."
-        primary={{ label: "Subscribe", to: "/contact" }}
-        secondary={{ label: "Talk to our team", to: "/contact" }}
+        eyebrow="GET IN TOUCH"
+        title="Have a story or partnership enquiry?"
+        description="Reach out to the GridCrest team for press, collaboration, or to learn more about our deployments across India."
+        primary={{ label: "Contact Us", to: "/contact" }}
+        secondary={{ label: "Explore Solutions", to: "/solutions" }}
       />
     </main>
   );

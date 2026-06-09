@@ -2,25 +2,28 @@ import { useEffect, useRef, useState } from "react";
 
 // State ID mappings
 export const STATE_IDS: Record<string, string> = {
-  "Gujarat":                    "IN-GJ",
-  "Kerala":                     "IN-KL",
-  "West Bengal":                "IN-WB",
-  "Nagaland":                   "IN-NL",
-  "Delhi":                      "IN-DL",
-  "Hyderabad":                  "IN-TG",
-  "Mysuru":                     "IN-KA",
+  "Gujarat":        "IN-GJ",
+  "Kerala":         "IN-KL",
+  "West Bengal":    "IN-WB",
+  "Uttar Pradesh":  "IN-UP",
+  "Hyderabad":      "IN-TG",
+  "Mysuru":         "IN-KA",
+  "Bengaluru":      "IN-KA",
+  "New Delhi":      "IN-DL",
 };
 
-const PROJECT_STATES  = new Set(["IN-GJ", "IN-KL", "IN-WB", "IN-NL", "IN-DL"]);
-const MFG_STATES      = new Set(["IN-TG", "IN-KA"]);
+const MFG_STATES = new Set(["IN-TG", "IN-KA"]);                // purple
+const RD_STATES  = new Set(["IN-WB", "IN-UP"]);                // cyan
+const OPS_STATES = new Set(["IN-KL", "IN-GJ", "IN-DL"]);      // amber
 
-const COLOR_DEFAULT     = "#E5E7EB";   // light grey for non-location states
-const COLOR_HOVER       = "#1DC0D2";   // brand cyan
-const COLOR_PROJECT     = "#A8EDF5";   // medium cyan for active project states
-const COLOR_MFG         = "#DDD0F7";   // light purple for manufacturing states
-const COLOR_HIGHLIGHT   = "#1DC0D2";   // bright cyan on hover/active
-const COLOR_MFG_HL      = "#A258DA";   // purple on hover/active for mfg
-const STROKE            = "#ffffff";
+const COLOR_DEFAULT  = "#E5E7EB";   // light grey
+const COLOR_MFG      = "#DDD0F7";   // light purple (resting mfg)
+const COLOR_MFG_HL   = "#A258DA";   // purple (active mfg)
+const COLOR_RD       = "#A8EDF5";   // light cyan (resting R&D)
+const COLOR_RD_HL    = "#1DC0D2";   // cyan (active R&D)
+const COLOR_OPS      = "#FEF3C7";   // light amber (resting ops)
+const COLOR_OPS_HL   = "#F59E0B";   // amber (active ops)
+const STROKE         = "#ffffff";
 
 interface Props {
   /** location label being hovered from outside (e.g. "Gujarat") */
@@ -44,7 +47,7 @@ export default function IndiaMapInteractive({ activeLocation, onStateHover }: Pr
         const svgEl = containerRef.current.querySelector("svg");
         if (svgEl) {
           // ViewBox covers full mainland + NE states; islands hidden via CSS
-          svgEl.setAttribute("viewBox", "0 0 500 696");
+          svgEl.setAttribute("viewBox", "0 0 612 696");
           svgEl.setAttribute("width", "100%");
           svgEl.setAttribute("height", "100%");
           svgEl.setAttribute("preserveAspectRatio", "xMidYMid meet");
@@ -65,11 +68,14 @@ export default function IndiaMapInteractive({ activeLocation, onStateHover }: Pr
           path.setAttribute("stroke", STROKE);
           path.setAttribute("stroke-width", "0.8");
           path.style.transition = "fill 0.25s ease";
-          path.style.cursor = "pointer";
-          if (PROJECT_STATES.has(id)) {
-            path.setAttribute("fill", COLOR_PROJECT);
-          } else if (MFG_STATES.has(id)) {
+          const isLoc = MFG_STATES.has(id) || RD_STATES.has(id) || OPS_STATES.has(id);
+          path.style.cursor = isLoc ? "pointer" : "default";
+          if (MFG_STATES.has(id)) {
             path.setAttribute("fill", COLOR_MFG);
+          } else if (RD_STATES.has(id)) {
+            path.setAttribute("fill", COLOR_RD);
+          } else if (OPS_STATES.has(id)) {
+            path.setAttribute("fill", COLOR_OPS);
           } else {
             path.setAttribute("fill", COLOR_DEFAULT);
           }
@@ -87,15 +93,20 @@ export default function IndiaMapInteractive({ activeLocation, onStateHover }: Pr
     paths.forEach((path) => {
       const id = path.getAttribute("id") ?? "";
       if (id === activeId) {
-        path.setAttribute("fill", MFG_STATES.has(id) ? COLOR_MFG_HL : COLOR_HIGHLIGHT);
+        const hl = MFG_STATES.has(id) ? COLOR_MFG_HL : RD_STATES.has(id) ? COLOR_RD_HL : COLOR_OPS_HL;
+        path.setAttribute("fill", hl);
+        path.setAttribute("stroke", hl);
         path.setAttribute("stroke-width", "1.5");
-        path.setAttribute("stroke", MFG_STATES.has(id) ? "#A258DA" : COLOR_HIGHLIGHT);
-      } else if (PROJECT_STATES.has(id)) {
-        path.setAttribute("fill", COLOR_PROJECT);
-        path.setAttribute("stroke", STROKE);
-        path.setAttribute("stroke-width", "0.8");
       } else if (MFG_STATES.has(id)) {
         path.setAttribute("fill", COLOR_MFG);
+        path.setAttribute("stroke", STROKE);
+        path.setAttribute("stroke-width", "0.8");
+      } else if (RD_STATES.has(id)) {
+        path.setAttribute("fill", COLOR_RD);
+        path.setAttribute("stroke", STROKE);
+        path.setAttribute("stroke-width", "0.8");
+      } else if (OPS_STATES.has(id)) {
+        path.setAttribute("fill", COLOR_OPS);
         path.setAttribute("stroke", STROKE);
         path.setAttribute("stroke-width", "0.8");
       } else {
@@ -111,21 +122,26 @@ export default function IndiaMapInteractive({ activeLocation, onStateHover }: Pr
     if (!svgLoaded || !containerRef.current) return;
     const container = containerRef.current;
 
+    const isLocationState = (id: string) =>
+      MFG_STATES.has(id) || RD_STATES.has(id) || OPS_STATES.has(id);
+
     const handleOver = (e: MouseEvent) => {
       const path = (e.target as Element).closest("path") as SVGPathElement | null;
       if (!path) return;
       const id = path.getAttribute("id") ?? "";
-      const title = path.getAttribute("title") ?? id;
 
-      // Find label for this state id
+      // Ignore grey (non-location) states completely
+      if (!isLocationState(id)) return;
+
+      const title = path.getAttribute("title") ?? id;
       const label = Object.entries(STATE_IDS).find(([, v]) => v === id)?.[0] ?? null;
       if (onStateHover) onStateHover(label);
 
-      const isMfg = MFG_STATES.has(id);
       const isActive = (activeLocation && STATE_IDS[activeLocation] === id);
       if (!isActive) {
-        path.setAttribute("fill", isMfg ? COLOR_MFG_HL : COLOR_HIGHLIGHT);
-        path.setAttribute("stroke", isMfg ? "#A258DA" : COLOR_HIGHLIGHT);
+        const hl = MFG_STATES.has(id) ? COLOR_MFG_HL : RD_STATES.has(id) ? COLOR_RD_HL : COLOR_OPS_HL;
+        path.setAttribute("fill", hl);
+        path.setAttribute("stroke", hl);
         path.setAttribute("stroke-width", "1.5");
       }
 
@@ -137,15 +153,19 @@ export default function IndiaMapInteractive({ activeLocation, onStateHover }: Pr
       const path = (e.target as Element).closest("path") as SVGPathElement | null;
       if (!path) return;
       const id = path.getAttribute("id") ?? "";
+
+      // Ignore grey (non-location) states completely
+      if (!isLocationState(id)) return;
+
       const activeId = activeLocation ? STATE_IDS[activeLocation] : null;
 
       if (id !== activeId) {
-        if (PROJECT_STATES.has(id)) {
-          path.setAttribute("fill", COLOR_PROJECT);
-        } else if (MFG_STATES.has(id)) {
+        if (MFG_STATES.has(id)) {
           path.setAttribute("fill", COLOR_MFG);
-        } else {
-          path.setAttribute("fill", COLOR_DEFAULT);
+        } else if (RD_STATES.has(id)) {
+          path.setAttribute("fill", COLOR_RD);
+        } else if (OPS_STATES.has(id)) {
+          path.setAttribute("fill", COLOR_OPS);
         }
         path.setAttribute("stroke", STROKE);
         path.setAttribute("stroke-width", "0.8");
@@ -168,8 +188,9 @@ export default function IndiaMapInteractive({ activeLocation, onStateHover }: Pr
       <div ref={containerRef} style={{ flex: 1, minHeight: 0 }} />
       {/* Legend overlay — bottom left */}
       <div className="absolute bottom-3 left-3 flex items-center gap-4 rounded-xl border border-border bg-white/80 px-3 py-2 text-xs text-muted-foreground backdrop-blur-sm shadow-sm">
-        <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-accent" /> Project Sites</span>
         <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-[#A258DA]" /> Manufacturing</span>
+        <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-accent" /> R&amp;D</span>
+        <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-[#F59E0B]" /> Operations</span>
       </div>
       {tooltip && (
         <div

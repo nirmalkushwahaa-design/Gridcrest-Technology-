@@ -1,36 +1,34 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { CtaBanner } from "@/components/CtaBanner";
+import IndiaMapInteractive from "@/components/IndiaMapInteractive";
 import {
-  ArrowRight,
-  Award,
-  Cpu,
+  CheckCircle2,
   Factory,
-  FlaskConical,
   Globe2,
   Layers,
-  MapPin,
-  Microchip,
-  Plane,
-  Radar,
   ShieldCheck,
-  Sparkles,
-  Train,
-  Wrench,
   Zap,
+  Cpu,
+  FlaskConical,
+  Wrench,
+  Package,
+  Settings,
 } from "lucide-react";
 
 export const Route = createFileRoute("/manufacturing")({
   head: () => ({
     meta: [
-      { title: "Manufacturing & Ecosystem — Built at Industrial Scale" },
+      { title: "Manufacturing & Ecosystem — GridCrest" },
       {
         name: "description",
         content:
-          "Advanced manufacturing, precision engineering and the strength of the Kaynes ecosystem.",
+          "GridCrest combines advanced manufacturing, intelligent engineering, and a robust supply chain ecosystem to deliver reliable smart energy solutions at scale.",
       },
       { property: "og:title", content: "Manufacturing & Ecosystem — GridCrest" },
       {
         property: "og:description",
-        content: "Built at industrial scale — manufacturing the future of smart grids.",
+        content: "Engineering the future of intelligent energy infrastructure.",
       },
     ],
   }),
@@ -41,314 +39,476 @@ function ManufacturingPage() {
   return (
     <main className="bg-background text-foreground">
       <Hero />
-      <Capabilities />
-      <Scale />
-      <Certifications />
-      <Kaynes />
-      <SupplyChain />
-      <MadeInIndia />
-      <CTA />
+      <ManufacturingScale />
+      <IntegratedEcosystem />
+      <ReliabilityEngineering />
+      <QualityCompliance />
+      <NationwidePresence />
+      <KaynesEcosystem />
+      <CtaBanner
+        eyebrow="PARTNER WITH US"
+        title="Partner with a Manufacturing Ecosystem Built for Scale"
+        description="Whether you're deploying smart metering programs, modernizing utility operations, or building intelligent infrastructure, GridCrest delivers the manufacturing capability, engineering expertise, and ecosystem support required for long-term success."
+        primary={{ label: "Talk to Our Team", to: "/contact" }}
+        secondary={{ label: "Explore Solutions", to: "/solutions" }}
+      />
     </main>
   );
 }
 
+/* ─── HERO ─────────────────────────────────────────────────────────────────── */
 function Hero() {
   return (
-    <section className="relative overflow-hidden border-b border-border/60">
+    <section className="relative overflow-hidden border-b border-border/60 bg-white" style={{ minHeight: 450 }}>
+      {/* Grid backdrop */}
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 opacity-40"
+        className="pointer-events-none absolute inset-0 -z-10"
         style={{
           backgroundImage:
-            "linear-gradient(to right, oklch(0.9 0.02 250 / 0.5) 1px, transparent 1px), linear-gradient(to bottom, oklch(0.9 0.02 250 / 0.5) 1px, transparent 1px)",
+            "linear-gradient(to right, oklch(0.9 0.02 250 / 0.35) 1px, transparent 1px), linear-gradient(to bottom, oklch(0.9 0.02 250 / 0.35) 1px, transparent 1px)",
           backgroundSize: "48px 48px",
-          maskImage: "radial-gradient(ellipse at top, black, transparent 70%)",
+          maskImage: "radial-gradient(ellipse 80% 80% at 20% 50%, black 30%, transparent 100%)",
         }}
       />
-      <div className="mx-auto max-w-7xl px-6 py-24 lg:py-32">
-        <span className="inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-muted-foreground backdrop-blur">
-          <Sparkles className="h-3.5 w-3.5 text-accent" /> Manufacturing & Ecosystem
-        </span>
-        <h1 className="mt-6 max-w-4xl text-balance text-5xl font-display font-bold leading-[1.05] lg:text-[64px]">
-          Manufacturing the future of{" "}
-          <span style={{ color: "var(--brand-cyan)" }}>
-            smart grids.
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -left-32 -top-32 -z-10 h-[480px] w-[480px] rounded-full"
+        style={{ background: "radial-gradient(circle, oklch(0.85 0.06 200 / 0.3) 0%, transparent 70%)" }}
+      />
+
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 px-6 lg:grid-cols-2" style={{ minHeight: 450 }}>
+        {/* Left: text */}
+        <div className="py-16 lg:py-20">
+          <span className="inline-flex items-center rounded-full border border-border bg-white/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            Manufacturing &amp; Ecosystem
           </span>
-        </h1>
-        <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-          Powered by advanced manufacturing, precision engineering and the strength of
-          the Kaynes ecosystem.
-        </p>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <a href="#capabilities" className="btn-primary">
-            See capabilities <ArrowRight className="h-4 w-4" />
-          </a>
-          <Link to="/contact" className="btn-secondary">
-            Talk to manufacturing
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Capabilities() {
-  const caps = [
-    { icon: Factory, title: "Smart meter manufacturing", body: "Mass production lines purpose-built for utility-grade meters." },
-    { icon: Layers, title: "Integrated production", body: "PCBA, assembly, calibration and validation in one flow." },
-    { icon: FlaskConical, title: "Testing & validation", body: "Functional, environmental and reliability test infrastructure." },
-    { icon: Cpu, title: "EMS capabilities", body: "Electronics manufacturing services for the broader ecosystem." },
-    { icon: Wrench, title: "Robotics & automation", body: "Automated handling, dispense, optical inspection and SMT." },
-    { icon: Microchip, title: "Tool room & moulding", body: "In-house tooling, plastics and precision engineering." },
-    { icon: Radar, title: "Reliability engineering", body: "Accelerated life testing and failure analysis labs." },
-    { icon: ShieldCheck, title: "Quality systems", body: "Closed-loop quality from incoming parts to outgoing units." },
-  ];
-  return (
-    <section id="capabilities" className="border-b border-border/60 py-24">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="max-w-2xl">
-          <div className="text-xs font-semibold uppercase tracking-widest text-accent">
-            Manufacturing capabilities
+          <h1 className="mt-6 text-balance text-5xl font-display font-bold leading-[1.05] tracking-tight lg:text-[58px]">
+            Engineering the Future of{" "}
+            <span style={{ color: "var(--brand-cyan)" }}>
+              Intelligent Energy Infrastructure
+            </span>
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+            GridCrest combines advanced manufacturing, intelligent engineering, and a robust supply
+            chain ecosystem to deliver reliable smart energy solutions at scale. Backed by the
+            strength of the Kaynes ecosystem, we integrate hardware, software, and operational
+            excellence to support the evolving needs of utilities, governments, and infrastructure
+            providers.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a href="#manufacturing-scale" className="btn-primary">
+              Explore Manufacturing
+            </a>
+            <a href="https://www.kaynestechnology.co.in/" target="_blank" rel="noopener noreferrer" className="btn-secondary">
+              Kaynes Ecosystem
+            </a>
           </div>
-          <h2 className="mt-3 text-balance text-4xl font-display font-bold leading-tight lg:text-5xl">
-            Built at industrial scale.
-          </h2>
         </div>
-        <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
-          {caps.map((c) => (
-            <article
-              key={c.title}
-              className="rounded-3xl border border-border bg-card p-6 transition hover:-translate-y-1 hover:shadow-[var(--shadow-card)]"
-            >
-              <c.icon className="h-6 w-6 text-accent" />
-              <h3 className="mt-6 text-base font-display font-bold">{c.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{c.body}</p>
-            </article>
-          ))}
+
+        {/* Right: placeholder */}
+        <div className="hidden lg:flex items-center justify-center py-10">
+          <div className="w-full rounded-3xl" style={{ height: 320, background: "#E5E7EB" }} />
         </div>
       </div>
     </section>
   );
 }
 
-function Scale() {
-  const sites = [
-    { city: "Hyderabad", note: "Primary facility · smart metering" },
-    { city: "Kerala", note: "Expansion · integrated production" },
-    { city: "West Bengal", note: "Expansion · regional reach" },
-  ];
-  const stats = [
-    { v: "Millions", l: "Annual production capacity" },
-    { v: "3", l: "Manufacturing sites" },
-    { v: "Pan-India", l: "Deployment readiness" },
-  ];
+/* ─── MANUFACTURING AT SCALE ─────────────────────────────────────────────── */
+const HIGHLIGHTS = [
+  { value: "5 Lakh+", label: "Smart Meters Manufactured Monthly" },
+  { value: "10,000+", label: "Meters Produced Daily" },
+  { value: "2", label: "Operational Manufacturing Facilities" },
+  { value: "2", label: "New Facilities Planned" },
+  { value: "2M+", label: "Smart Meter Endpoints Deployed" },
+  { value: "2,500+", label: "Professionals Across India" },
+];
+
+function ManufacturingScale() {
+  return (
+    <section id="manufacturing-scale" className="border-b border-border/60 py-24">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
+          {/* Text */}
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">
+              Manufacturing at Scale
+            </p>
+            <h2 className="mt-4 text-balance text-4xl font-display font-bold leading-tight lg:text-5xl">
+              Built for Growth.{" "}
+              <span style={{ color: "var(--brand-cyan)" }}>Designed for Reliability.</span>
+            </h2>
+            <p className="mt-5 text-lg text-muted-foreground">
+              GridCrest operates advanced manufacturing facilities capable of producing more than
+              5 lakh smart electricity meters every month, supporting large-scale deployments
+              across India.
+            </p>
+            <p className="mt-4 text-muted-foreground">
+              Our manufacturing operations are designed to meet the highest standards of quality,
+              precision, and reliability while ensuring rapid scalability for future demand.
+            </p>
+          </div>
+
+          {/* Stats grid */}
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+            {HIGHLIGHTS.map((h) => (
+              <div
+                key={h.label}
+                className="rounded-2xl border border-border bg-card p-5 shadow-[var(--shadow-card)]"
+              >
+                <div className="text-2xl font-display font-bold" style={{ color: "var(--brand-cyan)" }}>
+                  {h.value}
+                </div>
+                <div className="mt-2 text-sm text-muted-foreground leading-snug">{h.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── INTEGRATED ECOSYSTEM ───────────────────────────────────────────────── */
+const ECOSYSTEM_ITEMS = [
+  { icon: Cpu, label: "Electronics Manufacturing Services (EMS)" },
+  { icon: Layers, label: "PCB Manufacturing" },
+  { icon: Zap, label: "Semiconductor Ecosystem" },
+  { icon: Settings, label: "Product Engineering" },
+  { icon: FlaskConical, label: "Testing & Validation" },
+  { icon: Wrench, label: "Tool Room & Mould Development" },
+  { icon: Package, label: "Supply Chain Management" },
+];
+
+function IntegratedEcosystem() {
   return (
     <section className="border-b border-border/60 bg-secondary/40 py-24">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="max-w-2xl">
-          <div className="text-xs font-semibold uppercase tracking-widest text-accent">
-            Scale & infrastructure
+        <div className="grid gap-16 lg:grid-cols-2 lg:items-start">
+          {/* Left */}
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">
+              Integrated Manufacturing Ecosystem
+            </p>
+            <h2 className="mt-4 text-balance text-4xl font-display font-bold leading-tight lg:text-5xl">
+              More Than{" "}
+              <span style={{ color: "var(--brand-cyan)" }}>Meter Manufacturing</span>
+            </h2>
+            <p className="mt-5 text-lg text-muted-foreground">
+              GridCrest benefits from a deeply integrated manufacturing ecosystem that enables
+              greater control over quality, supply chain resilience, and product innovation.
+            </p>
+            <p className="mt-4 text-muted-foreground">
+              Through the Kaynes ecosystem, we leverage capabilities across multiple domains —
+              allowing faster innovation, improved reliability, and reduced dependency on
+              fragmented supply chains.
+            </p>
           </div>
-          <h2 className="mt-3 text-balance text-4xl font-display font-bold leading-tight lg:text-5xl">
-            Deployment-ready scale.
-          </h2>
-        </div>
-        <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-12">
-          <div className="space-y-3 lg:col-span-7">
-            {sites.map((s) => (
+
+          {/* Right: capability list */}
+          <div className="grid gap-3 sm:grid-cols-2">
+            {ECOSYSTEM_ITEMS.map((item) => (
               <div
-                key={s.city}
-                className="flex items-center justify-between gap-4 rounded-2xl border border-border bg-card p-5"
+                key={item.label}
+                className="flex items-center gap-3 rounded-2xl border border-border bg-card px-5 py-4 shadow-[var(--shadow-card)]"
               >
-                <div className="flex items-center gap-4">
-                  <span className="grid h-10 w-10 place-items-center rounded-xl bg-accent/10 text-accent">
-                    <MapPin className="h-5 w-5" />
-                  </span>
-                  <div>
-                    <div className="text-base font-display font-bold">{s.city}</div>
-                    <div className="text-sm text-muted-foreground">{s.note}</div>
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-accent/10 text-accent">
+                  <item.icon className="h-4 w-4" />
+                </span>
+                <span className="text-sm font-medium">{item.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── RELIABILITY ENGINEERING ────────────────────────────────────────────── */
+const RELIABILITY_ITEMS = [
+  "Product Reliability Testing",
+  "Environmental Validation",
+  "Electrical Safety Testing",
+  "Performance Verification",
+  "Communication Validation",
+  "Long-Term Lifecycle Assurance",
+];
+
+function ReliabilityEngineering() {
+  return (
+    <section className="border-b border-border/60 py-24">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
+          {/* Left */}
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">
+              Reliability Engineering
+            </p>
+            <h2 className="mt-4 text-balance text-4xl font-display font-bold leading-tight lg:text-5xl">
+              Designed for{" "}
+              <span style={{ color: "var(--brand-cyan)" }}>Mission-Critical Infrastructure</span>
+            </h2>
+            <p className="mt-5 text-lg text-muted-foreground">
+              Every GridCrest product is engineered to operate reliably in challenging field
+              conditions across urban, rural, industrial, and utility environments.
+            </p>
+            <p className="mt-4 text-muted-foreground">
+              The result is infrastructure designed to support utility operations for years while
+              adapting to future technology requirements.
+            </p>
+          </div>
+
+          {/* Right: checklist */}
+          <div className="rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-card)]">
+            <div className="flex items-center gap-3">
+              <p className="font-display font-semibold">Our engineering and validation processes focus on:</p>
+            </div>
+            <ul className="mt-6 space-y-3">
+              {RELIABILITY_ITEMS.map((item) => (
+                <li key={item} className="flex items-center gap-3 text-sm text-foreground/85">
+                  <CheckCircle2 className="h-4 w-4 shrink-0 text-accent" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── QUALITY & COMPLIANCE ───────────────────────────────────────────────── */
+const QUALITY_ITEMS = [
+  "Product Certification Compliance",
+  "Quality Management Processes",
+  "Utility Industry Standards",
+  "Metering Standards",
+  "Safety & Environmental Requirements",
+  "Continuous Quality Monitoring",
+];
+
+function QualityCompliance() {
+  return (
+    <section className="border-b border-border/60 bg-secondary/40 py-24">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
+          {/* Left: checklist */}
+          <div className="rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-card)]">
+            <div className="flex items-center gap-3">
+              <p className="font-display font-semibold">Key compliance areas:</p>
+            </div>
+            <ul className="mt-6 space-y-3">
+              {QUALITY_ITEMS.map((item) => (
+                <li key={item} className="flex items-center gap-3 text-sm text-foreground/85">
+                  <CheckCircle2 className="h-4 w-4 shrink-0 text-accent" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Right */}
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">
+              Quality &amp; Compliance
+            </p>
+            <h2 className="mt-4 text-balance text-4xl font-display font-bold leading-tight lg:text-5xl">
+              Built to{" "}
+              <span style={{ color: "var(--brand-cyan)" }}>Global Standards</span>
+            </h2>
+            <p className="mt-5 text-lg text-muted-foreground">
+              GridCrest products are developed and manufactured in compliance with
+              industry-recognised standards and regulatory requirements.
+            </p>
+            <p className="mt-4 text-muted-foreground">
+              Quality is embedded throughout the product lifecycle — from design and manufacturing
+              to deployment and field operations.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── NATIONWIDE PRESENCE ────────────────────────────────────────────────── */
+const MFG_SITES    = ["Hyderabad", "Mysuru"];
+const PROJECT_LOCS = ["Kerala", "Gujarat"];
+
+function NationwidePresence() {
+  const [activeLocation, setActiveLocation] = useState<string | null>(null);
+
+  return (
+    <section className="border-b border-border/60 py-24" style={{ overflow: "clip" }}>
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="grid items-stretch gap-16 lg:grid-cols-2">
+
+          {/* LEFT: text + chips */}
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">
+              Nationwide Presence
+            </p>
+            <h2 className="mt-4 text-balance text-4xl font-display font-bold leading-tight lg:text-5xl">
+              Manufacturing, Engineering &amp; Project Execution{" "}
+              <span style={{ color: "var(--brand-cyan)" }}>Across India</span>
+            </h2>
+            <p className="mt-5 text-muted-foreground">
+              GridCrest maintains a growing national footprint supporting manufacturing,
+              R&amp;D, project execution, and customer engagement.
+            </p>
+
+            <div className="mt-10 space-y-7">
+              {/* Manufacturing Sites */}
+              <div className="flex gap-5">
+                <div className="mt-1 w-0.5 shrink-0 self-stretch rounded-full bg-[#A258DA]" />
+                <div>
+                  <p className="text-sm font-semibold text-[#A258DA]">Manufacturing Sites</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {MFG_SITES.map((loc) => (
+                      <span
+                        key={loc}
+                        onMouseEnter={() => setActiveLocation(loc)}
+                        onMouseLeave={() => setActiveLocation(null)}
+                        className={`cursor-pointer rounded-full border px-3 py-1 text-xs font-medium transition-all ${
+                          activeLocation === loc
+                            ? "border-[#A258DA] bg-[#A258DA] text-white"
+                            : "border-border bg-secondary text-foreground hover:border-[#A258DA]/50 hover:bg-[#A258DA]/10"
+                        }`}
+                      >
+                        {loc}
+                      </span>
+                    ))}
+                    <span className="rounded-full border border-[#A258DA]/30 bg-[#A258DA]/5 px-3 py-1 text-xs font-medium text-[#A258DA]">
+                      +2 new facilities planned
+                    </span>
                   </div>
                 </div>
-                <Factory className="h-5 w-5 text-muted-foreground" />
+              </div>
+
+              {/* R&D Centers */}
+              <div className="flex gap-5">
+                <div className="mt-1 w-0.5 shrink-0 self-stretch rounded-full bg-accent" />
+                <div>
+                  <p className="text-sm font-semibold text-accent">R&amp;D Centers</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {[
+                      { label: "Kolkata", state: "West Bengal" },
+                      { label: "Noida", state: "Uttar Pradesh" },
+                    ].map((loc) => (
+                      <span
+                        key={loc.label}
+                        onMouseEnter={() => setActiveLocation(loc.state)}
+                        onMouseLeave={() => setActiveLocation(null)}
+                        className={`cursor-pointer rounded-full border px-3 py-1 text-xs font-medium transition-all ${
+                          activeLocation === loc.state
+                            ? "border-accent bg-accent text-white"
+                            : "border-border bg-secondary text-foreground hover:border-accent/50 hover:bg-accent/10"
+                        }`}
+                      >
+                        {loc.label}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Project Operations */}
+              <div className="flex gap-5">
+                <div className="mt-1 w-0.5 shrink-0 self-stretch rounded-full bg-[#F59E0B]" />
+                <div>
+                  <p className="text-sm font-semibold text-[#D97706]">Project Operations</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {PROJECT_LOCS.map((loc) => (
+                      <span
+                        key={loc}
+                        onMouseEnter={() => setActiveLocation(loc)}
+                        onMouseLeave={() => setActiveLocation(null)}
+                        className={`cursor-pointer rounded-full border px-3 py-1 text-xs font-medium transition-all ${
+                          activeLocation === loc
+                            ? "border-[#F59E0B] bg-[#F59E0B] text-white"
+                            : "border-border bg-secondary text-foreground hover:border-[#F59E0B]/50 hover:bg-[#F59E0B]/10"
+                        }`}
+                      >
+                        {loc}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT: India map */}
+          <div className="flex flex-col overflow-hidden" style={{ minHeight: 0 }}>
+            <IndiaMapInteractive
+              activeLocation={activeLocation}
+              onStateHover={(label) => setActiveLocation(label)}
+            />
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── KAYNES ECOSYSTEM ───────────────────────────────────────────────────── */
+const KAYNES_CAPABILITIES = [
+  { icon: Zap, label: "Faster Product Development" },
+  { icon: Factory, label: "Large-Scale Manufacturing Capability" },
+  { icon: Globe2, label: "Supply Chain Stability" },
+  { icon: Settings, label: "Engineering Excellence" },
+  { icon: Cpu, label: "Future Technology Readiness" },
+];
+
+function KaynesEcosystem() {
+  return (
+    <section id="kaynes-ecosystem" className="border-b border-border/60 bg-secondary/40 py-24">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
+          {/* Left */}
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">
+              Powered by the Kaynes Ecosystem
+            </p>
+            <h2 className="mt-4 text-balance text-4xl font-display font-bold leading-tight lg:text-5xl">
+              Manufacturing Strength Behind{" "}
+              <span style={{ color: "var(--brand-cyan)" }}>Every GridCrest Solution</span>
+            </h2>
+            <p className="mt-5 text-lg text-muted-foreground">
+              As part of the Kaynes ecosystem, GridCrest benefits from one of India's strongest
+              technology manufacturing networks.
+            </p>
+            <p className="mt-4 text-muted-foreground">
+              Together, GridCrest and Kaynes are building the foundation for the next generation
+              of intelligent energy infrastructure.
+            </p>
+            <a
+              href="https://www.kaynestechnology.co.in/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary mt-8 inline-flex"
+            >
+              Visit Kaynes Group
+            </a>
+          </div>
+
+          {/* Right: capabilities */}
+          <div className="space-y-3">
+            {KAYNES_CAPABILITIES.map((cap) => (
+              <div
+                key={cap.label}
+                className="flex items-center gap-4 rounded-2xl border border-border bg-card px-5 py-4 shadow-[var(--shadow-card)]"
+              >
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-accent/10 text-accent">
+                  <cap.icon className="h-5 w-5" />
+                </span>
+                <span className="font-medium">{cap.label}</span>
               </div>
             ))}
-          </div>
-          <div className="grid grid-cols-1 gap-4 lg:col-span-5">
-            {stats.map((s) => (
-              <div key={s.l} className="rounded-3xl border border-border bg-card p-6">
-                <div className="text-3xl font-display font-bold">{s.v}</div>
-                <div className="mt-1 text-sm text-muted-foreground">{s.l}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Certifications() {
-  const certs = ["ISO 9001", "ISO 14001", "ISO 27001", "IEC 62052", "IEC 62053", "DLMS / COSEM", "BIS", "Safety standards"];
-  return (
-    <section className="border-b border-border/60 py-24">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="max-w-2xl">
-          <div className="text-xs font-semibold uppercase tracking-widest text-accent">
-            Certifications & quality
-          </div>
-          <h2 className="mt-3 text-balance text-4xl font-display font-bold leading-tight lg:text-5xl">
-            Compliance & reliability, demonstrated.
-          </h2>
-        </div>
-        <div className="mt-12 grid grid-cols-2 gap-3 md:grid-cols-4">
-          {certs.map((c) => (
-            <div
-              key={c}
-              className="flex items-center gap-3 rounded-2xl border border-border bg-card p-5 text-sm font-semibold"
-            >
-              <Award className="h-5 w-5 text-accent" />
-              {c}
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Kaynes() {
-  const nodes = [
-    { icon: Microchip, label: "Semiconductor" },
-    { icon: Cpu, label: "PCB manufacturing" },
-    { icon: Layers, label: "OSAT" },
-    { icon: Wrench, label: "Embedded systems" },
-    { icon: Plane, label: "Aerospace & defence" },
-    { icon: Train, label: "Railway & industrial" },
-  ];
-  return (
-    <section className="border-b border-border/60 bg-secondary/40 py-24">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="max-w-2xl">
-          <div className="text-xs font-semibold uppercase tracking-widest text-accent">
-            The Kaynes ecosystem
-          </div>
-          <h2 className="mt-3 text-balance text-4xl font-display font-bold leading-tight lg:text-5xl">
-            Backed by an industrial ecosystem.
-          </h2>
-          <p className="mt-5 text-muted-foreground">
-            GridCrest is reinforced by Kaynes' deep manufacturing and engineering
-            capability across semiconductors, electronics and mission-critical systems.
-          </p>
-        </div>
-        <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-6">
-          {nodes.map((n) => (
-            <div
-              key={n.label}
-              className="rounded-3xl border border-border bg-card p-6 text-center transition hover:-translate-y-1 hover:shadow-[var(--shadow-card)]"
-            >
-              <span className="mx-auto grid h-12 w-12 place-items-center rounded-xl bg-accent/10 text-accent">
-                <n.icon className="h-6 w-6" />
-              </span>
-              <div className="mt-4 text-sm font-display font-semibold">{n.label}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function SupplyChain() {
-  const items = [
-    { title: "Vendor partnerships", body: "Long-standing relationships across silicon, sensors and connectivity." },
-    { title: "Critical infrastructure capability", body: "Sourcing engineered for mission-critical, high-volume programs." },
-    { title: "Mission-critical expertise", body: "Manufacturing for energy, defence, aerospace and industrial sectors." },
-  ];
-  return (
-    <section className="border-b border-border/60 py-24">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="max-w-2xl">
-          <div className="text-xs font-semibold uppercase tracking-widest text-accent">
-            Supply chain strength
-          </div>
-          <h2 className="mt-3 text-balance text-4xl font-display font-bold leading-tight lg:text-5xl">
-            A resilient global supply chain.
-          </h2>
-        </div>
-        <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-3">
-          {items.map((i) => (
-            <article key={i.title} className="rounded-3xl border border-border bg-card p-7">
-              <Zap className="h-6 w-6 text-accent" />
-              <h3 className="mt-6 text-lg font-display font-bold">{i.title}</h3>
-              <p className="mt-3 text-sm text-muted-foreground">{i.body}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function MadeInIndia() {
-  return (
-    <section className="border-b border-border/60 bg-secondary/40 py-24">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 lg:grid-cols-12">
-        <div className="lg:col-span-6">
-          <div className="text-xs font-semibold uppercase tracking-widest text-accent">
-            Made in India for the world
-          </div>
-          <h2 className="mt-3 text-balance text-4xl font-display font-bold leading-tight lg:text-5xl">
-            An Indian manufacturing story, built for global utilities.
-          </h2>
-          <p className="mt-5 text-muted-foreground">
-            From precision engineering to export-ready production lines, GridCrest is
-            building the manufacturing backbone of the smart-grid era — at home, and at
-            global scale.
-          </p>
-        </div>
-        <div className="grid grid-cols-2 gap-4 lg:col-span-6">
-          {[
-            { icon: Globe2, label: "Export readiness" },
-            { icon: Factory, label: "Industrial scale" },
-            { icon: ShieldCheck, label: "Compliance built in" },
-            { icon: Sparkles, label: "Future-ready lines" },
-          ].map((t) => (
-            <div
-              key={t.label}
-              className="rounded-3xl border border-border bg-gradient-to-br from-surface-cyan/60 to-surface-lavender/60 p-6"
-            >
-              <t.icon className="h-6 w-6 text-foreground/70" />
-              <div className="mt-6 text-sm font-display font-bold">{t.label}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function CTA() {
-  return (
-    <section className="py-24">
-      <div className="mx-auto max-w-7xl px-6">
-        <div
-          className="relative overflow-hidden rounded-[2rem] p-10 text-center lg:p-16"
-          style={{ background: "var(--gradient-cta)" }}
-        >
-          <h2 data-no-reveal className="relative mx-auto max-w-3xl text-balance text-4xl font-display font-bold leading-tight text-white lg:text-5xl">
-            Manufacturing partnerships at scale.
-          </h2>
-          <p className="relative mx-auto mt-4 max-w-xl text-white/85">
-            From smart meters to integrated systems — let's discuss your production
-            programme.
-          </p>
-          <div className="relative mt-8 flex flex-wrap items-center justify-center gap-3">
-            <Link to="/contact" className="btn-primary">
-              Talk to manufacturing <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link to="/company/kaynes" className="btn-secondary">
-              The Kaynes ecosystem
-            </Link>
           </div>
         </div>
       </div>

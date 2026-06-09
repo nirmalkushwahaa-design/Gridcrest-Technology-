@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { CtaBanner } from "@/components/CtaBanner";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -47,7 +48,13 @@ function IndustriesPage() {
       <SmartCities />
       <FutureEnergy />
       <Impact />
-      <CTA />
+      <CtaBanner
+        eyebrow="GET STARTED"
+        title="Building the Next Generation of Intelligent Infrastructure."
+        description="Partner with GridCrest to modernise utilities, infrastructure systems and future-ready energy ecosystems."
+        primary={{ label: "Contact Us", to: "/contact" }}
+        secondary={{ label: "Explore Solutions", to: "/solutions" }}
+      />
     </main>
   );
 }
@@ -478,42 +485,3 @@ function Impact() {
   );
 }
 
-/* ---------- 4.8 CTA ---------- */
-function CTA() {
-  return (
-    <section className="py-24">
-      <div className="mx-auto max-w-7xl px-6">
-        <div
-          className="relative overflow-hidden rounded-[2rem] p-10 text-center lg:p-16"
-          style={{ background: "var(--gradient-cta)" }}
-        >
-          <div
-            aria-hidden
-            className="absolute inset-0 opacity-20"
-            style={{
-              backgroundImage:
-                "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
-              backgroundSize: "32px 32px",
-              maskImage: "radial-gradient(ellipse at center, black, transparent 70%)",
-            }}
-          />
-          <h2 data-no-reveal className="relative mx-auto max-w-3xl text-balance text-4xl font-display font-bold leading-tight text-white lg:text-5xl">
-            Building the next generation of intelligent infrastructure.
-          </h2>
-          <p className="relative mx-auto mt-4 max-w-xl text-white/85">
-            Partner with GridCrest to modernize utilities, infrastructure systems and
-            future-ready energy ecosystems.
-          </p>
-          <div className="relative mt-8 flex flex-wrap items-center justify-center gap-3">
-            <Link to="/contact" className="btn-primary">
-              Contact us <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link to="/solutions" className="btn-secondary">
-              Explore Solutions
-            </Link>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}

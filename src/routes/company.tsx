@@ -1,4 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { CtaBanner } from "@/components/CtaBanner";
+import { PageHero } from "@/components/PageHero";
+import heroCompany from "@/assets/hero-company.svg";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -45,7 +48,13 @@ function CompanyPage() {
       <Culture />
       <Kaynes />
       <Metrics />
-      <ClosingCTA />
+      <CtaBanner
+        eyebrow="PARTNER WITH US"
+        title="Partner with GridCrest"
+        description="Whether you're a utility, integrator or technology partner — let's explore how GridCrest can support your next smart metering programme."
+        primary={{ label: "Talk to Our Team", to: "/contact" }}
+        secondary={{ label: "Explore Solutions", to: "/solutions" }}
+      />
     </main>
   );
 }
@@ -53,38 +62,16 @@ function CompanyPage() {
 /* ---------- 1. Hero ---------- */
 function Hero() {
   return (
-    <section className="relative overflow-hidden border-b border-border/60">
-      <GridBackdrop />
-      <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-24 lg:grid-cols-12 lg:py-32">
-        <div className="lg:col-span-7">
-          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-muted-foreground backdrop-blur">
-            <Sparkles className="h-3.5 w-3.5 text-accent" /> About GridCrest
-          </span>
-          <h1 className="mt-6 text-balance text-5xl font-display font-bold leading-[1.05] lg:text-[64px]">
-            Building the digital backbone of{" "}
-            <span style={{ color: "var(--brand-cyan)" }}>
-              modern utilities.
-            </span>
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-            GridCrest delivers integrated smart-grid technologies — intelligent metering,
-            digital platforms and scalable grid intelligence — engineered to work as one
-            connected system.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <Link to="/solutions" className="btn-primary">
-              Explore Solutions <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link to="/contact" className="btn-secondary">
-              Partner with us
-            </Link>
-          </div>
-        </div>
-        <div className="lg:col-span-5">
-          <EcosystemFlow />
-        </div>
-      </div>
-    </section>
+    <PageHero
+      eyebrow="About GridCrest"
+      title="Building the digital backbone of"
+      titleAccent="modern utilities."
+      description="GridCrest delivers integrated smart-grid technologies — intelligent metering, digital platforms and scalable grid intelligence — engineered to work as one connected system."
+      primary={{ label: "Explore Solutions", to: "/solutions" }}
+      secondary={{ label: "Partner with us", to: "/contact" }}
+      image={heroCompany}
+      imageAlt="GridCrest Company"
+    />
   );
 }
 
@@ -492,38 +479,3 @@ function Metrics() {
   );
 }
 
-/* ---------- 8. Closing CTA ---------- */
-function ClosingCTA() {
-  return (
-    <section className="py-24">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="relative overflow-hidden rounded-[2rem] p-10 text-center lg:p-16" style={{ background: "var(--gradient-cta)" }}>
-          <div className="absolute inset-0 opacity-20" style={{
-            backgroundImage:
-              "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
-            backgroundSize: "32px 32px",
-            maskImage: "radial-gradient(ellipse at center, black, transparent 70%)",
-          }} aria-hidden />
-          <h2 data-no-reveal className="relative mx-auto max-w-3xl text-balance text-4xl font-display font-bold leading-tight text-white lg:text-5xl">
-            Ready to build the future grid?
-          </h2>
-          <p className="relative mx-auto mt-4 max-w-xl text-white/85">
-            Explore GridCrest's integrated smart-grid solutions and digital utility
-            platforms.
-          </p>
-          <div className="relative mt-8 flex flex-wrap items-center justify-center gap-3">
-            <Link to="/solutions" className="btn-primary">
-              Explore Solutions <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link to="/contact" className="btn-secondary">
-              Contact us
-            </Link>
-            <Link to="/contact" className="inline-flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-white hover:text-white/80">
-              Partner with us <Users className="h-4 w-4" />
-            </Link>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}

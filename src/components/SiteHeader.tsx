@@ -4,8 +4,9 @@ import { Menu, X } from "lucide-react";
 import logoUrl from "@/assets/gridcrest-logo.svg";
 
 const NAV_ITEMS = [
-  { label: "Solution", to: "/solutions" },
+  { label: "Solutions", to: "/solutions" },
   { label: "Technology", to: "/technology" },
+  { label: "Manufacturing", to: "/manufacturing" },
   { label: "Company", to: "/company" },
   { label: "Insight", to: "/insight/" },
   { label: "Contact", to: "/contact" },
@@ -16,7 +17,7 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/70">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6" style={{ WebkitTextFillColor: "inherit" }}>
         <Link to="/" className="flex items-center">
           <img src={logoUrl} alt="GridCrest" className="h-12 w-auto" />
         </Link>

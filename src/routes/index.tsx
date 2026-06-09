@@ -11,12 +11,9 @@ import {
   Network,
   Factory,
   Calendar,
-  Linkedin,
-  Twitter,
-  Youtube,
-  Mail,
 } from "lucide-react";
 import IndiaMapInteractive from "@/components/IndiaMapInteractive";
+import { CtaBanner } from "@/components/CtaBanner";
 import logoUGVCL from "@/assets/logo-ugvcl.svg";
 import logoCESC from "@/assets/logo-cesc.svg";
 import logoKSEB from "@/assets/logo-kseb.svg";
@@ -25,7 +22,6 @@ import heroImg from "@/assets/hero-ecosystem.png";
 import utilitiesImg from "@/assets/utilities.jpg";
 import governmentImg from "@/assets/government.jpg";
 import manufacturingImg from "@/assets/manufacturing.jpg";
-import gridcrestLogo from "@/assets/gridcrest-logo.svg";
 
 
 export const Route = createFileRoute("/")({
@@ -398,38 +394,14 @@ function Index() {
       <PresenceSection />
 
       {/* CTA */}
-      <section className="px-6 pb-20">
-        <div className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl px-6 py-20 text-center shadow-[var(--shadow-cta)]" style={{ background: "var(--gradient-cta)" }}>
-          <div className="absolute -left-10 bottom-0 h-72 w-72 rounded-full bg-primary/30 blur-3xl" />
-          <div className="absolute -right-10 top-0 h-72 w-72 rounded-full bg-accent/30 blur-3xl" />
-          <p className="relative text-xs font-semibold uppercase tracking-[0.22em] text-white/80">
-            ENGAGEMENT
-          </p>
-          <h2 data-no-reveal className="relative mx-auto mt-3 max-w-3xl text-3xl font-bold tracking-tight text-white md:text-5xl">
-            Ready to Transform Your Grid?
-          </h2>
-          <p className="relative mx-auto mt-4 max-w-2xl text-white/85">
-            Whether you're modernizing an existing network or building a smart grid from the ground
-            up — GridCrest has the platform, the hardware, and the expertise to deliver.
-          </p>
-          <div className="relative mt-8 flex flex-wrap justify-center gap-3">
-            <button className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-foreground transition hover:bg-white/90">
-              Explore Solutions
-            </button>
-            <button className="rounded-full border border-white/40 bg-transparent px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
-              Talk to our Team
-            </button>
-          </div>
-          <p className="relative mt-8 text-xs uppercase tracking-[0.22em] text-white/70">
-            ◆ Become a Partner
-          </p>
-          <p className="relative mt-2 text-xs text-white/60">
-            Join our growing network of utility &amp; integration partners.
-          </p>
-        </div>
-      </section>
+      <CtaBanner
+        eyebrow="GET STARTED"
+        title="Modernise Your Utility with GridCrest"
+        description="From smart metering hardware to advanced software platforms — GridCrest delivers the end-to-end ecosystem your utility needs to operate smarter, faster and at scale."
+        primary={{ label: "Explore Solutions", to: "/solutions" }}
+        secondary={{ label: "Talk to Our Team", to: "/contact" }}
+      />
 
-      <Footer />
     </div>
   );
 }
@@ -763,103 +735,3 @@ function IndustryCard({
   );
 }
 
-function Logo() {
-  return (
-    <img src={gridcrestLogo} alt="GridCrest" className="h-12 w-auto" />
-  );
-}
-
-function Header() {
-  const items = ["Solutions", "Industries", "Technology", "Company", "Insights"];
-  return (
-    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <Logo />
-        <nav className="hidden items-center gap-8 md:flex">
-          {items.map((i) => (
-            <a
-              key={i}
-              href="#"
-              className="text-sm text-muted-foreground transition hover:text-foreground"
-            >
-              {i}
-            </a>
-          ))}
-        </nav>
-        <button className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition hover:brightness-95">
-          Contact Us
-        </button>
-      </div>
-    </header>
-  );
-}
-
-function Footer() {
-  return (
-    <footer className="border-t border-border bg-surface-cyan/40">
-      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-16 md:grid-cols-5">
-        <div className="md:col-span-2">
-          <Logo />
-          <p className="mt-4 max-w-xs text-sm text-muted-foreground">
-            End-to-end smart grid infrastructure: from the field to the cloud, in one connected
-            ecosystem.
-          </p>
-        </div>
-        <FooterCol
-          title="Solutions"
-          links={[
-            "Smart Metering",
-            "Communication & Control (HES)",
-            "Meter Data Management (MDM)",
-            "Integrated Platform",
-            "Technology Overview",
-          ]}
-        />
-        <FooterCol
-          title="Company"
-          links={["About GridCrest", "Manufacturing", "Leadership", "Careers", "News & Press"]}
-        />
-        <FooterCol
-          title="Resources"
-          links={["Blog & Insights", "Utilities", "Government / Smart Programs", "Technical Docs", "Contact Us"]}
-        />
-      </div>
-      <div className="border-t border-border">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-6 py-6 text-xs text-muted-foreground">
-          <p>© 2025 GridCrest. All rights reserved. A Kaynes Technology Group Company.</p>
-          <div className="flex items-center gap-5">
-            <Link to="/privacy" className="hover:text-foreground">
-              Privacy Policy
-            </Link>
-            <Link to="/terms" className="hover:text-foreground">
-              Terms of Use
-            </Link>
-            <div className="flex items-center gap-3">
-              <Linkedin className="h-4 w-4" />
-              <Twitter className="h-4 w-4" />
-              <Youtube className="h-4 w-4" />
-              <Mail className="h-4 w-4" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-}
-
-function FooterCol({ title, links }: { title: string; links: string[] }) {
-  return (
-    <div>
-      <h4 className="text-xs font-bold uppercase tracking-[0.18em] text-accent">{title}</h4>
-      <ul className="mt-4 space-y-3">
-        {links.map((l) => (
-          <li key={l}>
-            <a href="#" className="text-sm text-muted-foreground hover:text-foreground">
-              {l}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}

@@ -1,15 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { CtaBanner } from "@/components/CtaBanner";
 import { useState } from "react";
+import IndiaMapInteractive from "@/components/IndiaMapInteractive";
 import {
   ArrowRight,
   Briefcase,
-  Building2,
   CheckCircle2,
   Clock,
   Globe2,
   Handshake,
   Mail,
-  MapPin,
   MessageSquare,
   Newspaper,
   Phone,
@@ -51,42 +51,59 @@ function ContactPage() {
   return (
     <main className="bg-background text-foreground">
       <Hero />
-      <Categories selected={category} onSelect={setCategory} />
-      <FormAndInfo category={category} />
+      <FormAndInfo category={category} selected={category} onSelect={setCategory} />
       <Offices />
       <Reach />
-      <FinalCTA />
+      <CtaBanner
+        eyebrow="LET'S TALK"
+        title="Let's Build Your Smart Metering Programme"
+        description="Connect with our team to discuss your utility's requirements, timelines and smart metering strategy."
+        primary={{ label: "Get in Touch", href: "#top" }}
+        secondary={{ label: "Explore Solutions", to: "/solutions" }}
+      />
     </main>
   );
 }
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden border-b border-border/60">
+    <section className="relative overflow-hidden border-b border-border/60 bg-white" style={{ minHeight: 450 }}>
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 opacity-40"
+        className="pointer-events-none absolute inset-0 -z-10"
         style={{
           backgroundImage:
-            "linear-gradient(to right, oklch(0.9 0.02 250 / 0.5) 1px, transparent 1px), linear-gradient(to bottom, oklch(0.9 0.02 250 / 0.5) 1px, transparent 1px)",
+            "linear-gradient(to right, oklch(0.9 0.02 250 / 0.35) 1px, transparent 1px), linear-gradient(to bottom, oklch(0.9 0.02 250 / 0.35) 1px, transparent 1px)",
           backgroundSize: "48px 48px",
-          maskImage: "radial-gradient(ellipse at top, black, transparent 70%)",
+          maskImage: "radial-gradient(ellipse 80% 80% at 20% 50%, black 30%, transparent 100%)",
         }}
       />
-      <div className="mx-auto max-w-7xl px-6 py-20 lg:py-28">
-        <span className="inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-muted-foreground backdrop-blur">
-          <Sparkles className="h-3.5 w-3.5 text-accent" /> Contact
-        </span>
-        <h1 className="mt-6 max-w-4xl text-balance text-5xl font-display font-bold leading-[1.05] lg:text-[64px]">
-          Let's build the future grid{" "}
-          <span style={{ color: "var(--brand-cyan)" }}>
-            together.
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -left-32 -top-32 -z-10 h-[520px] w-[520px] rounded-full"
+        style={{ background: "radial-gradient(circle, oklch(0.85 0.06 200 / 0.35) 0%, transparent 70%)" }}
+      />
+
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 px-6 lg:grid-cols-2" style={{ minHeight: 450 }}>
+        {/* Left: text */}
+        <div className="py-16 lg:py-20">
+          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-white/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground backdrop-blur">
+            <Sparkles className="h-3.5 w-3.5 text-accent" /> Contact
           </span>
-        </h1>
-        <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-          Reach out for partnerships, business inquiries, technology discussions or
-          career opportunities. We typically respond within one business day.
-        </p>
+          <h1 className="mt-6 max-w-xl text-balance text-5xl font-display font-bold leading-[1.05] tracking-tight lg:text-[58px]">
+            Let's build the future grid{" "}
+            <span style={{ color: "var(--brand-cyan)" }}>together.</span>
+          </h1>
+          <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground">
+            Reach out for partnerships, business inquiries, technology discussions or
+            career opportunities. We typically respond within one business day.
+          </p>
+        </div>
+
+        {/* Right: placeholder */}
+        <div className="hidden lg:flex items-center justify-center py-10">
+          <div className="w-full rounded-3xl" style={{ height: 320, background: "#E5E7EB" }} />
+        </div>
       </div>
     </section>
   );
@@ -94,44 +111,43 @@ function Hero() {
 
 function Categories({ selected, onSelect }: { selected: string; onSelect: (k: string) => void }) {
   return (
-    <section className="border-b border-border/60 py-16">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="text-xs font-semibold uppercase tracking-widest text-accent">
-          Inquiry categories
-        </div>
-        <h2 className="mt-3 text-balance text-3xl font-display font-bold lg:text-4xl">
-          What can we help with?
-        </h2>
-        <div className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-6">
-          {CATEGORIES.map((c) => {
-            const active = selected === c.key;
-            return (
-              <button
-                key={c.key}
-                type="button"
-                onClick={() => onSelect(c.key)}
-                className={`rounded-2xl border p-5 text-left transition ${
-                  active
-                    ? "border-accent bg-accent/5 shadow-[var(--shadow-card)]"
-                    : "border-border bg-card hover:-translate-y-0.5 hover:shadow-[var(--shadow-card)]"
-                }`}
-              >
-                <c.icon className={`h-5 w-5 ${active ? "text-accent" : "text-foreground/70"}`} />
-                <div className="mt-4 text-sm font-display font-semibold">{c.label}</div>
-              </button>
-            );
-          })}
-        </div>
+    <div className="mb-8">
+      <div className="text-xs font-semibold uppercase tracking-widest text-accent">
+        Inquiry categories
       </div>
-    </section>
+      <h2 className="mt-2 text-2xl font-display font-bold">
+        What can we help with?
+      </h2>
+      <div className="mt-5 flex flex-wrap gap-2">
+        {CATEGORIES.map((c) => {
+          const active = selected === c.key;
+          return (
+            <button
+              key={c.key}
+              type="button"
+              onClick={() => onSelect(c.key)}
+              className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition ${
+                active
+                  ? "border-accent bg-accent/10 text-accent"
+                  : "border-border bg-card text-foreground/70 hover:border-accent/50 hover:text-accent"
+              }`}
+            >
+              <c.icon className="h-4 w-4 shrink-0" />
+              {c.label}
+            </button>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 
-function FormAndInfo({ category }: { category: string }) {
+function FormAndInfo({ category, selected, onSelect }: { category: string; selected: string; onSelect: (k: string) => void }) {
   return (
-    <section className="border-b border-border/60 py-20">
+    <section className="py-20">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 lg:grid-cols-12">
         <div className="lg:col-span-7">
+          <Categories selected={selected} onSelect={onSelect} />
           <ContactForm category={category} />
         </div>
         <div className="space-y-5 lg:col-span-5">
@@ -282,42 +298,85 @@ function Field({
 }
 
 function Offices() {
-  const offices = [
-    { city: "Bengaluru", country: "India", note: "HQ · Engineering & operations", type: "Headquarters" },
-    { city: "Hyderabad", country: "India", note: "Manufacturing facility", type: "Manufacturing" },
-    { city: "Mysuru", country: "India", note: "Integration & testing", type: "Manufacturing" },
-    { city: "New Delhi", country: "India", note: "Programs & public sector", type: "Regional office" },
-  ];
+  const [activeLocation, setActiveLocation] = useState<string | null>(null);
+
   return (
-    <section className="border-b border-border/60 bg-secondary/40 py-20">
+    <section className="border-b border-border/60 bg-secondary/40 py-20" style={{ overflow: "clip" }}>
       <div className="mx-auto max-w-7xl px-6">
-        <div className="max-w-2xl">
-          <div className="text-xs font-semibold uppercase tracking-widest text-accent">
-            Locations
+        <div className="grid items-stretch gap-16 lg:grid-cols-2">
+
+          {/* LEFT: text + chips */}
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-widest text-accent">
+              Locations
+            </div>
+            <h2 className="mt-3 text-balance text-4xl font-display font-bold leading-tight lg:text-5xl">
+              Where to find us.
+            </h2>
+            <p className="mt-4 text-muted-foreground">
+              GridCrest operates across India — from headquarters and manufacturing
+              plants to R&amp;D centres and regional program offices.
+            </p>
+
+            <div className="mt-10 space-y-7">
+              {/* HQ & Manufacturing */}
+              <div className="flex gap-5">
+                <div className="mt-1 w-0.5 shrink-0 self-stretch rounded-full bg-[#A258DA]" />
+                <div>
+                  <p className="text-sm font-semibold text-[#A258DA]">HQ &amp; Manufacturing</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {["Bengaluru", "Hyderabad", "Mysuru"].map((loc) => (
+                      <span
+                        key={loc}
+                        onMouseEnter={() => setActiveLocation(loc)}
+                        onMouseLeave={() => setActiveLocation(null)}
+                        className={`cursor-pointer rounded-full border px-3 py-1 text-xs font-medium transition-all ${
+                          activeLocation === loc
+                            ? "border-[#A258DA] bg-[#A258DA] text-white"
+                            : "border-border bg-white text-foreground hover:border-[#A258DA]/50 hover:bg-[#A258DA]/10"
+                        }`}
+                      >
+                        {loc}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Regional Offices */}
+              <div className="flex gap-5">
+                <div className="mt-1 w-0.5 shrink-0 self-stretch rounded-full bg-[#F59E0B]" />
+                <div>
+                  <p className="text-sm font-semibold text-[#D97706]">Regional Offices</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {["New Delhi"].map((loc) => (
+                      <span
+                        key={loc}
+                        onMouseEnter={() => setActiveLocation(loc)}
+                        onMouseLeave={() => setActiveLocation(null)}
+                        className={`cursor-pointer rounded-full border px-3 py-1 text-xs font-medium transition-all ${
+                          activeLocation === loc
+                            ? "border-[#F59E0B] bg-[#F59E0B] text-white"
+                            : "border-border bg-white text-foreground hover:border-[#F59E0B]/50 hover:bg-[#F59E0B]/10"
+                        }`}
+                      >
+                        {loc}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <h2 className="mt-3 text-balance text-4xl font-display font-bold leading-tight lg:text-5xl">
-            Where to find us.
-          </h2>
-        </div>
-        <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
-          {offices.map((o) => (
-            <article
-              key={o.city}
-              className="rounded-3xl border border-border bg-card p-7 transition hover:-translate-y-1 hover:shadow-[var(--shadow-card)]"
-            >
-              <div className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
-                {o.type}
-              </div>
-              <span className="mt-3 grid h-10 w-10 place-items-center rounded-xl bg-accent/10 text-accent">
-                <MapPin className="h-5 w-5" />
-              </span>
-              <h3 className="mt-5 text-xl font-display font-bold">{o.city}</h3>
-              <div className="text-sm text-muted-foreground">{o.country}</div>
-              <div className="mt-4 flex items-center gap-2 text-xs text-foreground/80">
-                <Building2 className="h-3.5 w-3.5 text-accent" /> {o.note}
-              </div>
-            </article>
-          ))}
+
+          {/* RIGHT: India map */}
+          <div className="flex flex-col overflow-hidden" style={{ minHeight: 0 }}>
+            <IndiaMapInteractive
+              activeLocation={activeLocation}
+              onStateHover={(label) => setActiveLocation(label)}
+            />
+          </div>
+
         </div>
       </div>
     </section>
@@ -349,7 +408,7 @@ function Reach() {
           {items.map((i) => (
             <div key={i.label} className="rounded-3xl border border-border bg-card p-6">
               <Globe2 className="h-5 w-5 text-accent" />
-              <div className="mt-5 text-3xl font-display font-bold">{i.value}</div>
+              <div className="mt-5 text-xl font-display font-bold">{i.value}</div>
               <div className="mt-1 text-sm text-muted-foreground">{i.label}</div>
             </div>
           ))}
@@ -359,30 +418,3 @@ function Reach() {
   );
 }
 
-function FinalCTA() {
-  return (
-    <section className="py-24">
-      <div className="mx-auto max-w-7xl px-6">
-        <div
-          className="relative overflow-hidden rounded-[2rem] p-10 text-center lg:p-16"
-          style={{ background: "var(--gradient-cta)" }}
-        >
-          <h2 data-no-reveal className="relative mx-auto max-w-3xl text-balance text-4xl font-display font-bold leading-tight text-white lg:text-5xl">
-            Ready to transform energy infrastructure?
-          </h2>
-          <div className="relative mt-8 flex flex-wrap items-center justify-center gap-3">
-            <a href="#top" className="btn-primary">
-              Talk to our team <ArrowRight className="h-4 w-4" />
-            </a>
-            <a href="/solutions" className="btn-secondary">
-              Explore solutions
-            </a>
-            <a href="/company/kaynes" className="btn-secondary">
-              Partner with GridCrest
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}

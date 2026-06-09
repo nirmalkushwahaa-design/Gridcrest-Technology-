@@ -12,6 +12,7 @@ import { useEffect } from "react";
 
 import appCss from "../styles.css?url";
 import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 
 function NotFoundComponent() {
   return (
@@ -152,6 +153,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <SiteHeader />
       <Outlet />
+      <SiteFooter />
     </QueryClientProvider>
   );
 }

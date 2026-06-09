@@ -1,4 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { CtaBanner } from "@/components/CtaBanner";
+import { PageHero } from "@/components/PageHero";
+import heroTechnology from "@/assets/hero-technology.svg";
 import {
   ArrowRight,
   BrainCircuit,
@@ -47,48 +50,29 @@ function TechnologyPage() {
       <Intelligence />
       <CloudEdge />
       <Metrics />
-      <CTA />
+      <CtaBanner
+        eyebrow="TECHNOLOGY"
+        title="Ready to Deploy Smarter Grid Technology?"
+        description="Talk to the GridCrest engineering team about your utility's requirements — from smart metering to full AMI deployment."
+        primary={{ label: "Talk to Our Team", to: "/contact" }}
+        secondary={{ label: "Explore Solutions", to: "/solutions" }}
+      />
     </main>
   );
 }
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden border-b border-border/60">
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 opacity-40"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, oklch(0.9 0.02 250 / 0.5) 1px, transparent 1px), linear-gradient(to bottom, oklch(0.9 0.02 250 / 0.5) 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
-          maskImage: "radial-gradient(ellipse at top, black, transparent 70%)",
-        }}
-      />
-      <div className="mx-auto max-w-7xl px-6 py-24 lg:py-32">
-        <span className="inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-muted-foreground backdrop-blur">
-          <Sparkles className="h-3.5 w-3.5 text-accent" /> Technology
-        </span>
-        <h1 className="mt-6 max-w-4xl text-balance text-5xl font-display font-bold leading-[1.05] lg:text-[64px]">
-          Built for the future of{" "}
-          <span style={{ color: "var(--brand-cyan)" }}>
-            intelligent grids.
-          </span>
-        </h1>
-        <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-          From smart meters to grid intelligence platforms, GridCrest combines hardware,
-          software, analytics and scalable infrastructure into one unified ecosystem.
-        </p>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <a href="#architecture" className="btn-primary">
-            Explore Architecture <ArrowRight className="h-4 w-4" />
-          </a>
-          <Link to="/solutions" className="btn-secondary">
-            View Solutions
-          </Link>
-        </div>
-      </div>
-    </section>
+    <PageHero
+      eyebrow="Technology"
+      title="Built for the future of"
+      titleAccent="intelligent grids."
+      description="From smart meters to grid intelligence platforms, GridCrest combines hardware, software, analytics and scalable infrastructure into one unified ecosystem."
+      primary={{ label: "Explore Architecture", href: "#architecture" }}
+      secondary={{ label: "View Solutions", to: "/solutions" }}
+      image={heroTechnology}
+      imageAlt="GridCrest Technology Stack"
+    />
   );
 }
 
@@ -350,31 +334,3 @@ function Metrics() {
   );
 }
 
-function CTA() {
-  return (
-    <section className="py-24">
-      <div className="mx-auto max-w-7xl px-6">
-        <div
-          className="relative overflow-hidden rounded-[2rem] p-10 text-center lg:p-16"
-          style={{ background: "var(--gradient-cta)" }}
-        >
-          <h2 data-no-reveal className="relative mx-auto max-w-3xl text-balance text-4xl font-display font-bold leading-tight text-white lg:text-5xl">
-            See the platform in action.
-          </h2>
-          <p className="relative mx-auto mt-4 max-w-xl text-white/85">
-            Walk through the GridCrest stack with our engineering team — tailored to your
-            program.
-          </p>
-          <div className="relative mt-8 flex flex-wrap items-center justify-center gap-3">
-            <Link to="/contact" className="btn-primary">
-              Book a walkthrough <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link to="/solutions" className="btn-secondary">
-              Explore solutions
-            </Link>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
