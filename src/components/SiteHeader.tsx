@@ -7,7 +7,7 @@ const NAV_ITEMS = [
   { label: "Solution", to: "/solutions" },
   { label: "Technology", to: "/technology" },
   { label: "Company", to: "/company" },
-  { label: "Insight", to: "/insight/news" },
+  { label: "Insight", to: "/insight/" },
   { label: "Contact", to: "/contact" },
 ];
 

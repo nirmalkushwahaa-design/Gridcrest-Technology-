@@ -143,12 +143,9 @@ function Index() {
               every node of the modern energy network.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <button className="hover-pop inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm text-primary-foreground shadow-[var(--shadow-card)] transition hover:brightness-95 text-center font-semibold">
+              <Link to="/solutions" className="hover-pop inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm text-primary-foreground shadow-[var(--shadow-card)] transition hover:brightness-95 text-center font-semibold">
                 Explore Solutions <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </button>
-              <button className="hover-pop inline-flex items-center gap-2 rounded-full border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition hover:bg-secondary">
-                Contact Sales
-              </button>
+              </Link>
             </div>
             <div className="mt-12 flex flex-wrap gap-x-10 gap-y-6">
               {[
@@ -346,9 +343,8 @@ function Index() {
               Real Infrastructure. Industrial Strength.
             </h2>
             <p className="mt-4 text-muted-foreground">
-              Grid-tech isn't a software-only operation. We are backed by a deep-rooted
-              manufacturing facility, an ISO-certified production process and the full data &amp;
-              depth of the Kaynes Group ecosystem.
+              We are backed by a deep-rooted manufacturing facility, an ISO-certified production
+              process and the full data &amp; depth of the Kaynes Group ecosystem.
             </p>
 
             <div className="mt-8 space-y-5">
@@ -377,9 +373,9 @@ function Index() {
               <button className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition hover:brightness-95">
                 Explore Our Capabilities
               </button>
-              <button className="rounded-full border border-border bg-background px-5 py-2.5 text-sm font-semibold transition hover:bg-secondary">
+              <a href="https://www.kaynestechnology.co.in/" target="_blank" rel="noopener noreferrer" className="rounded-full border border-border bg-background px-5 py-2.5 text-sm font-semibold transition hover:bg-secondary">
                 Kaynes Group ↗
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -567,14 +563,12 @@ function PresenceSection() {
             </div>
           </div>
 
-          {/* RIGHT: India map — clipped to left column height */}
-          <div className="flex flex-col overflow-hidden">
-            <div className="flex flex-1 flex-col">
-              <IndiaMapInteractive
-                activeLocation={activeLocation}
-                onStateHover={(label) => setActiveLocation(label)}
-              />
-            </div>
+          {/* RIGHT: India map — sized to match left column */}
+          <div className="flex flex-col overflow-hidden" style={{ minHeight: 0 }}>
+            <IndiaMapInteractive
+              activeLocation={activeLocation}
+              onStateHover={(label) => setActiveLocation(label)}
+            />
           </div>
         </div>
 

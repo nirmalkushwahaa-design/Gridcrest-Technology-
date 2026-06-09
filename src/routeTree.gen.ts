@@ -19,6 +19,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CompanyRouteImport } from './routes/company'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as InsightIndexRouteImport } from './routes/insight.index'
 import { Route as SolutionsSmartMetersRouteImport } from './routes/solutions.smart-meters'
 import { Route as SolutionsMdmRouteImport } from './routes/solutions.mdm'
 import { Route as SolutionsInteroperabilityRouteImport } from './routes/solutions.interoperability'
@@ -90,6 +91,11 @@ const CareersRoute = CareersRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InsightIndexRoute = InsightIndexRouteImport.update({
+  id: '/insight/',
+  path: '/insight/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SolutionsSmartMetersRoute = SolutionsSmartMetersRouteImport.update({
@@ -239,6 +245,7 @@ export interface FileRoutesByFullPath {
   '/solutions/interoperability': typeof SolutionsInteroperabilityRoute
   '/solutions/mdm': typeof SolutionsMdmRoute
   '/solutions/smart-meters': typeof SolutionsSmartMetersRoute
+  '/insight/': typeof InsightIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -273,6 +280,7 @@ export interface FileRoutesByTo {
   '/solutions/interoperability': typeof SolutionsInteroperabilityRoute
   '/solutions/mdm': typeof SolutionsMdmRoute
   '/solutions/smart-meters': typeof SolutionsSmartMetersRoute
+  '/insight': typeof InsightIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -308,6 +316,7 @@ export interface FileRoutesById {
   '/solutions/interoperability': typeof SolutionsInteroperabilityRoute
   '/solutions/mdm': typeof SolutionsMdmRoute
   '/solutions/smart-meters': typeof SolutionsSmartMetersRoute
+  '/insight/': typeof InsightIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -344,6 +353,7 @@ export interface FileRouteTypes {
     | '/solutions/interoperability'
     | '/solutions/mdm'
     | '/solutions/smart-meters'
+    | '/insight/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -378,6 +388,7 @@ export interface FileRouteTypes {
     | '/solutions/interoperability'
     | '/solutions/mdm'
     | '/solutions/smart-meters'
+    | '/insight'
   id:
     | '__root__'
     | '/'
@@ -412,6 +423,7 @@ export interface FileRouteTypes {
     | '/solutions/interoperability'
     | '/solutions/mdm'
     | '/solutions/smart-meters'
+    | '/insight/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -428,6 +440,7 @@ export interface RootRouteChildren {
   InsightArticlesRoute: typeof InsightArticlesRoute
   InsightNewsRoute: typeof InsightNewsRoute
   InsightUpdatesRoute: typeof InsightUpdatesRoute
+  InsightIndexRoute: typeof InsightIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -500,6 +513,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/insight/': {
+      id: '/insight/'
+      path: '/insight'
+      fullPath: '/insight/'
+      preLoaderRoute: typeof InsightIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/solutions/smart-meters': {
@@ -758,6 +778,7 @@ const rootRouteChildren: RootRouteChildren = {
   InsightArticlesRoute: InsightArticlesRoute,
   InsightNewsRoute: InsightNewsRoute,
   InsightUpdatesRoute: InsightUpdatesRoute,
+  InsightIndexRoute: InsightIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

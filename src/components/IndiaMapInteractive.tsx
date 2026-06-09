@@ -43,11 +43,13 @@ export default function IndiaMapInteractive({ activeLocation, onStateHover }: Pr
         // Style the SVG to fill container
         const svgEl = containerRef.current.querySelector("svg");
         if (svgEl) {
-          // Crop right side to remove Andaman dead space, focus on mainland
-          svgEl.setAttribute("viewBox", "0 0 450 696");
+          // ViewBox covers full mainland + NE states; islands hidden via CSS
+          svgEl.setAttribute("viewBox", "0 0 500 696");
           svgEl.setAttribute("width", "100%");
           svgEl.setAttribute("height", "100%");
-          svgEl.setAttribute("preserveAspectRatio", "xMinYMin meet");
+          svgEl.setAttribute("preserveAspectRatio", "xMidYMid meet");
+          svgEl.style.maxWidth = "100%";
+          svgEl.style.overflow = "hidden";
           svgEl.style.display = "block";
         }
         // Hide island territories
@@ -162,8 +164,8 @@ export default function IndiaMapInteractive({ activeLocation, onStateHover }: Pr
   }, [svgLoaded, activeLocation, onStateHover]);
 
   return (
-    <div className="relative flex flex-1 flex-col">
-      <div ref={containerRef} className="flex-1" />
+    <div className="relative flex flex-col" style={{ height: "100%" }}>
+      <div ref={containerRef} style={{ flex: 1, minHeight: 0 }} />
       {/* Legend overlay — bottom left */}
       <div className="absolute bottom-3 left-3 flex items-center gap-4 rounded-xl border border-border bg-white/80 px-3 py-2 text-xs text-muted-foreground backdrop-blur-sm shadow-sm">
         <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-accent" /> Project Sites</span>
