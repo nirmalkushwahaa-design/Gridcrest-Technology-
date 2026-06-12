@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { CtaBanner } from "@/components/CtaBanner";
+import { EyebrowChip, FilterChip, LabelChip } from "@/components/ui/Chip";
 import IndiaMapInteractive from "@/components/IndiaMapInteractive";
 import {
   CheckCircle2,
@@ -80,9 +81,7 @@ function Hero() {
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 px-6 lg:grid-cols-2" style={{ minHeight: 450 }}>
         {/* Left: text */}
         <div className="py-16 lg:py-20">
-          <span className="inline-flex items-center rounded-full border border-border bg-white/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-            Manufacturing &amp; Ecosystem
-          </span>
+          <EyebrowChip>Manufacturing &amp; Ecosystem</EyebrowChip>
           <h1 className="mt-6 text-balance text-5xl font-display font-bold leading-[1.05] tracking-tight lg:text-[58px]">
             Engineering the Future of{" "}
             <span style={{ color: "var(--brand-cyan)" }}>
@@ -368,22 +367,18 @@ function NationwidePresence() {
                   <p className="text-sm font-semibold text-[#A258DA]">Manufacturing Sites</p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {MFG_SITES.map((loc) => (
-                      <span
+                      <FilterChip
                         key={loc}
+                        as="span"
+                        active={activeLocation === loc}
+                        color="purple"
                         onMouseEnter={() => setActiveLocation(loc)}
                         onMouseLeave={() => setActiveLocation(null)}
-                        className={`cursor-pointer rounded-full border px-3 py-1 text-xs font-medium transition-all ${
-                          activeLocation === loc
-                            ? "border-[#A258DA] bg-[#A258DA] text-white"
-                            : "border-border bg-secondary text-foreground hover:border-[#A258DA]/50 hover:bg-[#A258DA]/10"
-                        }`}
                       >
                         {loc}
-                      </span>
+                      </FilterChip>
                     ))}
-                    <span className="rounded-full border border-[#A258DA]/30 bg-[#A258DA]/5 px-3 py-1 text-xs font-medium text-[#A258DA]">
-                      +2 new facilities planned
-                    </span>
+                    <LabelChip color="purple">+2 new facilities planned</LabelChip>
                   </div>
                 </div>
               </div>
@@ -398,18 +393,16 @@ function NationwidePresence() {
                       { label: "Kolkata", state: "West Bengal" },
                       { label: "Noida", state: "Uttar Pradesh" },
                     ].map((loc) => (
-                      <span
+                      <FilterChip
                         key={loc.label}
+                        as="span"
+                        active={activeLocation === loc.state}
+                        color="cyan"
                         onMouseEnter={() => setActiveLocation(loc.state)}
                         onMouseLeave={() => setActiveLocation(null)}
-                        className={`cursor-pointer rounded-full border px-3 py-1 text-xs font-medium transition-all ${
-                          activeLocation === loc.state
-                            ? "border-accent bg-accent text-white"
-                            : "border-border bg-secondary text-foreground hover:border-accent/50 hover:bg-accent/10"
-                        }`}
                       >
                         {loc.label}
-                      </span>
+                      </FilterChip>
                     ))}
                   </div>
                 </div>
@@ -422,18 +415,16 @@ function NationwidePresence() {
                   <p className="text-sm font-semibold text-[#D97706]">Project Operations</p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {PROJECT_LOCS.map((loc) => (
-                      <span
+                      <FilterChip
                         key={loc}
+                        as="span"
+                        active={activeLocation === loc}
+                        color="amber"
                         onMouseEnter={() => setActiveLocation(loc)}
                         onMouseLeave={() => setActiveLocation(null)}
-                        className={`cursor-pointer rounded-full border px-3 py-1 text-xs font-medium transition-all ${
-                          activeLocation === loc
-                            ? "border-[#F59E0B] bg-[#F59E0B] text-white"
-                            : "border-border bg-secondary text-foreground hover:border-[#F59E0B]/50 hover:bg-[#F59E0B]/10"
-                        }`}
                       >
                         {loc}
-                      </span>
+                      </FilterChip>
                     ))}
                   </div>
                 </div>

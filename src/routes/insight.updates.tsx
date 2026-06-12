@@ -1,6 +1,7 @@
 ﻿import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { CtaBanner } from "@/components/CtaBanner";
+import { FilterChip } from "@/components/ui/Chip";
 
 type UpdateType = "Product" | "Program" | "Partnership";
 type Update = {
@@ -109,17 +110,14 @@ function UpdatesPage() {
       <section className="mx-auto max-w-5xl px-6 py-16">
         <div className="flex flex-wrap gap-2">
           {FILTERS.map((f) => (
-            <button
+            <FilterChip
               key={f}
+              active={filter === f}
+              color="navy"
               onClick={() => setFilter(f)}
-              className={`rounded-full border px-4 py-2 text-xs font-medium uppercase tracking-wider transition-colors ${
-                filter === f
-                  ? "border-[var(--brand-navy)] bg-[var(--brand-navy)] text-white"
-                  : "border-border text-muted-foreground hover:border-[var(--brand-navy-hover)] hover:text-[var(--brand-navy-hover)]"
-              }`}
             >
               {f}
-            </button>
+            </FilterChip>
           ))}
         </div>
 

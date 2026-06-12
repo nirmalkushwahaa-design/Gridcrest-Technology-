@@ -5,7 +5,6 @@ import logoUrl from "@/assets/gridcrest-logo.svg";
 
 const NAV_ITEMS = [
   { label: "Solutions", to: "/solutions" },
-  { label: "Technology", to: "/technology" },
   { label: "Manufacturing", to: "/manufacturing" },
   { label: "Company", to: "/company" },
   { label: "Insight", to: "/insight/" },

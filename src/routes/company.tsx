@@ -1,37 +1,45 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CtaBanner } from "@/components/CtaBanner";
 import { PageHero } from "@/components/PageHero";
-import heroCompany from "@/assets/hero-company.svg";
+import milestoneActiveImg from "@/assets/milestone-active.svg";
+import aboutHeroImg from "@/assets/about-hero.svg";
 import {
   ArrowRight,
   ArrowUpRight,
+  BrainCircuit,
   Building2,
+  CheckCircle2,
   Cpu,
+  DatabaseZap,
   Factory,
   Gauge,
+  Globe,
+  Handshake,
   Layers,
-  LineChart,
+  Lightbulb,
   Network,
-  Plus,
+  Radio,
+  Server,
+  Settings2,
+  ShieldCheck,
+  Smartphone,
   Sparkles,
   Target,
+  TrendingUp,
   Users,
+  Wrench,
+  Zap,
 } from "lucide-react";
+import { useRef, useEffect, useState, useCallback } from "react";
 
 export const Route = createFileRoute("/company")({
   head: () => ({
     meta: [
-      { title: "About GridCrest — Building the Digital Backbone of Modern Utilities" },
+      { title: "About GridCrest — Engineering the Future of Utility Intelligence" },
       {
         name: "description",
         content:
-          "GridCrest combines smart metering, scalable software platforms and manufacturing excellence to power the transition to intelligent, data-driven utilities.",
-      },
-      { property: "og:title", content: "About GridCrest" },
-      {
-        property: "og:description",
-        content:
-          "A manufacturing-backed technology company building the digital backbone of modern utilities.",
+          "GridCrest Technologies delivers integrated smart metering solutions across devices, communications, software platforms, and managed services — backed by the Kaynes Group.",
       },
     ],
   }),
@@ -41,218 +49,261 @@ export const Route = createFileRoute("/company")({
 function CompanyPage() {
   return (
     <main className="bg-background text-foreground">
-      <Hero />
-      <Overview />
-      <VisionMission />
-      <Leadership />
-      <Culture />
-      <Kaynes />
-      <Metrics />
+      <PageHero
+        eyebrow="About GridCrest"
+        title="Engineering the Future of"
+        titleAccent="Utility Intelligence"
+        description="GridCrest Technologies is a utility technology company delivering integrated smart metering solutions across devices, communications, software platforms, and managed services. Backed by the engineering and manufacturing strength of the Kaynes Group."
+        primary={{ label: "Explore Solutions", to: "/solutions" }}
+        secondary={{ label: "Contact Us", to: "/contact" }}
+        image={aboutHeroImg}
+        imageAlt="GridCrest ecosystem overview"
+      />
+      <AboutGridCrest />
+      <WhyGridCrest />
+      <KaynesGroup />
+      <CoreCapabilities />
+      <OurJourney />
+      <LeadershipTeam />
+      <MissionVisionValues />
+      <PeopleAndCulture />
       <CtaBanner
-        eyebrow="PARTNER WITH US"
-        title="Partner with GridCrest"
-        description="Whether you're a utility, integrator or technology partner — let's explore how GridCrest can support your next smart metering programme."
-        primary={{ label: "Talk to Our Team", to: "/contact" }}
-        secondary={{ label: "Explore Solutions", to: "/solutions" }}
+        eyebrow="LET'S BUILD THE FUTURE TOGETHER"
+        title="Partnering for Smarter Utilities"
+        description="Whether you're a utility looking to modernize operations, a technology partner exploring collaboration opportunities, or a professional interested in joining our journey, we'd love to hear from you."
+        primary={{ label: "Talk to Our Experts", to: "/contact" }}
+        secondary={{ label: "Become a Partner", to: "/contact" }}
       />
     </main>
   );
 }
 
-/* ---------- 1. Hero ---------- */
-function Hero() {
+/* ─── 2. ABOUT GRIDCREST ────────────────────────────────────────────────────── */
+function AboutGridCrest() {
   return (
-    <PageHero
-      eyebrow="About GridCrest"
-      title="Building the digital backbone of"
-      titleAccent="modern utilities."
-      description="GridCrest delivers integrated smart-grid technologies — intelligent metering, digital platforms and scalable grid intelligence — engineered to work as one connected system."
-      primary={{ label: "Explore Solutions", to: "/solutions" }}
-      secondary={{ label: "Partner with us", to: "/contact" }}
-      image={heroCompany}
-      imageAlt="GridCrest Company"
-    />
-  );
-}
-
-function GridBackdrop() {
-  return (
-    <div
-      aria-hidden
-      className="absolute inset-0 -z-10 opacity-[0.35]"
-      style={{
-        backgroundImage:
-          "linear-gradient(to right, oklch(0.9 0.02 250 / 0.6) 1px, transparent 1px), linear-gradient(to bottom, oklch(0.9 0.02 250 / 0.6) 1px, transparent 1px)",
-        backgroundSize: "48px 48px",
-        maskImage: "radial-gradient(ellipse at top, black, transparent 70%)",
-      }}
-    />
-  );
-}
-
-function EcosystemFlow() {
-  const nodes = [
-    { label: "Meter", icon: Gauge },
-    { label: "HES", icon: Network },
-    { label: "MDM", icon: Layers },
-    { label: "OMS", icon: LineChart },
-    { label: "DMS", icon: Cpu },
-    { label: "SGOC", icon: Building2 },
-  ];
-  return (
-    <div className="relative rounded-3xl border border-border bg-gradient-to-br from-surface-cyan/60 to-surface-lavender/60 p-6 shadow-[var(--shadow-card)]">
-      <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-        Live grid ecosystem
+    <section className="border-b border-border/60 py-24">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="grid gap-16 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">
+              About GridCrest
+            </p>
+            <h2 className="mt-3 text-4xl font-bold leading-tight tracking-tight lg:text-5xl">
+              Built for Modern Utilities
+            </h2>
+          </div>
+          <div className="space-y-5 text-base text-muted-foreground leading-relaxed lg:col-span-8 lg:pt-1">
+            <p>
+              The utility industry is undergoing a fundamental transformation driven by
+              digital technologies, connected infrastructure, and data-driven decision making.
+            </p>
+            <p>
+              GridCrest was founded with a singular focus: helping utilities unlock the full
+              value of digital transformation.
+            </p>
+            <p>
+              We combine smart metering technology, communication infrastructure, enterprise
+              software, analytics, and operational services into one integrated ecosystem
+              designed specifically for utility environments.
+            </p>
+            <p>
+              Our solutions support utilities throughout their transformation journey — from
+              meter deployment and data collection to operational intelligence and consumer
+              engagement.
+            </p>
+          </div>
+        </div>
       </div>
-      <div className="mt-5 grid grid-cols-2 gap-3">
-        {nodes.map((n, i) => (
-          <div
-            key={n.label}
-            className="group flex items-center gap-3 rounded-2xl border border-border/80 bg-background/80 p-4 backdrop-blur transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-card)]"
-            style={{ animation: `pulse-soft 3s ${i * 0.3}s ease-in-out infinite` }}
-          >
-            <span className="grid h-9 w-9 place-items-center rounded-lg bg-accent/10 text-accent">
-              <n.icon className="h-4.5 w-4.5" />
-            </span>
-            <div>
-              <div className="text-sm font-semibold">{n.label}</div>
-              <div className="text-[11px] text-muted-foreground">Online</div>
+    </section>
+  );
+}
+
+/* ─── 3. WHY UTILITIES CHOOSE GRIDCREST ─────────────────────────────────────── */
+const WHY_CARDS = [
+  {
+    icon: Layers,
+    title: "One Partner. Complete Stack.",
+    body: "Smart meters, communication modules, utility platforms, analytics, and managed services under one ecosystem.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Open by Design",
+    body: "Built on industry standards including DLMS/COSEM, IS 15959, IS 16444, and IEC 61968 CIM to ensure seamless integration across utility environments.",
+  },
+  {
+    icon: Lightbulb,
+    title: "Utility-Focused Innovation",
+    body: "Purpose-built solutions designed specifically for utility operations, deployment realities, and evolving business requirements.",
+  },
+  {
+    icon: Zap,
+    title: "Scalable by Design",
+    body: "Engineered to support utility-scale deployments, high-volume data processing, and mission-critical operations.",
+  },
+  {
+    icon: Cpu,
+    title: "Semiconductor to Services",
+    body: "Backed by Kaynes Group capabilities spanning electronics manufacturing, engineering, software, and field services.",
+  },
+];
+
+function WhyGridCrest() {
+  return (
+    <section className="border-b border-border/60 bg-secondary py-24">
+      <div className="mx-auto max-w-7xl px-6">
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">
+          What Makes Us Different
+        </p>
+        <h2 className="mt-3 text-4xl font-bold leading-tight tracking-tight lg:text-5xl">
+          Why Utilities Choose GridCrest
+        </h2>
+
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+          {WHY_CARDS.map((c, i) => (
+            <div
+              key={c.title}
+              className={`rounded-2xl border border-border bg-card p-7 ${i === 4 ? "sm:col-span-2 xl:col-span-1" : ""}`}
+            >
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                <c.icon className="h-5 w-5" />
+              </span>
+              <h3 className="mt-5 text-lg font-bold" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>
+                {c.title}
+              </h3>
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{c.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── 4. KAYNES GROUP ───────────────────────────────────────────────────────── */
+const KAYNES_STRENGTHS = [
+  { icon: TrendingUp, label: "30+ Years of Engineering Excellence" },
+  { icon: Globe,      label: "Global Manufacturing Footprint" },
+  { icon: Factory,    label: "Advanced Electronics Manufacturing" },
+  { icon: Wrench,     label: "End-to-End Product Lifecycle Expertise" },
+];
+
+function KaynesGroup() {
+  return (
+    <section className="border-b border-border/60 py-24">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="grid gap-14 lg:grid-cols-2 lg:items-start">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">
+              Powered by Kaynes Group
+            </p>
+            <h2 className="mt-3 text-4xl font-bold leading-tight tracking-tight lg:text-5xl">
+              From Semiconductor to Services
+            </h2>
+            <p className="mt-5 text-muted-foreground leading-relaxed">
+              GridCrest is part of the Kaynes Group ecosystem, a leading electronics
+              manufacturing and engineering organization with decades of experience
+              delivering technology solutions across critical industries.
+            </p>
+            <p className="mt-4 text-muted-foreground leading-relaxed">
+              This unique foundation allows us to combine software innovation with
+              manufacturing excellence, supply chain resilience, and large-scale delivery
+              capabilities.
+            </p>
+            <a
+              href="https://www.kaynestechnology.co.in/"
+              target="_blank"
+              rel="noreferrer"
+              className="btn-secondary mt-7 inline-flex"
+            >
+              Visit Kaynes Group <ArrowUpRight className="h-4 w-4" />
+            </a>
+          </div>
+
+          <div className="space-y-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground mb-6">
+              Key Strengths
+            </p>
+            {KAYNES_STRENGTHS.map((s) => (
+              <div key={s.label} className="flex items-center gap-4 rounded-2xl border border-border bg-card p-5">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                  <s.icon className="h-5 w-5" />
+                </span>
+                <span className="font-semibold text-sm">{s.label}</span>
+                <CheckCircle2 className="ml-auto h-4 w-4 shrink-0 text-accent" />
+              </div>
+            ))}
+
+            {/* Visual placeholder */}
+            <div className="mt-2 h-44 w-full rounded-2xl border border-border bg-gradient-to-br from-surface-cyan/40 to-surface-lavender/30 flex items-center justify-center text-sm text-muted-foreground">
+              Kaynes manufacturing facility
             </div>
           </div>
-        ))}
-      </div>
-      <div className="mt-5 flex items-center justify-between rounded-2xl border border-dashed border-border bg-background/60 p-4 text-xs text-muted-foreground">
-        <span>Meter → HES → MDM → OMS → DMS → SGOC</span>
-        <span className="inline-flex items-center gap-1.5 font-semibold text-accent">
-          <span className="h-2 w-2 animate-pulse rounded-full bg-accent" /> Data flowing
-        </span>
-      </div>
-    </div>
-  );
-}
-
-/* ---------- 2. Company Overview ---------- */
-function Overview() {
-  return (
-    <section className="border-b border-border/60 py-24">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 px-6 lg:grid-cols-12">
-        <div className="lg:col-span-5">
-          <div className="text-xs font-semibold uppercase tracking-widest text-accent">
-            About GridCrest
-          </div>
-          <h2 className="mt-3 text-balance text-4xl font-display font-bold leading-tight lg:text-5xl">
-            Integrated smart-grid intelligence for the future of utilities.
-          </h2>
         </div>
-        <div className="space-y-5 text-base text-muted-foreground lg:col-span-7 lg:pt-2">
-          <p>
-            GridCrest combines advanced smart metering infrastructure, scalable software
-            platforms and manufacturing excellence to help utilities transition toward
-            intelligent, data-driven energy ecosystems.
-          </p>
-          <p>
-            Built with deep integration across hardware, software, analytics and
-            operations, GridCrest enables utilities to scale reliably — from initial
-            deployment all the way to full grid intelligence.
-          </p>
-        </div>
-      </div>
-
-      <div className="mx-auto mt-16 max-w-7xl px-6">
-        <ArchitectureStack />
       </div>
     </section>
   );
 }
 
-function ArchitectureStack() {
-  const stack = [
-    { label: "Smart Metering", icon: Gauge, color: "from-surface-cyan to-transparent" },
-    { label: "Communication", icon: Network, color: "from-surface-cyan to-transparent" },
-    { label: "HES", icon: Layers, color: "from-surface-lavender to-transparent" },
-    { label: "MDM", icon: Layers, color: "from-surface-lavender to-transparent" },
-    { label: "OMS / DMS", icon: LineChart, color: "from-surface-lavender to-transparent" },
-    { label: "SGOC", icon: Building2, color: "from-surface-lavender to-transparent" },
-  ];
-  return (
-    <div className="rounded-3xl border border-border bg-card p-6 shadow-[var(--shadow-card)] lg:p-10">
-      <div className="mb-6 flex items-center justify-between">
-        <div className="text-sm font-semibold">One connected architecture</div>
-        <div className="text-xs text-muted-foreground">Hover a layer to learn more</div>
-      </div>
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
-        {stack.map((s) => (
-          <div
-            key={s.label}
-            className={`group relative overflow-hidden rounded-2xl border border-border bg-gradient-to-b ${s.color} p-5 transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-card)]`}
-          >
-            <s.icon className="h-5 w-5 text-accent" />
-            <div className="mt-8 text-sm font-semibold">{s.label}</div>
-            <ArrowUpRight className="absolute right-3 top-3 h-4 w-4 opacity-0 transition group-hover:opacity-100" />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
+/* ─── 5. CORE CAPABILITIES ──────────────────────────────────────────────────── */
+const CAPABILITIES = [
+  {
+    icon: Gauge,
+    title: "Smart Metering",
+    body: "Standards-compliant smart metering solutions designed for reliable measurement, remote operations, and large-scale deployments.",
+  },
+  {
+    icon: Radio,
+    title: "Communications",
+    body: "Flexible connectivity through RF Mesh, Cellular, BLE, and interoperable communication technologies.",
+  },
+  {
+    icon: Server,
+    title: "Utility Platforms",
+    body: "Comprehensive software solutions including HES, MDM, Prepayment, Analytics, Workforce Management, and Consumer Engagement.",
+  },
+  {
+    icon: BrainCircuit,
+    title: "Data & Intelligence",
+    body: "Advanced analytics, operational insights, SLA monitoring, AI/ML-driven intelligence, and decision support.",
+  },
+  {
+    icon: Factory,
+    title: "Manufacturing & Engineering",
+    body: "Leveraging the Kaynes ecosystem for product engineering, electronics manufacturing, quality assurance, and scalable production of utility-grade technologies.",
+  },
+  {
+    icon: Settings2,
+    title: "Managed Services",
+    body: "Deployment, operations, maintenance, and utility transformation services supporting the complete AMI lifecycle.",
+  },
+];
 
-/* ---------- 3. Vision / Mission / Positioning ---------- */
-function VisionMission() {
-  const cards = [
-    {
-      tag: "Vision",
-      title: "Vision",
-      body: "To accelerate the evolution of intelligent, resilient and sustainable utility infrastructure — globally.",
-      icon: Target,
-    },
-    {
-      tag: "Mission",
-      title: "Mission",
-      body: "To build scalable smart-grid platforms that integrate hardware, software, analytics and manufacturing into one connected ecosystem.",
-      icon: Layers,
-    },
-    {
-      tag: "Why GridCrest",
-      title: "Positioning",
-      body: "A future-ready digital grid company combining deep utility expertise with vertically integrated manufacturing strength.",
-      icon: Sparkles,
-    },
-  ];
+function CoreCapabilities() {
   return (
-    <section className="border-b border-border/60 bg-gradient-to-b from-background to-surface-lavender/30 py-24">
+    <section className="border-b border-border/60 bg-secondary py-24">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="text-center">
-          <h2 className="mx-auto max-w-3xl text-balance text-4xl font-display font-bold leading-tight lg:text-5xl">
-            Invisible technology.{" "}
-            <span className="relative">
-              <span style={{ color: "var(--brand-cyan)" }}>
-                Visible impact.
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">
+          Core Capabilities
+        </p>
+        <h2 className="mt-3 text-4xl font-bold leading-tight tracking-tight lg:text-5xl">
+          Deep Expertise Across the Utility Value Chain
+        </h2>
+        <p className="mt-4 max-w-3xl text-muted-foreground">
+          GridCrest combines domain knowledge, engineering excellence, and digital
+          innovation to deliver solutions across every layer of the smart metering ecosystem.
+        </p>
+
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+          {CAPABILITIES.map((c) => (
+            <div key={c.title} className="rounded-2xl border border-border bg-card p-7">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                <c.icon className="h-5 w-5" />
               </span>
-              <span
-                aria-hidden
-                className="absolute -bottom-2 left-0 right-0 h-[3px] rounded-full bg-[var(--gradient-cta)] opacity-80"
-              />
-            </span>
-          </h2>
-        </div>
-
-        <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
-          {cards.map((c) => (
-            <article
-              key={c.title}
-              className="group relative overflow-hidden rounded-3xl border border-border bg-card p-8 transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-card)]"
-            >
-              <div className="text-xs font-semibold uppercase tracking-widest text-accent">
-                {c.tag}
-              </div>
-              <c.icon className="mt-4 h-7 w-7 text-foreground/80" />
-              <h3 className="mt-5 text-2xl font-display font-bold">{c.title}</h3>
-              <p className="mt-3 text-muted-foreground">{c.body}</p>
-              <div
-                aria-hidden
-                className="absolute inset-x-0 bottom-0 h-1 bg-[var(--gradient-cta)] opacity-0 transition group-hover:opacity-100"
-              />
-            </article>
+              <h3 className="mt-5 text-lg font-bold" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>
+                {c.title}
+              </h3>
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{c.body}</p>
+            </div>
           ))}
         </div>
       </div>
@@ -260,116 +311,120 @@ function VisionMission() {
   );
 }
 
-/* ---------- 4. Leadership ---------- */
-function Leadership() {
-  const team = [
-    {
-      name: "Ramesh Iyer",
-      role: "Chief Executive Officer",
-      blurb: "Two decades scaling digital infrastructure across utility programs.",
-      initials: "RI",
-    },
-    {
-      name: "Priya Nair",
-      role: "Chief Technology Officer",
-      blurb: "Architecting AI-driven platforms for grid operations.",
-      initials: "PN",
-    },
-    {
-      name: "Arjun Patel",
-      role: "Chief Operating Officer",
-      blurb: "Manufacturing-led delivery at national scale.",
-      initials: "AP",
-    },
-    {
-      name: "Maya Krishnan",
-      role: "Chief Product Officer",
-      blurb: "Building software utilities trust to run daily operations.",
-      initials: "MK",
-    },
-  ];
+/* ─── 6. OUR JOURNEY (milestones) ───────────────────────────────────────────── */
+const MILESTONES = [
+  { year: "2019", text: "Establishment of Iskraemeco India Private Limited. Operations begin with a single employee." },
+  { year: "2020", text: "Core founding team joins. First office in Kolkata. First meter testing lab built in a residential bedroom." },
+  { year: "2020–21", text: "Regulatory approvals and technical capability building across key utility verticals." },
+  { year: "2021", text: "First major smart metering order secured from WBSEDCL." },
+  { year: "2022", text: "Major project secured from Power Grid Corporation of India." },
+  { year: "2022–24", text: "Rapid organisational growth and large-scale project expansion across India." },
+  { year: "2024–25", text: "Strategic acquisition by Kaynes Technologies, enabling industrial-scale manufacturing." },
+  { year: "2025–26", text: "Rebranding and launch of GridCrest — one ecosystem, every layer of the grid.", active: true },
+];
+
+function OurJourney() {
+  const CARD_W = 300;
+  const PEEK = 28;
+  const containerRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [containerW, setContainerW] = useState(1200);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    setContainerW(el.offsetWidth);
+    const ro = new ResizeObserver(([e]) => setContainerW(e.contentRect.width));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  const onScroll = useCallback(() => {
+    const sl = containerRef.current?.scrollLeft ?? 0;
+    MILESTONES.forEach((_, i) => {
+      const card = cardRefs.current[i];
+      if (!card) return;
+      const push = sl - (i * CARD_W - i * PEEK);
+      card.style.transform = push > 0 ? `translateX(${push}px)` : "";
+    });
+  }, []);
+
+  const dragging = useRef(false);
+  const startX = useRef(0);
+  const scrollAt = useRef(0);
+  const onMouseDown = (e: React.MouseEvent) => {
+    dragging.current = true;
+    startX.current = e.pageX;
+    scrollAt.current = containerRef.current?.scrollLeft ?? 0;
+    if (containerRef.current) containerRef.current.style.cursor = "grabbing";
+  };
+  const onMouseUp = () => {
+    dragging.current = false;
+    if (containerRef.current) containerRef.current.style.cursor = "grab";
+  };
+  const onMouseMove = (e: React.MouseEvent) => {
+    if (!dragging.current || !containerRef.current) return;
+    e.preventDefault();
+    containerRef.current.scrollLeft = scrollAt.current - (e.pageX - startX.current) * 1.2;
+  };
+
+  const innerWidth = (MILESTONES.length - 1) * CARD_W + containerW;
+
   return (
-    <section className="border-b border-border/60 py-24">
+    <section className="border-b border-border/60 bg-secondary py-20">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="max-w-2xl">
-          <div className="text-xs font-semibold uppercase tracking-widest text-accent">
-            Leadership
-          </div>
-          <h2 className="mt-3 text-balance text-4xl font-display font-bold leading-tight lg:text-5xl">
-            Leadership driving transformation.
-          </h2>
-          <p className="mt-4 text-muted-foreground">
-            Experienced leaders across energy, manufacturing, software and digital
-            infrastructure — shaping the next generation of intelligent utilities.
-          </p>
-        </div>
-
-        <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {team.map((p) => (
-            <article
-              key={p.name}
-              className="group relative overflow-hidden rounded-3xl border border-border bg-card p-6 transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-card)]"
-            >
-              <div className="grid h-40 w-full place-items-center rounded-2xl bg-gradient-to-br from-surface-cyan to-surface-lavender text-3xl font-display font-bold text-foreground/70">
-                {p.initials}
-              </div>
-              <h3 className="mt-5 text-lg font-semibold">{p.name}</h3>
-              <div className="text-sm text-accent">{p.role}</div>
-              <p className="mt-3 text-sm text-muted-foreground">{p.blurb}</p>
-              <button
-                aria-label="Expand bio"
-                className="absolute right-4 top-4 grid h-8 w-8 place-items-center rounded-full border border-border bg-background text-foreground/70 transition group-hover:bg-accent group-hover:text-accent-foreground"
-              >
-                <Plus className="h-4 w-4" />
-              </button>
-            </article>
-          ))}
-        </div>
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">
+          Our Journey
+        </p>
+        <h2 className="mt-3 text-4xl font-bold leading-tight tracking-tight lg:text-5xl">
+          Milestones
+        </h2>
+        <p className="mt-4 max-w-2xl text-muted-foreground">
+          From a regional metering company to a global smart-grid force — every year, a new chapter.
+        </p>
       </div>
-    </section>
-  );
-}
 
-/* ---------- 5. Culture & People ---------- */
-function Culture() {
-  const tiles = [
-    { label: "Engineering", h: "h-56" },
-    { label: "Factory floor", h: "h-72" },
-    { label: "Innovation lab", h: "h-48" },
-    { label: "Site visit", h: "h-64" },
-    { label: "Operations", h: "h-52" },
-    { label: "Team off-site", h: "h-60" },
-  ];
-  return (
-    <section className="border-b border-border/60 bg-secondary/40 py-24">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-14 px-6 lg:grid-cols-12">
-        <div className="lg:col-span-5">
-          <div className="text-xs font-semibold uppercase tracking-widest text-accent">
-            Culture & People
-          </div>
-          <h2 className="mt-3 text-balance text-4xl font-display font-bold leading-tight lg:text-5xl">
-            People powering the future grid.
-          </h2>
-          <p className="mt-5 text-muted-foreground">
-            From engineering and manufacturing to innovation and operations, GridCrest is
-            built by teams shaping the future of utility transformation.
-          </p>
-          <Link
-            to="/careers"
-            className="mt-7 inline-flex items-center gap-1.5 text-sm font-semibold text-foreground hover:gap-2.5 transition-all"
-          >
-            Life at GridCrest <ArrowUpRight className="h-4 w-4" />
-          </Link>
-        </div>
-        <div className="lg:col-span-7">
-          <div className="columns-2 gap-4 md:columns-3">
-            {tiles.map((t) => (
+      <div className="mx-auto mt-10 max-w-7xl px-6">
+        <div
+          ref={containerRef}
+          className="overflow-x-auto pb-2 select-none"
+          style={{ cursor: "grab" }}
+          onScroll={onScroll}
+          onMouseDown={onMouseDown}
+          onMouseUp={onMouseUp}
+          onMouseLeave={onMouseUp}
+          onMouseMove={onMouseMove}
+        >
+          <div className="flex" style={{ width: innerWidth }}>
+            {MILESTONES.map((m, i) => (
               <div
-                key={t.label}
-                className={`mb-4 break-inside-avoid overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-surface-cyan/70 to-surface-lavender/70 ${t.h} relative`}
+                key={m.year}
+                ref={(el) => { cardRefs.current[i] = el; }}
+                className="shrink-0"
+                style={{ zIndex: i + 1, width: CARD_W }}
               >
-                <div className="absolute inset-0 grid place-items-center text-sm font-semibold text-foreground/60">
-                  {t.label}
+                <div
+                  className={`flex flex-col justify-between rounded-2xl border p-6 ${
+                    m.active
+                      ? "bg-primary text-primary-foreground border-primary shadow-[var(--shadow-card)]"
+                      : "bg-card border-border"
+                  }`}
+                  style={{ minHeight: 220 }}
+                >
+                  {m.active ? (
+                    <>
+                      <div>
+                        <div className="text-2xl font-bold text-primary-foreground">{m.year}</div>
+                        <p className="mt-2 text-sm leading-relaxed text-primary-foreground/90">{m.text}</p>
+                      </div>
+                      <img src={milestoneActiveImg} alt="" className="mt-4 h-16 w-auto self-start object-contain" draggable={false} />
+                    </>
+                  ) : (
+                    <>
+                      <div className="text-2xl font-bold text-accent">{m.year}</div>
+                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{m.text}</p>
+                    </>
+                  )}
                 </div>
               </div>
             ))}
@@ -380,60 +435,168 @@ function Culture() {
   );
 }
 
-/* ---------- 6. Kaynes ---------- */
-function Kaynes() {
+/* ─── 7. LEADERSHIP TEAM ────────────────────────────────────────────────────── */
+const TEAM = [
+  { name: "Ramesh Iyer",    role: "Chief Executive Officer",   initials: "RI" },
+  { name: "Priya Nair",     role: "Chief Technology Officer",  initials: "PN" },
+  { name: "Arjun Patel",    role: "Chief Operating Officer",   initials: "AP" },
+  { name: "Maya Krishnan",  role: "Chief Product Officer",     initials: "MK" },
+  { name: "Suresh Menon",   role: "VP — Engineering",          initials: "SM" },
+  { name: "Kavya Reddy",    role: "VP — Delivery & Services",  initials: "KR" },
+];
+
+function LeadershipTeam() {
   return (
     <section className="border-b border-border/60 py-24">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-14 px-6 lg:grid-cols-12">
-        <div className="lg:col-span-6">
-          <div className="text-xs font-semibold uppercase tracking-widest text-accent">
-            Kaynes ecosystem
-          </div>
-          <h2 className="mt-3 text-balance text-4xl font-display font-bold leading-tight lg:text-5xl">
-            Powered by the Kaynes ecosystem.
-          </h2>
-          <p className="mt-5 text-muted-foreground">
-            GridCrest operates within the broader strength of the Kaynes ecosystem —
-            combining advanced electronics manufacturing, semiconductor capabilities and
-            large-scale engineering expertise.
-          </p>
-          <p className="mt-4 text-muted-foreground">
-            This integration enables reliability, scalability and long-term execution
-            capability across smart-grid deployments.
-          </p>
-          <a
-            href="https://www.kaynestechnology.com"
-            target="_blank"
-            rel="noreferrer"
-            className="btn-secondary mt-7"
-          >
-            Visit Kaynes <ArrowUpRight className="h-4 w-4" />
-          </a>
-        </div>
-        <div className="lg:col-span-6">
-          <div className="rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-card)]">
-            <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-              Relationship
+      <div className="mx-auto max-w-7xl px-6">
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">
+          Leadership Team
+        </p>
+        <h2 className="mt-3 text-4xl font-bold leading-tight tracking-tight lg:text-5xl">
+          Guiding the Future of Utility Innovation
+        </h2>
+        <p className="mt-4 max-w-2xl text-muted-foreground">
+          Experienced leaders across energy, manufacturing, software, and digital
+          infrastructure — shaping the next generation of intelligent utilities.
+        </p>
+
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {TEAM.map((p) => (
+            <div key={p.name} className="rounded-2xl border border-border bg-card overflow-hidden">
+              <div className="flex h-52 w-full items-center justify-center bg-gradient-to-br from-surface-cyan/60 to-surface-lavender/60 text-4xl font-bold text-foreground/40">
+                {p.initials}
+              </div>
+              <div className="p-5">
+                <p className="font-bold text-foreground">{p.name}</p>
+                <p className="mt-1 text-sm text-accent">{p.role}</p>
+              </div>
             </div>
-            <div className="mt-6 space-y-3">
-              {[
-                { icon: Factory, label: "Kaynes Manufacturing", note: "Electronics, semiconductors, large-scale engineering" },
-                { icon: Layers, label: "GridCrest Platforms", note: "Smart metering, HES, MDM, intelligence" },
-                { icon: Building2, label: "Utility Transformation", note: "Reliable, scalable, future-ready deployments" },
-              ].map((row, i, arr) => (
-                <div key={row.label}>
-                  <div className="flex items-center gap-4 rounded-2xl border border-border bg-background p-4">
-                    <span className="grid h-10 w-10 place-items-center rounded-xl bg-accent/10 text-accent">
-                      <row.icon className="h-5 w-5" />
-                    </span>
-                    <div>
-                      <div className="text-sm font-semibold">{row.label}</div>
-                      <div className="text-xs text-muted-foreground">{row.note}</div>
-                    </div>
-                  </div>
-                  {i < arr.length - 1 && (
-                    <div className="my-1 ml-7 h-5 w-px bg-gradient-to-b from-accent/60 to-transparent" />
-                  )}
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── 8. MISSION, VISION & CORE VALUES ──────────────────────────────────────── */
+const CORE_VALUES = [
+  { icon: Lightbulb,  label: "Innovation",    body: "Continuously pushing boundaries to deliver breakthrough solutions for utility transformation." },
+  { icon: ShieldCheck,label: "Integrity",     body: "Committed to transparency, accountability, and the highest standards in everything we deliver." },
+  { icon: Sparkles,   label: "Excellence",    body: "Pursuing quality and precision across engineering, software, services, and customer outcomes." },
+  { icon: Users,      label: "Collaboration", body: "Working across disciplines, ecosystems, and geographies to solve complex utility challenges." },
+  { icon: TrendingUp, label: "Impact",        body: "Driving measurable improvement in how utilities operate, deliver services, and serve communities." },
+];
+
+function MissionVisionValues() {
+  return (
+    <section className="border-b border-border/60 bg-secondary py-24">
+      <div className="mx-auto max-w-7xl px-6">
+        {/* Mission & Vision */}
+        <div className="grid gap-8 lg:grid-cols-2">
+          <div className="rounded-2xl border border-border bg-card p-8">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent">
+              <Target className="h-5 w-5" />
+            </span>
+            <p className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-accent">Mission</p>
+            <h3 className="mt-2 text-2xl font-bold" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>
+              Our Mission
+            </h3>
+            <p className="mt-3 text-muted-foreground leading-relaxed">
+              To deliver integrated smart metering solutions that help utilities build
+              intelligent, efficient, and resilient operations — combining devices,
+              communications, platforms, and services into one seamless ecosystem.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-border bg-card p-8">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent">
+              <Sparkles className="h-5 w-5" />
+            </span>
+            <p className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-accent">Vision</p>
+            <h3 className="mt-2 text-2xl font-bold" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>
+              Our Vision
+            </h3>
+            <p className="mt-3 text-muted-foreground leading-relaxed">
+              To be the leading integrated utility technology partner — enabling utilities
+              worldwide to achieve full digital transformation through open, scalable, and
+              intelligent smart metering ecosystems.
+            </p>
+          </div>
+        </div>
+
+        {/* Core Values */}
+        <div className="mt-14">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">Core Values</p>
+          <h2 className="mt-3 text-4xl font-bold leading-tight tracking-tight">
+            What We Stand For
+          </h2>
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-5">
+            {CORE_VALUES.map((v) => (
+              <div key={v.label} className="rounded-2xl border border-border bg-card p-6">
+                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                  <v.icon className="h-5 w-5" />
+                </span>
+                <h3 className="mt-4 font-bold" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>{v.label}</h3>
+                <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{v.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── 9. PEOPLE & CULTURE ───────────────────────────────────────────────────── */
+const CULTURE_PILLARS = [
+  { icon: Lightbulb,  label: "Innovation",    body: "Encouraging new ideas and continuous improvement." },
+  { icon: Handshake,  label: "Ownership",     body: "Empowering individuals to take responsibility and drive outcomes." },
+  { icon: Users,      label: "Collaboration", body: "Working across disciplines to solve complex utility challenges." },
+  { icon: TrendingUp, label: "Growth",        body: "Investing in learning, development, and professional excellence." },
+];
+
+function PeopleAndCulture() {
+  return (
+    <section className="border-b border-border/60 py-24">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="grid gap-14 lg:grid-cols-12">
+          <div className="lg:col-span-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">
+              People &amp; Culture
+            </p>
+            <h2 className="mt-3 text-4xl font-bold leading-tight tracking-tight lg:text-5xl">
+              Life at GridCrest
+            </h2>
+            <p className="mt-2 text-lg font-semibold text-foreground">
+              Building Technology. Empowering People.
+            </p>
+            <p className="mt-4 text-muted-foreground leading-relaxed">
+              At GridCrest, we bring together utility experts, engineers, product
+              innovators, and technology professionals who are passionate about solving
+              complex challenges for modern utilities.
+            </p>
+            <p className="mt-4 text-muted-foreground leading-relaxed">
+              We foster a culture of innovation, ownership, collaboration, and continuous
+              learning — creating an environment where individuals can grow while delivering
+              meaningful impact.
+            </p>
+            <Link
+              to="/contact"
+              className="mt-7 inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:gap-2.5 transition-all"
+            >
+              Explore Opportunities <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <div className="lg:col-span-7">
+            <div className="grid grid-cols-2 gap-5">
+              {CULTURE_PILLARS.map((p) => (
+                <div key={p.label} className="rounded-2xl border border-border bg-card p-6">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                    <p.icon className="h-5 w-5" />
+                  </span>
+                  <h3 className="mt-4 font-bold" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>{p.label}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{p.body}</p>
                 </div>
               ))}
             </div>
@@ -443,39 +606,3 @@ function Kaynes() {
     </section>
   );
 }
-
-/* ---------- 7. Metrics ---------- */
-function Metrics() {
-  const stats = [
-    { v: "10M+", l: "Smart devices addressable" },
-    { v: "Multi-state", l: "Deployment programs" },
-    { v: "Integrated", l: "Manufacturing ecosystem" },
-    { v: "Future-ready", l: "Grid platforms" },
-  ];
-  return (
-    <section className="border-b border-border/60 bg-gradient-to-br from-surface-cyan/40 to-surface-lavender/40 py-24">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="max-w-2xl">
-          <h2 className="text-balance text-4xl font-display font-bold leading-tight lg:text-5xl">
-            Scale you can verify.
-          </h2>
-          <p className="mt-4 text-muted-foreground">
-            Built for enterprise-scale deployments — across utilities, governments and
-            national infrastructure programs.
-          </p>
-        </div>
-        <div className="mt-12 grid grid-cols-2 gap-6 md:grid-cols-4">
-          {stats.map((s) => (
-            <div key={s.l} className="rounded-3xl border border-border bg-background p-7">
-              <div className="text-4xl font-display font-bold text-foreground lg:text-5xl">
-                {s.v}
-              </div>
-              <div className="mt-2 text-sm text-muted-foreground">{s.l}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-

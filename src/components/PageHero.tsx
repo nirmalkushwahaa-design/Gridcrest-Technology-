@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
+import { EyebrowChip } from "@/components/ui/Chip";
 
 type Btn =
   | { label: string; to: string; href?: never }
@@ -71,9 +72,7 @@ export function PageHero({
       <div className="mx-auto grid h-full max-w-7xl grid-cols-1 items-center gap-8 px-6 lg:grid-cols-2" style={{ minHeight: 450 }}>
         {/* ── Left: text ── */}
         <div className="py-16 lg:py-20">
-          <span className="inline-flex items-center rounded-full border border-border bg-white/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground backdrop-blur">
-            {eyebrow}
-          </span>
+          <EyebrowChip>{eyebrow}</EyebrowChip>
 
           <h1 className="mt-6 max-w-xl text-balance text-5xl font-display font-bold leading-[1.05] tracking-tight lg:text-[58px]">
             {title}
@@ -97,14 +96,23 @@ export function PageHero({
           )}
         </div>
 
-        {/* ── Right: illustration placeholder ── */}
+        {/* ── Right: illustration ── */}
         <div className="hidden lg:flex items-center justify-center py-10">
-          <div
-            className="w-full rounded-3xl"
-            style={{ height: 320, background: "#E5E7EB" }}
-            role="img"
-            aria-label={imageAlt}
-          />
+          {image ? (
+            <img
+              src={image}
+              alt={imageAlt}
+              className="w-full max-w-[560px] h-auto object-contain select-none"
+              draggable={false}
+            />
+          ) : (
+            <div
+              className="w-full rounded-3xl"
+              style={{ height: 320, background: "#E5E7EB" }}
+              role="img"
+              aria-label={imageAlt}
+            />
+          )}
         </div>
       </div>
     </section>

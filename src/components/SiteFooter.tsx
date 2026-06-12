@@ -7,11 +7,14 @@ const NAV = [
     heading: "Solutions",
     links: [
       { label: "Smart Meters", to: "/solutions" },
-      { label: "Head End System (HES)", to: "/solutions" },
-      { label: "Meter Data Management", to: "/solutions" },
-      { label: "Reporting & Analytics", to: "/solutions" },
-      { label: "Consumer Application", to: "/solutions" },
-      { label: "Workforce Management", to: "/solutions" },
+      { label: "Network Interface Cards (NIC)", to: "/solutions" },
+      { label: "Anantya HES", to: "/solutions" },
+      { label: "Anantya MDM", to: "/solutions" },
+      { label: "Anantya Prepayment Engine", to: "/solutions" },
+      { label: "Anantya Reporting & Analytics", to: "/solutions" },
+      { label: "Anantya WFM", to: "/solutions" },
+      { label: "Anantya Synkra", to: "/solutions" },
+      { label: "Anantya Consumer App", to: "/solutions" },
     ],
   },
   {
@@ -19,14 +22,16 @@ const NAV = [
     links: [
       { label: "About GridCrest", to: "/company" },
       { label: "Manufacturing & Ecosystem", to: "/manufacturing" },
-      { label: "Technology", to: "/technology" },
       { label: "Kaynes Partnership", to: "/company" },
     ],
   },
   {
     heading: "Resources",
     links: [
-      { label: "Insight", to: "/insight/" },
+      { label: "Blog & Insights", to: "/insight/" },
+      { label: "Case Studies", to: "/insight/" },
+      { label: "Technical Resources", to: "/insight/" },
+      { label: "FAQs", to: "/contact" },
       { label: "Contact Us", to: "/contact" },
     ],
   },
@@ -50,8 +55,7 @@ export function SiteFooter() {
               <img src={gridcrestLogo} alt="GridCrest" className="h-9 w-auto" />
             </Link>
             <p className="mt-4 max-w-xs text-sm text-muted-foreground leading-relaxed">
-              Intelligent grid infrastructure for modern utilities — smart metering,
-              data platforms and field operations, built and backed in India.
+              One ecosystem for modern utilities—connecting devices, data, operations, and intelligence.
             </p>
             <div className="mt-6 flex items-center gap-2 text-xs text-muted-foreground">
               <span className="h-2 w-2 rounded-full bg-green-500" />

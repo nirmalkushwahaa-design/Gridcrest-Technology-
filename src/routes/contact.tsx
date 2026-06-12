@@ -1,5 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import contactHeroImg from "@/assets/contact-hero.png";
+import contactEmailImg from "@/assets/contact-email.png";
+import contactPhoneImg from "@/assets/contact-phone.png";
 import { CtaBanner } from "@/components/CtaBanner";
+import { EyebrowChip, CategoryChip } from "@/components/ui/Chip";
 import { useState } from "react";
 import IndiaMapInteractive from "@/components/IndiaMapInteractive";
 import {
@@ -87,9 +91,7 @@ function Hero() {
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 px-6 lg:grid-cols-2" style={{ minHeight: 450 }}>
         {/* Left: text */}
         <div className="py-16 lg:py-20">
-          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-white/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground backdrop-blur">
-            <Sparkles className="h-3.5 w-3.5 text-accent" /> Contact
-          </span>
+          <EyebrowChip><Sparkles className="h-3.5 w-3.5 text-accent" /> Contact</EyebrowChip>
           <h1 className="mt-6 max-w-xl text-balance text-5xl font-display font-bold leading-[1.05] tracking-tight lg:text-[58px]">
             Let's build the future grid{" "}
             <span style={{ color: "var(--brand-cyan)" }}>together.</span>
@@ -100,9 +102,14 @@ function Hero() {
           </p>
         </div>
 
-        {/* Right: placeholder */}
+        {/* Right: hero image */}
         <div className="hidden lg:flex items-center justify-center py-10">
-          <div className="w-full rounded-3xl" style={{ height: 320, background: "#E5E7EB" }} />
+          <img
+            src={contactHeroImg}
+            alt="GridCrest contact illustration"
+            className="w-full max-w-[560px] h-auto object-contain select-none"
+            draggable={false}
+          />
         </div>
       </div>
     </section>
@@ -119,24 +126,16 @@ function Categories({ selected, onSelect }: { selected: string; onSelect: (k: st
         What can we help with?
       </h2>
       <div className="mt-5 flex flex-wrap gap-2">
-        {CATEGORIES.map((c) => {
-          const active = selected === c.key;
-          return (
-            <button
-              key={c.key}
-              type="button"
-              onClick={() => onSelect(c.key)}
-              className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition ${
-                active
-                  ? "border-accent bg-accent/10 text-accent"
-                  : "border-border bg-card text-foreground/70 hover:border-accent/50 hover:text-accent"
-              }`}
-            >
-              <c.icon className="h-4 w-4 shrink-0" />
-              {c.label}
-            </button>
-          );
-        })}
+        {CATEGORIES.map((c) => (
+          <CategoryChip
+            key={c.key}
+            active={selected === c.key}
+            icon={c.icon}
+            onClick={() => onSelect(c.key)}
+          >
+            {c.label}
+          </CategoryChip>
+        ))}
       </div>
     </div>
   );
@@ -145,26 +144,19 @@ function Categories({ selected, onSelect }: { selected: string; onSelect: (k: st
 function FormAndInfo({ category, selected, onSelect }: { category: string; selected: string; onSelect: (k: string) => void }) {
   return (
     <section className="py-20">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 lg:grid-cols-12">
-        <div className="lg:col-span-7">
+      <div className="mx-auto max-w-7xl px-6 space-y-6">
+        <div>
           <Categories selected={selected} onSelect={onSelect} />
           <ContactForm category={category} />
         </div>
-        <div className="space-y-5 lg:col-span-5">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <InfoCard
-            icon={Mail}
-            title="Email"
+            img={contactEmailImg}
             lines={["hello@gridcrest.tech", "partnerships@gridcrest.tech"]}
           />
           <InfoCard
-            icon={Phone}
-            title="Phone"
+            img={contactPhoneImg}
             lines={["+91 80 4000 0000", "Mon – Fri · 9:30am – 6:30pm IST"]}
-          />
-          <InfoCard
-            icon={Newspaper}
-            title="Press & analysts"
-            lines={["press@gridcrest.tech"]}
           />
         </div>
       </div>
@@ -172,26 +164,17 @@ function FormAndInfo({ category, selected, onSelect }: { category: string; selec
   );
 }
 
-function InfoCard({
-  icon: Icon,
-  title,
-  lines,
-}: {
-  icon: React.ComponentType<{ className?: string }>;
-  title: string;
-  lines: string[];
-}) {
+function InfoCard({ img, lines }: { img: string; lines: string[] }) {
   return (
-    <div className="rounded-2xl border border-border bg-card p-6">
-      <div className="flex items-center gap-3">
-        <span className="grid h-10 w-10 place-items-center rounded-xl bg-accent/10 text-accent">
-          <Icon className="h-5 w-5" />
-        </span>
-        <div className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">
-          {title}
-        </div>
-      </div>
-      <div className="mt-4 space-y-1 text-sm text-foreground/85">
+    <div className="rounded-2xl border border-border bg-card p-6 flex items-center gap-6">
+      <img
+        src={img}
+        alt=""
+        className="shrink-0 object-contain select-none"
+        style={{ width: 250, height: 250 }}
+        draggable={false}
+      />
+      <div className="space-y-2 text-sm text-foreground/85">
         {lines.map((l) => (
           <div key={l}>{l}</div>
         ))}

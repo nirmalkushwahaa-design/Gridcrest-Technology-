@@ -1,16 +1,19 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { FilterChip, LabelChip, StaticChip } from "@/components/ui/Chip";
+import solSmartMeterImg from "@/assets/sol-smart-meter.png";
+import solCommunicationImg from "@/assets/sol-communication.png";
+import solIntelligenceImg from "@/assets/sol-intelligence.png";
+import solIntegratedImg from "@/assets/sol-integrated.png";
 import {
   ArrowRight,
-  Gauge,
-  MessagesSquare,
-  BarChart3,
-  LayoutGrid,
-  HandHeart,
   BrainCircuit,
   Network,
   Factory,
   Calendar,
+  Cpu,
+  ShieldCheck,
+  Layers,
 } from "lucide-react";
 import IndiaMapInteractive from "@/components/IndiaMapInteractive";
 import { CtaBanner } from "@/components/CtaBanner";
@@ -19,6 +22,7 @@ import logoCESC from "@/assets/logo-cesc.svg";
 import logoKSEB from "@/assets/logo-kseb.svg";
 import logoWBSEDCL from "@/assets/logo-wbsedcl.svg";
 import heroImg from "@/assets/hero-ecosystem.png";
+import milestoneActiveImg from "@/assets/milestone-active.svg";
 import utilitiesImg from "@/assets/utilities.jpg";
 import governmentImg from "@/assets/government.jpg";
 import manufacturingImg from "@/assets/manufacturing.jpg";
@@ -27,13 +31,13 @@ import manufacturingImg from "@/assets/manufacturing.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "GridCrest — One Ecosystem. Every Layer of the Grid." },
+      { title: "GridCrest — One Platform. Complete Grid Intelligence." },
       {
         name: "description",
         content:
-          "Field-tested. Cloud-connected. GridCrest unites every layer of the modern energy network — metering, communication, intelligence, and platform.",
+          "GridCrest brings together smart meters, communication networks, data platforms, and operational intelligence to help utilities improve reliability, efficiency, and customer service.",
       },
-      { property: "og:title", content: "GridCrest — One Ecosystem. Every Layer of the Grid." },
+      { property: "og:title", content: "GridCrest — One Platform. Complete Grid Intelligence." },
       {
         property: "og:description",
         content:
@@ -48,57 +52,63 @@ const solutions = [
   {
     tag: "FIELD",
     title: "Smart Meter",
-    icon: Gauge,
+    img: solSmartMeterImg,
     text: "Purpose-built AMI for electricity, water and gas — covering smart metering, MDM, advanced data analytics, and connectivity across regions.",
     color: "cyan",
   },
   {
     tag: "COMMUNICATION",
     title: "Communication & Control",
-    icon: MessagesSquare,
+    img: solCommunicationImg,
     text: "Communication-ready meter networks built for reliability, scalability, and seamless data sync across distributed networks.",
     color: "lavender",
   },
   {
     tag: "ANANTYA",
     title: "Anantya Intelligence",
-    icon: BarChart3,
+    img: solIntelligenceImg,
     text: "Cloud-native analytics for AMI, MDM and beyond — turning raw operational data into clear decisions, faster.",
     color: "cyan",
   },
   {
     tag: "INTEGRATED",
     title: "Integrated Platform",
-    icon: LayoutGrid,
+    img: solIntegratedImg,
     text: "Modular, configurable, and connected by design — one platform for every layer of the grid.",
     color: "lavender",
   },
-] as const;
+];
 
 const differentiators = [
   {
-    icon: HandHeart,
-    title: "End-to-End Ownership",
-    text: "From silicon to dashboard, we design, build and service every layer ourselves.",
+    icon: Layers,
+    title: "Integrated by Design",
+    text: "Devices, communications, software, and services engineered to work together as a unified ecosystem.",
     bg: "bg-surface-cyan",
   },
   {
     icon: BrainCircuit,
-    title: "Intelligence-First Design",
-    text: "Every device ships analytics-ready — data is a primary product, not a side effect.",
+    title: "Intelligence at Scale",
+    text: "Convert billions of data points into operational visibility, actionable insights, and business value.",
     bg: "bg-surface-lavender",
   },
   {
     icon: Network,
-    title: "Protocol-Agnostic Communication",
-    text: "RF, cellular, PLC, LoRa — meet utilities where their networks already are.",
+    title: "Connectivity Without Constraints",
+    text: "Support for RF Mesh, Cellular, NB-IoT, PLC, BLE, and hybrid communication networks across diverse utility environments.",
     bg: "bg-surface-cyan",
   },
   {
-    icon: Factory,
-    title: "Manufacturing Backbone",
-    text: "Backed by Kaynes Group's 30-year industrial backbone — providing supply-chain depth, traceability and cross-sector scale few infra start-ups can match.",
+    icon: Cpu,
+    title: "Semiconductor to Services",
+    text: "Backed by Kaynes Group's expertise in electronics manufacturing and semiconductor innovation, delivering control, quality, and reliability across the entire value chain.",
     bg: "bg-surface-lavender",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Execution You Can Trust",
+    text: "Proven expertise in delivering complex utility programs—from planning and deployment to ongoing operations and managed services.",
+    bg: "bg-surface-cyan",
   },
 ];
 
@@ -113,12 +123,18 @@ const milestones = [
   { year: "2025–26", text: "Rebranding and launch of GridCrest — one ecosystem, every layer of the grid.", active: true },
 ];
 
+const utilityPartners = [
+  { name: "UGVCL",    logo: logoUGVCL },
+  { name: "KSEB",     logo: logoKSEB },
+  { name: "CESC",     logo: logoCESC },
+  { name: "WBSEDCL", logo: logoWBSEDCL },
+];
+
 function Index() {
   const [activeSolution, setActiveSolution] = useState(0);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      
 
       {/* HERO */}
       <section className="relative overflow-hidden">
@@ -129,14 +145,14 @@ function Index() {
               From Field to Intelligence
             </p>
             <h1 className="text-4xl font-bold leading-[1.05] tracking-tight md:text-6xl">
-              One Ecosystem. <br />
+              One Platform. <br />
               <span style={{ color: "var(--brand-cyan)" }}>
-                Every Layer of the Grid.
+                Complete Grid Intelligence.
               </span>
             </h1>
             <p className="mt-6 max-w-lg text-base text-muted-foreground md:text-lg">
-              From the physical field to cloud-level intelligence in one place — GridCrest connects
-              every node of the modern energy network.
+              GridCrest brings together smart meters, communication networks, data platforms, and
+              operational intelligence to help utilities improve reliability, efficiency, and customer service.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link to="/solutions" className="hover-pop inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm text-primary-foreground shadow-[var(--shadow-card)] transition hover:brightness-95 text-center font-semibold">
@@ -146,7 +162,7 @@ function Index() {
             <div className="mt-12 flex flex-wrap gap-x-10 gap-y-6">
               {[
                 { prefix: "", target: 2, suffix: "M+", decimals: 0, l: "Meters Deployed" },
-                { prefix: "₹", target: 600, suffix: "Cr+", decimals: 0, l: "Annual Revenue" },
+                { prefix: "", target: 2, suffix: "", decimals: 0, l: "Factories (2 under construction)" },
                 { prefix: "", target: 5, suffix: "L+", decimals: 0, l: "Monthly Production" },
                 { prefix: "", target: 2500, suffix: "+", decimals: 0, l: "Employees" },
               ].map((s, i) => (
@@ -179,11 +195,11 @@ function Index() {
       <section className="mx-auto max-w-7xl px-6 py-20">
         <SectionLabel>SOLUTIONS & SERVICES</SectionLabel>
         <h2 className="mx-auto mt-3 max-w-3xl text-center text-3xl font-bold tracking-tight md:text-4xl">
-          A Connected Ecosystem, Not Isolated Products
+          One Ecosystem. Endless Possibilities.
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-center text-muted-foreground">
-          From the physical field layer to cloud-level intelligence — every GridCrest module is
-          designed to work as one system.
+          GridCrest combines intelligent devices, adaptive communications, digital platforms, and domain
+          expertise to help utilities accelerate their transformation journey.
         </p>
 
         {/* Pipeline tabs */}
@@ -207,25 +223,22 @@ function Index() {
 
         <div className="mt-10 grid gap-5 md:grid-cols-2">
           {solutions.map((s, i) => {
-            const Icon = s.icon;
             const active = i === activeSolution;
             return (
               <button
                 key={s.title}
                 onClick={() => setActiveSolution(i)}
-                className={`group hover-lift flex gap-5 rounded-2xl border bg-card p-6 text-left shadow-[var(--shadow-card)] transition ${
+                className={`group hover-lift flex gap-5 rounded-2xl border bg-card p-4 text-left shadow-[var(--shadow-card)] transition ${
                   active ? "border-primary/50 ring-1 ring-primary/30" : "border-border"
                 }`}
               >
-                <div
-                  className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-xl ${
-                    s.color === "cyan" ? "bg-surface-cyan" : "bg-surface-lavender"
-                  }`}
-                >
-                  <Icon
-                    className={`h-7 w-7 ${s.color === "cyan" ? "text-primary" : "text-accent"}`}
-                  />
-                </div>
+                <img
+                  src={s.img}
+                  alt={s.title}
+                  className="shrink-0 object-contain select-none"
+                  style={{ width: 160, height: 160 }}
+                  draggable={false}
+                />
                 <div className="flex-1">
                   <p
                     className={`text-[10px] font-bold uppercase tracking-[0.18em] ${
@@ -246,55 +259,60 @@ function Index() {
         </div>
       </section>
 
+      {/* CLIENTS */}
+      <section className="border-y border-border/60 bg-secondary py-14">
+        <div className="mx-auto max-w-7xl px-6">
+          <p className="text-center text-[10px] font-semibold uppercase tracking-[0.25em] text-muted-foreground">
+            Trusted by Leading Utilities
+          </p>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-10">
+            {utilityPartners.map((p) => (
+              <div key={p.name} className="opacity-70 transition-all duration-300 hover:opacity-100">
+                <img src={p.logo} alt={p.name} className="h-10 w-auto object-contain" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* WHY GRIDCREST */}
       <section className="mx-auto max-w-7xl px-6 py-20">
         <div className="grid items-end gap-6 md:grid-cols-2">
           <div>
             <SectionLabel align="left">WHY GRIDCREST</SectionLabel>
             <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">
-              What Makes Us Different
+              Why GridCrest
             </h2>
           </div>
           <p className="text-sm text-muted-foreground md:text-base">
-            Clear advantages, not generic claims. Each differentiator is rooted in capabilities that
-            translate to measurable outcomes.
+            Built on deep utility expertise, proven technology, and end-to-end execution capabilities
+            to deliver measurable outcomes for utilities.
           </p>
         </div>
 
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <ScrollTrack className="mt-10">
           {differentiators.map((d) => {
             const Icon = d.icon;
             return (
               <div
                 key={d.title}
-                className={`hover-lift flex flex-col rounded-2xl ${d.bg} p-6`}
+                className={`hover-lift flex w-72 shrink-0 flex-col rounded-2xl ${d.bg} p-6`}
               >
                 <Icon className="h-10 w-10 text-accent" />
                 <h3 className="mt-5 text-base font-semibold leading-tight">{d.title}</h3>
                 <p className="mt-3 flex-1 text-sm text-muted-foreground">{d.text}</p>
-                <a
-                  href="#"
-                  className="mt-5 inline-flex items-center gap-1 text-xs font-semibold text-foreground"
-                >
-                  Explore More <ArrowRight className="h-3 w-3" />
-                </a>
               </div>
             );
           })}
-        </div>
+        </ScrollTrack>
       </section>
 
-      {/* INDUSTRY — hidden for phase 1 */}
+      {/* INDUSTRY — hidden */}
       <section className="mx-auto max-w-7xl px-6 py-20 hidden">
         <SectionLabel>RELEVANCE LAYER</SectionLabel>
         <h2 className="mx-auto mt-3 max-w-3xl text-center text-3xl font-bold tracking-tight md:text-4xl">
           Built for Your Industry
         </h2>
-        <p className="mx-auto mt-4 max-w-2xl text-center text-muted-foreground">
-          Sectoral solutions, purpose-built for the operational realities of electric, water and gas
-          utilities — not retrofit from generic platforms.
-        </p>
-
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           <IndustryCard
             img={utilitiesImg}
@@ -314,80 +332,67 @@ function Index() {
       </section>
 
       {/* MANUFACTURING */}
-      <section className="mx-auto max-w-7xl px-6 py-20">
-        <div className="grid items-center gap-12 md:grid-cols-2">
-          <div className="relative overflow-hidden rounded-3xl">
-            <img
-              src={manufacturingImg}
-              alt="Engineer with clipboard inside GridCrest manufacturing facility"
-              width={800}
-              height={900}
-              loading="lazy"
-              decoding="async"
-              className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
-            />
-            <span className="absolute left-4 top-4 rounded-md bg-background/90 px-3 py-1 text-xs font-medium text-foreground">
-              Made in India
-            </span>
-            <span className="absolute bottom-4 right-4 rounded-md bg-background/90 px-3 py-1 text-xs font-medium text-foreground">
-              ISO Certified
-            </span>
+      <section className="py-24">
+        <div className="mx-auto max-w-7xl px-6">
+          <SectionLabel>ENGINEERING & MANUFACTURING EXCELLENCE</SectionLabel>
+          <h2 className="mx-auto mt-3 max-w-3xl text-center text-3xl font-bold tracking-tight md:text-4xl">
+            From Semiconductor to Services. Built for Scale.
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-center text-muted-foreground">
+            GridCrest combines utility domain expertise with the engineering and manufacturing
+            capabilities of Kaynes Group, creating a unique foundation for delivering reliable,
+            scalable, and future-ready utility solutions.
+          </p>
+
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {[
+              {
+                icon: Factory,
+                title: "Manufacturing at Scale",
+                text: "Advanced manufacturing facilities and quality-driven processes supporting large-scale smart meter and utility technology deployments.",
+              },
+              {
+                icon: Cpu,
+                title: "Engineering-Led Innovation",
+                text: "Dedicated hardware, firmware, and software teams working together to develop utility-grade solutions designed for long-term performance.",
+              },
+              {
+                icon: ShieldCheck,
+                title: "Backed by Kaynes Group",
+                text: "Leveraging decades of expertise in electronics manufacturing, industrial engineering, and supply chain excellence to ensure dependable delivery and support.",
+              },
+            ].map((card) => (
+              <div key={card.title} className="rounded-2xl border border-border bg-card p-8 shadow-[var(--shadow-card)]">
+                <card.icon className="h-8 w-8 text-accent" />
+                <h3 className="mt-5 text-lg font-semibold">{card.title}</h3>
+                <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{card.text}</p>
+              </div>
+            ))}
           </div>
-          <div>
-            <SectionLabel align="left">MANUFACTURING & INDUSTRIAL</SectionLabel>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">
-              Real Infrastructure. Industrial Strength.
-            </h2>
-            <p className="mt-4 text-muted-foreground">
-              We are backed by a deep-rooted manufacturing facility, an ISO-certified production
-              process and the full data &amp; depth of the Kaynes Group ecosystem.
-            </p>
 
-            <div className="mt-8 space-y-5">
-              {[
-                {
-                  title: "State-of-the-Art Manufacturing",
-                  text: "ISO 9001-aligned facility with 10+ certified production lines, capable of delivering 600K+ units per quarter.",
-                },
-                {
-                  title: "Kaynes Group Ecosystem",
-                  text: "Backed by Kaynes Group's 30-year industrial backbone — providing supply chain depth, traceability, and cross-sector scale few can match.",
-                },
-                {
-                  title: "In-House R&D & Testing",
-                  text: "Embedded hardware and firmware engineering teams with a fully in-house ISO 9001:2015 certified lab.",
-                },
-              ].map((b) => (
-                <div key={b.title} className="border-l-2 border-primary pl-4">
-                  <h4 className="text-sm font-semibold">{b.title}</h4>
-                  <p className="mt-1 text-sm text-muted-foreground">{b.text}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-8 flex flex-wrap gap-3">
-              <button className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition hover:brightness-95">
-                Explore Our Capabilities
-              </button>
-              <a href="https://www.kaynestechnology.co.in/" target="_blank" rel="noopener noreferrer" className="rounded-full border border-border bg-background px-5 py-2.5 text-sm font-semibold transition hover:bg-secondary">
-                Kaynes Group ↗
-              </a>
-            </div>
+          <div className="mt-10 flex flex-wrap justify-center gap-3">
+            <Link to="/manufacturing" className="btn-primary">
+              Explore Manufacturing
+            </Link>
+            <a href="https://www.kaynestechnology.co.in/" target="_blank" rel="noopener noreferrer" className="btn-secondary">
+              Kaynes Group ↗
+            </a>
           </div>
         </div>
       </section>
 
       {/* MILESTONES */}
-      <section className="mx-auto max-w-7xl px-6 py-20">
-        <SectionLabel>OUR JOURNEY</SectionLabel>
-        <h2 className="mx-auto mt-3 max-w-3xl text-center text-3xl font-bold tracking-tight md:text-4xl">
-          Milestones
-        </h2>
-        <p className="mx-auto mt-4 max-w-2xl text-center text-muted-foreground">
-          From a regional metering company to a global smart-grid force — every year, a new chapter.
-        </p>
-
-        <MilestonesTrack />
+      <section className="border-y border-border/60 bg-secondary py-20">
+        <div className="mx-auto max-w-7xl px-6">
+          <SectionLabel>OUR JOURNEY</SectionLabel>
+          <h2 className="mx-auto mt-3 max-w-3xl text-center text-3xl font-bold tracking-tight md:text-4xl">
+            Milestones
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-center text-muted-foreground">
+            From a regional metering company to a global smart-grid force — every year, a new chapter.
+          </p>
+          <MilestonesTrack />
+        </div>
       </section>
 
       {/* PRESENCE */}
@@ -396,10 +401,10 @@ function Index() {
       {/* CTA */}
       <CtaBanner
         eyebrow="GET STARTED"
-        title="Modernise Your Utility with GridCrest"
-        description="From smart metering hardware to advanced software platforms — GridCrest delivers the end-to-end ecosystem your utility needs to operate smarter, faster and at scale."
+        title="Building the Connected Utility of Tomorrow"
+        description="From intelligent devices and communication networks to utility platforms and managed services, GridCrest delivers integrated solutions for modern utility operations."
         primary={{ label: "Explore Solutions", to: "/solutions" }}
-        secondary={{ label: "Talk to Our Team", to: "/contact" }}
+        secondary={{ label: "Talk to Our Experts", to: "/contact" }}
       />
 
     </div>
@@ -408,27 +413,14 @@ function Index() {
 
 const projectLocations = ["Gujarat", "Kerala", "West Bengal", "Nagaland", "Delhi"];
 const manufacturingSites  = ["Hyderabad", "Mysuru"];
-const utilityPartners = [
-  { name: "UGVCL",    logo: logoUGVCL },
-  { name: "KSEB",     logo: logoKSEB },
-  { name: "CESC",     logo: logoCESC },
-  { name: "WBSEDCL", logo: logoWBSEDCL },
-];
 
 
 function PresenceSection() {
   const [activeLocation, setActiveLocation] = useState<string | null>(null);
 
-  const allLocations = [
-    ...projectLocations.map((l) => ({ label: l, type: "project" as const })),
-    ...manufacturingSites.map((l) => ({ label: l, type: "mfg" as const })),
-  ];
-
   return (
     <section className="relative bg-background py-24" style={{ overflow: "clip" }}>
-
       <div className="mx-auto max-w-7xl px-6">
-        {/* TOP: content + map */}
         <div className="grid items-stretch gap-16 lg:grid-cols-2">
 
           {/* LEFT */}
@@ -454,18 +446,16 @@ function PresenceSection() {
                   <p className="text-sm font-semibold text-accent">Project Locations</p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {projectLocations.map((loc) => (
-                      <span
+                      <FilterChip
                         key={loc}
+                        as="span"
+                        active={activeLocation === loc}
+                        color="cyan"
                         onMouseEnter={() => setActiveLocation(loc)}
                         onMouseLeave={() => setActiveLocation(null)}
-                        className={`cursor-pointer rounded-full border px-3 py-1 text-xs font-medium transition-all ${
-                          activeLocation === loc
-                            ? "border-accent bg-accent text-white"
-                            : "border-border bg-secondary text-foreground hover:border-accent/50 hover:bg-accent/10"
-                        }`}
                       >
                         {loc}
-                      </span>
+                      </FilterChip>
                     ))}
                   </div>
                 </div>
@@ -478,22 +468,18 @@ function PresenceSection() {
                   <p className="text-sm font-semibold text-[#A258DA]">Manufacturing Sites</p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {manufacturingSites.map((loc) => (
-                      <span
+                      <FilterChip
                         key={loc}
+                        as="span"
+                        active={activeLocation === loc}
+                        color="purple"
                         onMouseEnter={() => setActiveLocation(loc)}
                         onMouseLeave={() => setActiveLocation(null)}
-                        className={`cursor-pointer rounded-full border px-3 py-1 text-xs font-medium transition-all ${
-                          activeLocation === loc
-                            ? "border-[#A258DA] bg-[#A258DA] text-white"
-                            : "border-border bg-secondary text-foreground hover:border-[#A258DA]/50 hover:bg-[#A258DA]/10"
-                        }`}
                       >
                         {loc}
-                      </span>
+                      </FilterChip>
                     ))}
-                    <span className="rounded-full border border-[#A258DA]/30 bg-[#A258DA]/8 px-3 py-1 text-xs font-medium text-[#A258DA]">
-                      +2 new factories planned
-                    </span>
+                    <LabelChip color="purple">+2 new factories planned</LabelChip>
                   </div>
                 </div>
               </div>
@@ -508,34 +494,15 @@ function PresenceSection() {
                   </p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {["Europe", "Americas", "Africa"].map((r) => (
-                      <span
-                        key={r}
-                        className="rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-muted-foreground"
-                      >
-                        {r}
-                      </span>
+                      <StaticChip key={r}>{r}</StaticChip>
                     ))}
                   </div>
-                </div>
-              </div>
-
-              {/* Trusted by */}
-              <div className="mt-10 border-t border-border pt-8">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-muted-foreground">
-                  Trusted by Leading Utilities
-                </p>
-                <div className="mt-5 flex flex-wrap items-center gap-6">
-                  {utilityPartners.map((p) => (
-                    <div key={p.name} className="opacity-80 transition-all duration-300 hover:opacity-100">
-                      <img src={p.logo} alt={p.name} className="h-8 w-auto object-contain" />
-                    </div>
-                  ))}
                 </div>
               </div>
             </div>
           </div>
 
-          {/* RIGHT: India map — sized to match left column */}
+          {/* RIGHT: India map */}
           <div className="flex flex-col overflow-hidden" style={{ minHeight: 0 }}>
             <IndiaMapInteractive
               activeLocation={activeLocation}
@@ -543,13 +510,12 @@ function PresenceSection() {
             />
           </div>
         </div>
-
       </div>
     </section>
   );
 }
 
-function MilestonesTrack() {
+function ScrollTrack({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
   const startX = useRef(0);
@@ -580,39 +546,120 @@ function MilestonesTrack() {
   return (
     <div
       ref={trackRef}
-      className="mt-12 flex gap-4 overflow-x-auto pb-2 select-none"
+      className={`flex gap-4 overflow-x-auto pb-4 select-none ${className}`}
       style={{ cursor: "grab" }}
       onMouseDown={onMouseDown}
       onMouseLeave={onMouseLeave}
       onMouseUp={onMouseUp}
       onMouseMove={onMouseMove}
     >
-      {milestones.map((m) => (
-        <div
-          key={m.year}
-          className={`flex min-h-[160px] w-56 shrink-0 flex-col rounded-2xl p-5 transition ${
-            m.active
-              ? "bg-primary text-primary-foreground shadow-[var(--shadow-card)]"
-              : "bg-surface-lavender"
-          }`}
-        >
-          {m.active && <Calendar className="mb-2 h-4 w-4" />}
+      {children}
+    </div>
+  );
+}
+
+function MilestonesTrack() {
+  const CARD_W = 300;
+  const PEEK   = 28;
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const cardRefs     = useRef<(HTMLDivElement | null)[]>([]);
+  const [containerW, setContainerW] = useState(1200);
+
+  // Track container width so the inner strip is always the right size
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    setContainerW(el.offsetWidth);
+    const ro = new ResizeObserver(([e]) => setContainerW(e.contentRect.width));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  // JS-based "sticky left" — CSS sticky doesn't work inside overflow-x containers
+  const onScroll = useCallback(() => {
+    const sl = containerRef.current?.scrollLeft ?? 0;
+    milestones.forEach((_, i) => {
+      const card = cardRefs.current[i];
+      if (!card) return;
+      const push = sl - (i * CARD_W - i * PEEK);
+      card.style.transform = push > 0 ? `translateX(${push}px)` : "";
+    });
+  }, []);
+
+  // Drag-to-scroll
+  const dragging  = useRef(false);
+  const startX    = useRef(0);
+  const scrollAt  = useRef(0);
+  const onMouseDown = (e: React.MouseEvent) => {
+    dragging.current = true;
+    startX.current  = e.pageX;
+    scrollAt.current = containerRef.current?.scrollLeft ?? 0;
+    if (containerRef.current) containerRef.current.style.cursor = "grabbing";
+  };
+  const onMouseUp = () => {
+    dragging.current = false;
+    if (containerRef.current) containerRef.current.style.cursor = "grab";
+  };
+  const onMouseMove = (e: React.MouseEvent) => {
+    if (!dragging.current || !containerRef.current) return;
+    e.preventDefault();
+    containerRef.current.scrollLeft = scrollAt.current - (e.pageX - startX.current) * 1.2;
+  };
+
+  // inner width: enough to scroll all (n-1) cards into their stack position
+  const innerWidth = (milestones.length - 1) * CARD_W + containerW;
+
+  return (
+    <div
+      ref={containerRef}
+      className="mt-12 overflow-x-auto pb-2 select-none"
+      style={{ cursor: "grab" }}
+      onScroll={onScroll}
+      onMouseDown={onMouseDown}
+      onMouseUp={onMouseUp}
+      onMouseLeave={onMouseUp}
+      onMouseMove={onMouseMove}
+    >
+      <div className="flex" style={{ width: innerWidth }}>
+        {milestones.map((m, i) => (
           <div
-            className={`text-2xl font-bold ${
-              m.active ? "text-primary-foreground" : "text-accent"
-            }`}
+            key={m.year}
+            ref={(el) => { cardRefs.current[i] = el; }}
+            className="shrink-0"
+            style={{ zIndex: i + 1, width: CARD_W }}
           >
-            {m.year}
+            <div
+              className={`flex flex-col justify-between rounded-2xl border p-6 ${
+                m.active
+                  ? "bg-primary text-primary-foreground border-primary shadow-[var(--shadow-card)]"
+                  : "bg-card border-border"
+              }`}
+              style={{ minHeight: 220 }}
+            >
+              {m.active ? (
+                <>
+                  <div>
+                    <div className="text-2xl font-bold text-primary-foreground">{m.year}</div>
+                    <p className="mt-2 text-sm leading-relaxed text-primary-foreground/90">{m.text}</p>
+                  </div>
+                  <img
+                    src={milestoneActiveImg}
+                    alt="GridCrest milestone"
+                    className="mt-4 h-16 w-auto self-start object-contain"
+                    draggable={false}
+                  />
+                </>
+              ) : (
+                <>
+                  <div className="text-2xl font-bold text-accent">{m.year}</div>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{m.text}</p>
+                </>
+              )}
+            </div>
           </div>
-          <p
-            className={`mt-2 text-xs leading-snug ${
-              m.active ? "text-primary-foreground/90" : "text-muted-foreground"
-            }`}
-          >
-            {m.text}
-          </p>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }
@@ -645,7 +692,6 @@ function CountUp({
           const step = (now: number) => {
             const elapsed = now - startTime;
             const progress = Math.min(elapsed / duration, 1);
-            // ease out cubic
             const eased = 1 - Math.pow(1 - progress, 3);
             setCount(parseFloat((eased * target).toFixed(decimals)));
             if (progress < 1) requestAnimationFrame(step);
@@ -734,4 +780,3 @@ function IndustryCard({
     </article>
   );
 }
-

@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CtaBanner } from "@/components/CtaBanner";
+import { EyebrowChip, NavChip } from "@/components/ui/Chip";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -75,9 +76,7 @@ function Hero() {
       />
       <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 py-24 lg:grid-cols-12 lg:py-32">
         <div className="lg:col-span-7">
-          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-muted-foreground backdrop-blur">
-            <Globe className="h-3.5 w-3.5 text-accent" /> Industries
-          </span>
+          <EyebrowChip><Globe className="h-3.5 w-3.5 text-accent" /> Industries</EyebrowChip>
           <h1 className="mt-6 text-balance text-5xl font-display font-bold leading-[1.05] lg:text-[64px]">
             Powering industries through{" "}
             <span style={{ color: "var(--brand-cyan)" }}>
@@ -391,12 +390,7 @@ function SmartCities() {
         </div>
         <div className="mt-12 flex flex-wrap gap-3">
           {chips.map((c) => (
-            <span
-              key={c}
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-foreground/85 transition hover:border-accent/60 hover:text-accent"
-            >
-              <span className="h-1.5 w-1.5 rounded-full bg-accent" /> {c}
-            </span>
+            <NavChip key={c}>{c}</NavChip>
           ))}
         </div>
       </div>

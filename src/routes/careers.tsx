@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CtaBanner } from "@/components/CtaBanner";
+import { EyebrowChip, StaticChip } from "@/components/ui/Chip";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -70,9 +71,7 @@ function Hero() {
         }}
       />
       <div className="mx-auto max-w-7xl px-6 py-24 lg:py-32">
-        <span className="inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-muted-foreground backdrop-blur">
-          <Sparkles className="h-3.5 w-3.5 text-accent" /> Careers
-        </span>
+        <EyebrowChip><Sparkles className="h-3.5 w-3.5 text-accent" /> Careers</EyebrowChip>
         <h1 className="mt-6 max-w-4xl text-balance text-5xl font-display font-bold leading-[1.05] lg:text-[64px]">
           Join the team building{" "}
           <span style={{ color: "var(--brand-cyan)" }}>
@@ -259,8 +258,8 @@ function OpenRoles() {
             </h2>
           </div>
           <div className="flex gap-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-            <span className="rounded-full border border-border px-3 py-1">All teams</span>
-            <span className="rounded-full border border-border px-3 py-1">India</span>
+            <StaticChip>All teams</StaticChip>
+            <StaticChip>India</StaticChip>
           </div>
         </div>
         <div className="mt-10 divide-y divide-border overflow-hidden rounded-3xl border border-border bg-card">
