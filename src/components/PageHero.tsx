@@ -97,12 +97,13 @@ export function PageHero({
         </div>
 
         {/* ── Right: illustration ── */}
-        <div className="hidden lg:flex items-center justify-center py-10">
+        <div className="relative hidden lg:flex items-center justify-center py-10 animate-fade-in-soft">
+          <div className="absolute inset-0 -z-10 mx-auto h-72 w-72 rounded-full bg-primary/20 blur-3xl md:h-96 md:w-96 animate-float" />
           {image ? (
             <img
               src={image}
               alt={imageAlt}
-              className="w-full max-w-[560px] h-auto object-contain select-none"
+              className="w-full max-w-[560px] h-auto object-contain select-none animate-float"
               draggable={false}
             />
           ) : (

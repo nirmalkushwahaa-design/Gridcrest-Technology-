@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { CtaBanner } from "@/components/CtaBanner";
 import { PageHero } from "@/components/PageHero";
 import milestoneActiveImg from "@/assets/milestone-active.svg";
-import aboutHeroImg from "@/assets/about-hero.svg";
+import aboutHeroImg from "@/assets/about-hero.png";
 import {
   ArrowRight,
   ArrowUpRight,

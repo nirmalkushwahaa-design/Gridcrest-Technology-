@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CtaBanner } from "@/components/CtaBanner";
 import { PageHero } from "@/components/PageHero";
-import heroSolutions from "@/assets/hero-solutions.svg";
+import heroSolutions from "@/assets/solutions-hero.png";
 import { useState, useEffect } from "react";
 import {
   ArrowRight,

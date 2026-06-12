@@ -151,10 +151,12 @@ function FormAndInfo({ category, selected, onSelect }: { category: string; selec
         </div>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <InfoCard
+            title="Email"
             img={contactEmailImg}
             lines={["hello@gridcrest.tech", "partnerships@gridcrest.tech"]}
           />
           <InfoCard
+            title="Phone"
             img={contactPhoneImg}
             lines={["+91 80 4000 0000", "Mon – Fri · 9:30am – 6:30pm IST"]}
           />
@@ -164,20 +166,23 @@ function FormAndInfo({ category, selected, onSelect }: { category: string; selec
   );
 }
 
-function InfoCard({ img, lines }: { img: string; lines: string[] }) {
+function InfoCard({ title, img, lines }: { title: string; img: string; lines: string[] }) {
   return (
-    <div className="rounded-2xl border border-border bg-card p-6 flex items-center gap-6">
+    <div className="rounded-2xl border border-border bg-card p-4 flex items-center gap-5">
       <img
         src={img}
         alt=""
         className="shrink-0 object-contain select-none"
-        style={{ width: 250, height: 250 }}
+        style={{ width: 140, height: 140 }}
         draggable={false}
       />
-      <div className="space-y-2 text-sm text-foreground/85">
-        {lines.map((l) => (
-          <div key={l}>{l}</div>
-        ))}
+      <div>
+        <p className="text-lg font-semibold text-foreground mb-2">{title}</p>
+        <div className="space-y-2 text-base text-foreground/85">
+          {lines.map((l) => (
+            <div key={l}>{l}</div>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -284,7 +289,7 @@ function Offices() {
   const [activeLocation, setActiveLocation] = useState<string | null>(null);
 
   return (
-    <section className="border-b border-border/60 bg-secondary/40 py-20" style={{ overflow: "clip" }}>
+    <section className="border-b border-border/60 py-20" style={{ overflow: "clip" }}>
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid items-stretch gap-16 lg:grid-cols-2">
 
@@ -390,8 +395,7 @@ function Reach() {
         <div className="grid grid-cols-1 gap-5 md:grid-cols-3 lg:col-span-7">
           {items.map((i) => (
             <div key={i.label} className="rounded-3xl border border-border bg-card p-6">
-              <Globe2 className="h-5 w-5 text-accent" />
-              <div className="mt-5 text-xl font-display font-bold">{i.value}</div>
+              <div className="text-xl font-display font-bold">{i.value}</div>
               <div className="mt-1 text-sm text-muted-foreground">{i.label}</div>
             </div>
           ))}
