@@ -3,6 +3,7 @@ import { CtaBanner } from "@/components/CtaBanner";
 import { PageHero } from "@/components/PageHero";
 import milestoneActiveImg from "@/assets/milestone-active.svg";
 import aboutHeroImg from "@/assets/about-hero.png";
+import React, { useRef } from "react";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -30,7 +31,6 @@ import {
   Wrench,
   Zap,
 } from "lucide-react";
-import { useRef, useEffect, useState, useCallback } from "react";
 
 export const Route = createFileRoute("/company")({
   head: () => ({
@@ -324,111 +324,81 @@ const MILESTONES = [
 ];
 
 function OurJourney() {
-  const CARD_W = 300;
-  const PEEK = 28;
-  const containerRef = useRef<HTMLDivElement>(null);
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const [containerW, setContainerW] = useState(1200);
-
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    setContainerW(el.offsetWidth);
-    const ro = new ResizeObserver(([e]) => setContainerW(e.contentRect.width));
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-
-  const onScroll = useCallback(() => {
-    const sl = containerRef.current?.scrollLeft ?? 0;
-    MILESTONES.forEach((_, i) => {
-      const card = cardRefs.current[i];
-      if (!card) return;
-      const push = sl - (i * CARD_W - i * PEEK);
-      card.style.transform = push > 0 ? `translateX(${push}px)` : "";
-    });
-  }, []);
-
+  const ref = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
   const startX = useRef(0);
-  const scrollAt = useRef(0);
+  const scrollLeft = useRef(0);
+
   const onMouseDown = (e: React.MouseEvent) => {
     dragging.current = true;
     startX.current = e.pageX;
-    scrollAt.current = containerRef.current?.scrollLeft ?? 0;
-    if (containerRef.current) containerRef.current.style.cursor = "grabbing";
+    scrollLeft.current = ref.current?.scrollLeft ?? 0;
+    if (ref.current) ref.current.style.cursor = "grabbing";
   };
   const onMouseUp = () => {
     dragging.current = false;
-    if (containerRef.current) containerRef.current.style.cursor = "grab";
+    if (ref.current) ref.current.style.cursor = "grab";
   };
   const onMouseMove = (e: React.MouseEvent) => {
-    if (!dragging.current || !containerRef.current) return;
+    if (!dragging.current || !ref.current) return;
     e.preventDefault();
-    containerRef.current.scrollLeft = scrollAt.current - (e.pageX - startX.current) * 1.2;
+    ref.current.scrollLeft = scrollLeft.current - (e.pageX - startX.current);
   };
 
-  const innerWidth = (MILESTONES.length - 1) * CARD_W + containerW;
-
   return (
-    <section className="border-b border-border/60 bg-secondary py-20">
-      <div className="mx-auto max-w-7xl px-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">
-          Our Journey
-        </p>
-        <h2 className="mt-3 text-4xl font-bold leading-tight tracking-tight lg:text-5xl">
-          Milestones
-        </h2>
-        <p className="mt-4 max-w-2xl text-muted-foreground">
+    <section className="border-b border-border/60 bg-white py-20">
+      {/* Centered heading */}
+      <div className="text-center px-6">
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">Our Journey</p>
+        <h2 className="mt-3 text-4xl font-bold leading-tight tracking-tight lg:text-5xl">Milestones</h2>
+        <p className="mt-4 mx-auto max-w-2xl text-muted-foreground">
           From a regional metering company to a global smart-grid force — every year, a new chapter.
         </p>
       </div>
 
-      <div className="mx-auto mt-10 max-w-7xl px-6">
+      {/* Scrollable strip */}
+      <div className="mt-12 overflow-hidden">
         <div
-          ref={containerRef}
-          className="overflow-x-auto pb-2 select-none"
-          style={{ cursor: "grab" }}
-          onScroll={onScroll}
+          ref={ref}
+          className="overflow-x-scroll pb-4 select-none px-8"
+          style={{ cursor: "grab", scrollbarWidth: "none", msOverflowStyle: "none" } as React.CSSProperties}
           onMouseDown={onMouseDown}
           onMouseUp={onMouseUp}
           onMouseLeave={onMouseUp}
           onMouseMove={onMouseMove}
         >
-          <div className="flex" style={{ width: innerWidth }}>
+          <div className="flex items-center" style={{ width: "max-content" }}>
             {MILESTONES.map((m, i) => (
-              <div
-                key={m.year}
-                ref={(el) => { cardRefs.current[i] = el; }}
-                className="shrink-0"
-                style={{ zIndex: i + 1, width: CARD_W }}
-              >
+              <React.Fragment key={m.year}>
+                {/* Card */}
                 <div
-                  className={`flex flex-col justify-between rounded-2xl border p-6 ${
-                    m.active
-                      ? "bg-primary text-primary-foreground border-primary shadow-[var(--shadow-card)]"
-                      : "bg-card border-border"
+                  className={`shrink-0 w-48 rounded-2xl p-5 flex flex-col ${
+                    m.active ? "bg-primary" : "bg-surface-lavender"
                   }`}
-                  style={{ minHeight: 220 }}
+                  style={{ minHeight: 180 }}
                 >
                   {m.active ? (
                     <>
-                      <div>
-                        <div className="text-2xl font-bold text-primary-foreground">{m.year}</div>
-                        <p className="mt-2 text-sm leading-relaxed text-primary-foreground/90">{m.text}</p>
-                      </div>
-                      <img src={milestoneActiveImg} alt="" className="mt-4 h-16 w-auto self-start object-contain" draggable={false} />
+                      <img src={milestoneActiveImg} alt="" className="h-8 w-auto self-start object-contain mb-3" draggable={false} />
+                      <div className="text-lg font-bold text-primary-foreground">{m.year}</div>
+                      <p className="mt-2 text-sm leading-relaxed text-primary-foreground/90">{m.text}</p>
                     </>
                   ) : (
-                    <>
-                      <div className="text-2xl font-bold text-accent">{m.year}</div>
-                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{m.text}</p>
-                    </>
+                    <div className="text-center flex flex-col gap-3">
+                      <div className="text-base font-semibold text-accent">{m.year}</div>
+                      <p className="text-sm leading-relaxed text-muted-foreground">{m.text}</p>
+                    </div>
                   )}
                 </div>
-              </div>
+                {/* Connector dot */}
+                {i < MILESTONES.length - 1 && (
+                  <div className="shrink-0 w-7 flex items-center justify-center">
+                    <div className="h-3 w-3 rounded-full border-2 border-accent/40 bg-white" />
+                  </div>
+                )}
+              </React.Fragment>
             ))}
-          </div>
+        </div>
         </div>
       </div>
     </section>
