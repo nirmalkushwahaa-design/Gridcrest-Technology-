@@ -2,18 +2,21 @@ import { useEffect, useRef, useState } from "react";
 
 // State ID mappings
 export const STATE_IDS: Record<string, string> = {
-  "Gujarat":        "IN-GJ",
-  "Kerala":         "IN-KL",
-  "West Bengal":    "IN-WB",
-  "Uttar Pradesh":  "IN-UP",
-  "Hyderabad":      "IN-TG",
-  "Mysuru":         "IN-KA",
-  "Bengaluru":      "IN-KA",
-  "New Delhi":      "IN-DL",
+  "Gujarat":          "IN-GJ",
+  "Kerala":           "IN-KL",
+  "West Bengal":      "IN-WB",
+  "Kolkata":          "IN-WB",
+  "Uttar Pradesh":    "IN-UP",
+  "Hyderabad":        "IN-TG",
+  "Mysuru":           "IN-KA",
+  "Bengaluru":        "IN-KA",
+  "Chamarajanagar":   "IN-KA",
+  "New Delhi":        "IN-DL",
+  "Nagaland":         "IN-NL",
 };
 
 const MFG_STATES = new Set(["IN-TG", "IN-KA"]);                // purple
-const RD_STATES  = new Set(["IN-WB", "IN-UP"]);                // cyan
+const RD_STATES  = new Set(["IN-WB", "IN-UP", "IN-NL"]);       // cyan
 const OPS_STATES = new Set(["IN-KL", "IN-GJ", "IN-DL"]);      // amber
 
 const COLOR_DEFAULT  = "#E5E7EB";   // light grey

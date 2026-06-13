@@ -49,7 +49,7 @@ export function SiteHeader() {
           </nav>
 
           <div className="hidden lg:flex items-center gap-3">
-            <a href="https://www.google.com" target="_blank" rel="noopener noreferrer" className="btn-ghost text-sm [&::after]:hidden">
+            <a href="https://www.linkedin.com/company/gridcrestindia/jobs/" target="_blank" rel="noopener noreferrer" className="btn-ghost text-sm [&::after]:hidden">
               Careers
             </a>
             <Link to="/contact" className="btn-primary text-sm">

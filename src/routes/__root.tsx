@@ -76,14 +76,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "GridCrest — One Platform. Complete Grid Intelligence." },
+      { name: "description", content: "GridCrest delivers integrated smart metering solutions across devices, communications, software platforms, and managed services — backed by the Kaynes Group." },
+      { name: "author", content: "GridCrest Technologies" },
+      { property: "og:title", content: "GridCrest — One Platform. Complete Grid Intelligence." },
+      { property: "og:description", content: "GridCrest delivers integrated smart metering solutions across devices, communications, software platforms, and managed services." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {

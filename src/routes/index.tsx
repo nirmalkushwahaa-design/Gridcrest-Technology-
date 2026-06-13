@@ -279,9 +279,9 @@ function Index() {
       <section className="mx-auto max-w-7xl px-6 py-20">
         <div className="grid items-end gap-6 md:grid-cols-2">
           <div>
-            <SectionLabel align="left">WHY GRIDCREST</SectionLabel>
+            <SectionLabel align="left">OUR EDGE</SectionLabel>
             <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">
-              Why GridCrest
+              What Sets Us Apart
             </h2>
           </div>
           <p className="text-sm text-muted-foreground md:text-base">

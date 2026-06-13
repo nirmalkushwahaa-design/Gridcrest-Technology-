@@ -22,7 +22,7 @@ const NAV = [
     links: [
       { label: "About GridCrest", to: "/company" },
       { label: "Manufacturing & Ecosystem", to: "/manufacturing" },
-      { label: "Kaynes Partnership", to: "/company" },
+      { label: "Kaynes Partnership", to: "/company/kaynes" },
     ],
   },
   {

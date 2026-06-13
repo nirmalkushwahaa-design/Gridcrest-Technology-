@@ -318,7 +318,7 @@ function Offices() {
                 <div>
                   <p className="text-sm font-semibold text-[#A258DA]">HQ &amp; Manufacturing</p>
                   <div className="mt-3 flex flex-wrap gap-2">
-                    {["Bengaluru", "Hyderabad", "Mysuru"].map((loc) => (
+                    {["Bengaluru", "Hyderabad", "Mysuru", "Chamarajanagar"].map((loc) => (
                       <span
                         key={loc}
                         onMouseEnter={() => setActiveLocation(loc)}
@@ -342,7 +342,7 @@ function Offices() {
                 <div>
                   <p className="text-sm font-semibold text-[#D97706]">Regional Offices</p>
                   <div className="mt-3 flex flex-wrap gap-2">
-                    {["New Delhi"].map((loc) => (
+                    {["New Delhi", "Kolkata", "Nagaland"].map((loc) => (
                       <span
                         key={loc}
                         onMouseEnter={() => setActiveLocation(loc)}
