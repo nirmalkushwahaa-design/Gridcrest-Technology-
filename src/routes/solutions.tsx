@@ -12,7 +12,7 @@ import anantaAnalytics from "@/assets/anantya-analytics.png";
 import anantaConsumer from "@/assets/anantya-consumer.png";
 import anantaSynkra from "@/assets/anantya-synkra.png";
 import anantaWfm from "@/assets/anantya-wfm.png";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   ArrowRight,
   BarChart3,
@@ -84,6 +84,8 @@ const ECOSYSTEM_CHIPS = [
 function EcosystemChips() {
   const [visible, setVisible]   = useState(true);
   const [activeId, setActiveId] = useState("smart-meters");
+  const navRef   = useRef<HTMLElement>(null);
+  const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
 
   // Hide when Why GridCrest section enters view
   useEffect(() => {
@@ -113,17 +115,29 @@ function EcosystemChips() {
     return () => observers.forEach((o) => o.disconnect());
   }, []);
 
+  // Auto-scroll active item into center of the strip on mobile
+  useEffect(() => {
+    const nav  = navRef.current;
+    const link = linkRefs.current[activeId];
+    if (!nav || !link) return;
+    const navW  = nav.offsetWidth;
+    const linkL = link.offsetLeft;
+    const linkW = link.offsetWidth;
+    nav.scrollTo({ left: linkL - navW / 2 + linkW / 2, behavior: "smooth" });
+  }, [activeId]);
+
   if (!visible) return null;
 
   return (
-    <div className="sticky top-16 z-40 w-full border-b border-border bg-white/90 backdrop-blur-md">
-      <nav className="flex items-center justify-center gap-10 px-6 py-3">
+    <div className="sticky top-16 z-40 w-full border-b border-border bg-white/90 backdrop-blur-md overflow-x-auto">
+      <nav ref={navRef} className="flex items-center justify-start lg:justify-center gap-6 lg:gap-10 px-6 py-3 min-w-max lg:min-w-0">
         {ECOSYSTEM_CHIPS.map((c) => {
           const isActive = activeId === c.id;
           return (
             <a
               key={c.label}
               href={c.href}
+              ref={(el) => { linkRefs.current[c.id] = el; }}
               className="shrink-0 text-xs font-semibold uppercase tracking-[0.18em] transition-colors"
               style={{
                 color: isActive ? "var(--color-accent)" : "var(--color-muted-foreground)",
@@ -351,9 +365,9 @@ function SolutionPortfolio() {
 
           <div className="mt-8 overflow-hidden rounded-3xl border border-border bg-card shadow-[var(--shadow-card)]">
             <div className="grid lg:grid-cols-[580px_1fr]">
-              <div className="flex flex-col items-center justify-center gap-4 border-b border-border bg-[#f4f8fc] p-8 lg:border-b-0 lg:border-r">
-                <div className="flex h-[500px] w-[500px] items-center justify-center rounded-2xl bg-white shadow-sm border border-border/50">
-                  <img src={meter.img} alt={meter.label} className="h-full w-full object-contain p-6 select-none" draggable={false} />
+              <div className="flex flex-col items-center justify-center gap-4 border-b border-border bg-[#f4f8fc] p-4 sm:p-8 lg:border-b-0 lg:border-r">
+                <div className="flex w-full max-w-[320px] sm:max-w-[420px] lg:max-w-[500px] aspect-square items-center justify-center rounded-2xl bg-white shadow-sm border border-border/50">
+                  <img src={meter.img} alt={meter.label} className="h-full w-full object-contain p-4 sm:p-6 select-none" draggable={false} />
                 </div>
                 <div className="text-center">
                   <p className="text-xl font-bold">{meter.label}</p>
@@ -361,12 +375,12 @@ function SolutionPortfolio() {
                 </div>
               </div>
               <div className="p-8 lg:p-10">
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-nowrap overflow-x-auto gap-2 pb-1">
                   {METERS.map((m) => (
                     <button
                       key={m.id}
                       onClick={() => setActive(m.id)}
-                      className={`rounded-lg border px-5 py-2 text-sm font-semibold transition-all ${
+                      className={`shrink-0 rounded-lg border px-5 py-2 text-sm font-semibold transition-all ${
                         active === m.id
                           ? "border-accent bg-accent text-white shadow-sm"
                           : "border-border bg-background text-foreground hover:bg-secondary"
@@ -453,11 +467,11 @@ function SolutionPortfolio() {
                 <article key={s.name} className="overflow-hidden rounded-3xl">
                   <div className="grid lg:grid-cols-2">
                     <div
-                      className={`flex min-h-[380px] items-center justify-center bg-gradient-to-br ${SW_GRADIENTS[i]} overflow-hidden ${(s as any).img ? "" : "p-12"} ${imgRight ? "lg:order-2" : ""}`}
+                      className={`flex min-h-[220px] lg:min-h-[380px] items-center justify-center bg-gradient-to-br ${SW_GRADIENTS[i]} overflow-hidden ${(s as any).img ? "" : "p-12"} ${imgRight ? "lg:order-2" : ""}`}
                     >
                       <div className="flex flex-col items-center gap-5">
                         {(s as any).img ? (
-                          <img src={(s as any).img} alt={s.name} className="w-full h-full object-contain select-none" draggable={false} />
+                          <img src={(s as any).img} alt={s.name} className="w-full max-h-[220px] lg:max-h-[380px] object-contain select-none" draggable={false} />
                         ) : (
                           <>
                             <span className={`flex h-20 w-20 items-center justify-center rounded-2xl ${SW_ICON_COLORS[i]}`}>

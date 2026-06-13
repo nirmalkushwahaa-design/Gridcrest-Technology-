@@ -439,7 +439,7 @@ function NationwidePresence() {
           </div>
 
           {/* RIGHT: India map */}
-          <div className="flex flex-col overflow-hidden" style={{ minHeight: 0 }}>
+          <div className="hidden lg:flex flex-col overflow-hidden" style={{ minHeight: 0 }}>
             <IndiaMapInteractive
               activeLocation={activeLocation}
               onStateHover={(label) => setActiveLocation(label)}

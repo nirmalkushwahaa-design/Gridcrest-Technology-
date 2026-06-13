@@ -175,7 +175,7 @@ function Index() {
               ))}
             </div>
           </div>
-          <div className="relative animate-fade-in-soft">
+          <div className="relative hidden md:block animate-fade-in-soft">
             <div className="absolute inset-0 -z-10 mx-auto h-72 w-72 rounded-full bg-primary/30 blur-3xl md:h-96 md:w-96 animate-float" />
             <img
               src={heroImg}
@@ -503,7 +503,7 @@ function PresenceSection() {
           </div>
 
           {/* RIGHT: India map */}
-          <div className="flex flex-col overflow-hidden" style={{ minHeight: 0 }}>
+          <div className="hidden lg:flex flex-col overflow-hidden" style={{ minHeight: 0 }}>
             <IndiaMapInteractive
               activeLocation={activeLocation}
               onStateHover={(label) => setActiveLocation(label)}
@@ -558,6 +558,39 @@ function ScrollTrack({ children, className = "" }: { children: React.ReactNode; 
   );
 }
 
+function MilestoneCard({ m }: { m: typeof milestones[number] }) {
+  return (
+    <div
+      className={`flex flex-col justify-between rounded-2xl border p-4 md:p-6 ${
+        m.active
+          ? "bg-primary text-primary-foreground border-primary shadow-[var(--shadow-card)]"
+          : "bg-card border-border"
+      }`}
+      style={{ minHeight: 160 }}
+    >
+      {m.active ? (
+        <>
+          <div>
+            <div className="text-xl md:text-2xl font-bold text-primary-foreground">{m.year}</div>
+            <p className="mt-1.5 text-sm leading-relaxed text-primary-foreground/90">{m.text}</p>
+          </div>
+          <img
+            src={milestoneActiveImg}
+            alt="GridCrest milestone"
+            className="mt-3 h-10 md:h-16 w-auto self-start object-contain"
+            draggable={false}
+          />
+        </>
+      ) : (
+        <>
+          <div className="text-xl md:text-2xl font-bold text-accent">{m.year}</div>
+          <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{m.text}</p>
+        </>
+      )}
+    </div>
+  );
+}
+
 function MilestonesTrack() {
   const CARD_W = 300;
   const PEEK   = 28;
@@ -566,7 +599,6 @@ function MilestonesTrack() {
   const cardRefs     = useRef<(HTMLDivElement | null)[]>([]);
   const [containerW, setContainerW] = useState(1200);
 
-  // Track container width so the inner strip is always the right size
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
@@ -576,7 +608,6 @@ function MilestonesTrack() {
     return () => ro.disconnect();
   }, []);
 
-  // JS-based "sticky left" — CSS sticky doesn't work inside overflow-x containers
   const onScroll = useCallback(() => {
     const sl = containerRef.current?.scrollLeft ?? 0;
     milestones.forEach((_, i) => {
@@ -587,7 +618,6 @@ function MilestonesTrack() {
     });
   }, []);
 
-  // Drag-to-scroll
   const dragging  = useRef(false);
   const startX    = useRef(0);
   const scrollAt  = useRef(0);
@@ -607,60 +637,42 @@ function MilestonesTrack() {
     containerRef.current.scrollLeft = scrollAt.current - (e.pageX - startX.current) * 1.2;
   };
 
-  // inner width: enough to scroll all (n-1) cards into their stack position
   const innerWidth = (milestones.length - 1) * CARD_W + containerW;
 
   return (
-    <div
-      ref={containerRef}
-      className="mt-12 overflow-x-auto pb-2 select-none"
-      style={{ cursor: "grab" }}
-      onScroll={onScroll}
-      onMouseDown={onMouseDown}
-      onMouseUp={onMouseUp}
-      onMouseLeave={onMouseUp}
-      onMouseMove={onMouseMove}
-    >
-      <div className="flex" style={{ width: innerWidth }}>
-        {milestones.map((m, i) => (
-          <div
-            key={m.year}
-            ref={(el) => { cardRefs.current[i] = el; }}
-            className="shrink-0"
-            style={{ zIndex: i + 1, width: CARD_W }}
-          >
-            <div
-              className={`flex flex-col justify-between rounded-2xl border p-6 ${
-                m.active
-                  ? "bg-primary text-primary-foreground border-primary shadow-[var(--shadow-card)]"
-                  : "bg-card border-border"
-              }`}
-              style={{ minHeight: 220 }}
-            >
-              {m.active ? (
-                <>
-                  <div>
-                    <div className="text-2xl font-bold text-primary-foreground">{m.year}</div>
-                    <p className="mt-2 text-sm leading-relaxed text-primary-foreground/90">{m.text}</p>
-                  </div>
-                  <img
-                    src={milestoneActiveImg}
-                    alt="GridCrest milestone"
-                    className="mt-4 h-16 w-auto self-start object-contain"
-                    draggable={false}
-                  />
-                </>
-              ) : (
-                <>
-                  <div className="text-2xl font-bold text-accent">{m.year}</div>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{m.text}</p>
-                </>
-              )}
-            </div>
-          </div>
+    <>
+      {/* Mobile: simple vertical list */}
+      <div className="mt-10 flex flex-col gap-4 md:hidden">
+        {milestones.map((m) => (
+          <MilestoneCard key={m.year} m={m} />
         ))}
       </div>
-    </div>
+
+      {/* Desktop: stacking drag-scroll track */}
+      <div
+        ref={containerRef}
+        className="mt-12 hidden overflow-x-auto pb-2 select-none md:block"
+        style={{ cursor: "grab" }}
+        onScroll={onScroll}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+        onMouseLeave={onMouseUp}
+        onMouseMove={onMouseMove}
+      >
+        <div className="flex" style={{ width: innerWidth }}>
+          {milestones.map((m, i) => (
+            <div
+              key={m.year}
+              ref={(el) => { cardRefs.current[i] = el; }}
+              className="shrink-0"
+              style={{ zIndex: i + 1, width: CARD_W }}
+            >
+              <MilestoneCard m={m} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
   );
 }
 
