@@ -411,8 +411,8 @@ function Index() {
   );
 }
 
-const projectLocations = ["Gujarat", "Kerala", "West Bengal", "Nagaland", "Delhi"];
-const manufacturingSites  = ["Hyderabad", "Mysuru"];
+const projectLocations = ["Gujarat", "Kerala", "West Bengal", "Kolkata", "Nagaland", "New Delhi"];
+const manufacturingSites  = ["Hyderabad", "Mysuru", "Chamarajanagar"];
 
 
 function PresenceSection() {
