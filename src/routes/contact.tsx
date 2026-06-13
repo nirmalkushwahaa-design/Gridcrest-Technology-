@@ -169,7 +169,7 @@ function FormAndInfo({ category, selected, onSelect }: { category: string; selec
 
 function InfoCard({ title, img, lines, href }: { title: string; img: string; lines: string[]; href?: string }) {
   return (
-    <div className="rounded-2xl border border-border bg-card p-4 flex items-center gap-5">
+    <div className="reveal-area rounded-2xl border border-border bg-card p-4 flex items-center gap-5">
       <img
         src={img}
         alt=""

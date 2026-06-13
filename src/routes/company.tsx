@@ -157,7 +157,7 @@ function WhyGridCrest() {
           {WHY_CARDS.map((c, i) => (
             <div
               key={c.title}
-              className={`rounded-2xl border border-border bg-card p-7 ${i === 4 ? "sm:col-span-2 xl:col-span-1" : ""}`}
+              className={`reveal-area rounded-2xl border border-border bg-card p-7 ${i === 4 ? "sm:col-span-2 xl:col-span-1" : ""}`}
             >
               <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent">
                 <c.icon className="h-5 w-5" />
@@ -219,7 +219,7 @@ function KaynesGroup() {
               Key Strengths
             </p>
             {KAYNES_STRENGTHS.map((s) => (
-              <div key={s.label} className="flex items-center gap-4 rounded-2xl border border-border bg-card p-5">
+              <div key={s.label} className="reveal-area flex items-center gap-4 rounded-2xl border border-border bg-card p-5">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
                   <s.icon className="h-5 w-5" />
                 </span>
@@ -286,7 +286,7 @@ function CoreCapabilities() {
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
           {CAPABILITIES.map((c) => (
-            <div key={c.title} className="rounded-2xl border border-border bg-card p-7">
+            <div key={c.title} className="reveal-area rounded-2xl border border-border bg-card p-7">
               <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent">
                 <c.icon className="h-5 w-5" />
               </span>
@@ -351,8 +351,8 @@ function OurJourney() {
       <div className="mt-12 overflow-hidden">
         <div
           ref={ref}
-          className="overflow-x-scroll pb-4 select-none px-8"
-          style={{ cursor: "grab", scrollbarWidth: "none", msOverflowStyle: "none" } as React.CSSProperties}
+          className="overflow-x-scroll pb-4 select-none"
+          style={{ cursor: "grab", scrollbarWidth: "none", msOverflowStyle: "none", paddingLeft: "max(2rem, calc((100vw - 80rem) / 2 + 1.5rem))", paddingRight: "max(2rem, calc((100vw - 80rem) / 2 + 1.5rem))" } as React.CSSProperties}
           onMouseDown={onMouseDown}
           onMouseUp={onMouseUp}
           onMouseLeave={onMouseUp}
@@ -409,9 +409,16 @@ function MissionVisionValues() {
   return (
     <section className="border-b border-border/60 bg-secondary py-24">
       <div className="mx-auto max-w-7xl px-6">
+        {/* Section heading */}
+        <div className="text-center mb-12">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">Purpose</p>
+          <h2 className="mt-3 text-4xl font-bold leading-tight tracking-tight lg:text-5xl">
+            Mission, Vision &amp; Values
+          </h2>
+        </div>
         {/* Mission & Vision */}
         <div className="grid gap-8 lg:grid-cols-2">
-          <div className="rounded-2xl border border-border bg-card p-8">
+          <div className="reveal-area rounded-2xl border border-border bg-card p-8">
             <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent">
               <Target className="h-5 w-5" />
             </span>
@@ -426,7 +433,7 @@ function MissionVisionValues() {
             </p>
           </div>
 
-          <div className="rounded-2xl border border-border bg-card p-8">
+          <div className="reveal-area rounded-2xl border border-border bg-card p-8">
             <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent">
               <Sparkles className="h-5 w-5" />
             </span>
@@ -450,7 +457,7 @@ function MissionVisionValues() {
           </h2>
           <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-5">
             {CORE_VALUES.map((v) => (
-              <div key={v.label} className="rounded-2xl border border-border bg-card p-6">
+              <div key={v.label} className="reveal-area rounded-2xl border border-border bg-card p-6">
                 <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent">
                   <v.icon className="h-5 w-5" />
                 </span>
@@ -509,7 +516,7 @@ function PeopleAndCulture() {
           <div className="lg:col-span-7">
             <div className="grid grid-cols-2 gap-5">
               {CULTURE_PILLARS.map((p) => (
-                <div key={p.label} className="rounded-2xl border border-border bg-card p-6">
+                <div key={p.label} className="reveal-area rounded-2xl border border-border bg-card p-6">
                   <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent">
                     <p.icon className="h-5 w-5" />
                   </span>

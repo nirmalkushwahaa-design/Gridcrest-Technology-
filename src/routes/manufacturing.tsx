@@ -160,7 +160,7 @@ function ManufacturingScale() {
             {HIGHLIGHTS.map((h) => (
               <div
                 key={h.label}
-                className="rounded-2xl border border-border bg-card p-5 shadow-[var(--shadow-card)]"
+                className="reveal-area rounded-2xl border border-border bg-card p-5 shadow-[var(--shadow-card)]"
               >
                 <div className="text-2xl font-display font-bold" style={{ color: "var(--brand-cyan)" }}>
                   {h.value}
@@ -216,7 +216,7 @@ function IntegratedEcosystem() {
             {ECOSYSTEM_ITEMS.map((item) => (
               <div
                 key={item.label}
-                className="flex items-center gap-3 rounded-2xl border border-border bg-card px-5 py-4 shadow-[var(--shadow-card)]"
+                className="reveal-area flex items-center gap-3 rounded-2xl border border-border bg-card px-5 py-4 shadow-[var(--shadow-card)]"
               >
                 <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-accent/10 text-accent">
                   <item.icon className="h-4 w-4" />
@@ -266,7 +266,7 @@ function ReliabilityEngineering() {
           </div>
 
           {/* Right: checklist */}
-          <div className="rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-card)]">
+          <div className="reveal-area rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-card)]">
             <div className="flex items-center gap-3">
               <p className="font-display font-semibold">Our engineering and validation processes focus on:</p>
             </div>
@@ -301,7 +301,7 @@ function QualityCompliance() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
           {/* Left: checklist */}
-          <div className="rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-card)]">
+          <div className="reveal-area rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-card)]">
             <div className="flex items-center gap-3">
               <p className="font-display font-semibold">Key compliance areas:</p>
             </div>
@@ -498,7 +498,7 @@ function KaynesEcosystem() {
             {KAYNES_CAPABILITIES.map((cap) => (
               <div
                 key={cap.label}
-                className="flex items-center gap-4 rounded-2xl border border-border bg-card px-5 py-4 shadow-[var(--shadow-card)]"
+                className="reveal-area flex items-center gap-4 rounded-2xl border border-border bg-card px-5 py-4 shadow-[var(--shadow-card)]"
               >
                 <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-accent/10 text-accent">
                   <cap.icon className="h-5 w-5" />

@@ -15,7 +15,7 @@ export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/70">
+    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/90">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6" style={{ WebkitTextFillColor: "inherit" }}>
         <Link to="/" className="flex items-center">
           <img src={logoUrl} alt="GridCrest" className="h-12 w-auto" />

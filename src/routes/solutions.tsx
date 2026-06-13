@@ -116,40 +116,17 @@ function EcosystemChips() {
   if (!visible) return null;
 
   return (
-    <div className="sticky top-16 z-40 flex justify-center py-4 px-6 pointer-events-none">
-      <nav
-        className="pointer-events-auto flex flex-wrap items-center justify-center gap-4 px-5 py-5"
-        style={{
-          background: "rgba(255,255,255,0.1)",
-          backdropFilter: "blur(16px) saturate(1.8)",
-          WebkitBackdropFilter: "blur(16px) saturate(1.8)",
-          borderRadius: 100,
-        }}
-      >
+    <div className="sticky top-16 z-40 w-full border-b border-border bg-white/90 backdrop-blur-md">
+      <nav className="flex items-center justify-center gap-10 px-6 py-3">
         {ECOSYSTEM_CHIPS.map((c) => {
           const isActive = activeId === c.id;
           return (
             <a
               key={c.label}
               href={c.href}
-              className="shrink-0 transition-all"
+              className="shrink-0 text-xs font-semibold uppercase tracking-[0.18em] transition-colors"
               style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                padding: "12px 16px",
-                borderRadius: 24,
-                border: "none",
-                background: isActive ? "rgba(0,229,255,0.08)" : "transparent",
-                boxShadow: isActive
-                  ? "0px 4px 12px 0px rgba(48,163,176,0.2)"
-                  : "none",
-                color: isActive ? "#1A3A5C" : "#888",
-                fontSize: 14,
-                fontWeight: 400,
-                letterSpacing: "1.2px",
-                textTransform: "uppercase",
-                whiteSpace: "nowrap",
+                color: isActive ? "var(--color-accent)" : "var(--color-muted-foreground)",
                 textDecoration: "none",
               }}
             >
@@ -476,7 +453,7 @@ function SolutionPortfolio() {
                 <article key={s.name} className="overflow-hidden rounded-3xl">
                   <div className="grid lg:grid-cols-2">
                     <div
-                      className={`flex min-h-[500px] items-center justify-center bg-gradient-to-br ${SW_GRADIENTS[i]} overflow-hidden ${(s as any).img ? "" : "p-12"} ${imgRight ? "lg:order-2" : ""}`}
+                      className={`flex min-h-[380px] items-center justify-center bg-gradient-to-br ${SW_GRADIENTS[i]} overflow-hidden ${(s as any).img ? "" : "p-12"} ${imgRight ? "lg:order-2" : ""}`}
                     >
                       <div className="flex flex-col items-center gap-5">
                         {(s as any).img ? (
@@ -492,7 +469,7 @@ function SolutionPortfolio() {
                       </div>
                     </div>
                     <div className={`flex flex-col justify-center p-8 lg:p-10 ${imgRight ? "lg:order-1" : ""}`}>
-                      <h3 className="text-2xl font-bold tracking-tight" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>{s.fullName}</h3>
+                      <h3 className="text-2xl font-normal tracking-tight" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>{s.fullName}</h3>
                       <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
                       <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-2 border-t border-border pt-6">
                         {s.highlights.map((h) => (
@@ -582,7 +559,7 @@ function EcosystemArchitecture() {
           {ARCH_CARDS.map((c) => (
             <div key={c.title} className="rounded-2xl border border-border bg-card p-8">
               <c.icon className="h-6 w-6 text-accent" />
-              <h3 className="mt-5 text-xl font-bold" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>{c.title}</h3>
+              <h3 className="mt-5 text-xl font-normal" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>{c.title}</h3>
               <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{c.body}</p>
             </div>
           ))}
@@ -637,7 +614,7 @@ function WhyGridCrest() {
               <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent">
                 <item.icon className="h-5 w-5" />
               </span>
-              <h3 className="mt-5 text-base font-bold" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>
+              <h3 className="mt-5 text-xl font-normal" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>
                 {item.title}
               </h3>
               <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{item.body}</p>
