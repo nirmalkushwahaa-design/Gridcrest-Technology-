@@ -153,12 +153,13 @@ function FormAndInfo({ category, selected, onSelect }: { category: string; selec
           <InfoCard
             title="Email"
             img={contactEmailImg}
-            lines={["hello@gridcrest.tech", "partnerships@gridcrest.tech"]}
+            lines={["sales@gridcrest.io"]}
+            href="mailto:sales@gridcrest.io"
           />
           <InfoCard
             title="Phone"
             img={contactPhoneImg}
-            lines={["+91 80 4000 0000", "Mon – Fri · 9:30am – 6:30pm IST"]}
+            lines={["334 531 2573", "Mon – Fri · 9:30am – 6:30pm IST"]}
           />
         </div>
       </div>
@@ -166,7 +167,7 @@ function FormAndInfo({ category, selected, onSelect }: { category: string; selec
   );
 }
 
-function InfoCard({ title, img, lines }: { title: string; img: string; lines: string[] }) {
+function InfoCard({ title, img, lines, href }: { title: string; img: string; lines: string[]; href?: string }) {
   return (
     <div className="rounded-2xl border border-border bg-card p-4 flex items-center gap-5">
       <img
@@ -180,7 +181,11 @@ function InfoCard({ title, img, lines }: { title: string; img: string; lines: st
         <p className="text-lg font-semibold text-foreground mb-2">{title}</p>
         <div className="space-y-2 text-base text-foreground/85">
           {lines.map((l) => (
-            <div key={l}>{l}</div>
+            href ? (
+              <a key={l} href={href} className="hover:text-accent transition-colors">{l}</a>
+            ) : (
+              <div key={l}>{l}</div>
+            )
           ))}
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import manufacturingHeroImg from "@/assets/manufacturing-hero.png";
 import { useState } from "react";
 import { CtaBanner } from "@/components/CtaBanner";
 import { EyebrowChip, FilterChip, LabelChip } from "@/components/ui/Chip";
@@ -105,9 +106,14 @@ function Hero() {
           </div>
         </div>
 
-        {/* Right: placeholder */}
+        {/* Right: hero image */}
         <div className="hidden lg:flex items-center justify-center py-10">
-          <div className="w-full rounded-3xl" style={{ height: 320, background: "#E5E7EB" }} />
+          <img
+            src={manufacturingHeroImg}
+            alt="GridCrest manufacturing facility"
+            className="w-full max-w-[560px] h-auto object-contain select-none"
+            draggable={false}
+          />
         </div>
       </div>
     </section>

@@ -8,22 +8,18 @@ import {
   ArrowRight,
   ArrowUpRight,
   BrainCircuit,
-  Building2,
   CheckCircle2,
   Cpu,
-  DatabaseZap,
   Factory,
   Gauge,
   Globe,
   Handshake,
   Layers,
   Lightbulb,
-  Network,
   Radio,
   Server,
   Settings2,
   ShieldCheck,
-  Smartphone,
   Sparkles,
   Target,
   TrendingUp,
@@ -64,7 +60,6 @@ function CompanyPage() {
       <KaynesGroup />
       <CoreCapabilities />
       <OurJourney />
-      <LeadershipTeam />
       <MissionVisionValues />
       <PeopleAndCulture />
       <CtaBanner
@@ -233,10 +228,6 @@ function KaynesGroup() {
               </div>
             ))}
 
-            {/* Visual placeholder */}
-            <div className="mt-2 h-44 w-full rounded-2xl border border-border bg-gradient-to-br from-surface-cyan/40 to-surface-lavender/30 flex items-center justify-center text-sm text-muted-foreground">
-              Kaynes manufacturing facility
-            </div>
           </div>
         </div>
       </div>
@@ -405,50 +396,7 @@ function OurJourney() {
   );
 }
 
-/* ─── 7. LEADERSHIP TEAM ────────────────────────────────────────────────────── */
-const TEAM = [
-  { name: "Ramesh Iyer",    role: "Chief Executive Officer",   initials: "RI" },
-  { name: "Priya Nair",     role: "Chief Technology Officer",  initials: "PN" },
-  { name: "Arjun Patel",    role: "Chief Operating Officer",   initials: "AP" },
-  { name: "Maya Krishnan",  role: "Chief Product Officer",     initials: "MK" },
-  { name: "Suresh Menon",   role: "VP — Engineering",          initials: "SM" },
-  { name: "Kavya Reddy",    role: "VP — Delivery & Services",  initials: "KR" },
-];
-
-function LeadershipTeam() {
-  return (
-    <section className="border-b border-border/60 py-24">
-      <div className="mx-auto max-w-7xl px-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">
-          Leadership Team
-        </p>
-        <h2 className="mt-3 text-4xl font-bold leading-tight tracking-tight lg:text-5xl">
-          Guiding the Future of Utility Innovation
-        </h2>
-        <p className="mt-4 max-w-2xl text-muted-foreground">
-          Experienced leaders across energy, manufacturing, software, and digital
-          infrastructure — shaping the next generation of intelligent utilities.
-        </p>
-
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {TEAM.map((p) => (
-            <div key={p.name} className="rounded-2xl border border-border bg-card overflow-hidden">
-              <div className="flex h-52 w-full items-center justify-center bg-gradient-to-br from-surface-cyan/60 to-surface-lavender/60 text-4xl font-bold text-foreground/40">
-                {p.initials}
-              </div>
-              <div className="p-5">
-                <p className="font-bold text-foreground">{p.name}</p>
-                <p className="mt-1 text-sm text-accent">{p.role}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ─── 8. MISSION, VISION & CORE VALUES ──────────────────────────────────────── */
+/* ─── 7. MISSION, VISION & CORE VALUES ──────────────────────────────────────── */
 const CORE_VALUES = [
   { icon: Lightbulb,  label: "Innovation",    body: "Continuously pushing boundaries to deliver breakthrough solutions for utility transformation." },
   { icon: ShieldCheck,label: "Integrity",     body: "Committed to transparency, accountability, and the highest standards in everything we deliver." },
@@ -506,7 +454,7 @@ function MissionVisionValues() {
                 <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent">
                   <v.icon className="h-5 w-5" />
                 </span>
-                <h3 className="mt-4 font-bold" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>{v.label}</h3>
+                <h3 className="mt-4 text-base font-bold" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>{v.label}</h3>
                 <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{v.body}</p>
               </div>
             ))}
@@ -565,7 +513,7 @@ function PeopleAndCulture() {
                   <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent">
                     <p.icon className="h-5 w-5" />
                   </span>
-                  <h3 className="mt-4 font-bold" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>{p.label}</h3>
+                  <h3 className="mt-4 text-base font-bold" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>{p.label}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{p.body}</p>
                 </div>
               ))}

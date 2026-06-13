@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Linkedin, Mail, Twitter, Youtube } from "lucide-react";
+import { Linkedin, Mail } from "lucide-react";
 import gridcrestLogo from "@/assets/gridcrest-logo.svg";
 
 const NAV = [
@@ -63,16 +63,10 @@ export function SiteFooter() {
             </div>
             {/* Social */}
             <div className="mt-6 flex items-center gap-3 text-muted-foreground">
-              <a href="#" aria-label="LinkedIn" className="hover:text-foreground transition-colors">
+              <a href="https://www.linkedin.com/company/gridcrestindia/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hover:text-foreground transition-colors">
                 <Linkedin className="h-4 w-4" />
               </a>
-              <a href="#" aria-label="Twitter" className="hover:text-foreground transition-colors">
-                <Twitter className="h-4 w-4" />
-              </a>
-              <a href="#" aria-label="YouTube" className="hover:text-foreground transition-colors">
-                <Youtube className="h-4 w-4" />
-              </a>
-              <a href="mailto:info@gridcrest.in" aria-label="Email" className="hover:text-foreground transition-colors">
+              <a href="mailto:sales@gridcrest.io" aria-label="Email" className="hover:text-foreground transition-colors">
                 <Mail className="h-4 w-4" />
               </a>
             </div>
@@ -109,7 +103,7 @@ export function SiteFooter() {
           <div className="flex gap-5">
             <Link to="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
             <Link to="/terms" className="hover:text-foreground transition-colors">Terms of Use</Link>
-            <a href="mailto:info@gridcrest.in" className="hover:text-foreground transition-colors">info@gridcrest.in</a>
+            <a href="mailto:sales@gridcrest.io" className="hover:text-foreground transition-colors">sales@gridcrest.io</a>
           </div>
         </div>
       </div>

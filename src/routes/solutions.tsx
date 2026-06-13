@@ -2,6 +2,16 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { CtaBanner } from "@/components/CtaBanner";
 import { PageHero } from "@/components/PageHero";
 import heroSolutions from "@/assets/solutions-hero.png";
+import meterMe280 from "@/assets/meter-me280.png";
+import meterMt260 from "@/assets/meter-mt260.png";
+import meterMt360 from "@/assets/meter-mt360.png";
+import meterMt490 from "@/assets/meter-mt490.png";
+import anantaHes from "@/assets/anantya-hes.png";
+import anantaMdm from "@/assets/anantya-mdm.png";
+import anantaAnalytics from "@/assets/anantya-analytics.png";
+import anantaConsumer from "@/assets/anantya-consumer.png";
+import anantaSynkra from "@/assets/anantya-synkra.png";
+import anantaWfm from "@/assets/anantya-wfm.png";
 import { useState, useEffect } from "react";
 import {
   ArrowRight,
@@ -10,7 +20,6 @@ import {
   CheckCircle2,
   Cpu,
   DatabaseZap,
-  Gauge,
   Layers,
   Network,
   Radio,
@@ -159,6 +168,7 @@ const METERS = [
     id: "ME280",
     label: "ME 280",
     subtitle: "Single Phase",
+    img: meterMe280,
     specs: [
       { key: "Wiring",          value: "1-phase 2-wire, Direct" },
       { key: "Voltage",         value: "240V (L-N)" },
@@ -177,6 +187,7 @@ const METERS = [
     id: "MT260",
     label: "MT 260",
     subtitle: "Three Phase",
+    img: meterMt260,
     specs: [
       { key: "Wiring",          value: "3-phase 4-wire, Direct" },
       { key: "Voltage",         value: "3×240V / 415V (L-L)" },
@@ -195,6 +206,7 @@ const METERS = [
     id: "MT360",
     label: "MT 360",
     subtitle: "Three Phase CT Operated",
+    img: meterMt360,
     specs: [
       { key: "Wiring",          value: "3-phase 4-wire, CT Operated" },
       { key: "Voltage",         value: "3×63.5V / 110V" },
@@ -213,6 +225,7 @@ const METERS = [
     id: "MT490",
     label: "MT 490",
     subtitle: "Three Phase CT-VT Operated",
+    img: meterMt490,
     specs: [
       { key: "Wiring",          value: "3-phase 4-wire, CT-VT Operated" },
       { key: "Voltage Input",   value: "3×63.5V / 110V (VT secondary)" },
@@ -235,6 +248,7 @@ const SOFTWARE = [
     name: "Anantya HES",
     fullName: "Anantya Head End System",
     icon: Server,
+    img: anantaHes,
     desc: "A unified device management platform for electricity, water, and gas meters. Designed to manage millions of connected endpoints with support for push, pull, and scheduled reads across multiple communication technologies.",
     highlights: [
       "Supports 50+ meter manufacturers", "DLMS compliant",
@@ -247,6 +261,7 @@ const SOFTWARE = [
     name: "Anantya MDM",
     fullName: "Anantya Meter Data Management",
     icon: DatabaseZap,
+    img: anantaMdm,
     desc: "Enterprise-grade meter data processing platform that enables validation, estimation, editing, tariff management, prepaid operations, and billing determinant calculations.",
     highlights: [
       "Asset Management", "VEE Processing",
@@ -259,6 +274,7 @@ const SOFTWARE = [
     name: "Anantya Analytics",
     fullName: "Anantya Reporting & Analytics",
     icon: BarChart3,
+    img: anantaAnalytics,
     desc: "Advanced analytics platform providing operational intelligence, energy auditing, transformer health monitoring, SLA tracking, and AI-driven insights.",
     highlights: [
       "Energy Audit", "DT & Feeder Analytics",
@@ -271,6 +287,7 @@ const SOFTWARE = [
     name: "Anantya Consumer",
     fullName: "Anantya Consumer Application",
     icon: Smartphone,
+    img: anantaConsumer,
     desc: "A digital self-service platform that enables consumers to monitor consumption, make payments, raise service requests, and access energy insights in real time.",
     highlights: [
       "Real-Time Usage Tracking", "Mobile App (iOS & Android)",
@@ -283,6 +300,7 @@ const SOFTWARE = [
     name: "Anantya Synkra",
     fullName: "Anantya Synkra",
     icon: Wrench,
+    img: anantaSynkra,
     desc: "A field operations platform designed for meter commissioning, maintenance, diagnostics, and operational support activities. Compatible with any DLMS-compliant meter.",
     highlights: [
       "BLE & Optical Communication", "Read / Write Operations",
@@ -295,6 +313,7 @@ const SOFTWARE = [
     name: "Anantya WFM",
     fullName: "Anantya Workforce Management",
     icon: Users,
+    img: anantaWfm,
     desc: "A digital workforce platform that streamlines deployment, operations, maintenance, inspections, surveys, and service management activities.",
     highlights: [
       "Digital Work Orders", "Consumer Surveys",
@@ -354,10 +373,10 @@ function SolutionPortfolio() {
           </p>
 
           <div className="mt-8 overflow-hidden rounded-3xl border border-border bg-card shadow-[var(--shadow-card)]">
-            <div className="grid lg:grid-cols-[340px_1fr]">
-              <div className="flex flex-col items-center justify-center gap-4 border-b border-border bg-[#f4f8fc] p-10 lg:border-b-0 lg:border-r">
-                <div className="flex h-52 w-52 items-center justify-center rounded-2xl bg-white shadow-sm border border-border/50">
-                  <Gauge className="h-24 w-24 text-accent/30" />
+            <div className="grid lg:grid-cols-[580px_1fr]">
+              <div className="flex flex-col items-center justify-center gap-4 border-b border-border bg-[#f4f8fc] p-8 lg:border-b-0 lg:border-r">
+                <div className="flex h-[500px] w-[500px] items-center justify-center rounded-2xl bg-white shadow-sm border border-border/50">
+                  <img src={meter.img} alt={meter.label} className="h-full w-full object-contain p-6 select-none" draggable={false} />
                 </div>
                 <div className="text-center">
                   <p className="text-xl font-bold">{meter.label}</p>
@@ -457,13 +476,19 @@ function SolutionPortfolio() {
                 <article key={s.name} className="overflow-hidden rounded-3xl">
                   <div className="grid lg:grid-cols-2">
                     <div
-                      className={`flex min-h-[240px] items-center justify-center bg-gradient-to-br ${SW_GRADIENTS[i]} p-12 ${imgRight ? "lg:order-2" : ""}`}
+                      className={`flex min-h-[500px] items-center justify-center bg-gradient-to-br ${SW_GRADIENTS[i]} overflow-hidden ${(s as any).img ? "" : "p-12"} ${imgRight ? "lg:order-2" : ""}`}
                     >
                       <div className="flex flex-col items-center gap-5">
-                        <span className={`flex h-20 w-20 items-center justify-center rounded-2xl ${SW_ICON_COLORS[i]}`}>
-                          <s.icon className="h-10 w-10" />
-                        </span>
-                        <p className="text-lg font-bold text-foreground/70">{s.name}</p>
+                        {(s as any).img ? (
+                          <img src={(s as any).img} alt={s.name} className="w-full h-full object-contain select-none" draggable={false} />
+                        ) : (
+                          <>
+                            <span className={`flex h-20 w-20 items-center justify-center rounded-2xl ${SW_ICON_COLORS[i]}`}>
+                              <s.icon className="h-10 w-10" />
+                            </span>
+                            <p className="text-lg font-bold text-foreground/70">{s.name}</p>
+                          </>
+                        )}
                       </div>
                     </div>
                     <div className={`flex flex-col justify-center p-8 lg:p-10 ${imgRight ? "lg:order-1" : ""}`}>
