@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FilterChip, LabelChip, StaticChip } from "@/components/ui/Chip";
 import solSmartMeterImg from "@/assets/sol-smart-meter.png";
 import solCommunicationImg from "@/assets/sol-communication.png";
@@ -22,7 +22,6 @@ import logoCESC from "@/assets/logo-cesc.svg";
 import logoKSEB from "@/assets/logo-kseb.svg";
 import logoWBSEDCL from "@/assets/logo-wbsedcl.svg";
 import heroImg from "@/assets/hero-ecosystem.png";
-import milestoneActiveImg from "@/assets/milestone-active.svg";
 import utilitiesImg from "@/assets/utilities.jpg";
 import governmentImg from "@/assets/government.jpg";
 import manufacturingImg from "@/assets/manufacturing.jpg";
@@ -51,30 +50,30 @@ export const Route = createFileRoute("/")({
 const solutions = [
   {
     tag: "FIELD",
-    title: "Smart Meter",
+    title: "Next-Gen Smart Meters",
     img: solSmartMeterImg,
-    text: "Purpose-built AMI for electricity, water and gas — covering smart metering, MDM, advanced data analytics, and connectivity across regions.",
+    text: "Precision-engineered smart meters designed for accurate measurement, reliable performance, and future-ready utility operations.",
     color: "cyan",
   },
   {
     tag: "COMMUNICATION",
-    title: "Communication & Control",
+    title: "Flexible Communications",
     img: solCommunicationImg,
-    text: "Communication-ready meter networks built for reliability, scalability, and seamless data sync across distributed networks.",
+    text: "A communication-agnostic architecture supporting RF Mesh, Cellular, NB-IoT, PLC, and BLE to ensure seamless connectivity across diverse deployment environments.",
     color: "lavender",
   },
   {
     tag: "ANANTYA",
-    title: "Anantya Intelligence",
+    title: "Anantya Unified Intelligence Platform",
     img: solIntelligenceImg,
-    text: "Cloud-native analytics for AMI, MDM and beyond — turning raw operational data into clear decisions, faster.",
+    text: "A comprehensive software ecosystem integrating HES, MDM, WFM, consumer engagement, analytics, and operational intelligence into a single platform.",
     color: "cyan",
   },
   {
     tag: "INTEGRATED",
-    title: "Integrated Platform",
+    title: "Anantya Services",
     img: solIntegratedImg,
-    text: "Modular, configurable, and connected by design — one platform for every layer of the grid.",
+    text: "End-to-end AMISP and utility transformation services that help utilities improve efficiency, enhance reliability, and deliver measurable business outcomes.",
     color: "lavender",
   },
 ];
@@ -112,15 +111,15 @@ const differentiators = [
   },
 ];
 
-const milestones = [
-  { year: "2019", text: "Establishment of Iskraemeco India Private Limited. Operations begin with a single employee." },
-  { year: "2020", text: "Core founding team joins. First office in Kolkata. First meter testing lab built in a residential bedroom." },
-  { year: "2020–21", text: "Regulatory approvals and technical capability building across key utility verticals." },
-  { year: "2021", text: "First major smart metering order secured from WBSEDCL." },
-  { year: "2022", text: "Major project secured from Power Grid Corporation of India." },
-  { year: "2022–24", text: "Rapid organisational growth and large-scale project expansion across India." },
-  { year: "2024–25", text: "Strategic acquisition by Kaynes Technologies, enabling industrial-scale manufacturing." },
-  { year: "2025–26", text: "Rebranding and launch of GridCrest — one ecosystem, every layer of the grid.", active: true },
+const MILESTONES = [
+  { year: "2019",    title: "Founded",              text: "Establishment of Iskraemeco India Private Limited. Operations begin with a single employee." },
+  { year: "2020",    title: "First Office & Lab",   text: "Core founding team joins. First office in Kolkata. First meter testing lab built in a residential bedroom." },
+  { year: "2020–21", title: "Regulatory Readiness", text: "Regulatory approvals and technical capability building across key utility verticals." },
+  { year: "2021",    title: "First Major Order",    text: "First major smart metering order secured from WBSEDCL." },
+  { year: "2022",    title: "Power Grid Win",        text: "Major project secured from Power Grid Corporation of India." },
+  { year: "2022–24", title: "Rapid Expansion",      text: "Rapid organisational growth and large-scale project expansion across India." },
+  { year: "2024–25", title: "Kaynes Acquisition",   text: "Strategic acquisition by Kaynes Technologies, enabling industrial-scale manufacturing." },
+  { year: "2025–26", title: "GridCrest Launch",     text: "Rebranding and launch of GridCrest — one ecosystem, every layer of the grid.", active: true },
 ];
 
 const utilityPartners = [
@@ -162,7 +161,7 @@ function Index() {
             <div className="mt-12 flex flex-wrap gap-x-10 gap-y-6">
               {[
                 { prefix: "", target: 2, suffix: "M+", decimals: 0, l: "Meters Deployed" },
-                { prefix: "", target: 2, suffix: "", decimals: 0, l: "Factories (2 under construction)" },
+                { prefix: "", target: 4, suffix: "", decimals: 0, l: "Factories (2 under construction)" },
                 { prefix: "", target: 5, suffix: "L+", decimals: 0, l: "Monthly Production" },
                 { prefix: "", target: 2500, suffix: "+", decimals: 0, l: "Employees" },
               ].map((s, i) => (
@@ -249,9 +248,6 @@ function Index() {
                   </p>
                   <h3 className="mt-1 text-lg font-semibold">{s.title}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{s.text}</p>
-                  <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-foreground">
-                    Explore More <ArrowRight className="h-3 w-3" />
-                  </span>
                 </div>
               </button>
             );
@@ -335,7 +331,7 @@ function Index() {
       <section className="py-24">
         <div className="mx-auto max-w-7xl px-6">
           <SectionLabel>ENGINEERING & MANUFACTURING EXCELLENCE</SectionLabel>
-          <h2 className="mx-auto mt-3 max-w-3xl text-center text-3xl font-bold tracking-tight md:text-4xl">
+          <h2 className="mx-auto mt-3 text-center text-3xl font-bold tracking-tight md:text-4xl whitespace-nowrap">
             From Semiconductor to Services. Built for Scale.
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-center text-muted-foreground">
@@ -382,18 +378,7 @@ function Index() {
       </section>
 
       {/* MILESTONES */}
-      <section className="border-y border-border/60 bg-secondary py-20">
-        <div className="mx-auto max-w-7xl px-6">
-          <SectionLabel>OUR JOURNEY</SectionLabel>
-          <h2 className="mx-auto mt-3 max-w-3xl text-center text-3xl font-bold tracking-tight md:text-4xl">
-            Milestones
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-center text-muted-foreground">
-            From a regional metering company to a global smart-grid force — every year, a new chapter.
-          </p>
-          <MilestonesTrack />
-        </div>
-      </section>
+      <MilestonesSection />
 
       {/* PRESENCE */}
       <PresenceSection />
@@ -411,9 +396,121 @@ function Index() {
   );
 }
 
-const projectLocations = ["Gujarat", "Kerala", "West Bengal", "Kolkata", "Nagaland", "New Delhi"];
+const projectLocations = ["Gujarat", "Kerala", "West Bengal", "Kolkata", "New Delhi"];
 const manufacturingSites  = ["Hyderabad", "Mysuru", "Chamarajanagar"];
 
+function MilestonesSection() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const dragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+
+  const onMouseDown = (e: React.MouseEvent) => {
+    dragging.current = true;
+    startX.current = e.pageX;
+    scrollLeft.current = trackRef.current?.scrollLeft ?? 0;
+    if (trackRef.current) trackRef.current.style.cursor = "grabbing";
+  };
+  const onMouseUp = () => {
+    dragging.current = false;
+    if (trackRef.current) trackRef.current.style.cursor = "grab";
+  };
+  const onMouseMove = (e: React.MouseEvent) => {
+    if (!dragging.current || !trackRef.current) return;
+    e.preventDefault();
+    trackRef.current.scrollLeft = scrollLeft.current - (e.pageX - startX.current);
+  };
+
+  const activeIndex = MILESTONES.findIndex((m) => m.active);
+
+  return (
+    <section className="border-y border-border/60 bg-secondary py-20">
+      <div className="text-center px-6">
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">Our Journey</p>
+        <h2 className="mt-3 text-4xl font-bold leading-tight tracking-tight lg:text-5xl">Milestones</h2>
+        <p className="mt-4 mx-auto max-w-2xl text-muted-foreground">
+          From a regional metering company to a global smart-grid force — every year, a new chapter.
+        </p>
+      </div>
+
+      <div className="mt-14" style={{ overflowX: "clip" }}>
+        <div
+          ref={trackRef}
+          className="overflow-x-auto select-none"
+          style={{
+            cursor: "grab",
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            paddingLeft: "max(2.5rem, calc((100vw - 80rem) / 2 + 1.5rem))",
+            paddingRight: "max(2.5rem, calc((100vw - 80rem) / 2 + 1.5rem))",
+            paddingTop: "0.75rem",
+            paddingBottom: "0.75rem",
+          } as React.CSSProperties}
+          onMouseDown={onMouseDown}
+          onMouseUp={onMouseUp}
+          onMouseLeave={onMouseUp}
+          onMouseMove={onMouseMove}
+        >
+          <ol className="flex items-start" style={{ width: "max-content" }}>
+            {MILESTONES.map((m, i) => {
+              const isPastOrActive = i <= activeIndex;
+              const isActive = !!m.active;
+              const isLast = i === MILESTONES.length - 1;
+
+              return (
+                <li key={m.year} className="relative w-56 shrink-0">
+                  <div className="flex items-center">
+                    <div
+                      className={`z-10 flex h-7 w-7 shrink-0 items-center justify-center rounded-full ring-8 ${
+                        isActive
+                          ? "bg-primary ring-primary/10"
+                          : isPastOrActive
+                          ? "bg-accent/10 ring-accent/5"
+                          : "bg-secondary ring-secondary/5"
+                      }`}
+                    >
+                      <svg
+                        className={`h-3.5 w-3.5 ${isActive ? "text-primary-foreground" : isPastOrActive ? "text-accent" : "text-muted-foreground"}`}
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 10h16m-8-3V4M7 7V4m10 3V4M5 20h14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Zm3-7h.01v.01H8V13Zm4 0h.01v.01H12V13Zm4 0h.01v.01H16V13Zm-8 4h.01v.01H8V17Zm4 0h.01v.01H12V17Zm4 0h.01v.01H16V17Z" />
+                      </svg>
+                    </div>
+                    {!isLast && (
+                      <div
+                        className="h-px w-full opacity-30"
+                        style={{ background: i < activeIndex ? "var(--color-accent)" : "var(--color-border)" }}
+                      />
+                    )}
+                  </div>
+
+                  <div className="mt-4 pe-6">
+                    <time
+                      className={`inline-block rounded border px-2 py-0.5 text-xs font-semibold ${
+                        isActive
+                          ? "border-primary/30 bg-primary/10 text-primary"
+                          : isPastOrActive
+                          ? "border-accent/30 bg-accent/8 text-accent"
+                          : "border-border bg-secondary text-muted-foreground"
+                      }`}
+                    >
+                      {m.year}
+                    </time>
+                    <h3 className="my-2 text-sm font-semibold text-foreground">{m.title}</h3>
+                    <p className="text-xs leading-relaxed text-muted-foreground">{m.text}</p>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function PresenceSection() {
   const [activeLocation, setActiveLocation] = useState<string | null>(null);
@@ -429,8 +526,8 @@ function PresenceSection() {
               Our Reach
             </p>
             <h2 className="mt-4 text-4xl font-bold leading-tight tracking-tight lg:text-5xl">
-              Pan-India Presence,{" "}
-              <span style={{ color: "var(--brand-cyan)" }}>Global Ambitions</span>
+              Pan-India Presence,<br />
+              <span style={{ color: "var(--brand-cyan)" }} className="whitespace-nowrap">Global Ambitions</span>
             </h2>
             <p className="mt-5 max-w-md text-sm text-muted-foreground">
               From remote North-East deployments to coastal utilities — GridCrest is
@@ -441,16 +538,16 @@ function PresenceSection() {
             <div className="mt-10 space-y-7">
               {/* Project Locations */}
               <div className="flex gap-5">
-                <div className="mt-1 w-0.5 shrink-0 self-stretch rounded-full bg-accent" />
+                <div className="mt-1 w-0.5 shrink-0 self-stretch rounded-full bg-[#9761E6]" />
                 <div>
-                  <p className="text-sm font-semibold text-accent">Project Locations</p>
+                  <p className="text-sm font-semibold text-[#9761E6]">Project Locations</p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {projectLocations.map((loc) => (
                       <FilterChip
                         key={loc}
                         as="span"
                         active={activeLocation === loc}
-                        color="cyan"
+                        color="orange"
                         onMouseEnter={() => setActiveLocation(loc)}
                         onMouseLeave={() => setActiveLocation(null)}
                       >
@@ -463,23 +560,23 @@ function PresenceSection() {
 
               {/* Manufacturing */}
               <div className="flex gap-5">
-                <div className="mt-1 w-0.5 shrink-0 self-stretch rounded-full bg-[#A258DA]" />
+                <div className="mt-1 w-0.5 shrink-0 self-stretch rounded-full bg-[#1DC0D2]" />
                 <div>
-                  <p className="text-sm font-semibold text-[#A258DA]">Manufacturing Sites</p>
+                  <p className="text-sm font-semibold text-[#1DC0D2]">Manufacturing Sites</p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {manufacturingSites.map((loc) => (
                       <FilterChip
                         key={loc}
                         as="span"
                         active={activeLocation === loc}
-                        color="purple"
+                        color="pink"
                         onMouseEnter={() => setActiveLocation(loc)}
                         onMouseLeave={() => setActiveLocation(null)}
                       >
                         {loc}
                       </FilterChip>
                     ))}
-                    <LabelChip color="purple">+2 new factories planned</LabelChip>
+                    <LabelChip color="pink">+2 new factories planned</LabelChip>
                   </div>
                 </div>
               </div>
@@ -558,123 +655,6 @@ function ScrollTrack({ children, className = "" }: { children: React.ReactNode; 
   );
 }
 
-function MilestoneCard({ m }: { m: typeof milestones[number] }) {
-  return (
-    <div
-      className={`flex flex-col justify-between rounded-2xl border p-4 md:p-6 ${
-        m.active
-          ? "bg-primary text-primary-foreground border-primary shadow-[var(--shadow-card)]"
-          : "bg-card border-border"
-      }`}
-      style={{ minHeight: 160 }}
-    >
-      {m.active ? (
-        <>
-          <div>
-            <div className="text-xl md:text-2xl font-bold text-primary-foreground">{m.year}</div>
-            <p className="mt-1.5 text-sm leading-relaxed text-primary-foreground/90">{m.text}</p>
-          </div>
-          <img
-            src={milestoneActiveImg}
-            alt="GridCrest milestone"
-            className="mt-3 h-10 md:h-16 w-auto self-start object-contain"
-            draggable={false}
-          />
-        </>
-      ) : (
-        <>
-          <div className="text-xl md:text-2xl font-bold text-accent">{m.year}</div>
-          <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{m.text}</p>
-        </>
-      )}
-    </div>
-  );
-}
-
-function MilestonesTrack() {
-  const CARD_W = 300;
-  const PEEK   = 28;
-
-  const containerRef = useRef<HTMLDivElement>(null);
-  const cardRefs     = useRef<(HTMLDivElement | null)[]>([]);
-  const [containerW, setContainerW] = useState(1200);
-
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    setContainerW(el.offsetWidth);
-    const ro = new ResizeObserver(([e]) => setContainerW(e.contentRect.width));
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-
-  const onScroll = useCallback(() => {
-    const sl = containerRef.current?.scrollLeft ?? 0;
-    milestones.forEach((_, i) => {
-      const card = cardRefs.current[i];
-      if (!card) return;
-      const push = sl - (i * CARD_W - i * PEEK);
-      card.style.transform = push > 0 ? `translateX(${push}px)` : "";
-    });
-  }, []);
-
-  const dragging  = useRef(false);
-  const startX    = useRef(0);
-  const scrollAt  = useRef(0);
-  const onMouseDown = (e: React.MouseEvent) => {
-    dragging.current = true;
-    startX.current  = e.pageX;
-    scrollAt.current = containerRef.current?.scrollLeft ?? 0;
-    if (containerRef.current) containerRef.current.style.cursor = "grabbing";
-  };
-  const onMouseUp = () => {
-    dragging.current = false;
-    if (containerRef.current) containerRef.current.style.cursor = "grab";
-  };
-  const onMouseMove = (e: React.MouseEvent) => {
-    if (!dragging.current || !containerRef.current) return;
-    e.preventDefault();
-    containerRef.current.scrollLeft = scrollAt.current - (e.pageX - startX.current) * 1.2;
-  };
-
-  const innerWidth = (milestones.length - 1) * CARD_W + containerW;
-
-  return (
-    <>
-      {/* Mobile: simple vertical list */}
-      <div className="mt-10 flex flex-col gap-4 md:hidden">
-        {milestones.map((m) => (
-          <MilestoneCard key={m.year} m={m} />
-        ))}
-      </div>
-
-      {/* Desktop: stacking drag-scroll track */}
-      <div
-        ref={containerRef}
-        className="mt-12 hidden overflow-x-auto pb-2 select-none md:block"
-        style={{ cursor: "grab" }}
-        onScroll={onScroll}
-        onMouseDown={onMouseDown}
-        onMouseUp={onMouseUp}
-        onMouseLeave={onMouseUp}
-        onMouseMove={onMouseMove}
-      >
-        <div className="flex" style={{ width: innerWidth }}>
-          {milestones.map((m, i) => (
-            <div
-              key={m.year}
-              ref={(el) => { cardRefs.current[i] = el; }}
-              className="shrink-0"
-              style={{ zIndex: i + 1, width: CARD_W }}
-            >
-              <MilestoneCard m={m} />
-            </div>
-          ))}
-        </div>
-      </div>
-    </>
-  );
-}
 
 function CountUp({
   target,

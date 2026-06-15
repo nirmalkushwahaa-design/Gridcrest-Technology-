@@ -118,7 +118,8 @@ function NewsPage() {
               </h3>
               <p className="mt-2 text-sm text-muted-foreground">{n.summary}</p>
               <Link
-                to="/insight/news"
+                to="/insight/$slug"
+                params={{ slug: n.slug }}
                 className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-[var(--brand-navy-hover)] transition-colors"
               >
                 Read release

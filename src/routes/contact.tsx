@@ -312,21 +312,21 @@ function Offices() {
             </p>
 
             <div className="mt-10 space-y-7">
-              {/* HQ & Manufacturing */}
+              {/* Project Locations */}
               <div className="flex gap-5">
-                <div className="mt-1 w-0.5 shrink-0 self-stretch rounded-full bg-[#A258DA]" />
+                <div className="mt-1 w-0.5 shrink-0 self-stretch rounded-full bg-[#9761E6]" />
                 <div>
-                  <p className="text-sm font-semibold text-[#A258DA]">HQ &amp; Manufacturing</p>
+                  <p className="text-sm font-semibold text-[#9761E6]">Project Locations</p>
                   <div className="mt-3 flex flex-wrap gap-2">
-                    {["Bengaluru", "Hyderabad", "Mysuru", "Chamarajanagar"].map((loc) => (
+                    {["Gujarat", "Kerala", "West Bengal", "Kolkata", "New Delhi"].map((loc) => (
                       <span
                         key={loc}
                         onMouseEnter={() => setActiveLocation(loc)}
                         onMouseLeave={() => setActiveLocation(null)}
                         className={`cursor-pointer rounded-full border px-3 py-1 text-xs font-medium transition-all ${
                           activeLocation === loc
-                            ? "border-[#A258DA] bg-[#A258DA] text-white"
-                            : "border-border bg-white text-foreground hover:border-[#A258DA]/50 hover:bg-[#A258DA]/10"
+                            ? "border-[#9761E6] bg-[#9761E6] text-white"
+                            : "border-border bg-white text-foreground hover:border-[#9761E6]/50 hover:bg-[#9761E6]/10"
                         }`}
                       >
                         {loc}
@@ -336,26 +336,29 @@ function Offices() {
                 </div>
               </div>
 
-              {/* Regional Offices */}
+              {/* Manufacturing Sites */}
               <div className="flex gap-5">
-                <div className="mt-1 w-0.5 shrink-0 self-stretch rounded-full bg-[#F59E0B]" />
+                <div className="mt-1 w-0.5 shrink-0 self-stretch rounded-full bg-[#1DC0D2]" />
                 <div>
-                  <p className="text-sm font-semibold text-[#D97706]">Regional Offices</p>
+                  <p className="text-sm font-semibold text-[#1DC0D2]">Manufacturing Sites</p>
                   <div className="mt-3 flex flex-wrap gap-2">
-                    {["New Delhi", "Kolkata", "Nagaland"].map((loc) => (
+                    {["Hyderabad", "Mysuru", "Chamarajanagar"].map((loc) => (
                       <span
                         key={loc}
                         onMouseEnter={() => setActiveLocation(loc)}
                         onMouseLeave={() => setActiveLocation(null)}
                         className={`cursor-pointer rounded-full border px-3 py-1 text-xs font-medium transition-all ${
                           activeLocation === loc
-                            ? "border-[#F59E0B] bg-[#F59E0B] text-white"
-                            : "border-border bg-white text-foreground hover:border-[#F59E0B]/50 hover:bg-[#F59E0B]/10"
+                            ? "border-[#1DC0D2] bg-[#1DC0D2] text-white"
+                            : "border-border bg-white text-foreground hover:border-[#1DC0D2]/50 hover:bg-[#1DC0D2]/10"
                         }`}
                       >
                         {loc}
                       </span>
                     ))}
+                    <span className="rounded-full border border-[#1DC0D2]/40 bg-[#1DC0D2]/10 px-3 py-1 text-xs font-medium text-[#1DC0D2]">
+                      +2 new factories planned
+                    </span>
                   </div>
                 </div>
               </div>

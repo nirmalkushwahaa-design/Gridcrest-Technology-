@@ -2,19 +2,23 @@ import { Link } from "@tanstack/react-router";
 import { Linkedin } from "lucide-react";
 import gridcrestLogo from "@/assets/gridcrest-logo.svg";
 
-const NAV = [
+type NavLink =
+  | { label: string; to: string; href?: never }
+  | { label: string; href: string; to?: never };
+
+const NAV: { heading: string; links: NavLink[] }[] = [
   {
     heading: "Solutions",
     links: [
-      { label: "Smart Meters", to: "/solutions" },
-      { label: "Network Interface Cards (NIC)", to: "/solutions" },
-      { label: "Anantya HES", to: "/solutions" },
-      { label: "Anantya MDM", to: "/solutions" },
-      { label: "Anantya Prepayment Engine", to: "/solutions" },
-      { label: "Anantya Reporting & Analytics", to: "/solutions" },
-      { label: "Anantya WFM", to: "/solutions" },
-      { label: "Anantya Synkra", to: "/solutions" },
-      { label: "Anantya Consumer App", to: "/solutions" },
+      { label: "Next-Gen Smart Meters", href: "/solutions#smart-meters" },
+      { label: "Network Interface Cards (NIC)", href: "/solutions#communications" },
+      { label: "Anantya HES", href: "/solutions#digital-platforms" },
+      { label: "Anantya MDM", href: "/solutions#digital-platforms" },
+      { label: "Anantya Prepayment Engine", href: "/solutions#digital-platforms" },
+      { label: "Anantya Reporting & Analytics", href: "/solutions#digital-platforms" },
+      { label: "Anantya WFM", href: "/solutions#digital-platforms" },
+      { label: "Anantya Synkra", href: "/solutions#digital-platforms" },
+      { label: "Anantya Consumer App", href: "/solutions#digital-platforms" },
     ],
   },
   {
@@ -66,12 +70,11 @@ export function SiteFooter() {
               href="https://www.linkedin.com/company/gridcrestindia/"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-2.5 rounded-lg px-4 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
-              style={{ background: "#0A66C2" }}
+              className="group mt-6 inline-flex items-center gap-2.5 rounded-lg border border-border px-4 py-2.5 text-sm font-medium transition-all hover:border-[#0A66C2] hover:bg-[#0A66C2]"
             >
-              <span>Connect with us on</span>
-              <span className="flex items-center gap-1.5 font-bold">
-                <Linkedin className="h-4 w-4" />
+              <span className="text-muted-foreground transition-colors group-hover:text-white">Connect with us on</span>
+              <span className="flex items-center gap-1.5 font-bold text-[#0A66C2] transition-colors group-hover:text-white">
+                <Linkedin className="h-4 w-4 fill-[#0A66C2] text-[#0A66C2] transition-colors group-hover:fill-white group-hover:text-white" />
                 LinkedIn
               </span>
             </a>
@@ -89,12 +92,21 @@ export function SiteFooter() {
               <ul className="mt-4 space-y-3">
                 {col.links.map((l) => (
                   <li key={l.label}>
-                    <Link
-                      to={l.to}
-                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                    >
-                      {l.label}
-                    </Link>
+                    {l.href ? (
+                      <a
+                        href={l.href}
+                        className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      >
+                        {l.label}
+                      </a>
+                    ) : (
+                      <Link
+                        to={l.to!}
+                        className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      >
+                        {l.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>

@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { CtaBanner } from "@/components/CtaBanner";
 import { PageHero } from "@/components/PageHero";
@@ -172,41 +172,48 @@ function InsightPage() {
       <section className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((item) => (
-            <article key={item.slug} className="group flex flex-col">
-              {/* Image */}
-              <div className="aspect-[16/10] overflow-hidden rounded-2xl bg-secondary">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                />
-              </div>
-
-              {/* Meta */}
-              <div className="mt-4 flex-1 flex flex-col">
-                <p className="text-xs text-muted-foreground">
-                  {item.author} · {item.date}
-                </p>
-
-                {/* Title */}
-                <h2 className="mt-2 text-lg font-bold leading-snug tracking-tight text-foreground line-clamp-2 group-hover:text-accent transition-colors">
-                  {item.title}
-                </h2>
-
-                {/* Description — 3 lines */}
-                <p className="mt-2 text-sm text-muted-foreground line-clamp-3 leading-relaxed">
-                  {item.description}
-                </p>
-
-                {/* Tag */}
-                <div className="mt-4">
-                  <span className={`inline-block rounded-full px-3 py-1 text-xs font-medium ${TAG_COLORS[item.tag]}`}>
-                    {item.tag}
-                  </span>
+            <Link
+              key={item.slug}
+              to="/insight/$slug"
+              params={{ slug: item.slug }}
+              className="group flex flex-col"
+            >
+              <article className="flex flex-col h-full">
+                {/* Image */}
+                <div className="aspect-[16/10] overflow-hidden rounded-2xl bg-secondary">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
                 </div>
-              </div>
-            </article>
+
+                {/* Meta */}
+                <div className="mt-4 flex-1 flex flex-col">
+                  <p className="text-xs text-muted-foreground">
+                    {item.author} · {item.date}
+                  </p>
+
+                  {/* Title */}
+                  <h2 className="mt-2 text-lg font-bold leading-snug tracking-tight text-foreground line-clamp-2 group-hover:text-accent transition-colors">
+                    {item.title}
+                  </h2>
+
+                  {/* Description — 3 lines */}
+                  <p className="mt-2 text-sm text-muted-foreground line-clamp-3 leading-relaxed">
+                    {item.description}
+                  </p>
+
+                  {/* Tag */}
+                  <div className="mt-4">
+                    <span className={`inline-block rounded-full px-3 py-1 text-xs font-medium ${TAG_COLORS[item.tag]}`}>
+                      {item.tag}
+                    </span>
+                  </div>
+                </div>
+              </article>
+            </Link>
           ))}
         </div>
       </section>

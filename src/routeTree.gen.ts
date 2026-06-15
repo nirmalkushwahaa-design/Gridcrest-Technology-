@@ -30,6 +30,7 @@ import { Route as SolutionsArchitectureRouteImport } from './routes/solutions.ar
 import { Route as InsightUpdatesRouteImport } from './routes/insight.updates'
 import { Route as InsightNewsRouteImport } from './routes/insight.news'
 import { Route as InsightArticlesRouteImport } from './routes/insight.articles'
+import { Route as InsightSlugRouteImport } from './routes/insight.$slug'
 import { Route as IndustriesPowerUtilitiesRouteImport } from './routes/industries.power-utilities'
 import { Route as IndustriesGovernmentRouteImport } from './routes/industries.government'
 import { Route as ContactLocationsRouteImport } from './routes/contact.locations'
@@ -150,6 +151,11 @@ const InsightArticlesRoute = InsightArticlesRouteImport.update({
   path: '/insight/articles',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InsightSlugRoute = InsightSlugRouteImport.update({
+  id: '/insight/$slug',
+  path: '/insight/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndustriesPowerUtilitiesRoute =
   IndustriesPowerUtilitiesRouteImport.update({
     id: '/power-utilities',
@@ -235,6 +241,7 @@ export interface FileRoutesByFullPath {
   '/contact/locations': typeof ContactLocationsRoute
   '/industries/government': typeof IndustriesGovernmentRoute
   '/industries/power-utilities': typeof IndustriesPowerUtilitiesRoute
+  '/insight/$slug': typeof InsightSlugRoute
   '/insight/articles': typeof InsightArticlesRoute
   '/insight/news': typeof InsightNewsRoute
   '/insight/updates': typeof InsightUpdatesRoute
@@ -270,6 +277,7 @@ export interface FileRoutesByTo {
   '/contact/locations': typeof ContactLocationsRoute
   '/industries/government': typeof IndustriesGovernmentRoute
   '/industries/power-utilities': typeof IndustriesPowerUtilitiesRoute
+  '/insight/$slug': typeof InsightSlugRoute
   '/insight/articles': typeof InsightArticlesRoute
   '/insight/news': typeof InsightNewsRoute
   '/insight/updates': typeof InsightUpdatesRoute
@@ -306,6 +314,7 @@ export interface FileRoutesById {
   '/contact/locations': typeof ContactLocationsRoute
   '/industries/government': typeof IndustriesGovernmentRoute
   '/industries/power-utilities': typeof IndustriesPowerUtilitiesRoute
+  '/insight/$slug': typeof InsightSlugRoute
   '/insight/articles': typeof InsightArticlesRoute
   '/insight/news': typeof InsightNewsRoute
   '/insight/updates': typeof InsightUpdatesRoute
@@ -343,6 +352,7 @@ export interface FileRouteTypes {
     | '/contact/locations'
     | '/industries/government'
     | '/industries/power-utilities'
+    | '/insight/$slug'
     | '/insight/articles'
     | '/insight/news'
     | '/insight/updates'
@@ -378,6 +388,7 @@ export interface FileRouteTypes {
     | '/contact/locations'
     | '/industries/government'
     | '/industries/power-utilities'
+    | '/insight/$slug'
     | '/insight/articles'
     | '/insight/news'
     | '/insight/updates'
@@ -413,6 +424,7 @@ export interface FileRouteTypes {
     | '/contact/locations'
     | '/industries/government'
     | '/industries/power-utilities'
+    | '/insight/$slug'
     | '/insight/articles'
     | '/insight/news'
     | '/insight/updates'
@@ -437,6 +449,7 @@ export interface RootRouteChildren {
   SolutionsRoute: typeof SolutionsRouteWithChildren
   TechnologyRoute: typeof TechnologyRoute
   TermsRoute: typeof TermsRoute
+  InsightSlugRoute: typeof InsightSlugRoute
   InsightArticlesRoute: typeof InsightArticlesRoute
   InsightNewsRoute: typeof InsightNewsRoute
   InsightUpdatesRoute: typeof InsightUpdatesRoute
@@ -590,6 +603,13 @@ declare module '@tanstack/react-router' {
       path: '/insight/articles'
       fullPath: '/insight/articles'
       preLoaderRoute: typeof InsightArticlesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/insight/$slug': {
+      id: '/insight/$slug'
+      path: '/insight/$slug'
+      fullPath: '/insight/$slug'
+      preLoaderRoute: typeof InsightSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/industries/power-utilities': {
@@ -775,6 +795,7 @@ const rootRouteChildren: RootRouteChildren = {
   SolutionsRoute: SolutionsRouteWithChildren,
   TechnologyRoute: TechnologyRoute,
   TermsRoute: TermsRoute,
+  InsightSlugRoute: InsightSlugRoute,
   InsightArticlesRoute: InsightArticlesRoute,
   InsightNewsRoute: InsightNewsRoute,
   InsightUpdatesRoute: InsightUpdatesRoute,

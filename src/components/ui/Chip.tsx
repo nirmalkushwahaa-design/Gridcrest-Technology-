@@ -11,7 +11,7 @@ import { type ReactNode } from "react";
  *
  * ─────────────────────────────────────────────────────────────────────────── */
 
-type Color = "cyan" | "purple" | "amber" | "navy";
+type Color = "cyan" | "purple" | "amber" | "navy" | "orange" | "pink";
 
 interface ChipBase {
   children: ReactNode;
@@ -44,12 +44,16 @@ const COLOR_ACTIVE: Record<Color, string> = {
   purple: "border-[#A258DA] bg-[#A258DA] text-white",
   amber:  "border-[#F59E0B] bg-[#F59E0B] text-white",
   navy:   "border-[var(--brand-navy)] bg-[var(--brand-navy)] text-white",
+  orange: "border-[#9761E6] bg-[#9761E6] text-white",
+  pink:   "border-[#1DC0D2] bg-[#1DC0D2] text-white",
 };
 const COLOR_INACTIVE: Record<Color, string> = {
   cyan:   "border-border bg-secondary text-foreground hover:border-accent/50 hover:bg-accent/10",
   purple: "border-border bg-secondary text-foreground hover:border-[#A258DA]/50 hover:bg-[#A258DA]/10",
   amber:  "border-border bg-secondary text-foreground hover:border-[#F59E0B]/50 hover:bg-[#F59E0B]/10",
   navy:   "border-border text-muted-foreground hover:border-[var(--brand-navy)] hover:text-[var(--brand-navy)]",
+  orange: "border-border bg-secondary text-foreground hover:border-[#9761E6]/50 hover:bg-[#9761E6]/10",
+  pink:   "border-border bg-secondary text-foreground hover:border-[#1DC0D2]/50 hover:bg-[#1DC0D2]/10",
 };
 
 export function FilterChip({
@@ -111,6 +115,8 @@ const LABEL_STYLES: Record<Color, string> = {
   purple: "border-[#A258DA]/30 bg-[#A258DA]/8 text-[#A258DA]",
   amber:  "border-[#F59E0B]/30 bg-[#F59E0B]/8 text-[#D97706]",
   navy:   "border-[var(--brand-navy)]/30 bg-[var(--brand-navy)]/8 text-[var(--brand-navy)]",
+  orange: "border-[#9761E6]/30 bg-[#9761E6]/8 text-[#9761E6]",
+  pink:   "border-[#1DC0D2]/30 bg-[#1DC0D2]/8 text-[#1DC0D2]",
 };
 
 export function LabelChip({ children, color = "purple", className = "" }: LabelChipProps) {

@@ -304,18 +304,18 @@ function CoreCapabilities() {
 
 /* ─── 6. OUR JOURNEY (milestones) ───────────────────────────────────────────── */
 const MILESTONES = [
-  { year: "2019", text: "Establishment of Iskraemeco India Private Limited. Operations begin with a single employee." },
-  { year: "2020", text: "Core founding team joins. First office in Kolkata. First meter testing lab built in a residential bedroom." },
-  { year: "2020–21", text: "Regulatory approvals and technical capability building across key utility verticals." },
-  { year: "2021", text: "First major smart metering order secured from WBSEDCL." },
-  { year: "2022", text: "Major project secured from Power Grid Corporation of India." },
-  { year: "2022–24", text: "Rapid organisational growth and large-scale project expansion across India." },
-  { year: "2024–25", text: "Strategic acquisition by Kaynes Technologies, enabling industrial-scale manufacturing." },
-  { year: "2025–26", text: "Rebranding and launch of GridCrest — one ecosystem, every layer of the grid.", active: true },
+  { year: "2019",    title: "Founded",             text: "Establishment of Iskraemeco India Private Limited. Operations begin with a single employee." },
+  { year: "2020",    title: "First Office & Lab",  text: "Core founding team joins. First office in Kolkata. First meter testing lab built in a residential bedroom." },
+  { year: "2020–21", title: "Regulatory Readiness",text: "Regulatory approvals and technical capability building across key utility verticals." },
+  { year: "2021",    title: "First Major Order",   text: "First major smart metering order secured from WBSEDCL." },
+  { year: "2022",    title: "Power Grid Win",       text: "Major project secured from Power Grid Corporation of India." },
+  { year: "2022–24", title: "Rapid Expansion",     text: "Rapid organisational growth and large-scale project expansion across India." },
+  { year: "2024–25", title: "Kaynes Acquisition",  text: "Strategic acquisition by Kaynes Technologies, enabling industrial-scale manufacturing." },
+  { year: "2025–26", title: "GridCrest Launch",    text: "Rebranding and launch of GridCrest — one ecosystem, every layer of the grid.", active: true },
 ];
 
 function OurJourney() {
-  const ref = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
   const startX = useRef(0);
   const scrollLeft = useRef(0);
@@ -323,73 +323,111 @@ function OurJourney() {
   const onMouseDown = (e: React.MouseEvent) => {
     dragging.current = true;
     startX.current = e.pageX;
-    scrollLeft.current = ref.current?.scrollLeft ?? 0;
-    if (ref.current) ref.current.style.cursor = "grabbing";
+    scrollLeft.current = trackRef.current?.scrollLeft ?? 0;
+    if (trackRef.current) trackRef.current.style.cursor = "grabbing";
   };
   const onMouseUp = () => {
     dragging.current = false;
-    if (ref.current) ref.current.style.cursor = "grab";
+    if (trackRef.current) trackRef.current.style.cursor = "grab";
   };
   const onMouseMove = (e: React.MouseEvent) => {
-    if (!dragging.current || !ref.current) return;
+    if (!dragging.current || !trackRef.current) return;
     e.preventDefault();
-    ref.current.scrollLeft = scrollLeft.current - (e.pageX - startX.current);
+    trackRef.current.scrollLeft = scrollLeft.current - (e.pageX - startX.current);
   };
+
+  const activeIndex = MILESTONES.findIndex((m) => m.active);
 
   return (
     <section className="border-b border-border/60 bg-white py-20">
-      {/* Centered heading */}
+      {/* Heading */}
       <div className="text-center px-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">Our Journey</p>
-        <h2 className="mt-3 text-4xl font-bold leading-tight tracking-tight lg:text-5xl">Milestones</h2>
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">Milestones</p>
+        <h2 className="mt-3 text-4xl font-bold leading-tight tracking-tight lg:text-5xl">Our Journey</h2>
         <p className="mt-4 mx-auto max-w-2xl text-muted-foreground">
           From a regional metering company to a global smart-grid force — every year, a new chapter.
         </p>
       </div>
 
-      {/* Scrollable strip */}
-      <div className="mt-12 overflow-hidden">
+      {/* Horizontal scrollable timeline */}
+      <div className="mt-14" style={{ overflowX: "clip" }}>
         <div
-          ref={ref}
-          className="overflow-x-scroll pb-4 select-none"
-          style={{ cursor: "grab", scrollbarWidth: "none", msOverflowStyle: "none", paddingLeft: "max(2rem, calc((100vw - 80rem) / 2 + 1.5rem))", paddingRight: "max(2rem, calc((100vw - 80rem) / 2 + 1.5rem))" } as React.CSSProperties}
+          ref={trackRef}
+          className="overflow-x-auto select-none"
+          style={{
+            cursor: "grab",
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            paddingLeft: "max(2.5rem, calc((100vw - 80rem) / 2 + 1.5rem))",
+            paddingRight: "max(2.5rem, calc((100vw - 80rem) / 2 + 1.5rem))",
+            paddingTop: "0.75rem",
+            paddingBottom: "0.75rem",
+          } as React.CSSProperties}
           onMouseDown={onMouseDown}
           onMouseUp={onMouseUp}
           onMouseLeave={onMouseUp}
           onMouseMove={onMouseMove}
         >
-          <div className="flex items-center" style={{ width: "max-content" }}>
-            {MILESTONES.map((m, i) => (
-              <React.Fragment key={m.year}>
-                {/* Card */}
-                <div
-                  className={`shrink-0 w-48 rounded-2xl p-5 flex flex-col ${
-                    m.active ? "bg-primary" : "bg-surface-lavender"
-                  }`}
-                  style={{ minHeight: 180 }}
-                >
-                  {m.active ? (
-                    <>
-                      <img src={milestoneActiveImg} alt="" className="h-8 w-auto self-start object-contain mb-3" draggable={false} />
-                      <div className="text-lg font-bold text-primary-foreground">{m.year}</div>
-                      <p className="mt-2 text-sm leading-relaxed text-primary-foreground/90">{m.text}</p>
-                    </>
-                  ) : (
-                    <div className="text-center flex flex-col gap-3">
-                      <div className="text-base font-semibold text-accent">{m.year}</div>
-                      <p className="text-sm leading-relaxed text-muted-foreground">{m.text}</p>
+          <ol className="flex items-start" style={{ width: "max-content" }}>
+            {MILESTONES.map((m, i) => {
+              const isPastOrActive = i <= activeIndex;
+              const isActive = !!m.active;
+              const isLast = i === MILESTONES.length - 1;
+
+              return (
+                <li key={m.year} className="relative w-56 shrink-0">
+                  {/* Dot + connector line row */}
+                  <div className="flex items-center">
+                    {/* Icon circle */}
+                    <div
+                      className={`z-10 flex h-7 w-7 shrink-0 items-center justify-center rounded-full ring-8 ${
+                        isActive
+                          ? "bg-primary ring-primary/10"
+                          : isPastOrActive
+                          ? "bg-accent/10 ring-accent/5"
+                          : "bg-secondary ring-secondary/5"
+                      }`}
+                    >
+                      <svg
+                        className={`h-3.5 w-3.5 ${isActive ? "text-primary-foreground" : isPastOrActive ? "text-accent" : "text-muted-foreground"}`}
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 10h16m-8-3V4M7 7V4m10 3V4M5 20h14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Zm3-7h.01v.01H8V13Zm4 0h.01v.01H12V13Zm4 0h.01v.01H16V13Zm-8 4h.01v.01H8V17Zm4 0h.01v.01H12V17Zm4 0h.01v.01H16V17Z" />
+                      </svg>
                     </div>
-                  )}
-                </div>
-                {/* Connector dot */}
-                {i < MILESTONES.length - 1 && (
-                  <div className="shrink-0 w-7 flex items-center justify-center">
-                    <div className="h-3 w-3 rounded-full border-2 border-accent/40 bg-white" />
+                    {/* Connecting line */}
+                    {!isLast && (
+                      <div
+                        className="h-px w-full opacity-30"
+                        style={{ background: i < activeIndex ? "var(--color-accent)" : "var(--color-border)" }}
+                      />
+                    )}
                   </div>
-                )}
-              </React.Fragment>
-            ))}
-        </div>
+
+                  {/* Content */}
+                  <div className="mt-4 pe-6">
+                    {/* Year badge */}
+                    <time
+                      className={`inline-block rounded border px-2 py-0.5 text-xs font-semibold ${
+                        isActive
+                          ? "border-primary/30 bg-primary/10 text-primary"
+                          : isPastOrActive
+                          ? "border-accent/30 bg-accent/8 text-accent"
+                          : "border-border bg-secondary text-muted-foreground"
+                      }`}
+                    >
+                      {m.year}
+                    </time>
+                    <h3 className="my-2 text-sm font-semibold text-foreground">{m.title}</h3>
+                    <p className="text-xs leading-relaxed text-muted-foreground">{m.text}</p>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
         </div>
       </div>
     </section>

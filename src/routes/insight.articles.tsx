@@ -147,7 +147,8 @@ function InsightsPage() {
               <span>{FEATURED.readTime}</span>
             </div>
             <Link
-              to="/insight/articles"
+              to="/insight/$slug"
+              params={{ slug: FEATURED.slug }}
               className="group mt-6 inline-flex w-fit items-center gap-1.5 text-sm font-medium text-foreground hover:text-[var(--brand-navy-hover)] transition-colors"
             >
               Read article
@@ -179,7 +180,8 @@ function InsightsPage() {
                   <span>{a.readTime}</span>
                 </div>
                 <Link
-                  to="/insight/articles"
+                  to="/insight/$slug"
+                  params={{ slug: a.slug }}
                   className="group mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-[var(--brand-navy-hover)] transition-colors"
                 >
                   Read more

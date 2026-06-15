@@ -28,6 +28,8 @@ import {
   Users,
   Wrench,
   Zap,
+  CreditCard,
+  MonitorCog,
 } from "lucide-react";
 
 export const Route = createFileRoute("/solutions")({
@@ -143,6 +145,10 @@ function EcosystemChips() {
                 color: isActive ? "var(--color-accent)" : "var(--color-muted-foreground)",
                 textDecoration: "none",
               }}
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById(c.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
             >
               {c.label}
             </a>
@@ -161,11 +167,11 @@ const METERS = [
     subtitle: "Single Phase",
     img: meterMe280,
     specs: [
-      { key: "Wiring",          value: "1-phase 2-wire, Direct" },
-      { key: "Voltage",         value: "240V (L-N)" },
-      { key: "Current Ratings", value: "5-30A / 5-60A / 10-60A" },
-      { key: "Accuracy",        value: "Class 1.0" },
-      { key: "Compliance",      value: "IS 16444, IS 15959" },
+      { key: "Wiring",        value: "1-phase 2-wire, Direct" },
+      { key: "Voltage Input", value: "240V (L-N)" },
+      { key: "Current Input", value: "5-30A / 5-60A / 10-60A" },
+      { key: "Accuracy",      value: "Class 1.0" },
+      { key: "Compliance",    value: "IS 16444, IS 15959" },
     ],
     features: [
       "IP54 Protection", "DLMS/COSEM Protocol",
@@ -180,11 +186,11 @@ const METERS = [
     subtitle: "Three Phase",
     img: meterMt260,
     specs: [
-      { key: "Wiring",          value: "3-phase 4-wire, Direct" },
-      { key: "Voltage",         value: "3×240V / 415V (L-L)" },
-      { key: "Current Ratings", value: "5-10A / 10-60A / 20-100A" },
-      { key: "Accuracy",        value: "Class 1.0" },
-      { key: "Compliance",      value: "IS 16444, IS 15959" },
+      { key: "Wiring",        value: "3-phase 4-wire, Direct" },
+      { key: "Voltage Input", value: "3×240V / 415V (L-L)" },
+      { key: "Current Input", value: "5-10A / 10-60A / 20-100A" },
+      { key: "Accuracy",      value: "Class 1.0" },
+      { key: "Compliance",    value: "IS 16444, IS 15959" },
     ],
     features: [
       "AMI / RDSS Ready", "Net Metering Support",
@@ -199,11 +205,11 @@ const METERS = [
     subtitle: "Three Phase CT Operated",
     img: meterMt360,
     specs: [
-      { key: "Wiring",          value: "3-phase 4-wire, CT Operated" },
-      { key: "Voltage",         value: "3×63.5V / 110V" },
-      { key: "Current Input",   value: "1A / 5A (Secondary)" },
-      { key: "Accuracy",        value: "Class 0.5S" },
-      { key: "Compliance",      value: "IS 16444, IEC 62052" },
+      { key: "Wiring",        value: "3-phase 4-wire, CT Operated" },
+      { key: "Voltage Input", value: "3×63.5V / 110V" },
+      { key: "Current Input", value: "1A / 5A (Secondary)" },
+      { key: "Accuracy",      value: "Class 0.5S" },
+      { key: "Compliance",    value: "IS 16444, IEC 62052" },
     ],
     features: [
       "DT Monitoring", "Energy Audit",
@@ -312,6 +318,33 @@ const SOFTWARE = [
       "Warehouse Management", "Quality Control Workflows",
     ],
   },
+  {
+    tag: "Prepayment Engine",
+    name: "Anantya Prepayment Engine",
+    fullName: "Anantya Prepayment Engine",
+    icon: CreditCard,
+    desc: "Support high-volume recharge operations while automating credit management and service control workflows.",
+    sub: "Deliver a frictionless prepaid experience for utilities and consumers.",
+    highlights: [
+      "1 million+ monthly recharges", "Real-time balance management",
+      "99.99% transaction accuracy", "Automated credit monitoring",
+      "Automated connect/disconnect",
+    ],
+  },
+  {
+    tag: "Engineering Tool",
+    name: "Anantya BCS",
+    fullName: "Anantya Base Computer Software (BCS)",
+    icon: MonitorCog,
+    desc: "Anantya BCS enables utilities, AMISPs, and field teams to securely access, configure, analyze, and manage DLMS/COSEM smart meters without requiring a full AMI infrastructure. Designed for meter testing, commissioning, diagnostics, and operational support, it provides direct visibility into meter data and performance.",
+    sub: "Simplify meter operations with a powerful engineering and field support tool.",
+    highlights: [
+      "Windows-based desktop application", "Compatible with DLMS/COSEM-compliant smart meters",
+      "Meter configuration and parameter management", "All meter data retrieval",
+      "Diagnostics, testing, and field troubleshooting support", "Custom downloadable reports",
+      "Vector diagram supported",
+    ],
+  },
 ];
 
 const SW_GRADIENTS = [
@@ -321,6 +354,8 @@ const SW_GRADIENTS = [
   "from-teal-50 to-emerald-100",
   "from-amber-50 to-orange-100",
   "from-rose-50 to-pink-100",
+  "from-green-50 to-emerald-100",
+  "from-slate-50 to-blue-100",
 ];
 const SW_ICON_COLORS = [
   "text-cyan-600 bg-cyan-100",
@@ -329,6 +364,8 @@ const SW_ICON_COLORS = [
   "text-teal-600 bg-teal-100",
   "text-amber-600 bg-amber-100",
   "text-rose-600 bg-rose-100",
+  "text-green-600 bg-green-100",
+  "text-slate-600 bg-slate-100",
 ];
 
 function SolutionPortfolio() {
@@ -344,35 +381,29 @@ function SolutionPortfolio() {
           Solution Portfolio
         </p>
         <h2 className="mt-3 text-4xl font-bold leading-tight tracking-tight lg:text-5xl">
-          Solutions Across the Utility Value Chain
+          One Ecosystem. Endless Utility Possibilities.
         </h2>
         <p className="mt-4 max-w-3xl text-muted-foreground">
-          From intelligent field devices and communication networks to enterprise software
-          and managed services, GridCrest delivers an integrated portfolio designed for
-          modern utility operations.
+          From field devices and communication networks to enterprise applications and managed
+          services, GridCrest enables a connected, intelligent, and data-driven utility operation.
         </p>
+
 
         {/* ── Smart Meters ── */}
         <div id="smart-meters" className="mt-16 scroll-mt-24">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Smart Meters</p>
           <h3 className="mt-2 text-2xl font-bold" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>
-            Smart Meters Built for India's Grid
+            Next-Gen Smart Meters Globally
           </h3>
           <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
             Designed for long-term deployment across residential, commercial, industrial, and utility
             environments — with interoperability, reliability, and future-ready communication.
           </p>
 
-          <div className="mt-8 overflow-hidden rounded-3xl border border-border bg-card shadow-[var(--shadow-card)]">
+          <div className="mt-8 overflow-hidden rounded-3xl border border-border bg-card">
             <div className="grid lg:grid-cols-[580px_1fr]">
-              <div className="flex flex-col items-center justify-center gap-4 border-b border-border bg-[#f4f8fc] p-4 sm:p-8 lg:border-b-0 lg:border-r">
-                <div className="flex w-full max-w-[320px] sm:max-w-[420px] lg:max-w-[500px] aspect-square items-center justify-center rounded-2xl bg-white shadow-sm border border-border/50">
-                  <img src={meter.img} alt={meter.label} className="h-full w-full object-contain p-4 sm:p-6 select-none" draggable={false} />
-                </div>
-                <div className="text-center">
-                  <p className="text-xl font-bold">{meter.label}</p>
-                  <p className="mt-1 text-sm text-muted-foreground">{meter.subtitle}</p>
-                </div>
+              <div className="flex items-center justify-center border-b border-border bg-[#f4f8fc] p-4 sm:p-8 lg:border-b-0 lg:border-r">
+                <img src={meter.img} alt={meter.label} className="h-full w-full max-h-[520px] object-contain select-none" draggable={false} />
               </div>
               <div className="p-8 lg:p-10">
                 <div className="flex flex-nowrap overflow-x-auto gap-2 pb-1">
@@ -390,7 +421,11 @@ function SolutionPortfolio() {
                     </button>
                   ))}
                 </div>
-                <div className="mt-8">
+                <div className="mt-5">
+                  <h3 className="text-2xl font-bold" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>{meter.label}</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">{meter.subtitle}</p>
+                </div>
+                <div className="mt-6">
                   <h3 className="text-base font-bold" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>Technical Specifications</h3>
                   <div className="mt-3 divide-y divide-border rounded-xl border border-border overflow-hidden">
                     {meter.specs.map((s) => (
@@ -422,10 +457,7 @@ function SolutionPortfolio() {
           <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Communications</p>
-              <span className="mt-4 flex h-11 w-11 items-center justify-center rounded-xl bg-accent/15 text-accent">
-                <Radio className="h-5 w-5" />
-              </span>
-              <h3 className="mt-5 text-2xl font-bold tracking-tight" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>
+              <h3 className="mt-4 text-2xl font-bold tracking-tight" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>
                 Communication Modules{" "}
                 <span className="font-normal text-muted-foreground">(NIC Cards)</span>
               </h3>
@@ -467,11 +499,11 @@ function SolutionPortfolio() {
                 <article key={s.name} className="overflow-hidden rounded-3xl">
                   <div className="grid lg:grid-cols-2">
                     <div
-                      className={`flex min-h-[220px] lg:min-h-[380px] items-center justify-center bg-gradient-to-br ${SW_GRADIENTS[i]} overflow-hidden ${(s as any).img ? "" : "p-12"} ${imgRight ? "lg:order-2" : ""}`}
+                      className={`flex min-h-[220px] lg:min-h-[380px] items-center justify-center bg-gradient-to-br ${SW_GRADIENTS[i]} overflow-hidden p-6 lg:p-8 ${imgRight ? "lg:order-2" : ""}`}
                     >
-                      <div className="flex flex-col items-center gap-5">
+                      <div className="flex flex-col items-center gap-5 w-full h-full">
                         {(s as any).img ? (
-                          <img src={(s as any).img} alt={s.name} className="w-full max-h-[220px] lg:max-h-[380px] object-contain select-none" draggable={false} />
+                          <img src={(s as any).img} alt={s.name} className="w-full max-h-[220px] lg:max-h-[360px] object-contain select-none rounded-2xl shadow-sm" draggable={false} />
                         ) : (
                           <>
                             <span className={`flex h-20 w-20 items-center justify-center rounded-2xl ${SW_ICON_COLORS[i]}`}>

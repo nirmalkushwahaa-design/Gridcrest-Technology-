@@ -340,7 +340,7 @@ function QualityCompliance() {
 }
 
 /* ─── NATIONWIDE PRESENCE ────────────────────────────────────────────────── */
-const MFG_SITES    = ["Hyderabad", "Mysuru"];
+const MFG_SITES    = ["Hyderabad", "Mysuru", "Chamarajanagar"];
 const PROJECT_LOCS = ["Kerala", "Gujarat"];
 
 function NationwidePresence() {
@@ -368,69 +368,63 @@ function NationwidePresence() {
             <div className="mt-10 space-y-7">
               {/* Manufacturing Sites */}
               <div className="flex gap-5">
-                <div className="mt-1 w-0.5 shrink-0 self-stretch rounded-full bg-[#A258DA]" />
+                <div className="mt-1 w-0.5 shrink-0 self-stretch rounded-full bg-[#1DC0D2]" />
                 <div>
-                  <p className="text-sm font-semibold text-[#A258DA]">Manufacturing Sites</p>
+                  <p className="text-sm font-semibold text-[#1DC0D2]">Manufacturing Sites</p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {MFG_SITES.map((loc) => (
                       <FilterChip
                         key={loc}
                         as="span"
                         active={activeLocation === loc}
-                        color="purple"
+                        color="pink"
                         onMouseEnter={() => setActiveLocation(loc)}
                         onMouseLeave={() => setActiveLocation(null)}
                       >
                         {loc}
                       </FilterChip>
                     ))}
-                    <LabelChip color="purple">+2 new facilities planned</LabelChip>
+                    <LabelChip color="pink">+2 new facilities planned</LabelChip>
                   </div>
                 </div>
               </div>
 
-              {/* R&D Centers */}
+              {/* Project Locations */}
               <div className="flex gap-5">
-                <div className="mt-1 w-0.5 shrink-0 self-stretch rounded-full bg-accent" />
+                <div className="mt-1 w-0.5 shrink-0 self-stretch rounded-full bg-[#9761E6]" />
                 <div>
-                  <p className="text-sm font-semibold text-accent">R&amp;D Centers</p>
+                  <p className="text-sm font-semibold text-[#9761E6]">Project Locations</p>
                   <div className="mt-3 flex flex-wrap gap-2">
-                    {[
-                      { label: "Kolkata", state: "West Bengal" },
-                      { label: "Noida", state: "Uttar Pradesh" },
-                    ].map((loc) => (
-                      <FilterChip
-                        key={loc.label}
-                        as="span"
-                        active={activeLocation === loc.state}
-                        color="cyan"
-                        onMouseEnter={() => setActiveLocation(loc.state)}
-                        onMouseLeave={() => setActiveLocation(null)}
-                      >
-                        {loc.label}
-                      </FilterChip>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Project Operations */}
-              <div className="flex gap-5">
-                <div className="mt-1 w-0.5 shrink-0 self-stretch rounded-full bg-[#F59E0B]" />
-                <div>
-                  <p className="text-sm font-semibold text-[#D97706]">Project Operations</p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {PROJECT_LOCS.map((loc) => (
+                    {["Gujarat", "Kerala", "West Bengal", "Kolkata", "New Delhi"].map((loc) => (
                       <FilterChip
                         key={loc}
                         as="span"
                         active={activeLocation === loc}
-                        color="amber"
+                        color="orange"
                         onMouseEnter={() => setActiveLocation(loc)}
                         onMouseLeave={() => setActiveLocation(null)}
                       >
                         {loc}
                       </FilterChip>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* 2026 & Beyond */}
+              <div className="flex gap-5">
+                <div className="mt-1 w-0.5 shrink-0 self-stretch rounded-full bg-border" />
+                <div>
+                  <p className="text-sm font-semibold text-foreground">2026 &amp; Beyond</p>
+                  <p className="mt-1 text-sm text-muted-foreground">Global expansion into Europe, Americas and Africa</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {["Europe", "Americas", "Africa"].map((region) => (
+                      <span
+                        key={region}
+                        className="rounded-full border border-border bg-white px-3 py-1 text-xs font-medium text-foreground"
+                      >
+                        {region}
+                      </span>
                     ))}
                   </div>
                 </div>
@@ -443,6 +437,7 @@ function NationwidePresence() {
             <IndiaMapInteractive
               activeLocation={activeLocation}
               onStateHover={(label) => setActiveLocation(label)}
+              categories={["mfg"]}
             />
           </div>
 
