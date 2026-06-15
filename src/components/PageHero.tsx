@@ -48,26 +48,6 @@ export function PageHero({
       className="relative overflow-hidden border-b border-border/60 bg-white"
       style={{ minHeight: 450 }}
     >
-      {/* Subtle grid backdrop */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, oklch(0.9 0.02 250 / 0.35) 1px, transparent 1px), linear-gradient(to bottom, oklch(0.9 0.02 250 / 0.35) 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
-          maskImage: "radial-gradient(ellipse 80% 80% at 20% 50%, black 30%, transparent 100%)",
-        }}
-      />
-
-      {/* Soft cyan glow top-left */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -left-32 -top-32 -z-10 h-[520px] w-[520px] rounded-full"
-        style={{
-          background: "radial-gradient(circle, oklch(0.85 0.06 200 / 0.35) 0%, transparent 70%)",
-        }}
-      />
 
       <div className="mx-auto grid h-full max-w-7xl grid-cols-1 items-center gap-8 px-6 lg:grid-cols-2" style={{ minHeight: 450 }}>
         {/* ── Left: text ── */}
