@@ -491,8 +491,8 @@ function SolutionPortfolio() {
               </div>
             </div>
             {/* Right: image */}
-            <div className="overflow-hidden rounded-3xl border border-border min-h-[360px] lg:min-h-[420px]">
-              <img src={commModules} alt="Communication Modules" className="h-full w-full object-cover select-none" style={{ minHeight: "360px" }} draggable={false} />
+            <div className="overflow-hidden rounded-3xl border border-border h-[220px] lg:h-[384px]">
+              <img src={commModules} alt="Communication Modules" className="h-full w-full object-contain select-none" draggable={false} />
             </div>
           </div>
         </div>
