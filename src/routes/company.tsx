@@ -61,6 +61,7 @@ function CompanyPage() {
       <CoreCapabilities />
       <OurJourney />
       <MissionVisionValues />
+      <LeadershipSection />
       <PeopleAndCulture />
       <CtaBanner
         eyebrow="LET'S BUILD THE FUTURE TOGETHER"
@@ -76,7 +77,7 @@ function CompanyPage() {
 /* ─── 2. ABOUT GRIDCREST ────────────────────────────────────────────────────── */
 function AboutGridCrest() {
   return (
-    <section className="border-b border-border/60 py-24">
+    <section className="py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid gap-16 lg:grid-cols-12">
           <div className="lg:col-span-4">
@@ -144,7 +145,7 @@ const WHY_CARDS = [
 
 function WhyGridCrest() {
   return (
-    <section className="border-b border-border/60 bg-secondary py-24">
+    <section className="bg-secondary py-24">
       <div className="mx-auto max-w-7xl px-6">
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">
           What Makes Us Different
@@ -184,7 +185,7 @@ const KAYNES_STRENGTHS = [
 
 function KaynesGroup() {
   return (
-    <section className="border-b border-border/60 py-24">
+    <section className="py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid gap-14 lg:grid-cols-2 lg:items-start">
           <div>
@@ -271,7 +272,7 @@ const CAPABILITIES = [
 
 function CoreCapabilities() {
   return (
-    <section className="border-b border-border/60 bg-secondary py-24">
+    <section className="bg-secondary py-24">
       <div className="mx-auto max-w-7xl px-6">
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">
           Core Capabilities
@@ -306,12 +307,12 @@ function CoreCapabilities() {
 const MILESTONES = [
   { year: "2019",    title: "Founded",             text: "Establishment of Iskraemeco India Private Limited. Operations begin with a single employee." },
   { year: "2020",    title: "First Office & Lab",  text: "Core founding team joins. First office in Kolkata. First meter testing lab built in a residential bedroom." },
-  { year: "2020–21", title: "Regulatory Readiness",text: "Regulatory approvals and technical capability building across key utility verticals." },
+  { year: "2020-21", title: "Regulatory Readiness",text: "Regulatory approvals and technical capability building across key utility verticals." },
   { year: "2021",    title: "First Major Order",   text: "First major smart metering order secured from WBSEDCL." },
   { year: "2022",    title: "Power Grid Win",       text: "Major project secured from Power Grid Corporation of India." },
-  { year: "2022–24", title: "Rapid Expansion",     text: "Rapid organisational growth and large-scale project expansion across India." },
-  { year: "2024–25", title: "Kaynes Acquisition",  text: "Strategic acquisition by Kaynes Technologies, enabling industrial-scale manufacturing." },
-  { year: "2025–26", title: "GridCrest Launch",    text: "Rebranding and launch of GridCrest — one ecosystem, every layer of the grid.", active: true },
+  { year: "2022-24", title: "Rapid Expansion",     text: "Rapid organisational growth and large-scale project expansion across India." },
+  { year: "2024-25", title: "Kaynes Acquisition",  text: "Strategic acquisition by Kaynes Technologies, enabling industrial-scale manufacturing." },
+  { year: "2025-26", title: "GridCrest Launch",    text: "Rebranding and launch of GridCrest — one ecosystem, every layer of the grid.", active: true },
 ];
 
 function OurJourney() {
@@ -339,7 +340,7 @@ function OurJourney() {
   const activeIndex = MILESTONES.findIndex((m) => m.active);
 
   return (
-    <section className="border-b border-border/60 bg-white py-20">
+    <section className="bg-white py-20">
       {/* Heading */}
       <div className="text-center px-6">
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">Milestones</p>
@@ -388,15 +389,15 @@ function OurJourney() {
                           : "bg-secondary ring-secondary/5"
                       }`}
                     >
-                      <svg
-                        className={`h-3.5 w-3.5 ${isActive ? "text-primary-foreground" : isPastOrActive ? "text-accent" : "text-muted-foreground"}`}
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 10h16m-8-3V4M7 7V4m10 3V4M5 20h14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Zm3-7h.01v.01H8V13Zm4 0h.01v.01H12V13Zm4 0h.01v.01H16V13Zm-8 4h.01v.01H8V17Zm4 0h.01v.01H12V17Zm4 0h.01v.01H16V17Z" />
-                      </svg>
+                      {isActive ? (
+                        <svg className="h-3.5 w-3.5 text-primary-foreground" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 10h16m-8-3V4M7 7V4m10 3V4M5 20h14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Zm3-7h.01v.01H8V13Zm4 0h.01v.01H12V13Zm4 0h.01v.01H16V13Zm-8 4h.01v.01H8V17Zm4 0h.01v.01H12V17Zm4 0h.01v.01H16V17Z" />
+                        </svg>
+                      ) : (
+                        <svg className={`h-3.5 w-3.5 ${isPastOrActive ? "text-accent" : "text-muted-foreground"}`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                          <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clipRule="evenodd" />
+                        </svg>
+                      )}
                     </div>
                     {/* Connecting line */}
                     {!isLast && (
@@ -445,64 +446,147 @@ const CORE_VALUES = [
 
 function MissionVisionValues() {
   return (
-    <section className="border-b border-border/60 bg-secondary py-24">
+    <section className="bg-secondary py-24">
       <div className="mx-auto max-w-7xl px-6">
-        {/* Section heading */}
-        <div className="text-center mb-12">
+        <div className="mb-12">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">Purpose</p>
           <h2 className="mt-3 text-4xl font-bold leading-tight tracking-tight lg:text-5xl">
             Mission, Vision &amp; Values
           </h2>
         </div>
-        {/* Mission & Vision */}
+
         <div className="grid gap-8 lg:grid-cols-2">
-          <div className="reveal-area rounded-2xl border border-border bg-card p-8">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent">
-              <Target className="h-5 w-5" />
-            </span>
-            <p className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-accent">Mission</p>
-            <h3 className="mt-2 text-2xl font-bold" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>
-              Our Mission
-            </h3>
-            <p className="mt-3 text-muted-foreground leading-relaxed">
-              To deliver integrated smart metering solutions that help utilities build
-              intelligent, efficient, and resilient operations — combining devices,
-              communications, platforms, and services into one seamless ecosystem.
-            </p>
+          {/* Left — Mission + Vision stacked */}
+          <div className="flex flex-col gap-6">
+            <div className="reveal-area rounded-2xl border border-border bg-card p-8">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Mission</p>
+              <h3 className="mt-2 text-2xl font-bold" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>
+                Our Mission
+              </h3>
+              <p className="mt-3 text-muted-foreground leading-relaxed">
+                To deliver integrated smart metering solutions that help utilities build
+                intelligent, efficient, and resilient operations — combining devices,
+                communications, platforms, and services into one seamless ecosystem.
+              </p>
+            </div>
+
+            <div className="reveal-area rounded-2xl border border-border bg-card p-8">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Vision</p>
+              <h3 className="mt-2 text-2xl font-bold" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>
+                Our Vision
+              </h3>
+              <p className="mt-3 text-muted-foreground leading-relaxed">
+                To be the leading integrated utility technology partner — enabling utilities
+                worldwide to achieve full digital transformation through open, scalable, and
+                intelligent smart metering ecosystems.
+              </p>
+            </div>
           </div>
 
+          {/* Right — single card with all values as points */}
           <div className="reveal-area rounded-2xl border border-border bg-card p-8">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent">
-              <Sparkles className="h-5 w-5" />
-            </span>
-            <p className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-accent">Vision</p>
-            <h3 className="mt-2 text-2xl font-bold" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>
-              Our Vision
-            </h3>
-            <p className="mt-3 text-muted-foreground leading-relaxed">
-              To be the leading integrated utility technology partner — enabling utilities
-              worldwide to achieve full digital transformation through open, scalable, and
-              intelligent smart metering ecosystems.
-            </p>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">Core Values</p>
+            <h3 className="mt-1 text-xl font-bold">What We Stand For</h3>
+            <ul className="mt-6 space-y-5">
+              {CORE_VALUES.map((v) => (
+                <li key={v.label}>
+                  <p className="text-sm font-semibold text-foreground">{v.label}</p>
+                  <p className="mt-0.5 text-xs text-muted-foreground leading-relaxed">{v.body}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── Leadership ─────────────────────────────────────────────────────────────── */
+const TOP_LEADERS = [
+  { name: "Ramesh Iyer",   title: "Chief Executive Officer",  img: "https://i.pravatar.cc/150?img=11" },
+  { name: "Priya Nair",    title: "Chief Technology Officer", img: "https://i.pravatar.cc/150?img=47" },
+  { name: "Arjun Patel",   title: "Chief Operating Officer",  img: "https://i.pravatar.cc/150?img=15" },
+  { name: "Maya Krishnan", title: "Chief Product Officer",    img: "https://i.pravatar.cc/150?img=44" },
+];
+
+const KAYNES_TEAM = [
+  { name: "Suresh Menon",  title: "VP — Manufacturing",        img: "https://i.pravatar.cc/150?img=12" },
+  { name: "Anil Verma",    title: "VP — Supply Chain",         img: "https://i.pravatar.cc/150?img=13" },
+  { name: "Ritu Sharma",   title: "Head — Quality Assurance",  img: "https://i.pravatar.cc/150?img=48" },
+  { name: "Deepak Rao",    title: "Head — Engineering",        img: "https://i.pravatar.cc/150?img=14" },
+  { name: "Kavita Bose",   title: "Head — Program Delivery",   img: "https://i.pravatar.cc/150?img=49" },
+  { name: "Santosh Kumar", title: "Head — Finance & Strategy", img: "https://i.pravatar.cc/150?img=17" },
+];
+
+const GRIDCREST_TEAM = [
+  { name: "Neha Gupta",    title: "Head — Product",            img: "https://i.pravatar.cc/150?img=45" },
+  { name: "Rohit Saxena",  title: "Head — Software",           img: "https://i.pravatar.cc/150?img=18" },
+  { name: "Anjali Singh",  title: "Head — Partnerships",       img: "https://i.pravatar.cc/150?img=46" },
+  { name: "Vikram Nair",   title: "Head — Communications",     img: "https://i.pravatar.cc/150?img=19" },
+  { name: "Pooja Reddy",   title: "Head — Customer Success",   img: "https://i.pravatar.cc/150?img=51" },
+  { name: "Kiran Desai",   title: "Head — Design & UX",        img: "https://i.pravatar.cc/150?img=52" },
+];
+
+function MemberCard({ name, title, img }: { name: string; title: string; img: string }) {
+  return (
+    <div className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition hover:shadow-md">
+      <div className="relative" style={{ background: "linear-gradient(135deg, #ddeeff 0%, #e8e4f8 100%)", minHeight: 120 }}>
+        <img
+          src={img}
+          alt={name}
+          className="absolute bottom-0 left-1/2 h-24 w-24 -translate-x-1/2 translate-y-1/2 rounded-full border-4 border-card object-cover"
+        />
+      </div>
+      <div className="px-4 pb-4 pt-14 text-center">
+        <p className="font-semibold text-foreground">{name}</p>
+        <p className="mt-0.5 text-sm font-medium" style={{ color: "var(--color-accent)" }}>{title}</p>
+      </div>
+    </div>
+  );
+}
+
+function CircleMember({ name, title, img }: { name: string; title: string; img: string }) {
+  return (
+    <div className="flex flex-col items-center text-center">
+      <img src={img} alt={name} className="h-20 w-20 rounded-full object-cover" />
+      <p className="mt-3 text-sm font-semibold text-foreground leading-tight">{name}</p>
+      <p className="mt-0.5 text-xs" style={{ color: "var(--color-accent)" }}>{title}</p>
+    </div>
+  );
+}
+
+function LeadershipSection() {
+  return (
+    <section className="py-20">
+      <div className="mx-auto max-w-7xl px-6">
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">Leadership</p>
+        <h2 className="mt-3 max-w-xl text-4xl font-bold leading-tight tracking-tight lg:text-5xl">
+          Leadership driving transformation.
+        </h2>
+        <p className="mt-4 max-w-2xl text-muted-foreground">
+          Experienced leaders across energy, manufacturing, software and digital infrastructure — shaping the next generation of intelligent utilities.
+        </p>
+
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {TOP_LEADERS.map((m) => <MemberCard key={m.name} {...m} />)}
+        </div>
+
+        <div className="mt-16">
+          <p className="mb-8 text-center text-sm font-semibold uppercase tracking-widest text-muted-foreground">Kaynes Team</p>
+          <div className="rounded-2xl border border-border px-8 py-10">
+            <div className="grid grid-cols-6 gap-6">
+              {KAYNES_TEAM.map((m) => <CircleMember key={m.name} {...m} />)}
+            </div>
           </div>
         </div>
 
-        {/* Core Values */}
-        <div className="mt-14">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">Core Values</p>
-          <h2 className="mt-3 text-4xl font-bold leading-tight tracking-tight">
-            What We Stand For
-          </h2>
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-5">
-            {CORE_VALUES.map((v) => (
-              <div key={v.label} className="reveal-area rounded-2xl border border-border bg-card p-6">
-                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent">
-                  <v.icon className="h-5 w-5" />
-                </span>
-                <h3 className="mt-4 text-base font-bold" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>{v.label}</h3>
-                <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{v.body}</p>
-              </div>
-            ))}
+        <div className="mt-10">
+          <p className="mb-8 text-center text-sm font-semibold uppercase tracking-widest text-muted-foreground">GridCrest Team</p>
+          <div className="rounded-2xl border border-border px-8 py-10">
+            <div className="grid grid-cols-6 gap-6">
+              {GRIDCREST_TEAM.map((m) => <CircleMember key={m.name} {...m} />)}
+            </div>
           </div>
         </div>
       </div>
@@ -520,7 +604,7 @@ const CULTURE_PILLARS = [
 
 function PeopleAndCulture() {
   return (
-    <section className="border-b border-border/60 py-24">
+    <section className="py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-5">

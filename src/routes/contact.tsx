@@ -71,7 +71,7 @@ function ContactPage() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden border-b border-border/60 bg-white" style={{ minHeight: 450 }}>
+    <section className="relative overflow-hidden bg-white" style={{ minHeight: 450 }}>
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10"
@@ -294,7 +294,7 @@ function Offices() {
   const [activeLocation, setActiveLocation] = useState<string | null>(null);
 
   return (
-    <section className="border-b border-border/60 py-20" style={{ overflow: "clip" }}>
+    <section className="py-20" style={{ overflow: "clip" }}>
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid items-stretch gap-16 lg:grid-cols-2">
 
@@ -386,7 +386,7 @@ function Reach() {
     { value: "Roadmap", label: "International expansion" },
   ];
   return (
-    <section className="border-b border-border/60 py-20">
+    <section className="py-20">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <div className="text-xs font-semibold uppercase tracking-widest text-accent">

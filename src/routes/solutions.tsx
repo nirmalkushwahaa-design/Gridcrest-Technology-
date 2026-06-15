@@ -12,6 +12,7 @@ import anantaAnalytics from "@/assets/anantya-analytics.png";
 import anantaConsumer from "@/assets/anantya-consumer.png";
 import anantaSynkra from "@/assets/anantya-synkra.png";
 import anantaWfm from "@/assets/anantya-wfm.png";
+import commModules from "@/assets/sol-communication-modules.png";
 import { useState, useEffect, useRef } from "react";
 import {
   ArrowRight,
@@ -89,12 +90,20 @@ function EcosystemChips() {
   const navRef   = useRef<HTMLElement>(null);
   const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
 
-  // Hide when Why GridCrest section enters view
+  // Hide permanently once Why GridCrest section enters view
+  const hasHidden = useRef(false);
   useEffect(() => {
     const target = document.getElementById("why-gridcrest");
     if (!target) return;
     const obs = new IntersectionObserver(
-      ([e]) => setVisible(!e.isIntersecting),
+      ([e]) => {
+        if (e.isIntersecting) {
+          hasHidden.current = true;
+          setVisible(false);
+        } else if (!hasHidden.current) {
+          setVisible(true);
+        }
+      },
       { threshold: 0.05 }
     );
     obs.observe(target);
@@ -373,7 +382,7 @@ function SolutionPortfolio() {
   const meter = METERS.find((m) => m.id === active)!;
 
   return (
-    <section id="portfolio" className="border-b border-border/60 py-24">
+    <section id="portfolio" className="py-24">
       <div className="mx-auto max-w-7xl px-6">
 
         {/* Section header */}
@@ -400,9 +409,9 @@ function SolutionPortfolio() {
             environments — with interoperability, reliability, and future-ready communication.
           </p>
 
-          <div className="mt-8 overflow-hidden rounded-3xl border border-border bg-card">
-            <div className="grid lg:grid-cols-[580px_1fr]">
-              <div className="flex items-center justify-center border-b border-border bg-[#f4f8fc] p-4 sm:p-8 lg:border-b-0 lg:border-r">
+          <div className="mt-8">
+            <div className="grid gap-6 lg:grid-cols-[580px_1fr]">
+              <div className="flex items-center justify-center rounded-3xl bg-[#f4f8fc] p-4 sm:p-8">
                 <img src={meter.img} alt={meter.label} className="h-full w-full max-h-[520px] object-contain select-none" draggable={false} />
               </div>
               <div className="p-8 lg:p-10">
@@ -411,10 +420,10 @@ function SolutionPortfolio() {
                     <button
                       key={m.id}
                       onClick={() => setActive(m.id)}
-                      className={`shrink-0 rounded-lg border px-5 py-2 text-sm font-semibold transition-all ${
+                      className={`shrink-0 rounded-full border px-5 py-1.5 text-sm font-semibold transition-all ${
                         active === m.id
-                          ? "border-accent bg-accent text-white shadow-sm"
-                          : "border-border bg-background text-foreground hover:bg-secondary"
+                          ? "border-transparent bg-accent/10 text-accent"
+                          : "border-border bg-transparent text-muted-foreground hover:text-foreground"
                       }`}
                     >
                       {m.label}
@@ -452,9 +461,12 @@ function SolutionPortfolio() {
           </div>
         </div>
 
+        <hr className="mt-16 border-border" />
+
         {/* ── Communications ── */}
-        <div id="communications" className="mt-10 scroll-mt-24 rounded-3xl border border-border bg-gradient-to-br from-surface-cyan/40 to-surface-lavender/30 p-8 lg:p-10">
-          <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
+        <div id="communications" className="mt-16 scroll-mt-24">
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+            {/* Left: title, description, 6 items */}
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Communications</p>
               <h3 className="mt-4 text-2xl font-bold tracking-tight" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>
@@ -466,20 +478,26 @@ function SolutionPortfolio() {
                 RF Mesh, 4G, NB-IoT, BLE, and dual-SIM networks. Designed for
                 interoperability and future upgrades without replacing the meter.
               </p>
+              <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
+                {["RF Mesh", "4G / LTE", "NB-IoT", "BLE", "Dual-SIM", "Hot-Swap"].map((t) => (
+                  <div
+                    key={t}
+                    className="flex items-center gap-2 rounded-xl border border-border bg-background/80 px-3 py-2.5 text-sm font-medium"
+                  >
+                    <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                    {t}
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-              {["RF Mesh", "4G / LTE", "NB-IoT", "BLE", "Dual-SIM", "Hot-Swap"].map((t) => (
-                <div
-                  key={t}
-                  className="flex items-center gap-2 rounded-xl border border-border bg-background/80 px-3 py-2.5 text-sm font-medium"
-                >
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                  {t}
-                </div>
-              ))}
+            {/* Right: image */}
+            <div className="overflow-hidden rounded-3xl border border-border min-h-[360px] lg:min-h-[420px]">
+              <img src={commModules} alt="Communication Modules" className="h-full w-full object-cover select-none" style={{ minHeight: "360px" }} draggable={false} />
             </div>
           </div>
         </div>
+
+        <hr className="mt-16 border-border" />
 
         {/* ── Digital Platforms ── */}
         <div id="software" className="mt-16 scroll-mt-24">
@@ -496,21 +514,22 @@ function SolutionPortfolio() {
             {SOFTWARE.map((s, i) => {
               const imgRight = i % 2 !== 0;
               return (
-                <article key={s.name} className="overflow-hidden rounded-3xl">
+                <article key={s.name}>
                   <div className="grid lg:grid-cols-2">
-                    <div
-                      className={`flex min-h-[220px] lg:min-h-[380px] items-center justify-center bg-gradient-to-br ${SW_GRADIENTS[i]} overflow-hidden p-6 lg:p-8 ${imgRight ? "lg:order-2" : ""}`}
-                    >
-                      <div className="flex flex-col items-center gap-5 w-full h-full">
+                    {/* Gradient block — rounded with padding so it floats inside the card */}
+                    <div className={`flex items-center justify-center p-5 ${imgRight ? "lg:order-2" : ""}`}>
+                      <div
+                        className={`flex w-full min-h-[220px] lg:min-h-[360px] items-center justify-center rounded-2xl bg-gradient-to-br ${SW_GRADIENTS[i]} overflow-hidden p-6 lg:p-8`}
+                      >
                         {(s as any).img ? (
-                          <img src={(s as any).img} alt={s.name} className="w-full max-h-[220px] lg:max-h-[360px] object-contain select-none rounded-2xl shadow-sm" draggable={false} />
+                          <img src={(s as any).img} alt={s.name} className="w-full max-h-[200px] lg:max-h-[340px] object-contain select-none" draggable={false} />
                         ) : (
-                          <>
+                          <div className="flex flex-col items-center gap-5">
                             <span className={`flex h-20 w-20 items-center justify-center rounded-2xl ${SW_ICON_COLORS[i]}`}>
                               <s.icon className="h-10 w-10" />
                             </span>
                             <p className="text-lg font-bold text-foreground/70">{s.name}</p>
-                          </>
+                          </div>
                         )}
                       </div>
                     </div>
@@ -533,8 +552,10 @@ function SolutionPortfolio() {
           </div>
         </div>
 
+        <hr className="mt-16 border-border" />
+
         {/* ── Managed Services ── */}
-        <div id="managed-services" className="mt-16 scroll-mt-24 rounded-3xl border border-border bg-card p-8 lg:p-10">
+        <div id="managed-services" className="mt-16 scroll-mt-24">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Managed Services</p>
           <div className="mt-6 grid gap-8 lg:grid-cols-2 lg:items-start">
             <div>
@@ -587,7 +608,7 @@ const ARCH_CARDS = [
 
 function EcosystemArchitecture() {
   return (
-    <section className="border-b border-border/60 bg-secondary py-24">
+    <section className="bg-secondary py-24">
       <div className="mx-auto max-w-7xl px-6">
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">
           Ecosystem Architecture
@@ -641,7 +662,7 @@ const WHY_ITEMS = [
 
 function WhyGridCrest() {
   return (
-    <section id="why-gridcrest" className="border-b border-border/60 py-24">
+    <section id="why-gridcrest" className="py-24">
       <div className="mx-auto max-w-7xl px-6">
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">
           Why GridCrest

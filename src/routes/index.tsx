@@ -114,12 +114,12 @@ const differentiators = [
 const MILESTONES = [
   { year: "2019",    title: "Founded",              text: "Establishment of Iskraemeco India Private Limited. Operations begin with a single employee." },
   { year: "2020",    title: "First Office & Lab",   text: "Core founding team joins. First office in Kolkata. First meter testing lab built in a residential bedroom." },
-  { year: "2020–21", title: "Regulatory Readiness", text: "Regulatory approvals and technical capability building across key utility verticals." },
+  { year: "2020-21", title: "Regulatory Readiness", text: "Regulatory approvals and technical capability building across key utility verticals." },
   { year: "2021",    title: "First Major Order",    text: "First major smart metering order secured from WBSEDCL." },
   { year: "2022",    title: "Power Grid Win",        text: "Major project secured from Power Grid Corporation of India." },
-  { year: "2022–24", title: "Rapid Expansion",      text: "Rapid organisational growth and large-scale project expansion across India." },
-  { year: "2024–25", title: "Kaynes Acquisition",   text: "Strategic acquisition by Kaynes Technologies, enabling industrial-scale manufacturing." },
-  { year: "2025–26", title: "GridCrest Launch",     text: "Rebranding and launch of GridCrest — one ecosystem, every layer of the grid.", active: true },
+  { year: "2022-24", title: "Rapid Expansion",      text: "Rapid organisational growth and large-scale project expansion across India." },
+  { year: "2024-25", title: "Kaynes Acquisition",   text: "Strategic acquisition by Kaynes Technologies, enabling industrial-scale manufacturing." },
+  { year: "2025-26", title: "GridCrest Launch",     text: "Rebranding and launch of GridCrest — one ecosystem, every layer of the grid.", active: true },
 ];
 
 const utilityPartners = [
@@ -424,10 +424,10 @@ function MilestonesSection() {
   const activeIndex = MILESTONES.findIndex((m) => m.active);
 
   return (
-    <section className="border-y border-border/60 bg-secondary py-20">
+    <section className="py-20">
       <div className="text-center px-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">Our Journey</p>
-        <h2 className="mt-3 text-4xl font-bold leading-tight tracking-tight lg:text-5xl">Milestones</h2>
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">Milestones</p>
+        <h2 className="mt-3 text-4xl font-bold leading-tight tracking-tight lg:text-5xl">Our Journey</h2>
         <p className="mt-4 mx-auto max-w-2xl text-muted-foreground">
           From a regional metering company to a global smart-grid force — every year, a new chapter.
         </p>
@@ -469,15 +469,15 @@ function MilestonesSection() {
                           : "bg-secondary ring-secondary/5"
                       }`}
                     >
-                      <svg
-                        className={`h-3.5 w-3.5 ${isActive ? "text-primary-foreground" : isPastOrActive ? "text-accent" : "text-muted-foreground"}`}
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 10h16m-8-3V4M7 7V4m10 3V4M5 20h14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Zm3-7h.01v.01H8V13Zm4 0h.01v.01H12V13Zm4 0h.01v.01H16V13Zm-8 4h.01v.01H8V17Zm4 0h.01v.01H12V17Zm4 0h.01v.01H16V17Z" />
-                      </svg>
+                      {isActive ? (
+                        <svg className="h-3.5 w-3.5 text-primary-foreground" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 10h16m-8-3V4M7 7V4m10 3V4M5 20h14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Zm3-7h.01v.01H8V13Zm4 0h.01v.01H12V13Zm4 0h.01v.01H16V13Zm-8 4h.01v.01H8V17Zm4 0h.01v.01H12V17Zm4 0h.01v.01H16V17Z" />
+                        </svg>
+                      ) : (
+                        <svg className={`h-3.5 w-3.5 ${isPastOrActive ? "text-accent" : "text-muted-foreground"}`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                          <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clipRule="evenodd" />
+                        </svg>
+                      )}
                     </div>
                     {!isLast && (
                       <div

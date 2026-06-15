@@ -178,7 +178,7 @@ function Overview() {
     },
   ];
   return (
-    <section className="border-b border-border/60 py-24">
+    <section className="py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="max-w-2xl">
           <div className="text-xs font-semibold uppercase tracking-widest text-accent">
@@ -244,7 +244,7 @@ function Utilities() {
     },
   ];
   return (
-    <section className="border-b border-border/60 bg-secondary/40 py-24">
+    <section className="bg-secondary/40 py-24">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-14 px-6 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <div className="text-xs font-semibold uppercase tracking-widest text-accent">
@@ -327,7 +327,7 @@ function Government() {
     },
   ];
   return (
-    <section className="border-b border-border/60 py-24">
+    <section className="py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="max-w-3xl">
           <div className="text-xs font-semibold uppercase tracking-widest text-accent">
@@ -373,7 +373,7 @@ function SmartCities() {
     "Intelligent Operations Centers",
   ];
   return (
-    <section className="border-b border-border/60 bg-gradient-to-b from-background to-surface-cyan/30 py-24">
+    <section className="bg-gradient-to-b from-background to-surface-cyan/30 py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="max-w-3xl">
           <div className="text-xs font-semibold uppercase tracking-widest text-accent">
@@ -409,7 +409,7 @@ function FutureEnergy() {
     { icon: BarChart3, label: "Intelligent Monitoring" },
   ];
   return (
-    <section className="border-b border-border/60 py-24">
+    <section className="py-24">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-14 px-6 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <div className="text-xs font-semibold uppercase tracking-widest text-accent">
@@ -451,7 +451,7 @@ function Impact() {
     { v: "Advanced", l: "Manufacturing ecosystem" },
   ];
   return (
-    <section className="border-b border-border/60 bg-gradient-to-br from-surface-cyan/40 to-surface-lavender/40 py-24">
+    <section className="bg-gradient-to-br from-surface-cyan/40 to-surface-lavender/40 py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-end">
           <div className="max-w-2xl">

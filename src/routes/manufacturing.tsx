@@ -61,7 +61,7 @@ function ManufacturingPage() {
 /* ─── HERO ─────────────────────────────────────────────────────────────────── */
 function Hero() {
   return (
-    <section className="relative overflow-hidden border-b border-border/60 bg-white" style={{ minHeight: 450 }}>
+    <section className="relative overflow-hidden bg-white" style={{ minHeight: 450 }}>
       {/* Grid backdrop */}
       <div
         aria-hidden
@@ -132,7 +132,7 @@ const HIGHLIGHTS = [
 
 function ManufacturingScale() {
   return (
-    <section id="manufacturing-scale" className="border-b border-border/60 py-24">
+    <section id="manufacturing-scale" className="py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
           {/* Text */}
@@ -188,7 +188,7 @@ const ECOSYSTEM_ITEMS = [
 
 function IntegratedEcosystem() {
   return (
-    <section className="border-b border-border/60 bg-secondary/40 py-24">
+    <section className="bg-secondary/40 py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid gap-16 lg:grid-cols-2 lg:items-start">
           {/* Left */}
@@ -243,7 +243,7 @@ const RELIABILITY_ITEMS = [
 
 function ReliabilityEngineering() {
   return (
-    <section className="border-b border-border/60 py-24">
+    <section className="py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
           {/* Left */}
@@ -297,7 +297,7 @@ const QUALITY_ITEMS = [
 
 function QualityCompliance() {
   return (
-    <section className="border-b border-border/60 bg-secondary/40 py-24">
+    <section className="bg-secondary/40 py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
           {/* Left: checklist */}
@@ -347,7 +347,7 @@ function NationwidePresence() {
   const [activeLocation, setActiveLocation] = useState<string | null>(null);
 
   return (
-    <section className="border-b border-border/60 py-24" style={{ overflow: "clip" }}>
+    <section className="py-24" style={{ overflow: "clip" }}>
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid items-stretch gap-16 lg:grid-cols-2">
 
@@ -458,7 +458,7 @@ const KAYNES_CAPABILITIES = [
 
 function KaynesEcosystem() {
   return (
-    <section id="kaynes-ecosystem" className="border-b border-border/60 bg-secondary/40 py-24">
+    <section id="kaynes-ecosystem" className="bg-secondary/40 py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
           {/* Left */}

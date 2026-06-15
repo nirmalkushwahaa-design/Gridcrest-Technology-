@@ -93,10 +93,10 @@ export function CategoryChip({ children, active = false, icon: Icon, onClick, cl
     <button
       type="button"
       onClick={onClick}
-      className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition ${
+      className={`inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm font-semibold transition ${
         active
-          ? "border-accent bg-accent/10 text-accent"
-          : "border-border bg-card text-foreground/70 hover:border-accent/50 hover:text-accent"
+          ? "border-accent bg-accent text-white"
+          : "border-border bg-background text-foreground hover:bg-secondary"
       } ${className}`}
     >
       {Icon && <Icon className="h-4 w-4 shrink-0" />}

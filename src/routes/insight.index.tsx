@@ -4,7 +4,7 @@ import { CtaBanner } from "@/components/CtaBanner";
 import { PageHero } from "@/components/PageHero";
 import heroInsight from "@/assets/insight-hero.png";
 
-type Tag = "News" | "Blog" | "Highlights";
+type Tag = "News" | "Articles" | "Highlights";
 
 type InsightItem = {
   slug: string;
@@ -51,7 +51,7 @@ const INSIGHTS: InsightItem[] = [
     slug: "ai-grid-orchestration",
     date: "12 Apr 2026",
     author: "Anantya Intelligence Team",
-    tag: "Blog",
+    tag: "Articles",
     title: "From Smart Meters to AI-Orchestrated Grids: The Next Decade",
     description:
       "How machine learning, digital twins and real-time telemetry are quietly reshaping the way utilities run distribution networks — and what operators need to do now to stay ahead of the curve.",
@@ -71,7 +71,7 @@ const INSIGHTS: InsightItem[] = [
     slug: "interoperability-matters",
     date: "02 Apr 2026",
     author: "Engineering Team",
-    tag: "Blog",
+    tag: "Articles",
     title: "Why Interoperability Is the Real Smart-Meter Battle",
     description:
       "Single-vendor lock-in is the silent tax on every utility modernization program. A deep look at how open standards change the economics of large-scale AMI deployments across India.",
@@ -91,7 +91,7 @@ const INSIGHTS: InsightItem[] = [
     slug: "digital-twin-distribution",
     date: "24 Mar 2026",
     author: "Engineering Team",
-    tag: "Blog",
+    tag: "Articles",
     title: "Digital Twins for Distribution: Beyond the Buzzword",
     description:
       "A practical framework for utilities evaluating digital twin platforms — what to measure, what to ignore, and what to pilot first to ensure a return on investment within 18 months.",
@@ -111,7 +111,7 @@ const INSIGHTS: InsightItem[] = [
 
 const TAG_COLORS: Record<Tag, string> = {
   News: "bg-blue-50 text-blue-700 border border-blue-200",
-  Blog: "bg-violet-50 text-violet-700 border border-violet-200",
+  Articles: "bg-violet-50 text-violet-700 border border-violet-200",
   Highlights: "bg-amber-50 text-amber-700 border border-amber-200",
 };
 
@@ -151,14 +151,14 @@ function InsightPage() {
       <section className="border-b border-border bg-white">
         <div className="mx-auto max-w-7xl px-6 py-5">
           <div className="flex flex-wrap gap-2">
-            {(["All", "News", "Blog", "Highlights"] as const).map((tag) => (
+            {(["All", "News", "Articles", "Highlights"] as const).map((tag) => (
               <button
                 key={tag}
                 onClick={() => setActiveTag(tag)}
-                className={`rounded-full px-5 py-2 text-sm font-medium transition-all ${
+                className={`rounded-full border px-5 py-1.5 text-sm font-semibold transition-all ${
                   activeTag === tag
-                    ? "bg-foreground text-background shadow-sm"
-                    : "border border-border bg-background text-foreground hover:bg-secondary"
+                    ? "border-transparent bg-accent/10 text-accent"
+                    : "border-border bg-transparent text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {tag}

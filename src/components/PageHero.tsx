@@ -98,7 +98,6 @@ export function PageHero({
 
         {/* ── Right: illustration ── */}
         <div className="relative hidden lg:flex items-center justify-center py-10 animate-fade-in-soft">
-          <div className="absolute inset-0 -z-10 mx-auto h-72 w-72 rounded-full bg-primary/20 blur-3xl md:h-96 md:w-96 animate-float" />
           {image ? (
             <img
               src={image}

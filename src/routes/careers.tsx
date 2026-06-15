@@ -105,7 +105,7 @@ function WhyGridcrest() {
     { icon: Heart, title: "Global ambitions", body: "Made in India, designed for the world's utility networks." },
   ];
   return (
-    <section className="border-b border-border/60 py-24">
+    <section className="py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="max-w-2xl">
           <div className="text-xs font-semibold uppercase tracking-widest text-accent">
@@ -139,7 +139,7 @@ function Stories() {
     { name: "Meera · Operations", role: "Deployment lead", quote: "Walking a substation after a successful rollout is the most rewarding part of the job." },
   ];
   return (
-    <section id="culture" className="border-b border-border/60 bg-secondary/40 py-24">
+    <section id="culture" className="bg-secondary/40 py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="max-w-2xl">
           <div className="text-xs font-semibold uppercase tracking-widest text-accent">
@@ -176,7 +176,7 @@ function Beyond() {
     { title: "Sports days", area: "", grad: "from-surface-lavender to-surface-cyan" },
   ];
   return (
-    <section className="border-b border-border/60 py-24">
+    <section className="py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="max-w-2xl">
           <div className="text-xs font-semibold uppercase tracking-widest text-accent">
@@ -209,7 +209,7 @@ function Growth() {
     { icon: Rocket, title: "Build", body: "Ship products and platforms that scale to millions." },
   ];
   return (
-    <section className="border-b border-border/60 bg-secondary/40 py-24">
+    <section className="bg-secondary/40 py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="max-w-2xl">
           <div className="text-xs font-semibold uppercase tracking-widest text-accent">
@@ -246,7 +246,7 @@ function OpenRoles() {
     { title: "Product Manager — HES", dept: "Product", loc: "Bengaluru" },
   ];
   return (
-    <section id="open-roles" className="border-b border-border/60 py-24">
+    <section id="open-roles" className="py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-2xl">

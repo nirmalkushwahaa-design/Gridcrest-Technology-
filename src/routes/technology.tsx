@@ -88,7 +88,7 @@ function Pillars() {
     { icon: Layers, title: "Interoperability standards", body: "DLMS / COSEM, IEC 61968 / 61970, CIM and open APIs." },
   ];
   return (
-    <section className="border-b border-border/60 py-24">
+    <section className="py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="max-w-2xl">
           <div className="text-xs font-semibold uppercase tracking-widest text-accent">
@@ -126,7 +126,7 @@ function Architecture() {
     { icon: Cloud, label: "Cloud infrastructure", note: "Hybrid · scalable" },
   ];
   return (
-    <section id="architecture" className="border-b border-border/60 bg-secondary/40 py-24">
+    <section id="architecture" className="bg-secondary/40 py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="max-w-2xl">
           <div className="text-xs font-semibold uppercase tracking-widest text-accent">
@@ -170,7 +170,7 @@ function Architecture() {
 function Interop() {
   const items = ["DLMS / COSEM", "IEC 61968 / 61970", "CIM", "MQTT", "REST · gRPC", "OAuth 2.0 · OIDC", "Kafka", "Webhooks"];
   return (
-    <section className="border-b border-border/60 py-24">
+    <section className="py-24">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-14 px-6 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <div className="text-xs font-semibold uppercase tracking-widest text-accent">
@@ -211,7 +211,7 @@ function Security() {
     { icon: LineChart, title: "Monitoring & diagnostics", body: "Telemetry, audit trails and reliability engineering." },
   ];
   return (
-    <section className="border-b border-border/60 bg-secondary/40 py-24">
+    <section className="bg-secondary/40 py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="max-w-2xl">
           <div className="text-xs font-semibold uppercase tracking-widest text-accent">
@@ -245,7 +245,7 @@ function Intelligence() {
     "Loss & theft detection",
   ];
   return (
-    <section className="border-b border-border/60 py-24">
+    <section className="py-24">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <div className="text-xs font-semibold uppercase tracking-widest text-accent">
@@ -275,7 +275,7 @@ function Intelligence() {
 
 function CloudEdge() {
   return (
-    <section className="border-b border-border/60 bg-secondary/40 py-24">
+    <section className="bg-secondary/40 py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="max-w-2xl">
           <div className="text-xs font-semibold uppercase tracking-widest text-accent">
@@ -311,7 +311,7 @@ function Metrics() {
     { value: "24×7", label: "Operations capability" },
   ];
   return (
-    <section className="border-b border-border/60 py-24">
+    <section className="py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="max-w-2xl">
           <div className="text-xs font-semibold uppercase tracking-widest text-accent">
