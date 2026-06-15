@@ -137,7 +137,6 @@ function Index() {
 
       {/* HERO */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-surface-cyan/40 to-background" />
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 py-16 md:grid-cols-2 md:py-24">
           <div className="animate-fade-in-up">
             <p className="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-accent">
@@ -175,7 +174,6 @@ function Index() {
             </div>
           </div>
           <div className="relative hidden md:block animate-fade-in-soft">
-            <div className="absolute inset-0 -z-10 mx-auto h-72 w-72 rounded-full bg-primary/30 blur-3xl md:h-96 md:w-96 animate-float" />
             <img
               src={heroImg}
               alt="GridCrest connected smart grid ecosystem with smart meters, towers, solar, and data centers"
