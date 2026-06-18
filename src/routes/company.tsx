@@ -2,6 +2,14 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { CtaBanner } from "@/components/CtaBanner";
 import { PageHero } from "@/components/PageHero";
 import milestoneActiveImg from "@/assets/milestone-active.svg";
+import leaderRamesh from "@/assets/Ramesh Kunhikannan Executive Chairman Kaynes Technology.png";
+import leaderJairam from "@/assets/Jairam P SAMPATH Director & Chief Financial Officer.png";
+import leaderAlexander from "@/assets/Mr. Alexander Koshy Director at Kaynes Technology.png";
+import leaderUser1 from "@/assets/USER 1.png";
+import leaderUser2 from "@/assets/USER 2.png";
+import leaderUser3 from "@/assets/USER 3.png";
+import leaderUser4 from "@/assets/USER 4.png";
+import leaderUser5 from "@/assets/USER 5.png";
 import aboutHeroImg from "@/assets/about-hero.png";
 import React, { useRef } from "react";
 import {
@@ -504,19 +512,23 @@ function MissionVisionValues() {
 
 /* ─── Leadership ─────────────────────────────────────────────────────────────── */
 const TOP_LEADERS = [
-  { name: "Ramesh Iyer",   title: "Chief Executive Officer",  img: "https://i.pravatar.cc/150?img=11" },
-  { name: "Priya Nair",    title: "Chief Technology Officer", img: "https://i.pravatar.cc/150?img=47" },
-  { name: "Arjun Patel",   title: "Chief Operating Officer",  img: "https://i.pravatar.cc/150?img=15" },
-  { name: "Maya Krishnan", title: "Chief Product Officer",    img: "https://i.pravatar.cc/150?img=44" },
+  { name: "Ramesh Kunhikannan", title: "Executive Chairman, Kaynes Technology", img: leaderRamesh },
+  { name: "Jairam P Sampath",   title: "Director & Chief Financial Officer",    img: leaderJairam },
+  { name: "Alexander Koshy",    title: "Director, Kaynes Technology",           img: leaderAlexander },
+  { name: "Leader Name",        title: "Title / Designation",                   img: leaderUser1 },
+  { name: "Leader Name",        title: "Title / Designation",                   img: leaderUser2 },
+  { name: "Leader Name",        title: "Title / Designation",                   img: leaderUser3 },
+  { name: "Leader Name",        title: "Title / Designation",                   img: leaderUser4 },
+  { name: "Leader Name",        title: "Title / Designation",                   img: leaderUser5 },
 ];
 
 const KAYNES_TEAM = [
-  { name: "Suresh Menon",  title: "VP — Manufacturing",        img: "https://i.pravatar.cc/150?img=12" },
-  { name: "Anil Verma",    title: "VP — Supply Chain",         img: "https://i.pravatar.cc/150?img=13" },
-  { name: "Ritu Sharma",   title: "Head — Quality Assurance",  img: "https://i.pravatar.cc/150?img=48" },
-  { name: "Deepak Rao",    title: "Head — Engineering",        img: "https://i.pravatar.cc/150?img=14" },
-  { name: "Kavita Bose",   title: "Head — Program Delivery",   img: "https://i.pravatar.cc/150?img=49" },
-  { name: "Santosh Kumar", title: "Head — Finance & Strategy", img: "https://i.pravatar.cc/150?img=17" },
+  { name: "Jairam P Sampath",  title: "Director",                  img: leaderJairam },
+  { name: "Alexander Koshy",   title: "Director",                  img: leaderAlexander },
+  { name: "Ritu Sharma",       title: "Head — Quality Assurance",  img: "https://i.pravatar.cc/150?img=48" },
+  { name: "Deepak Rao",        title: "Head — Engineering",        img: "https://i.pravatar.cc/150?img=14" },
+  { name: "Kavita Bose",       title: "Head — Program Delivery",   img: "https://i.pravatar.cc/150?img=49" },
+  { name: "Santosh Kumar",     title: "Head — Finance & Strategy", img: "https://i.pravatar.cc/150?img=17" },
 ];
 
 const GRIDCREST_TEAM = [
@@ -530,17 +542,27 @@ const GRIDCREST_TEAM = [
 
 function MemberCard({ name, title, img }: { name: string; title: string; img: string }) {
   return (
-    <div className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition hover:shadow-md">
-      <div className="relative" style={{ background: "linear-gradient(135deg, #ddeeff 0%, #e8e4f8 100%)", minHeight: 120 }}>
-        <img
-          src={img}
-          alt={name}
-          className="absolute bottom-0 left-1/2 h-24 w-24 -translate-x-1/2 translate-y-1/2 rounded-full border-4 border-card object-cover"
-        />
-      </div>
-      <div className="px-4 pb-4 pt-14 text-center">
-        <p className="font-semibold text-foreground">{name}</p>
-        <p className="mt-0.5 text-sm font-medium" style={{ color: "var(--color-accent)" }}>{title}</p>
+    <div
+      className="flex flex-col items-center overflow-hidden"
+      style={{
+        borderRadius: "178px 178px 14px 14px",
+        background: "linear-gradient(180deg, #EBFDFF 0%, #FFF 100%)",
+        padding: "24px",
+        gap: "24px",
+      }}
+    >
+      {/* Photo */}
+      <img
+        src={img}
+        alt={name}
+        className="w-full select-none"
+        draggable={false}
+      />
+
+      {/* Text */}
+      <div className="text-center">
+        <p className="text-[20px] font-bold text-foreground leading-tight">{name}</p>
+        <p className="mt-2 text-base text-muted-foreground leading-snug">{title}</p>
       </div>
     </div>
   );
@@ -568,27 +590,10 @@ function LeadershipSection() {
           Experienced leaders across energy, manufacturing, software and digital infrastructure — shaping the next generation of intelligent utilities.
         </p>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {TOP_LEADERS.map((m) => <MemberCard key={m.name} {...m} />)}
+        <div className="mt-12 grid gap-[30px] sm:grid-cols-2 lg:grid-cols-4">
+          {TOP_LEADERS.map((m, i) => <MemberCard key={i} {...m} />)}
         </div>
 
-        <div className="mt-16">
-          <p className="mb-8 text-center text-sm font-semibold uppercase tracking-widest text-muted-foreground">Kaynes Team</p>
-          <div className="rounded-2xl border border-border px-8 py-10">
-            <div className="grid grid-cols-6 gap-6">
-              {KAYNES_TEAM.map((m) => <CircleMember key={m.name} {...m} />)}
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-10">
-          <p className="mb-8 text-center text-sm font-semibold uppercase tracking-widest text-muted-foreground">GridCrest Team</p>
-          <div className="rounded-2xl border border-border px-8 py-10">
-            <div className="grid grid-cols-6 gap-6">
-              {GRIDCREST_TEAM.map((m) => <CircleMember key={m.name} {...m} />)}
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
