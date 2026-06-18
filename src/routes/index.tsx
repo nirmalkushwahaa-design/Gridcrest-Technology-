@@ -1,10 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect, useRef } from "react";
 import { FilterChip, LabelChip, StaticChip } from "@/components/ui/Chip";
-import solSmartMeterImg from "@/assets/sol-smart-meter.png";
-import solCommunicationImg from "@/assets/sol-communication.png";
-import solIntelligenceImg from "@/assets/sol-intelligence.png";
-import solIntegratedImg from "@/assets/sol-integrated.png";
+import solSmartMeterImg from "@/assets/sol-smart-meter.webp";
+import solCommunicationImg from "@/assets/sol-communication.webp";
+import solIntelligenceImg from "@/assets/sol-intelligence.webp";
+import solIntegratedImg from "@/assets/sol-integrated.webp";
 import {
   ArrowRight,
   BrainCircuit,
@@ -21,10 +21,10 @@ import logoUGVCL from "@/assets/logo-ugvcl.svg";
 import logoCESC from "@/assets/logo-cesc.svg";
 import logoKSEB from "@/assets/logo-kseb.svg";
 import logoWBSEDCL from "@/assets/logo-wbsedcl.svg";
-import heroImg from "@/assets/hero-ecosystem.png";
-import utilitiesImg from "@/assets/utilities.jpg";
-import governmentImg from "@/assets/government.jpg";
-import manufacturingImg from "@/assets/manufacturing.jpg";
+import heroImg from "@/assets/hero-ecosystem.webp";
+import utilitiesImg from "@/assets/utilities.webp";
+import governmentImg from "@/assets/government.webp";
+import manufacturingImg from "@/assets/manufacturing.webp";
 
 
 export const Route = createFileRoute("/")({

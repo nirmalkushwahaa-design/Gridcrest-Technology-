@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import manufacturingHeroImg from "@/assets/manufacturing-hero.png";
+import manufacturingHeroImg from "@/assets/manufacturing-hero.webp";
 import { useState } from "react";
 import { CtaBanner } from "@/components/CtaBanner";
 import { EyebrowChip, FilterChip, LabelChip } from "@/components/ui/Chip";

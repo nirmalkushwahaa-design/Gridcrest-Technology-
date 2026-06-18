@@ -1,20 +1,20 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CtaBanner } from "@/components/CtaBanner";
 import { PageHero } from "@/components/PageHero";
-import heroSolutions from "@/assets/solutions-hero.png";
-import meterMe280 from "@/assets/meter-me280.png";
-import meterMt260 from "@/assets/meter-mt260.png";
-import meterMt360 from "@/assets/meter-mt360.png";
-import meterMt490 from "@/assets/meter-mt490.png";
-import anantaHes from "@/assets/anantya-hes.png";
-import anantaMdm from "@/assets/anantya-mdm.png";
-import anantaAnalytics from "@/assets/anantya-analytics.png";
-import anantaConsumer from "@/assets/anantya-consumer.png";
-import anantaSynkra from "@/assets/anantya-synkra.png";
-import anantaWfm from "@/assets/anantya-wfm.png";
-import commModules from "@/assets/sol-communication-modules.png";
-import anantaPrepayment from "@/assets/Prepayment.png";
-import anantaBcs from "@/assets/BCS.png";
+import heroSolutions from "@/assets/solutions-hero.webp";
+import meterMe280 from "@/assets/meter-me280.webp";
+import meterMt260 from "@/assets/meter-mt260.webp";
+import meterMt360 from "@/assets/meter-mt360.webp";
+import meterMt490 from "@/assets/meter-mt490.webp";
+import anantaHes from "@/assets/anantya-hes.webp";
+import anantaMdm from "@/assets/anantya-mdm.webp";
+import anantaAnalytics from "@/assets/anantya-analytics.webp";
+import anantaConsumer from "@/assets/anantya-consumer.webp";
+import anantaSynkra from "@/assets/anantya-synkra.webp";
+import anantaWfm from "@/assets/anantya-wfm.webp";
+import commModules from "@/assets/sol-communication-modules.webp";
+import anantaPrepayment from "@/assets/Prepayment.webp";
+import anantaBcs from "@/assets/BCS.webp";
 import { useState, useEffect, useRef } from "react";
 import {
   ArrowRight,

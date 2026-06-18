@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shopifi — Commerce for Everyone</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,420;0,14..32,500;0,14..32,550&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --canvas-night: #000000;
+    --canvas-night-elevated: #0a0a0a;
+    --surface-elevated-dark: #1e2c31;
+    --canvas-light: #ffffff;
+    --canvas-cream: #fbfbf5;
+    --aloe: #c1fbd4;
+    --pistachio: #d4f9e0;
+    --ink: #000000;
+    --on-primary: #ffffff;
+    --hairline-light: #e4e4e7;
+    --hairline-dark: #1e2c31;
+    --shade-30: #d4d4d8;
+    --shade-40: #a1a1aa;
+    --shade-50: #71717a;
+    --shade-60: #52525b;
+    --shade-70: #3f3f46;
+    --link-cool-1: #9dabad;
+    --link-cool-2: #9797a2;
+    --link-cool-3: #bdbdca;
+    --pill: 9999px;
+    --rounded-xs: 4px;
+    --rounded-sm: 5px;
+    --rounded-md: 8px;
+    --rounded-lg: 12px;
+    --rounded-xl: 20px;
+    --sp-xxs: 2px;
+    --sp-xs: 4px;
+    --sp-sm: 8px;
+    --sp-md: 12px;
+    --sp-lg: 16px;
+    --sp-xl: 24px;
+    --sp-xxl: 32px;
+    --sp-huge: 64px;
+    --display-xxl: 96px;
+    --display-xl: 70px;
+    --display-lg: 55px;
+    --display-md: 48px;
+  }
+
+  html {
+    font-feature-settings: "ss03";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 16px;
+    font-weight: 420;
+    line-height: 1.5;
+    font-feature-settings: "ss03";
+    background: var(--canvas-night);
+    color: var(--on-primary);
+    overflow-x: hidden;
+  }
+
+  .display { font-family: 'Helvetica Now Display', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-feature-settings: "ss03"; }
+
+  a { text-decoration: none; color: inherit; }
+  img { display: block; max-width: 100%; }
+
+  .btn-outline-dark {
+    display: inline-flex; align-items: center; gap: var(--sp-sm);
+    background: transparent; border: 2px solid var(--on-primary);
+    color: var(--on-primary); border-radius: var(--pill);
+    padding: var(--sp-md) var(--sp-xl); font-size: 16px; font-weight: 420;
+    font-family: 'Inter', sans-serif; font-feature-settings: "ss03";
+    cursor: pointer; transition: background 0.15s; white-space: nowrap;
+  }
+  .btn-outline-dark:hover { background: rgba(255,255,255,0.08); }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: var(--sp-sm);
+    background: var(--ink); border: 2px solid var(--ink);
+    color: var(--on-primary); border-radius: var(--pill);
+    padding: var(--sp-md) var(--sp-xl); font-size: 16px; font-weight: 420;
+    font-family: 'Inter', sans-serif; font-feature-settings: "ss03";
+    cursor: pointer; transition: background 0.15s; white-space: nowrap;
+  }
+  .btn-primary:hover { background: var(--shade-70); border-color: var(--shade-70); }
+
+  .btn-outline-light {
+    display: inline-flex; align-items: center; gap: var(--sp-sm);
+    background: var(--canvas-light); border: 1px solid var(--ink);
+    color: var(--ink); border-radius: var(--pill);
+    padding: var(--sp-md) var(--sp-xl); font-size: 16px; font-weight: 420;
+    font-family: 'Inter', sans-serif; font-feature-settings: "ss03";
+    cursor: pointer; transition: background 0.15s; white-space: nowrap;
+  }
+  .btn-outline-light:hover { background: var(--shade-30); }
+
+  .btn-aloe {
+    display: inline-flex; align-items: center; gap: var(--sp-sm);
+    background: var(--aloe); border: 2px solid var(--aloe);
+    color: var(--ink); border-radius: var(--pill);
+    padding: var(--sp-md) var(--sp-xl); font-size: 16px; font-weight: 420;
+    font-family: 'Inter', sans-serif; font-feature-settings: "ss03";
+    cursor: pointer; transition: opacity 0.15s; white-space: nowrap;
+  }
+  .btn-aloe:hover { opacity: 0.88; }
+
+  .pill-tag-mint {
+    display: inline-block; background: var(--aloe); color: var(--ink);
+    font-size: 12px; font-weight: 400; letter-spacing: 0.72px;
+    text-transform: uppercase; border-radius: var(--pill);
+    padding: var(--sp-xs) var(--sp-md);
+    font-family: 'Inter', sans-serif; font-feature-settings: "ss03";
+  }
+
+  .pill-tag-shade {
+    display: inline-block; background: var(--shade-30); color: var(--ink);
+    font-size: 12px; font-weight: 400; letter-spacing: 0.72px;
+    text-transform: uppercase; border-radius: var(--pill);
+    padding: var(--sp-xs) var(--sp-md);
+    font-family: 'Inter', sans-serif; font-feature-settings: "ss03";
+  }
+
+  /* ─── NAV ─── */
+  .nav-dark {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(0,0,0,0.92); backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: var(--sp-lg) var(--sp-xxl);
+    border-bottom: 1px solid var(--hairline-dark);
+  }
+  .nav-logo {
+    font-family: 'Helvetica Now Display', Helvetica, Arial, sans-serif;
+    font-size: 22px; font-weight: 500; font-feature-settings: "ss03";
+    color: var(--on-primary); letter-spacing: -0.2px;
+  }
+  .nav-links { display: flex; align-items: center; gap: var(--sp-xxl); }
+  .nav-links a {
+    font-size: 15px; font-weight: 420; color: var(--shade-40);
+    transition: color 0.12s;
+  }
+  .nav-links a:hover { color: var(--on-primary); }
+  .nav-actions { display: flex; align-items: center; gap: var(--sp-md); }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: var(--canvas-night);
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: flex-end; position: relative; overflow: hidden;
+  }
+  .hero-photo {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #0d1a1e 0%, #071014 30%, #000 60%);
+    overflow: hidden;
+  }
+  .hero-photo::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.7) 100%);
+  }
+  .hero-photo-inner {
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(ellipse 900px 700px at 70% 40%, rgba(30,44,49,0.6) 0%, transparent 70%),
+      radial-gradient(ellipse 600px 400px at 20% 60%, rgba(193,251,212,0.04) 0%, transparent 60%);
+  }
+  .hero-photo .merchant-scene {
+    position: absolute; right: -40px; top: 0; bottom: 0; width: 60%;
+    background:
+      radial-gradient(ellipse 500px 600px at 60% 50%, rgba(40,60,50,0.5) 0%, transparent 70%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-photo .merchant-scene svg { opacity: 0.18; width: 80%; max-width: 700px; }
+
+  .hero-content {
+    position: relative; z-index: 10;
+    max-width: 1440px; margin: 0 auto; width: 100%;
+    padding: 0 var(--sp-xxl) 128px;
+  }
+  .hero-eyebrow {
+    font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 400;
+    letter-spacing: 0.72px; text-transform: uppercase;
+    color: var(--shade-40); margin-bottom: var(--sp-xl);
+  }
+  .hero-headline {
+    font-family: 'Helvetica Now Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: var(--display-xxl); font-weight: 330; line-height: 1.0;
+    letter-spacing: 2.4px; color: var(--on-primary);
+    font-feature-settings: "ss03";
+    max-width: 880px; margin-bottom: var(--sp-xxl);
+  }
+  .hero-sub {
+    font-size: 18px; font-weight: 550; line-height: 1.56;
+    color: var(--shade-40); max-width: 480px; margin-bottom: 48px;
+  }
+  .hero-cta { display: flex; align-items: center; gap: var(--sp-lg); }
+
+  /* ─── TRUST STRIP ─── */
+  .trust-strip {
+    background: var(--canvas-night); border-top: 1px solid var(--hairline-dark);
+    padding: var(--sp-xxl) var(--sp-xxl);
+  }
+  .trust-strip-inner {
+    max-width: 1440px; margin: 0 auto;
+    display: flex; align-items: center; gap: var(--sp-xxl); flex-wrap: wrap;
+  }
+  .trust-label {
+    font-size: 13px; font-weight: 500; color: var(--shade-50);
+    letter-spacing: -0.13px; white-space: nowrap;
+  }
+  .trust-logos {
+    display: flex; align-items: center; gap: 48px; flex-wrap: wrap;
+  }
+  .trust-logo {
+    font-family: 'Helvetica Now Display', Helvetica, Arial, sans-serif;
+    font-size: 15px; font-weight: 500; color: var(--shade-50);
+    letter-spacing: 0.3px; font-feature-settings: "ss03";
+    opacity: 0.55; transition: opacity 0.15s;
+  }
+  .trust-logo:hover { opacity: 1; }
+
+  /* ─── FEATURE SECTION (DARK) ─── */
+  .section-dark {
+    background: var(--canvas-night);
+    padding: 128px var(--sp-xxl);
+  }
+  .section-inner { max-width: 1440px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 12px; font-weight: 400; letter-spacing: 0.72px;
+    text-transform: uppercase; color: var(--shade-50);
+    margin-bottom: var(--sp-xl);
+  }
+  .section-headline-dark {
+    font-family: 'Helvetica Now Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: var(--display-xl); font-weight: 330; line-height: 1.0;
+    color: var(--on-primary); font-feature-settings: "ss03";
+    max-width: 700px; margin-bottom: 80px;
+  }
+
+  .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-lg); }
+
+  .card-cinematic {
+    background: var(--canvas-night-elevated);
+    border-radius: var(--rounded-lg); padding: var(--sp-xxl);
+    box-shadow: 0 1px 2px rgba(255,255,255,0.05), inset 0 1px 0 rgba(255,255,255,0.04);
+    display: flex; flex-direction: column; gap: var(--sp-xl);
+    min-height: 280px;
+  }
+  .card-cinematic.tall { min-height: 360px; }
+  .card-cinematic-icon {
+    width: 44px; height: 44px; border-radius: var(--rounded-md);
+    background: var(--surface-elevated-dark);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .card-cinematic-icon svg { width: 22px; height: 22px; color: var(--shade-40); }
+  .card-cinematic-title {
+    font-size: 28px; font-weight: 500; line-height: 1.28;
+    letter-spacing: 0.42px; color: var(--on-primary);
+    font-family: 'Inter', sans-serif; font-feature-settings: "ss03";
+  }
+  .card-cinematic-body {
+    font-size: 16px; font-weight: 420; line-height: 1.5;
+    color: var(--shade-40);
+  }
+  .card-cinematic-link {
+    font-size: 14px; font-weight: 500; color: var(--shade-40);
+    letter-spacing: 0.28px; margin-top: auto;
+    display: flex; align-items: center; gap: var(--sp-xs);
+    transition: color 0.12s;
+  }
+  .card-cinematic-link:hover { color: var(--on-primary); }
+  .card-cinematic-photo {
+    flex: 1; border-radius: var(--rounded-md);
+    background: linear-gradient(135deg, var(--surface-elevated-dark) 0%, #0d1a1a 100%);
+    min-height: 140px; overflow: hidden; display: flex;
+    align-items: center; justify-content: center;
+  }
+  .card-cinematic-photo svg { opacity: 0.2; }
+
+  /* ─── PISTACHIO BAND ─── */
+  .pistachio-band {
+    background: var(--canvas-cream);
+    padding: 96px var(--sp-xxl);
+  }
+  .pistachio-card {
+    background: var(--pistachio); border-radius: var(--rounded-lg);
+    padding: 72px var(--sp-xxl); max-width: 1440px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; gap: 64px;
+    flex-wrap: wrap;
+  }
+  .pistachio-text { max-width: 540px; }
+  .pistachio-headline {
+    font-family: 'Helvetica Now Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: var(--display-md); font-weight: 330; line-height: 1.14;
+    color: var(--ink); font-feature-settings: "ss03";
+    margin-top: var(--sp-lg); margin-bottom: var(--sp-xl);
+  }
+  .pistachio-body { font-size: 18px; font-weight: 550; line-height: 1.56; color: var(--shade-60); }
+  .pistachio-metrics {
+    display: flex; flex-direction: column; gap: var(--sp-xxl);
+    flex-shrink: 0;
+  }
+  .pistachio-metric {}
+  .pistachio-metric-number {
+    font-family: 'Helvetica Now Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: var(--display-lg); font-weight: 330; line-height: 1.0;
+    color: var(--ink); font-feature-settings: "ss03";
+  }
+  .pistachio-metric-label {
+    font-size: 14px; font-weight: 500; color: var(--shade-60);
+    letter-spacing: 0.28px; margin-top: var(--sp-xs);
+  }
+
+  /* ─── PRICING ─── */
+  .section-light {
+    background: var(--canvas-cream);
+    padding: 96px var(--sp-xxl);
+  }
+  .pricing-header { text-align: center; max-width: 1440px; margin: 0 auto 64px; }
+  .pricing-headline {
+    font-family: 'Helvetica Now Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: var(--display-lg); font-weight: 330; line-height: 1.16;
+    color: var(--ink); font-feature-settings: "ss03";
+    margin-bottom: var(--sp-lg);
+  }
+  .pricing-sub { font-size: 18px; font-weight: 550; line-height: 1.56; color: var(--shade-50); }
+
+  .pricing-grid {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-lg);
+    align-items: start;
+  }
+  .card-pricing {
+    background: var(--canvas-light); border-radius: var(--rounded-lg);
+    border: 1px solid var(--hairline-light); padding: var(--sp-xxl);
+    display: flex; flex-direction: column; gap: var(--sp-xl);
+    box-shadow: 0 8px 8px rgba(0,0,0,0.1), 0 4px 4px rgba(0,0,0,0.1),
+                0 2px 2px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.1);
+  }
+  .card-pricing-featured {
+    background: var(--aloe); border-radius: var(--rounded-lg);
+    border: 1px solid transparent; padding: var(--sp-xxl);
+    display: flex; flex-direction: column; gap: var(--sp-xl);
+    box-shadow: 0 8px 8px rgba(0,0,0,0.1), 0 4px 4px rgba(0,0,0,0.1),
+                0 2px 2px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.1);
+    transform: translateY(-8px);
+  }
+  .pricing-tier-name {
+    font-size: 28px; font-weight: 500; line-height: 1.28;
+    letter-spacing: 0.42px; color: var(--ink);
+    font-family: 'Inter', sans-serif;
+  }
+  .pricing-price {
+    font-family: 'Helvetica Now Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: var(--display-md); font-weight: 330; line-height: 1.14;
+    color: var(--ink); font-feature-settings: "ss03";
+  }
+  .pricing-price sup { font-size: 24px; vertical-align: top; margin-top: 12px; display: inline-block; }
+  .pricing-price span { font-size: 16px; font-weight: 420; color: var(--shade-50); margin-left: 4px; }
+  .pricing-desc { font-size: 16px; font-weight: 420; line-height: 1.5; color: var(--shade-50); }
+  .pricing-divider { height: 1px; background: var(--hairline-light); }
+  .pricing-divider-aloe { height: 1px; background: rgba(0,0,0,0.1); }
+  .pricing-features { display: flex; flex-direction: column; gap: var(--sp-md); list-style: none; }
+  .pricing-features li {
+    display: flex; align-items: flex-start; gap: var(--sp-md);
+    font-size: 16px; font-weight: 420; line-height: 1.5; color: var(--shade-60);
+  }
+  .pricing-features li::before {
+    content: ''; flex-shrink: 0;
+    width: 18px; height: 18px; margin-top: 2px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2352525b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+    background-size: contain; background-repeat: no-repeat;
+  }
+  .card-pricing-featured .pricing-features li { color: var(--shade-70); }
+  .card-pricing-featured .pricing-features li::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233f3f46' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+  }
+  .pricing-cta { margin-top: auto; }
+  .pricing-footnote {
+    text-align: center; font-size: 13px; font-weight: 500;
+    color: var(--shade-40); letter-spacing: -0.13px; margin-top: var(--sp-xxl);
+    max-width: 1100px; margin-left: auto; margin-right: auto;
+  }
+
+  /* ─── TESTIMONIAL ─── */
+  .section-testimonial {
+    background: var(--canvas-night);
+    padding: 128px var(--sp-xxl);
+  }
+  .testimonial-inner {
+    max-width: 1440px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 96px; align-items: center;
+  }
+  .testimonial-photo-frame {
+    background: var(--canvas-night);
+    border-radius: var(--rounded-xl); overflow: hidden;
+    aspect-ratio: 4/5; max-width: 460px;
+    background: linear-gradient(135deg, #0d1a1e 0%, #0a1416 100%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .testimonial-photo-frame .photo-placeholder {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 300px 400px at 50% 60%, rgba(30,44,49,0.8) 0%, transparent 70%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .testimonial-photo-frame svg { opacity: 0.15; }
+  .testimonial-text {}
+  .testimonial-quote {
+    font-family: 'Helvetica Now Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: var(--display-md); font-weight: 330; line-height: 1.14;
+    color: var(--on-primary); font-feature-settings: "ss03";
+    margin-bottom: var(--sp-xxl);
+  }
+  .testimonial-author-name {
+    font-size: 16px; font-weight: 550; color: var(--on-primary); margin-bottom: var(--sp-xs);
+  }
+  .testimonial-author-role {
+    font-size: 14px; font-weight: 500; color: var(--shade-40); letter-spacing: 0.28px;
+  }
+
+  /* ─── FOOTER ─── */
+  .footer-dark {
+    background: var(--canvas-night);
+    border-top: 1px solid var(--hairline-dark);
+    padding: var(--sp-huge) var(--sp-xxl) var(--sp-xxl);
+  }
+  .footer-inner { max-width: 1440px; margin: 0 auto; }
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    gap: var(--sp-xxl); margin-bottom: 64px;
+  }
+  .footer-brand {}
+  .footer-brand-name {
+    font-family: 'Helvetica Now Display', Helvetica, Arial, sans-serif;
+    font-size: 22px; font-weight: 500; color: var(--on-primary);
+    margin-bottom: var(--sp-lg); font-feature-settings: "ss03";
+  }
+  .footer-brand-desc {
+    font-size: 14px; font-weight: 500; line-height: 1.49;
+    color: var(--shade-50); max-width: 280px; letter-spacing: 0.28px;
+  }
+  .footer-col-title {
+    font-size: 13px; font-weight: 500; color: var(--on-primary);
+    letter-spacing: -0.13px; margin-bottom: var(--sp-lg);
+  }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: var(--sp-md); }
+  .footer-links a {
+    font-size: 13px; font-weight: 500; color: var(--link-cool-2);
+    letter-spacing: -0.13px; transition: color 0.12s;
+    text-decoration: underline; text-underline-offset: 2px;
+    text-decoration-color: transparent;
+  }
+  .footer-links a:hover { color: var(--on-primary); text-decoration-color: var(--shade-40); }
+  .footer-divider { height: 1px; background: var(--hairline-dark); margin-bottom: var(--sp-xl); }
+  .footer-bottom {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: var(--sp-lg);
+  }
+  .footer-legal {
+    font-size: 13px; font-weight: 500; color: var(--shade-50); letter-spacing: -0.13px;
+  }
+  .footer-legal-links {
+    display: flex; align-items: center; gap: var(--sp-xl);
+    list-style: none;
+  }
+  .footer-legal-links a {
+    font-size: 13px; font-weight: 500; color: var(--link-cool-1);
+    letter-spacing: -0.13px; text-decoration: underline;
+    text-underline-offset: 2px; transition: color 0.12s;
+  }
+  .footer-legal-links a:hover { color: var(--on-primary); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1023px) {
+    .feature-grid { grid-template-columns: repeat(2, 1fr); }
+    .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+    .testimonial-inner { grid-template-columns: 1fr; gap: var(--sp-xxl); }
+    .testimonial-photo-frame { max-width: 100%; aspect-ratio: 16/9; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: var(--sp-xxl); }
+    .pistachio-card { flex-direction: column; }
+    .pistachio-metrics { flex-direction: row; flex-wrap: wrap; }
+  }
+
+  @media (max-width: 767px) {
+    :root {
+      --display-xxl: 56px;
+      --display-xl: 44px;
+      --display-lg: 40px;
+      --display-md: 36px;
+    }
+    .nav-links { display: none; }
+    .hero-content { padding: 0 var(--sp-xl) 80px; }
+    .feature-grid { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .card-pricing-featured { transform: none; }
+    .section-dark, .section-light, .pistachio-band, .section-testimonial { padding: 64px var(--sp-xl); }
+    .hero-headline { letter-spacing: 0.8px; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav class="nav-dark" aria-label="Primary navigation">
+  <a href="#" class="nav-logo">Shopifi</a>
+  <div class="nav-links" role="list">
+    <a href="#" role="listitem">Products</a>
+    <a href="#" role="listitem">Pricing</a>
+    <a href="#" role="listitem">Developers</a>
+    <a href="#" role="listitem">Blog</a>
+    <a href="#" role="listitem">Enterprise</a>
+  </div>
+  <div class="nav-actions">
+    <a href="#" class="btn-outline-dark" style="font-size:15px; padding:10px 20px;">Log in</a>
+    <a href="#" class="btn-outline-dark" style="font-size:15px; padding:10px 20px; background:rgba(255,255,255,0.06);">Start free trial</a>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero" aria-labelledby="hero-headline">
+  <div class="hero-photo">
+    <div class="hero-photo-inner"></div>
+    <div class="merchant-scene">
+      <!-- Decorative merchant storefront illustration -->
+      <svg viewBox="0 0 600 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="50" y="120" width="500" height="320" rx="20" fill="white" opacity="0.6"/>
+        <rect x="90" y="160" width="180" height="200" rx="8" fill="white" opacity="0.5"/>
+        <rect x="310" y="160" width="200" height="90" rx="8" fill="white" opacity="0.5"/>
+        <rect x="310" y="270" width="200" height="90" rx="8" fill="white" opacity="0.5"/>
+        <rect x="100" y="420" width="400" height="4" rx="2" fill="white" opacity="0.3"/>
+        <circle cx="130" cy="340" r="30" fill="white" opacity="0.3"/>
+        <rect x="170" y="250" width="80" height="12" rx="4" fill="white" opacity="0.4"/>
+        <rect x="170" y="272" width="55" height="8" rx="3" fill="white" opacity="0.25"/>
+        <rect x="330" y="182" width="120" height="8" rx="3" fill="white" opacity="0.4"/>
+        <rect x="330" y="200" width="80" height="8" rx="3" fill="white" opacity="0.25"/>
+        <rect x="330" y="292" width="100" height="8" rx="3" fill="white" opacity="0.4"/>
+        <rect x="330" y="310" width="70" height="8" rx="3" fill="white" opacity="0.25"/>
+        <rect x="160" y="370" width="100" height="36" rx="18" fill="white" opacity="0.35"/>
+      </svg>
+    </div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Commerce platform</p>
+    <h1 class="hero-headline display" id="hero-headline">
+      Built for<br>merchants who<br>mean business.
+    </h1>
+    <p class="hero-sub">
+      Everything you need to sell anywhere, scale faster, and keep more of what you earn.
+    </p>
+    <div class="hero-cta">
+      <a href="#" class="btn-outline-dark">Start free trial</a>
+      <a href="#" style="font-size:15px; color:var(--shade-40); display:flex; align-items:center; gap:6px; transition:color 0.12s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='var(--shade-40)'">
+        Watch the story
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TRUST STRIP ─── -->
+<div class="trust-strip">
+  <div class="trust-strip-inner">
+    <span class="trust-label">Trusted by 2 million+ merchants</span>
+    <div class="trust-logos" aria-label="Trusted brands">
+      <span class="trust-logo">Allbirds</span>
+      <span class="trust-logo">Gymshark</span>
+      <span class="trust-logo">Heinz</span>
+      <span class="trust-logo">Kylie Cosmetics</span>
+      <span class="trust-logo">Bombas</span>
+      <span class="trust-logo">Magnolia</span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FEATURES (DARK CINEMATIC) ─── -->
+<section class="section-dark" aria-labelledby="features-headline">
+  <div class="section-inner">
+    <p class="section-label">Platform</p>
+    <h2 class="section-headline-dark display" id="features-headline">
+      Every tool to run<br>your store, unified.
+    </h2>
+    <div class="feature-grid">
+      <!-- Card 1 -->
+      <div class="card-cinematic tall">
+        <div class="card-cinematic-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div class="card-cinematic-photo">
+          <svg viewBox="0 0 300 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width:80%">
+            <rect x="20" y="20" width="260" height="120" rx="8" fill="white" opacity="0.08"/>
+            <rect x="34" y="34" width="100" height="60" rx="4" fill="white" opacity="0.12"/>
+            <rect x="148" y="34" width="118" height="28" rx="4" fill="white" opacity="0.1"/>
+            <rect x="148" y="70" width="80" height="12" rx="3" fill="white" opacity="0.08"/>
+            <rect x="34" y="106" width="232" height="20" rx="10" fill="white" opacity="0.08"/>
+          </svg>
+        </div>
+        <h3 class="card-cinematic-title">Online store builder</h3>
+        <p class="card-cinematic-body">Drag, drop, launch. No code required. Themes built for conversion, customizable to the pixel.</p>
+        <a href="#" class="card-cinematic-link">
+          Build your store
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <!-- Card 2 -->
+      <div class="card-cinematic tall">
+        <div class="card-cinematic-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="card-cinematic-photo">
+          <svg viewBox="0 0 300 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width:80%">
+            <circle cx="150" cy="80" r="50" fill="white" opacity="0.06"/>
+            <circle cx="150" cy="80" r="35" fill="white" opacity="0.08"/>
+            <circle cx="150" cy="80" r="20" fill="white" opacity="0.1"/>
+            <path d="M100 80 Q120 50 150 45 Q180 50 200 80 Q180 110 150 115 Q120 110 100 80Z" fill="none" stroke="white" stroke-opacity="0.15"/>
+            <circle cx="100" cy="80" r="4" fill="white" opacity="0.3"/>
+            <circle cx="200" cy="80" r="4" fill="white" opacity="0.3"/>
+            <circle cx="150" cy="45" r="4" fill="white" opacity="0.3"/>
+          </svg>
+        </div>
+        <h3 class="card-cinematic-title">Sell everywhere</h3>
+        <p class="card-cinematic-body">Online, in-store, social, wholesale — one inventory, every channel, real-time sync.</p>
+        <a href="#" class="card-cinematic-link">
+          Explore channels
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <!-- Card 3 -->
+      <div class="card-cinematic tall">
+        <div class="card-cinematic-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg>
+        </div>
+        <div class="card-cinematic-photo">
+          <svg viewBox="0 0 300 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width:80%">
+            <rect x="60" y="40" width="180" height="80" rx="12" fill="white" opacity="0.08"/>
+            <rect x="75" y="55" width="80" height="8" rx="3" fill="white" opacity="0.15"/>
+            <rect x="75" y="71" width="50" height="6" rx="2" fill="white" opacity="0.1"/>
+            <rect x="75" y="95" width="60" height="16" rx="8" fill="white" opacity="0.12"/>
+            <rect x="185" y="55" width="40" height="12" rx="4" fill="white" opacity="0.12"/>
+            <rect x="185" y="75" width="30" height="8" rx="3" fill="white" opacity="0.08"/>
+          </svg>
+        </div>
+        <h3 class="card-cinematic-title">Payments built in</h3>
+        <p class="card-cinematic-body">Accept any card, pay later, crypto. Lowest rates for Shopifi merchants, zero surprise fees.</p>
+        <a href="#" class="card-cinematic-link">
+          See payments
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PISTACHIO BAND ─── -->
+<section class="pistachio-band" aria-labelledby="pistachio-headline">
+  <div class="pistachio-card">
+    <div class="pistachio-text">
+      <span class="pill-tag-shade">By the numbers</span>
+      <h2 class="pistachio-headline display" id="pistachio-headline">
+        The world's best<br>merchants grow<br>on Shopifi.
+      </h2>
+      <p class="pistachio-body">
+        From first sale to global scale — our infrastructure handles the volume so you can focus on the product.
+      </p>
+    </div>
+    <div class="pistachio-metrics" role="list">
+      <div class="pistachio-metric" role="listitem">
+        <div class="pistachio-metric-number display">$900B+</div>
+        <div class="pistachio-metric-label">Total merchant GMV</div>
+      </div>
+      <div class="pistachio-metric" role="listitem">
+        <div class="pistachio-metric-number display">2M+</div>
+        <div class="pistachio-metric-label">Active stores</div>
+      </div>
+      <div class="pistachio-metric" role="listitem">
+        <div class="pistachio-metric-number display">175</div>
+        <div class="pistachio-metric-label">Countries supported</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PRICING ─── -->
+<section class="section-light" id="pricing" aria-labelledby="pricing-headline">
+  <div class="pricing-header">
+    <span class="pill-tag-mint" style="margin-bottom:var(--sp-xl); display:inline-block;">Pricing</span>
+    <h2 class="pricing-headline display" id="pricing-headline">
+      Simple, transparent<br>pricing.
+    </h2>
+    <p class="pricing-sub">Start free. Upgrade as you grow. No hidden fees.</p>
+  </div>
+  <div class="pricing-grid">
+    <!-- Starter -->
+    <div class="card-pricing">
+      <div>
+        <div class="pricing-tier-name">Starter</div>
+        <div style="margin-top:var(--sp-md)">
+          <div class="pricing-price display">
+            <sup>$</sup>29<span>/ month</span>
+          </div>
+        </div>
+        <p class="pricing-desc" style="margin-top:var(--sp-md)">For new merchants finding their footing.</p>
+      </div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li>Online store with 2 staff accounts</li>
+        <li>Up to 1,000 products</li>
+        <li>Shopifi Payments at 2.9% + 30¢</li>
+        <li>24/7 email and chat support</li>
+        <li>Basic analytics dashboard</li>
+      </ul>
+      <div class="pricing-cta">
+        <a href="#" class="btn-outline-light" style="width:100%; justify-content:center;">Get started</a>
+      </div>
+    </div>
+
+    <!-- Grow (Featured) -->
+    <div class="card-pricing-featured">
+      <div>
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:var(--sp-md)">
+          <div class="pricing-tier-name">Grow</div>
+          <span class="pill-tag-shade" style="font-size:11px; padding:3px 10px;">Most popular</span>
+        </div>
+        <div style="margin-top:var(--sp-md)">
+          <div class="pricing-price display">
+            <sup>$</sup>79<span>/ month</span>
+          </div>
+        </div>
+        <p class="pricing-desc" style="margin-top:var(--sp-md);">For growing brands ready to scale.</p>
+      </div>
+      <div class="pricing-divider-aloe"></div>
+      <ul class="pricing-features">
+        <li>Everything in Starter</li>
+        <li>Unlimited products &amp; 5 staff accounts</li>
+        <li>Shopifi Payments at 2.6% + 30¢</li>
+        <li>Professional reports &amp; attribution</li>
+        <li>Gift cards and discount automation</li>
+        <li>International selling in 3 markets</li>
+      </ul>
+      <div class="pricing-cta">
+        <a href="#" class="btn-aloe" style="width:100%; justify-content:center;">Start free trial</a>
+      </div>
+    </div>
+
+    <!-- Scale -->
+    <div class="card-pricing">
+      <div>
+        <div class="pricing-tier-name">Scale</div>
+        <div style="margin-top:var(--sp-md)">
+          <div class="pricing-price display">
+            <sup>$</sup>299<span>/ month</span>
+          </div>
+        </div>
+        <p class="pricing-desc" style="margin-top:var(--sp-md);">For high-volume merchants and teams.</p>
+      </div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li>Everything in Grow</li>
+        <li>15 staff accounts</li>
+        <li>Shopifi Payments at 2.4% + 30¢</li>
+        <li>Advanced reporting &amp; custom analytics</li>
+        <li>Unlimited international markets</li>
+        <li>Dedicated account manager</li>
+        <li>Checkout extensibility &amp; custom apps</li>
+      </ul>
+      <div class="pricing-cta">
+        <a href="#" class="btn-outline-light" style="width:100%; justify-content:center;">Get started</a>
+      </div>
+    </div>
+  </div>
+  <p class="pricing-footnote">All plans include a 3-day free trial. No credit card required. Cancel anytime. Transaction fees apply only when not using Shopifi Payments.</p>
+</section>
+
+<!-- ─── TESTIMONIAL (DARK) ─── -->
+<section class="section-testimonial" aria-labelledby="testimonial-quote">
+  <div class="testimonial-inner section-inner">
+    <div class="testimonial-photo-frame" role="img" aria-label="Merchant portrait">
+      <div class="photo-placeholder">
+        <svg viewBox="0 0 300 400" fill="none" xmlns="http://www.w3.org/2000/svg" width="200" aria-hidden="true">
+          <circle cx="150" cy="140" r="70" fill="white" opacity="0.5"/>
+          <path d="M30 380 C30 280 270 280 270 380" fill="white" opacity="0.4"/>
+        </svg>
+      </div>
+    </div>
+    <div class="testimonial-text">
+      <blockquote>
+        <p class="testimonial-quote display" id="testimonial-quote">
+          "Shopifi gave us the infrastructure of a billion-dollar brand before we were anywhere close to being one."
+        </p>
+        <footer>
+          <p class="testimonial-author-name">Priya Mehta</p>
+          <p class="testimonial-author-role">Co-founder, Luminary Goods — 0 to $12M in two years</p>
+        </footer>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer class="footer-dark" aria-label="Site footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-brand-name">Shopifi</div>
+        <p class="footer-brand-desc">The global commerce platform. Sell anywhere, grow everywhere.</p>
+      </div>
+      <div>
+        <p class="footer-col-title">Platform</p>
+        <ul class="footer-links">
+          <li><a href="#">Online store</a></li>
+          <li><a href="#">Point of sale</a></li>
+          <li><a href="#">Channels</a></li>
+          <li><a href="#">Payments</a></li>
+          <li><a href="#">Shipping</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Merchants</p>
+        <ul class="footer-links">
+          <li><a href="#">Starter</a></li>
+          <li><a href="#">Grow</a></li>
+          <li><a href="#">Scale</a></li>
+          <li><a href="#">Enterprise</a></li>
+          <li><a href="#">Compare plans</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Developers</p>
+        <ul class="footer-links">
+          <li><a href="#">API reference</a></li>
+          <li><a href="#">App store</a></li>
+          <li><a href="#">Theme kit</a></li>
+          <li><a href="#">Partner program</a></li>
+          <li><a href="#">Changelog</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Company</p>
+        <ul class="footer-links">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <p class="footer-legal">&copy; 2026 Shopifi Inc. All rights reserved.</p>
+      <ul class="footer-legal-links">
+        <li><a href="#">Privacy policy</a></li>
+        <li><a href="#">Terms of service</a></li>
+        <li><a href="#">Cookie settings</a></li>
+        <li><a href="#">Accessibility</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Devlok Chronicles — Indian Gods RPG</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+  :root {
+    --gold: #f0c060;
+    --gold2: #d4a017;
+    --saffron: #ff6b35;
+    --deep: #0a0510;
+    --panel: #12091e;
+    --border: #3a2060;
+    --text: #e8d5b0;
+    --muted: #8878aa;
+    --hp-color: #e74c3c;
+    --mp-color: #3498db;
+    --xp-color: #2ecc71;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--deep);
+    color: var(--text);
+    font-family: 'Crimson Text', serif;
+    font-size: 16px;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  /* ── Stars background ── */
+  #stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+  /* ── Screens ── */
+  .screen { position: fixed; inset: 0; z-index: 10; display: none; flex-direction: column; align-items: center; justify-content: center; }
+  .screen.active { display: flex; }
+
+  /* ══════════════ TITLE SCREEN ══════════════ */
+  #title-screen { background: radial-gradient(ellipse at 50% 40%, #1a0830 0%, #050108 70%); }
+  .title-logo {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: floatTitle 4s ease-in-out infinite;
+  }
+  @keyframes floatTitle { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+  .title-logo h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, #ffe066 0%, #ff8c00 50%, #ff3d00 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 4px;
+    text-shadow: none;
+    line-height: 1.1;
+  }
+  .title-logo .subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    color: var(--muted);
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+  .title-logo .om {
+    font-size: 5rem;
+    display: block;
+    margin-bottom: 16px;
+    color: var(--gold);
+    animation: omPulse 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px #f0c06088);
+  }
+  @keyframes omPulse { 0%,100%{opacity:0.7;transform:scale(1)} 50%{opacity:1;transform:scale(1.08)} }
+
+  .btn {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    padding: 14px 40px;
+    border: 2px solid var(--gold2);
+    background: linear-gradient(135deg, #1a0a2e, #2d1555);
+    color: var(--gold);
+    letter-spacing: 3px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+    clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+  }
+  .btn::before { content: ''; position:absolute; inset:0; background:linear-gradient(135deg,#f0c06020,transparent); opacity:0; transition:opacity 0.25s; }
+  .btn:hover { background: linear-gradient(135deg, #2d1555, #4a2080); border-color: var(--gold); color: #fff; box-shadow: 0 0 20px #f0c06055; }
+  .btn:hover::before { opacity: 1; }
+  .btn:active { transform: scale(0.97); }
+
+  /* ══════════════ CHARACTER SELECT ══════════════ */
+  #char-screen { background: radial-gradient(ellipse at 50% 30%, #120520 0%, #050108 80%); padding: 20px; }
+  .char-screen-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 8px;
+    letter-spacing: 4px;
+  }
+  .char-screen-sub { color: var(--muted); text-align: center; margin-bottom: 30px; font-style: italic; }
+  .char-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 900px; width: 100%; }
+  .char-card {
+    background: linear-gradient(160deg, #1a0830 0%, #0d0520 100%);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 20px 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .char-card::before { content:''; position:absolute; inset:0; background:linear-gradient(180deg, transparent 60%, #f0c06008); }
+  .char-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 8px 30px #f0c06030; }
+  .char-card.selected { border-color: var(--gold); box-shadow: 0 0 25px #f0c06055; background: linear-gradient(160deg, #2d1555 0%, #1a0830 100%); }
+  .char-emoji { font-size: 3.5rem; display: block; margin-bottom: 10px; filter: drop-shadow(0 0 10px currentColor); }
+  .char-name { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gold); margin-bottom: 6px; }
+  .char-title { color: var(--muted); font-size: 0.85rem; font-style: italic; margin-bottom: 12px; }
+  .char-desc { font-size: 0.8rem; color: #a090c0; line-height: 1.5; }
+  .char-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 12px; }
+  .char-stat { font-size: 0.7rem; color: var(--muted); }
+  .char-stat span { color: var(--gold2); font-weight: 600; }
+
+  /* ══════════════ MAIN GAME ══════════════ */
+  #game-screen { background: #060210; padding: 0; display: grid; grid-template-rows: auto 1fr auto; grid-template-columns: 240px 1fr 240px; height: 100vh; gap: 0; }
+
+  /* Header */
+  .game-header { grid-column: 1/-1; background: linear-gradient(90deg, #0d0520, #150830, #0d0520); border-bottom: 1px solid var(--border); padding: 8px 20px; display: flex; align-items: center; justify-content: space-between; }
+  .game-header .title { font-family: 'Cinzel', serif; color: var(--gold); font-size: 1rem; letter-spacing: 3px; }
+  .zone-label { font-family: 'Cinzel', serif; color: var(--saffron); font-size: 0.85rem; letter-spacing: 2px; text-align: center; }
+  .header-right { display: flex; gap: 16px; align-items: center; }
+  .header-btn { background: none; border: 1px solid var(--border); color: var(--muted); padding: 4px 12px; font-size: 0.75rem; cursor: pointer; font-family: 'Cinzel', serif; letter-spacing: 1px; transition: all 0.2s; }
+  .header-btn:hover { border-color: var(--gold2); color: var(--gold); }
+
+  /* Left Panel — Character */
+  .left-panel { background: linear-gradient(180deg, #0d0520, #090318); border-right: 1px solid var(--border); padding: 16px; display: flex; flex-direction: column; gap: 12px; overflow-y: auto; }
+  .panel-title { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 3px; color: var(--muted); text-transform: uppercase; margin-bottom: 4px; border-bottom: 1px solid #2a1540; padding-bottom: 4px; }
+  .char-portrait { text-align: center; padding: 12px 0; }
+  .portrait-emoji { font-size: 4rem; display: block; filter: drop-shadow(0 0 15px var(--saffron)); animation: porFloat 3s ease-in-out infinite; }
+  @keyframes porFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+  .portrait-name { font-family: 'Cinzel', serif; color: var(--gold); font-size: 1rem; margin-top: 8px; }
+  .portrait-class { color: var(--muted); font-size: 0.8rem; font-style: italic; }
+  .level-badge { display: inline-block; background: linear-gradient(135deg, #2d1555, #1a0830); border: 1px solid var(--gold2); color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.75rem; padding: 2px 10px; margin-top: 6px; letter-spacing: 2px; }
+
+  .stat-bar { margin-bottom: 8px; }
+  .stat-bar-label { display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 3px; }
+  .stat-bar-track { height: 8px; background: #150825; border-radius: 4px; overflow: hidden; border: 1px solid #2a1540; }
+  .stat-bar-fill { height: 100%; border-radius: 4px; transition: width 0.5s ease; }
+  .hp-fill { background: linear-gradient(90deg, #c0392b, #e74c3c); box-shadow: 0 0 6px #e74c3c88; }
+  .mp-fill { background: linear-gradient(90deg, #1a5276, #3498db); box-shadow: 0 0 6px #3498db88; }
+  .xp-fill { background: linear-gradient(90deg, #1e8449, #2ecc71); box-shadow: 0 0 6px #2ecc7188; }
+
+  .mini-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .mini-stat { background: #0d0520; border: 1px solid #2a1540; padding: 6px 8px; border-radius: 2px; text-align: center; }
+  .mini-stat-val { font-family: 'Cinzel', serif; color: var(--gold); font-size: 1rem; display: block; }
+  .mini-stat-lbl { color: var(--muted); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* Center — World / Battle */
+  .center-panel { background: #060210; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+
+  /* World Map */
+  #world-view { flex: 1; position: relative; overflow: hidden; }
+  .world-canvas { width: 100%; height: 100%; position: relative; }
+  .world-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 60%, #1a0530 0%, #060210 70%); }
+
+  /* Zone tiles */
+  .zone-grid { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: repeat(3, 1fr); gap: 2px; padding: 20px; }
+  .zone-tile {
+    border: 1px solid #2a1540;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(160deg, #100820, #080218);
+  }
+  .zone-tile:hover { border-color: var(--gold2); transform: scale(1.03); z-index: 5; box-shadow: 0 0 20px #f0c06030; }
+  .zone-tile.current { border-color: var(--saffron); box-shadow: 0 0 15px #ff6b3560; }
+  .zone-tile.locked { opacity: 0.4; cursor: not-allowed; }
+  .zone-tile.locked:hover { transform: none; box-shadow: none; border-color: #2a1540; }
+  .zone-tile .tile-emoji { font-size: 2rem; margin-bottom: 6px; }
+  .zone-tile .tile-name { font-family: 'Cinzel', serif; font-size: 0.7rem; color: var(--gold); text-align: center; letter-spacing: 1px; }
+  .zone-tile .tile-level { font-size: 0.6rem; color: var(--muted); margin-top: 3px; }
+  .zone-tile .tile-bg { position: absolute; inset: 0; opacity: 0.15; font-size: 4rem; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+
+  /* Battle View */
+  #battle-view { display: none; flex: 1; flex-direction: column; padding: 20px; gap: 16px; }
+  #battle-view.active { display: flex; }
+
+  .battle-stage {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+    background: radial-gradient(ellipse at 50% 80%, #1a0830 0%, #060210 60%);
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    min-height: 220px;
+  }
+  .battle-floor {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 60px;
+    background: linear-gradient(180deg, transparent, #1a0830);
+  }
+  .battle-fighter { text-align: center; position: relative; z-index: 2; }
+  .fighter-sprite { font-size: 5rem; display: block; line-height: 1; }
+  .hero-sprite { animation: heroFloat 2s ease-in-out infinite; filter: drop-shadow(0 0 20px var(--saffron)); }
+  .enemy-sprite { animation: enemyFloat 2s ease-in-out infinite 0.5s; filter: drop-shadow(0 0 20px #8b0000); }
+  @keyframes heroFloat { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-10px) scale(1.02)} }
+  @keyframes enemyFloat { 0%,100%{transform:translateY(0) scaleX(-1)} 50%{transform:translateY(-8px) scaleX(-1)} }
+  .fighter-name { font-family: 'Cinzel', serif; font-size: 0.85rem; margin-top: 8px; }
+  .fighter-hp { font-size: 0.75rem; color: var(--muted); }
+
+  .enemy-hp-bar { width: 140px; height: 10px; background: #150825; border-radius: 5px; margin: 6px auto 0; border: 1px solid #2a1540; overflow: hidden; }
+  .enemy-hp-fill { height: 100%; background: linear-gradient(90deg, #c0392b, #e74c3c); border-radius: 5px; transition: width 0.5s; }
+
+  .vs-text { font-family: 'Cinzel', serif; font-size: 2rem; color: var(--saffron); font-weight: 900; opacity: 0.5; }
+
+  .battle-log {
+    background: #0d0520;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px 14px;
+    height: 80px;
+    overflow-y: auto;
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+  .battle-log::-webkit-scrollbar { width: 4px; }
+  .battle-log::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  .log-line { color: var(--text); }
+  .log-line.hero { color: #f0c060; }
+  .log-line.enemy { color: #e74c3c; }
+  .log-line.system { color: #3498db; font-style: italic; }
+  .log-line.special { color: #2ecc71; font-weight: 600; }
+
+  .skill-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .skill-btn {
+    background: linear-gradient(160deg, #150830, #0d0520);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 8px;
+    cursor: pointer;
+    font-family: 'Crimson Text', serif;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .skill-btn:hover:not(:disabled) { border-color: var(--gold2); color: var(--gold); background: linear-gradient(160deg, #2d1555, #1a0830); box-shadow: 0 0 10px #f0c06030; }
+  .skill-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .skill-btn .skill-emoji { font-size: 1.3rem; display: block; margin-bottom: 4px; }
+  .skill-btn .skill-cost { font-size: 0.65rem; color: #3498db; }
+  .skill-btn .skill-dmg { font-size: 0.65rem; color: #e74c3c; }
+
+  /* Right Panel */
+  .right-panel { background: linear-gradient(180deg, #0d0520, #090318); border-left: 1px solid var(--border); padding: 16px; display: flex; flex-direction: column; gap: 12px; overflow-y: auto; }
+
+  .inventory-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .inv-slot { background: #0d0520; border: 1px solid #2a1540; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; cursor: pointer; transition: all 0.2s; border-radius: 2px; position: relative; }
+  .inv-slot:hover { border-color: var(--gold2); box-shadow: 0 0 8px #f0c06030; }
+  .inv-slot.equipped { border-color: var(--saffron); }
+  .inv-slot .item-qty { position: absolute; bottom: 1px; right: 3px; font-size: 0.55rem; color: var(--gold); font-family: 'Cinzel', serif; }
+
+  .quest-list { display: flex; flex-direction: column; gap: 8px; }
+  .quest-item { background: #0d0520; border: 1px solid #2a1540; border-left: 3px solid var(--gold2); padding: 8px 10px; border-radius: 2px; }
+  .quest-name { font-family: 'Cinzel', serif; font-size: 0.75rem; color: var(--gold); margin-bottom: 3px; }
+  .quest-desc { font-size: 0.7rem; color: var(--muted); line-height: 1.4; }
+  .quest-progress { margin-top: 5px; height: 4px; background: #150825; border-radius: 2px; overflow: hidden; }
+  .quest-progress-fill { height: 100%; background: var(--gold2); border-radius: 2px; transition: width 0.5s; }
+
+  /* Bottom Bar */
+  .bottom-bar { grid-column: 1/-1; background: linear-gradient(90deg, #0d0520, #150830, #0d0520); border-top: 1px solid var(--border); padding: 10px 20px; display: flex; align-items: center; gap: 12px; }
+  .action-btn {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    padding: 8px 18px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid var(--border);
+    background: #0d0520;
+    color: var(--muted);
+  }
+  .action-btn:hover { border-color: var(--gold2); color: var(--gold); }
+  .action-btn.primary { background: linear-gradient(135deg, #2d1555, #1a0830); border-color: var(--gold2); color: var(--gold); }
+  .action-btn.primary:hover { border-color: var(--gold); color: #fff; box-shadow: 0 0 12px #f0c06040; }
+  .bottom-center { flex: 1; text-align: center; }
+  .gold-display { font-family: 'Cinzel', serif; color: var(--gold); font-size: 0.9rem; }
+  .gold-display .coin { margin-right: 4px; }
+
+  /* Animations */
+  .shake { animation: shake 0.4s ease; }
+  @keyframes shake { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-8px)} 40%,80%{transform:translateX(8px)} }
+  .flash-red { animation: flashRed 0.4s ease; }
+  @keyframes flashRed { 0%,100%{filter:none} 50%{filter:brightness(3) saturate(0) sepia(1) hue-rotate(300deg)} }
+  .flash-gold { animation: flashGold 0.5s ease; }
+  @keyframes flashGold { 0%,100%{filter:none} 50%{filter:brightness(2) sepia(1) saturate(3)} }
+
+  /* Floating damage numbers */
+  .dmg-float {
+    position: absolute;
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    pointer-events: none;
+    animation: floatDmg 1.2s forwards;
+    z-index: 100;
+  }
+  @keyframes floatDmg { 0%{opacity:1;transform:translateY(0) scale(1)} 100%{opacity:0;transform:translateY(-80px) scale(0.6)} }
+
+  /* Victory / Defeat */
+  .overlay {
+    position: fixed; inset: 0; z-index: 200;
+    display: none; align-items: center; justify-content: center;
+    background: rgba(0,0,0,0.85);
+  }
+  .overlay.show { display: flex; }
+  .overlay-box {
+    background: linear-gradient(160deg, #1a0830, #0d0520);
+    border: 2px solid var(--gold2);
+    padding: 40px 60px;
+    text-align: center;
+    max-width: 420px;
+    width: 90%;
+  }
+  .overlay-emoji { font-size: 4rem; display: block; margin-bottom: 16px; }
+  .overlay-title { font-family: 'Cinzel', serif; font-size: 2rem; color: var(--gold); margin-bottom: 12px; }
+  .overlay-body { color: var(--text); line-height: 1.7; margin-bottom: 24px; }
+  .overlay-rewards { background: #0d0520; border: 1px solid var(--border); padding: 12px; margin-bottom: 20px; font-family: 'Cinzel', serif; color: var(--gold2); font-size: 0.85rem; }
+  .reward-line { display: flex; justify-content: space-between; margin: 4px 0; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: #060210; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  /* Tooltip */
+  [data-tip] { position: relative; }
+  [data-tip]:hover::after {
+    content: attr(data-tip);
+    position: absolute; bottom: 110%; left: 50%; transform: translateX(-50%);
+    background: #150830; border: 1px solid var(--border);
+    color: var(--text); font-size: 0.7rem; padding: 4px 8px;
+    white-space: nowrap; z-index: 50; pointer-events: none;
+    font-family: 'Crimson Text', serif;
+  }
+
+  /* Responsive */
+  @media(max-width:1100px) {
+    #game-screen { grid-template-columns: 200px 1fr 200px; }
+  }
+  @media(max-width:860px) {
+    .char-grid { grid-template-columns: repeat(2, 1fr); }
+    #game-screen { grid-template-columns: 1fr; grid-template-rows: auto 1fr auto auto auto; }
+    .left-panel, .right-panel { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- STARS -->
+<canvas id="stars"></canvas>
+
+<!-- ═══════════════ TITLE SCREEN ═══════════════ -->
+<div class="screen active" id="title-screen">
+  <div class="title-logo">
+    <span class="om">ॐ</span>
+    <h1>Devlok Chronicles</h1>
+    <p class="subtitle">Journey of the Gods</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:14px;align-items:center;">
+    <button class="btn" onclick="showScreen('char-screen')">⚔ Begin Journey</button>
+    <button class="btn" onclick="showLore()" style="font-size:0.85rem;padding:10px 30px;">📜 Sacred Lore</button>
+  </div>
+  <p style="margin-top:40px;color:#4a3060;font-size:0.8rem;letter-spacing:2px;">© DEVLOK CHRONICLES · DHARMA ENGINE v1.0</p>
+</div>
+
+<!-- ═══════════════ CHARACTER SELECT ═══════════════ -->
+<div class="screen" id="char-screen">
+  <div class="char-screen-title">Choose Your Avatar</div>
+  <p class="char-screen-sub">Select a deity to channel their divine power</p>
+  <div class="char-grid" id="char-grid"></div>
+  <div style="display:flex;gap:14px;margin-top:28px;">
+    <button class="btn" style="font-size:0.8rem;padding:10px 24px;" onclick="showScreen('title-screen')">← Back</button>
+    <button class="btn" id="start-btn" style="opacity:0.4;pointer-events:none;" onclick="startGame()">Begin Journey →</button>
+  </div>
+</div>
+
+<!-- ═══════════════ MAIN GAME ═══════════════ -->
+<div class="screen" id="game-screen">
+  <!-- Header -->
+  <header class="game-header">
+    <div class="title">ॐ DEVLOK CHRONICLES</div>
+    <div class="zone-label" id="zone-label">🏔 Kailash Parvat — Starting Realm</div>
+    <div class="header-right">
+      <button class="header-btn" onclick="toggleView()">⚔ Battle / 🗺 Map</button>
+      <button class="header-btn" onclick="showScreen('char-screen')">↩ Menu</button>
+    </div>
+  </header>
+
+  <!-- Left Panel -->
+  <aside class="left-panel">
+    <div class="char-portrait">
+      <span class="portrait-emoji" id="portrait-emoji">🙏</span>
+      <div class="portrait-name" id="portrait-name">—</div>
+      <div class="portrait-class" id="portrait-class">—</div>
+      <div class="level-badge">LVL <span id="player-level">1</span></div>
+    </div>
+
+    <div>
+      <div class="panel-title">Vitals</div>
+      <div class="stat-bar">
+        <div class="stat-bar-label">
+          <span style="color:#e74c3c">❤ Prana</span>
+          <span id="hp-label">100/100</span>
+        </div>
+        <div class="stat-bar-track"><div class="stat-bar-fill hp-fill" id="hp-bar" style="width:100%"></div></div>
+      </div>
+      <div class="stat-bar">
+        <div class="stat-bar-label">
+          <span style="color:#3498db">✦ Shakti</span>
+          <span id="mp-label">80/80</span>
+        </div>
+        <div class="stat-bar-track"><div class="stat-bar-fill mp-fill" id="mp-bar" style="width:100%"></div></div>
+      </div>
+      <div class="stat-bar">
+        <div class="stat-bar-label">
+          <span style="color:#2ecc71">★ Karma</span>
+          <span id="xp-label">0/100</span>
+        </div>
+        <div class="stat-bar-track"><div class="stat-bar-fill xp-fill" id="xp-bar" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="panel-title">Attributes</div>
+      <div class="mini-stats">
+        <div class="mini-stat"><span class="mini-stat-val" id="stat-atk">—</span><span class="mini-stat-lbl">⚔ Attack</span></div>
+        <div class="mini-stat"><span class="mini-stat-val" id="stat-def">—</span><span class="mini-stat-lbl">🛡 Defense</span></div>
+        <div class="mini-stat"><span class="mini-stat-val" id="stat-spd">—</span><span class="mini-stat-lbl">⚡ Speed</span></div>
+        <div class="mini-stat"><span class="mini-stat-val" id="stat-luk">—</span><span class="mini-stat-lbl">🍀 Divinity</span></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="panel-title">Divine Weapon</div>
+      <div style="text-align:center;padding:10px 0;">
+        <span style="font-size:2.5rem;" id="weapon-emoji">—</span>
+        <div style="font-family:'Cinzel',serif;color:var(--gold);font-size:0.85rem;margin-top:6px;" id="weapon-name">—</div>
+        <div style="color:var(--muted);font-size:0.75rem;" id="weapon-stat">—</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="panel-title">Battles Won</div>
+      <div style="text-align:center;font-family:'Cinzel',serif;font-size:2rem;color:var(--gold);" id="kills-count">0</div>
+    </div>
+  </aside>
+
+  <!-- Center Panel -->
+  <main class="center-panel">
+    <!-- World Map -->
+    <div id="world-view">
+      <div class="world-bg"></div>
+      <div class="zone-grid" id="zone-grid"></div>
+    </div>
+
+    <!-- Battle View -->
+    <div id="battle-view">
+      <div class="battle-stage" id="battle-stage">
+        <div class="battle-floor"></div>
+        <div class="battle-fighter" id="hero-fighter">
+          <span class="fighter-sprite hero-sprite" id="hero-sprite">🙏</span>
+          <div class="fighter-name" id="hero-battle-name">Hero</div>
+          <div class="fighter-hp" id="hero-battle-hp">100 HP</div>
+        </div>
+        <div class="vs-text">VS</div>
+        <div class="battle-fighter" id="enemy-fighter">
+          <span class="fighter-sprite enemy-sprite" id="enemy-sprite">👹</span>
+          <div class="fighter-name" id="enemy-battle-name">Enemy</div>
+          <div class="enemy-hp-bar"><div class="enemy-hp-fill" id="enemy-hp-fill" style="width:100%"></div></div>
+          <div class="fighter-hp" id="enemy-battle-hp">100 HP</div>
+        </div>
+      </div>
+
+      <div class="battle-log" id="battle-log">
+        <div class="log-line system">⚔ Battle begins! Choose your action...</div>
+      </div>
+
+      <div class="skill-grid" id="skill-grid"></div>
+    </div>
+  </main>
+
+  <!-- Right Panel -->
+  <aside class="right-panel">
+    <div>
+      <div class="panel-title">Sacred Items</div>
+      <div class="inventory-grid" id="inventory-grid"></div>
+    </div>
+
+    <div>
+      <div class="panel-title">Active Quests</div>
+      <div class="quest-list" id="quest-list"></div>
+    </div>
+
+    <div>
+      <div class="panel-title">Battle History</div>
+      <div id="battle-history" style="font-size:0.75rem;color:var(--muted);line-height:1.8;"></div>
+    </div>
+  </aside>
+
+  <!-- Bottom Bar -->
+  <footer class="bottom-bar">
+    <button class="action-btn primary" onclick="startRandomBattle()">⚔ Seek Battle</button>
+    <button class="action-btn" onclick="rest()">🏕 Rest & Restore</button>
+    <button class="action-btn" onclick="visitShrine()">🕌 Visit Shrine</button>
+    <div class="bottom-center">
+      <span class="gold-display"><span class="coin">🪙</span><span id="gold-amount">0</span> Gold Coins</span>
+    </div>
+    <button class="action-btn" onclick="usePotion()">🧪 Use Amrit (<span id="potion-count">3</span>)</button>
+    <button class="action-btn" onclick="showScreen('char-screen')">📜 Quit</button>
+  </footer>
+</div>
+
+<!-- VICTORY OVERLAY -->
+<div class="overlay" id="victory-overlay">
+  <div class="overlay-box">
+    <span class="overlay-emoji">🏆</span>
+    <div class="overlay-title">Victory!</div>
+    <div class="overlay-body" id="victory-text">You have vanquished the enemy!</div>
+    <div class="overlay-rewards" id="victory-rewards"></div>
+    <button class="btn" onclick="closeOverlay()">Continue Journey →</button>
+  </div>
+</div>
+
+<!-- DEFEAT OVERLAY -->
+<div class="overlay" id="defeat-overlay">
+  <div class="overlay-box">
+    <span class="overlay-emoji">💀</span>
+    <div class="overlay-title" style="color:#e74c3c">Fallen!</div>
+    <div class="overlay-body">Your divine essence returns to the cosmos. The journey continues from sacred ground.</div>
+    <button class="btn" onclick="revive()" style="border-color:#e74c3c;color:#e74c3c;">🔄 Resurrect (−20 Gold)</button>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════
+//  STARS
+// ══════════════════════════════════════════════════════
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+function resizeCanvas() { canvas.width = innerWidth; canvas.height = innerHeight; }
+resizeCanvas(); window.addEventListener('resize', resizeCanvas);
+const stars = Array.from({length:200},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.5+0.3,speed:Math.random()*0.2+0.05,alpha:Math.random()}));
+function animStars() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  stars.forEach(s=>{
+    s.alpha += (Math.random()-0.5)*0.05;
+    s.alpha = Math.max(0.1,Math.min(1,s.alpha));
+    ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(255,220,150,${s.alpha})`; ctx.fill();
+  });
+  requestAnimationFrame(animStars);
+}
+animStars();
+
+// ══════════════════════════════════════════════════════
+//  DATA
+// ══════════════════════════════════════════════════════
+const HEROES = [
+  {
+    id:'shiva', name:'Shiva', title:'The Destroyer', emoji:'🔱',
+    desc:'Lord of destruction and transformation. Wields the all-powerful Trishul and the third eye that burns all evil.',
+    weapon:{emoji:'🔱',name:'Trishul',stat:'+30 ATK'}, weaponBonus:30,
+    hp:120, mp:100, atk:28, def:18, spd:15, luk:22,
+    skills:[
+      {name:'Tandava Strike',emoji:'💫',cost:0,baseDmg:20,type:'physical',desc:'Cosmic dance attack'},
+      {name:'Third Eye',emoji:'👁',cost:20,baseDmg:45,type:'magic',desc:'Burns with divine fire'},
+      {name:'Rudra Fury',emoji:'⚡',cost:30,baseDmg:60,type:'magic',desc:'Unleash cosmic rage'},
+      {name:'Pinaka Blast',emoji:'🏹',cost:15,baseDmg:35,type:'magic',desc:'Sacred arrow strike'},
+    ]
+  },
+  {
+    id:'vishnu', name:'Vishnu', title:'The Preserver', emoji:'🌊',
+    desc:'Protector of dharma. Bearer of the Sudarshana Chakra and Kaumodaki mace. Master of strategy.',
+    weapon:{emoji:'☸',name:'Sudarshana Chakra',stat:'+25 ATK +10 SPD'}, weaponBonus:25,
+    hp:140, mp:90, atk:24, def:22, spd:18, luk:25,
+    skills:[
+      {name:'Chakra Throw',emoji:'☸',cost:0,baseDmg:22,type:'physical',desc:'Spinning disc attack'},
+      {name:'Kaumodaki Smash',emoji:'🏏',cost:15,baseDmg:40,type:'physical',desc:'Mace of justice'},
+      {name:'Narayana Astra',emoji:'✨',cost:35,baseDmg:65,type:'magic',desc:'Divine missile rain'},
+      {name:'Vaikuntha Shield',emoji:'🛡',cost:20,baseDmg:0,type:'heal',desc:'Restore 40 Prana'},
+    ]
+  },
+  {
+    id:'rama', name:'Rama', title:'The Righteous', emoji:'🏹',
+    desc:'The ideal warrior-king. With the divine bow Kodanda, every arrow carries the weight of dharma.',
+    weapon:{emoji:'🏹',name:'Kodanda Bow',stat:'+35 ATK +5 SPD'}, weaponBonus:35,
+    hp:110, mp:95, atk:32, def:16, spd:20, luk:18,
+    skills:[
+      {name:'Arrow Rain',emoji:'🏹',cost:0,baseDmg:24,type:'physical',desc:'Triple arrow volley'},
+      {name:'Brahmastra',emoji:'🌟',cost:40,baseDmg:80,type:'magic',desc:'Ultimate divine arrow'},
+      {name:'Agni Astra',emoji:'🔥',cost:25,baseDmg:50,type:'magic',desc:'Fire-blessed arrow'},
+      {name:'Dharma Strike',emoji:'⚖',cost:15,baseDmg:38,type:'physical',desc:'Righteous blow'},
+    ]
+  },
+  {
+    id:'krishna', name:'Krishna', title:'The Divine', emoji:'🪈',
+    desc:'Master strategist and playful god. The Sudarshana Chakra returns to him always. Speed and cunning win all battles.',
+    weapon:{emoji:'🪈',name:'Panchajanya',stat:'+20 ATK +15 SPD'}, weaponBonus:20,
+    hp:100, mp:110, atk:22, def:20, spd:28, luk:30,
+    skills:[
+      {name:'Flute Lure',emoji:'🪈',cost:0,baseDmg:18,type:'magic',desc:'Hypnotic melody attack'},
+      {name:'Govinda Bliss',emoji:'💛',cost:20,baseDmg:0,type:'heal',desc:'Restore 50 Prana'},
+      {name:'Yogamaya',emoji:'🌀',cost:30,baseDmg:55,type:'magic',desc:'Illusion-based assault'},
+      {name:'Gita Wisdom',emoji:'📖',cost:25,baseDmg:45,type:'magic',desc:'Channel cosmic truth'},
+    ]
+  },
+  {
+    id:'hanuman', name:'Hanuman', title:'The Devoted', emoji:'🐒',
+    desc:'Devotee of Rama with boundless strength. Can grow to mountain size and carry the Sanjeevani. Fearless in battle.',
+    weapon:{emoji:'🗿',name:'Gada of Vayu',stat:'+28 ATK +8 DEF'}, weaponBonus:28,
+    hp:160, mp:80, atk:30, def:28, spd:16, luk:20,
+    skills:[
+      {name:'Mountain Fist',emoji:'⛰',cost:0,baseDmg:26,type:'physical',desc:'Colossal punch'},
+      {name:'Sanjeevani',emoji:'🌿',cost:25,baseDmg:0,type:'heal',desc:'Restore 60 Prana'},
+      {name:'Bajrang Baan',emoji:'🔥',cost:35,baseDmg:70,type:'physical',desc:'Sacred fire attack'},
+      {name:'Roar of Lanka',emoji:'🦁',cost:20,baseDmg:40,type:'magic',desc:'Terrifying battle cry'},
+    ]
+  },
+  {
+    id:'durga', name:'Durga', title:'The Invincible', emoji:'⚔',
+    desc:'Warrior goddess with ten arms, each wielding a divine weapon. Slayer of Mahishasura. Pure shakti incarnate.',
+    weapon:{emoji:'🪃',name:'Trishul & Sword',stat:'+32 ATK +12 DEF'}, weaponBonus:32,
+    hp:130, mp:120, atk:30, def:24, spd:17, luk:26,
+    skills:[
+      {name:'Ten Arms Strike',emoji:'⚔',cost:0,baseDmg:28,type:'physical',desc:'Multi-weapon combo'},
+      {name:'Shakti Beam',emoji:'⚡',cost:30,baseDmg:65,type:'magic',desc:'Pure divine energy'},
+      {name:'Mahishasura End',emoji:'🔱',cost:45,baseDmg:90,type:'magic',desc:'Legendary demon-slayer'},
+      {name:'Devi Kavach',emoji:'🛡',cost:20,baseDmg:0,type:'heal',desc:'Divine armor — +35 Prana'},
+    ]
+  }
+];
+
+const ZONES = [
+  {id:'kailash',name:'Kailash Parvat',emoji:'🏔',bg:'⛰',level:'Lv 1-3',minLevel:1,story:'The sacred mountain of Shiva, gateway to divine realms.'},
+  {id:'vrindavan',name:'Vrindavan',emoji:'🌳',bg:'🌿',level:'Lv 2-4',minLevel:2,story:'Where Krishna played his flute and demons lurked.'},
+  {id:'ayodhya',name:'Ayodhya',emoji:'🏛',bg:'🏯',level:'Lv 3-5',minLevel:3,story:'Rama\'s kingdom, threatened by shadows of adharma.'},
+  {id:'swarga',name:'Swarga Lok',emoji:'☁',bg:'✨',level:'Lv 4-6',minLevel:4,story:'The heavenly realm under siege by asuras.'},
+  {id:'patal',name:'Patala',emoji:'🌊',bg:'🌑',level:'Lv 5-7',minLevel:5,story:'Underworld depths where serpent kings hold power.'},
+  {id:'lanka',name:'Lanka',emoji:'🏝',bg:'🔥',level:'Lv 6-8',minLevel:6,story:'Ravana\'s golden fortress of evil splendor.'},
+  {id:'kurukshetra',name:'Kurukshetra',emoji:'⚔',bg:'💀',level:'Lv 7-9',minLevel:7,story:'Battlefield of the great war, haunted by echoes.'},
+  {id:'mandara',name:'Mt. Mandara',emoji:'🌋',bg:'🌊',level:'Lv 8-10',minLevel:8,story:'Where gods and demons churned the cosmic ocean.'},
+  {id:'brahmalok',name:'Brahma Lok',emoji:'🌐',bg:'🔮',level:'Lv 9-11',minLevel:9,story:'Realm of creation — the ultimate challenge.'},
+  {id:'vaikuntha',name:'Vaikuntha',emoji:'🌟',bg:'💫',level:'Lv 10+',minLevel:10,story:'Vishnu\'s eternal realm. Final destination.'},
+  {id:'devalok',name:'Deva Lok',emoji:'⚡',bg:'🌈',level:'Lv 8-10',minLevel:8,story:'Realm of the thirty-three devas.'},
+  {id:'maya',name:'Maya Forest',emoji:'🌫',bg:'🌀',level:'Lv 5-7',minLevel:5,story:'Forest of illusion where demons hide.'},
+  {id:'ganga',name:'Ganga Ghat',emoji:'💧',bg:'🌊',level:'Lv 3-5',minLevel:3,story:'Sacred river banks — restore and battle water demons.'},
+  {id:'aranya',name:'Dandaka Aranya',emoji:'🌿',bg:'🌲',level:'Lv 4-6',minLevel:4,story:'Dense jungle filled with rakshasas.'},
+  {id:'naga',name:'Naga Realm',emoji:'🐍',bg:'💎',level:'Lv 6-9',minLevel:6,story:'Kingdom of the serpent gods beneath the earth.'},
+];
+
+const ENEMIES = [
+  {name:'Asura Warrior',emoji:'👹',hp:60,atk:12,def:6,xp:20,gold:15,desc:'A brutish demon soldier'},
+  {name:'Rakshasa',emoji:'🧟',hp:80,atk:15,def:8,xp:28,gold:20,desc:'Shape-shifting demon'},
+  {name:'Naga Serpent',emoji:'🐍',hp:70,atk:14,def:10,xp:25,gold:18,desc:'Venomous serpent warrior'},
+  {name:'Pishacha',emoji:'👻',hp:55,atk:18,def:4,xp:30,gold:22,desc:'Flesh-eating spirit'},
+  {name:'Daitya Giant',emoji:'👺',hp:120,atk:20,def:12,xp:45,gold:35,desc:'Colossal demon warrior'},
+  {name:'Kali Asura',emoji:'😈',hp:100,atk:22,def:10,xp:50,gold:40,desc:'Dark-age demon lord'},
+  {name:'Mahishasura',emoji:'🐂',hp:180,atk:28,def:18,xp:90,gold:80,desc:'The Buffalo Demon King'},
+  {name:'Ravana',emoji:'🧛',hp:250,atk:35,def:25,xp:150,gold:150,desc:'Ten-headed demon king of Lanka'},
+  {name:'Vritra',emoji:'🐉',hp:200,atk:32,def:22,xp:120,gold:120,desc:'Dragon demon of drought'},
+  {name:'Tarakasura',emoji:'🌑',hp:160,atk:26,def:16,xp:100,gold:90,desc:'Terror of the three worlds'},
+  {name:'Bhasmasura',emoji:'🔥',hp:90,atk:19,def:8,xp:40,gold:30,desc:'Ash demon with cursed touch'},
+  {name:'Shumbha',emoji:'👑',hp:140,atk:24,def:14,xp:75,gold:65,desc:'Demon king slain by Durga'},
+];
+
+const ITEMS = [
+  {emoji:'🧪',name:'Amrit Drop',desc:'Restore 40 Prana',type:'potion',value:40},
+  {emoji:'🌿',name:'Sanjeevani',desc:'Restore all Prana',type:'fullheal',value:999},
+  {emoji:'💎',name:'Mani Gem',desc:'+15 Attack permanently',type:'stat',stat:'atk',value:15},
+  {emoji:'🪬',name:'Rudraksha',desc:'+10 Defense permanently',type:'stat',stat:'def',value:10},
+  {emoji:'⚡',name:'Vajra Shard',desc:'+5 Speed permanently',type:'stat',stat:'spd',value:5},
+  {emoji:'📿',name:'Sacred Beads',desc:'+20 Max Shakti',type:'stat',stat:'mp',value:20},
+  {emoji:'🔔',name:'Temple Bell',desc:'Reveal next enemy',type:'info',value:0},
+  {emoji:'🪔',name:'Diya',desc:'+5 Luck permanently',type:'stat',stat:'luk',value:5},
+];
+
+// ══════════════════════════════════════════════════════
+//  GAME STATE
+// ══════════════════════════════════════════════════════
+let G = {
+  hero: null,
+  hp: 0, maxHp: 0,
+  mp: 0, maxMp: 0,
+  xp: 0, xpNeeded: 100,
+  level: 1,
+  atk: 0, def: 0, spd: 0, luk: 0,
+  gold: 50,
+  kills: 0,
+  potions: 3,
+  inventory: [],
+  currentZone: 'kailash',
+  inBattle: false,
+  enemy: null, enemyHp: 0, enemyMaxHp: 0,
+  turn: 'player',
+  battleActive: false,
+  questKills: 0, questGoal: 5,
+};
+
+// ══════════════════════════════════════════════════════
+//  SCREEN MANAGEMENT
+// ══════════════════════════════════════════════════════
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(id==='char-screen') buildCharGrid();
+  if(id==='game-screen') refreshUI();
+}
+
+// ══════════════════════════════════════════════════════
+//  CHARACTER SELECT
+// ══════════════════════════════════════════════════════
+let selectedHero = null;
+function buildCharGrid() {
+  const grid = document.getElementById('char-grid');
+  grid.innerHTML = '';
+  HEROES.forEach(h=>{
+    const card = document.createElement('div');
+    card.className = 'char-card';
+    card.innerHTML = `
+      <span class="char-emoji">${h.emoji}</span>
+      <div class="char-name">${h.name}</div>
+      <div class="char-title">${h.title}</div>
+      <div class="char-desc">${h.desc}</div>
+      <div class="char-stats">
+        <div class="char-stat">❤ Prana <span>${h.hp}</span></div>
+        <div class="char-stat">⚔ Attack <span>${h.atk}</span></div>
+        <div class="char-stat">🛡 Defense <span>${h.def}</span></div>
+        <div class="char-stat">⚡ Speed <span>${h.spd}</span></div>
+      </div>
+    `;
+    card.onclick = () => selectHero(h, card);
+    grid.appendChild(card);
+  });
+}
+
+function selectHero(h, card) {
+  document.querySelectorAll('.char-card').forEach(c=>c.classList.remove('selected'));
+  card.classList.add('selected');
+  selectedHero = h;
+  const btn = document.getElementById('start-btn');
+  btn.style.opacity = '1'; btn.style.pointerEvents = 'auto';
+}
+
+function startGame() {
+  if(!selectedHero) return;
+  const h = selectedHero;
+  G.hero = h;
+  G.hp = G.maxHp = h.hp;
+  G.mp = G.maxMp = h.mp;
+  G.xp = 0; G.xpNeeded = 100; G.level = 1;
+  G.atk = h.atk; G.def = h.def; G.spd = h.spd; G.luk = h.luk;
+  G.gold = 50; G.kills = 0; G.potions = 3;
+  G.inventory = [];
+  G.currentZone = 'kailash';
+  G.inBattle = false; G.battleActive = false;
+  G.questKills = 0; G.questGoal = 5;
+  showScreen('game-screen');
+  buildZoneGrid();
+  buildSkillGrid();
+  buildInventory();
+  buildQuests();
+  refreshUI();
+  document.getElementById('world-view').style.display = '';
+  document.getElementById('battle-view').classList.remove('active');
+}
+
+// ══════════════════════════════════════════════════════
+//  ZONE GRID
+// ══════════════════════════════════════════════════════
+function buildZoneGrid() {
+  const grid = document.getElementById('zone-grid');
+  grid.innerHTML = '';
+  ZONES.forEach(z=>{
+    const tile = document.createElement('div');
+    const locked = G.level < z.minLevel;
+    tile.className = 'zone-tile' + (z.id===G.currentZone?' current':'') + (locked?' locked':'');
+    tile.innerHTML = `
+      <div class="tile-bg">${z.bg}</div>
+      <div class="tile-emoji">${z.emoji}${locked?'🔒':''}</div>
+      <div class="tile-name">${z.name}</div>
+      <div class="tile-level">${z.level}${locked?` · Need Lv ${z.minLevel}`:''}</div>
+    `;
+    if(!locked) {
+      tile.title = z.story;
+      tile.onclick = () => travelTo(z);
+    }
+    grid.appendChild(tile);
+  });
+}
+
+function travelTo(z) {
+  G.currentZone = z.id;
+  document.getElementById('zone-label').textContent = `${z.emoji} ${z.name} — ${z.story.substring(0,50)}...`;
+  buildZoneGrid();
+  addLog(`🗺 Traveled to ${z.name}.`, 'system');
+}
+
+// ══════════════════════════════════════════════════════
+//  UI REFRESH
+// ══════════════════════════════════════════════════════
+function refreshUI() {
+  const h = G.hero;
+  if(!h) return;
+  document.getElementById('portrait-emoji').textContent = h.emoji;
+  document.getElementById('portrait-name').textContent = h.name;
+  document.getElementById('portrait-class').textContent = h.title;
+  document.getElementById('player-level').textContent = G.level;
+
+  // Bars
+  setBar('hp',G.hp,G.maxHp);
+  setBar('mp',G.mp,G.maxMp);
+  setBar('xp',G.xp,G.xpNeeded);
+
+  // Stats
+  document.getElementById('stat-atk').textContent = G.atk;
+  document.getElementById('stat-def').textContent = G.def;
+  document.getElementById('stat-spd').textContent = G.spd;
+  document.getElementById('stat-luk').textContent = G.luk;
+
+  // Weapon
+  document.getElementById('weapon-emoji').textContent = h.weapon.emoji;
+  document.getElementById('weapon-name').textContent = h.weapon.name;
+  document.getElementById('weapon-stat').textContent = h.weapon.stat;
+
+  // Other
+  document.getElementById('kills-count').textContent = G.kills;
+  document.getElementById('gold-amount').textContent = G.gold;
+  document.getElementById('potion-count').textContent = G.potions;
+
+  if(G.battleActive) {
+    document.getElementById('hero-battle-name').textContent = h.name;
+    document.getElementById('hero-battle-hp').textContent = `${G.hp} / ${G.maxHp} HP`;
+    document.getElementById('hero-sprite').textContent = h.emoji;
+  }
+  updateSkillBtns();
+}
+
+function setBar(type, val, max) {
+  const pct = Math.max(0,Math.min(100, (val/max)*100));
+  document.getElementById(`${type}-bar`).style.width = pct+'%';
+  document.getElementById(`${type}-label`).textContent = `${Math.round(val)}/${Math.round(max)}`;
+}
+
+// ══════════════════════════════════════════════════════
+//  SKILLS
+// ══════════════════════════════════════════════════════
+function buildSkillGrid() {
+  const grid = document.getElementById('skill-grid');
+  grid.innerHTML = '';
+  G.hero.skills.forEach((sk,i)=>{
+    const btn = document.createElement('button');
+    btn.className = 'skill-btn';
+    btn.id = `skill-btn-${i}`;
+    btn.innerHTML = `
+      <span class="skill-emoji">${sk.emoji}</span>
+      ${sk.name}
+      <div class="skill-cost">✦ ${sk.cost} Shakti</div>
+      <div class="skill-dmg">${sk.type==='heal'?'Heal':sk.type==='physical'?'⚔ '+sk.baseDmg:'✨ '+sk.baseDmg} dmg</div>
+    `;
+    btn.onclick = () => useSkill(i);
+    grid.appendChild(btn);
+  });
+}
+
+function updateSkillBtns() {
+  if(!G.hero) return;
+  G.hero.skills.forEach((sk,i)=>{
+    const btn = document.getElementById(`skill-btn-${i}`);
+    if(btn) btn.disabled = !G.battleActive || G.turn!=='player' || G.mp<sk.cost;
+  });
+}
+
+// ══════════════════════════════════════════════════════
+//  BATTLE
+// ══════════════════════════════════════════════════════
+function startRandomBattle() {
+  // pick enemy scaled to level
+  const pool = ENEMIES.filter(e=>e.xp <= G.level*20+30);
+  const e = {...pool[Math.floor(Math.random()*pool.length)]};
+  const scale = 0.7 + G.level*0.15;
+  e.hp = Math.round(e.hp * scale);
+  e.atk = Math.round(e.atk * (0.8+G.level*0.1));
+  e.def = Math.round(e.def * (0.8+G.level*0.1));
+  G.enemy = e;
+  G.enemyHp = G.enemyMaxHp = e.hp;
+  G.battleActive = true;
+  G.turn = G.spd >= e.atk ? 'player' : 'enemy'; // speed check
+
+  // Show battle UI
+  document.getElementById('world-view').style.display = 'none';
+  document.getElementById('battle-view').classList.add('active');
+  document.getElementById('enemy-sprite').textContent = e.emoji;
+  document.getElementById('enemy-battle-name').textContent = e.name;
+  document.getElementById('enemy-hp-fill').style.width = '100%';
+  document.getElementById('enemy-battle-hp').textContent = `${e.hp} / ${e.hp} HP`;
+  document.getElementById('battle-log').innerHTML = `<div class="log-line system">⚔ A wild ${e.name} appears! ${e.desc}.</div>`;
+  document.getElementById('zone-label').textContent = `⚔ Battle — ${G.hero.name} vs ${e.name}`;
+
+  refreshUI();
+  if(G.turn==='enemy') { addLog(`${e.emoji} ${e.name} moves first!`,'enemy'); setTimeout(enemyTurn,1000); }
+}
+
+function useSkill(idx) {
+  if(!G.battleActive || G.turn!=='player') return;
+  const sk = G.hero.skills[idx];
+  if(G.mp < sk.cost) { addLog('Not enough Shakti!','system'); return; }
+  G.mp -= sk.cost;
+
+  let dmg = 0, msg = '';
+  if(sk.type==='heal') {
+    const heal = sk.name.includes('Sanjeevani')||sk.name.includes('Govinda') ? 50 : 35;
+    G.hp = Math.min(G.maxHp, G.hp + heal);
+    msg = `💚 ${G.hero.name} uses ${sk.name}! Restores ${heal} Prana.`;
+    addLog(msg,'special');
+    document.getElementById('hero-fighter').classList.add('flash-gold');
+    setTimeout(()=>document.getElementById('hero-fighter').classList.remove('flash-gold'),500);
+  } else {
+    dmg = calcDmg(sk.baseDmg + G.atk + Math.floor(Math.random()*10), G.enemy.def);
+    G.enemyHp -= dmg;
+    const isCrit = Math.random() < G.luk/100;
+    if(isCrit) { dmg = Math.round(dmg*1.5); G.enemyHp += dmg/3; } // recalc for crit
+    G.enemyHp = Math.max(0, G.enemyHp);
+    msg = `${sk.emoji} ${G.hero.name} uses ${sk.name}${isCrit?' — CRITICAL HIT!':''}! ${dmg} damage!`;
+    addLog(msg,'hero');
+    floatDmg(document.getElementById('enemy-fighter'), dmg, isCrit?'#f0c060':'#ff6b35');
+    updateEnemyHp();
+    document.getElementById('enemy-fighter').classList.add('shake');
+    setTimeout(()=>document.getElementById('enemy-fighter').classList.remove('shake'),400);
+  }
+  refreshUI();
+  if(G.enemyHp<=0) { endBattle(true); return; }
+  G.turn = 'enemy';
+  updateSkillBtns();
+  setTimeout(enemyTurn, 900);
+}
+
+function enemyTurn() {
+  if(!G.battleActive) return;
+  const e = G.enemy;
+  const dmg = Math.max(1, calcDmg(e.atk + Math.floor(Math.random()*8), G.def));
+  G.hp -= dmg;
+  G.hp = Math.max(0, G.hp);
+  addLog(`${e.emoji} ${e.name} attacks! ${dmg} damage!`,'enemy');
+  floatDmg(document.getElementById('hero-fighter'), dmg, '#e74c3c');
+  document.getElementById('hero-fighter').classList.add('flash-red');
+  setTimeout(()=>document.getElementById('hero-fighter').classList.remove('flash-red'),400);
+  refreshUI();
+  if(G.hp<=0) { endBattle(false); return; }
+  G.turn = 'player';
+  updateSkillBtns();
+}
+
+function calcDmg(atk, def) { return Math.max(1, atk - Math.floor(def/2) + Math.floor(Math.random()*6)); }
+
+function updateEnemyHp() {
+  const pct = Math.max(0,(G.enemyHp/G.enemyMaxHp)*100);
+  document.getElementById('enemy-hp-fill').style.width = pct+'%';
+  document.getElementById('enemy-battle-hp').textContent = `${Math.max(0,Math.round(G.enemyHp))} / ${G.enemyMaxHp} HP`;
+}
+
+function endBattle(won) {
+  G.battleActive = false; G.inBattle = false;
+  if(won) {
+    G.kills++; G.questKills++;
+    const xpGain = G.enemy.xp + Math.floor(Math.random()*10);
+    const goldGain = G.enemy.gold + Math.floor(Math.random()*20);
+    G.xp += xpGain; G.gold += goldGain;
+    document.getElementById('battle-history').innerHTML += `<div>✓ ${G.enemy.emoji} ${G.enemy.name} slain</div>`;
+
+    // Level up
+    let levelMsg = '';
+    while(G.xp >= G.xpNeeded) {
+      G.xp -= G.xpNeeded; G.level++;
+      G.xpNeeded = Math.round(G.xpNeeded*1.4);
+      G.maxHp += 15; G.hp = G.maxHp;
+      G.maxMp += 10; G.mp = G.maxMp;
+      G.atk += 3; G.def += 2; G.spd += 1; G.luk += 2;
+      levelMsg = `🌟 LEVEL UP! Now Level ${G.level}!`;
+    }
+
+    // Random item drop
+    let itemMsg = '';
+    if(Math.random() < 0.3) {
+      const item = ITEMS[Math.floor(Math.random()*ITEMS.length)];
+      G.inventory.push({...item});
+      itemMsg = `📦 Found: ${item.emoji} ${item.name}!`;
+      buildInventory();
+    }
+
+    const rewards = `
+      <div class="reward-line"><span>Experience</span><span>+${xpGain} XP</span></div>
+      <div class="reward-line"><span>Gold Coins</span><span>+${goldGain} 🪙</span></div>
+      ${levelMsg?`<div class="reward-line"><span>${levelMsg}</span></div>`:''}
+      ${itemMsg?`<div class="reward-line"><span>${itemMsg}</span></div>`:''}
+    `;
+    document.getElementById('victory-text').textContent = `${G.enemy.emoji} ${G.enemy.name} has been defeated!`;
+    document.getElementById('victory-rewards').innerHTML = rewards;
+    document.getElementById('victory-overlay').classList.add('show');
+    buildZoneGrid();
+    updateQuests();
+  } else {
+    document.getElementById('defeat-overlay').classList.add('show');
+  }
+  refreshUI();
+}
+
+function closeOverlay() {
+  document.getElementById('victory-overlay').classList.remove('show');
+  document.getElementById('battle-view').classList.remove('active');
+  document.getElementById('world-view').style.display = '';
+  document.getElementById('zone-label').textContent = `${ZONES.find(z=>z.id===G.currentZone)?.emoji||'🏔'} ${ZONES.find(z=>z.id===G.currentZone)?.name||'Unknown'} — Continue your journey`;
+  updateSkillBtns();
+}
+
+function revive() {
+  if(G.gold >= 20) { G.gold -= 20; }
+  G.hp = Math.round(G.maxHp * 0.5);
+  G.mp = Math.round(G.maxMp * 0.5);
+  document.getElementById('defeat-overlay').classList.remove('show');
+  document.getElementById('battle-view').classList.remove('active');
+  document.getElementById('world-view').style.display = '';
+  refreshUI();
+}
+
+// Floating damage numbers
+function floatDmg(parent, dmg, color) {
+  const el = document.createElement('div');
+  el.className = 'dmg-float';
+  el.textContent = `-${dmg}`;
+  el.style.color = color;
+  el.style.left = (Math.random()*40+30)+'%';
+  el.style.top = '20%';
+  parent.style.position = 'relative';
+  parent.appendChild(el);
+  setTimeout(()=>el.remove(), 1200);
+}
+
+// ══════════════════════════════════════════════════════
+//  ACTIONS
+// ══════════════════════════════════════════════════════
+function rest() {
+  if(G.battleActive) { addLog('Cannot rest during battle!','system'); return; }
+  const restore = Math.round(G.maxHp*0.3);
+  const mpRestore = Math.round(G.maxMp*0.4);
+  G.hp = Math.min(G.maxHp, G.hp+restore);
+  G.mp = Math.min(G.maxMp, G.mp+mpRestore);
+  G.gold = Math.max(0, G.gold-5);
+  addLog(`🏕 You rest at camp. +${restore} Prana, +${mpRestore} Shakti. (-5 Gold)`,'system');
+  refreshUI();
+}
+
+function visitShrine() {
+  if(G.battleActive) return;
+  const cost = G.level * 10;
+  if(G.gold < cost) { addLog(`🕌 Not enough gold. Shrine costs ${cost} coins.`,'system'); return; }
+  G.gold -= cost;
+  G.hp = G.maxHp; G.mp = G.maxMp;
+  addLog(`🕌 Shrine blessing! Fully restored. (-${cost} Gold)`,'special');
+  refreshUI();
+}
+
+function usePotion() {
+  if(G.potions <= 0) { addLog('No Amrit drops left!','system'); return; }
+  G.potions--;
+  const heal = 40;
+  G.hp = Math.min(G.maxHp, G.hp+heal);
+  addLog(`🧪 Used Amrit Drop! +${heal} Prana.`,'special');
+  refreshUI();
+}
+
+function toggleView() {
+  const bv = document.getElementById('battle-view');
+  const wv = document.getElementById('world-view');
+  if(G.battleActive) { addLog('Cannot leave during battle!','system'); return; }
+  if(bv.classList.contains('active')) {
+    bv.classList.remove('active'); wv.style.display = '';
+  } else {
+    bv.classList.add('active'); wv.style.display = 'none';
+  }
+}
+
+// ══════════════════════════════════════════════════════
+//  INVENTORY
+// ══════════════════════════════════════════════════════
+function buildInventory() {
+  const grid = document.getElementById('inventory-grid');
+  grid.innerHTML = '';
+  const slots = 9;
+  for(let i=0;i<slots;i++) {
+    const slot = document.createElement('div');
+    slot.className = 'inv-slot';
+    if(G.inventory[i]) {
+      const item = G.inventory[i];
+      slot.textContent = item.emoji;
+      slot.innerHTML = `${item.emoji}<span class="item-qty">1</span>`;
+      slot.title = `${item.name}: ${item.desc}`;
+      slot.onclick = () => useItem(i);
+    }
+    grid.appendChild(slot);
+  }
+}
+
+function useItem(idx) {
+  const item = G.inventory[idx];
+  if(!item) return;
+  switch(item.type) {
+    case 'potion': G.hp=Math.min(G.maxHp,G.hp+item.value); addLog(`${item.emoji} Used ${item.name}! +${item.value} Prana.`,'special'); break;
+    case 'fullheal': G.hp=G.maxHp; G.mp=G.maxMp; addLog(`${item.emoji} Used ${item.name}! Fully restored!`,'special'); break;
+    case 'stat':
+      if(item.stat==='atk') G.atk+=item.value;
+      else if(item.stat==='def') G.def+=item.value;
+      else if(item.stat==='spd') G.spd+=item.value;
+      else if(item.stat==='luk') G.luk+=item.value;
+      else if(item.stat==='mp') G.maxMp+=item.value;
+      addLog(`${item.emoji} Used ${item.name}! Stats enhanced!`,'special'); break;
+    case 'info': addLog(`${item.emoji} Next enemy revealed: ${ENEMIES[Math.floor(Math.random()*ENEMIES.length)].name}`,'system'); break;
+  }
+  G.inventory.splice(idx,1);
+  buildInventory();
+  refreshUI();
+}
+
+// ══════════════════════════════════════════════════════
+//  QUESTS
+// ══════════════════════════════════════════════════════
+function buildQuests() {
+  const list = document.getElementById('quest-list');
+  list.innerHTML = `
+    <div class="quest-item">
+      <div class="quest-name">🗡 Demon Slayer</div>
+      <div class="quest-desc">Defeat ${G.questGoal} enemies to prove your worth.</div>
+      <div class="quest-progress"><div class="quest-progress-fill" id="kill-progress" style="width:0%"></div></div>
+      <div style="font-size:0.65rem;color:var(--muted);margin-top:3px"><span id="kill-progress-text">0/${G.questGoal}</span></div>
+    </div>
+    <div class="quest-item" style="border-left-color:#3498db">
+      <div class="quest-name">🌟 Divine Seeker</div>
+      <div class="quest-desc">Reach Level 5 to unlock celestial realms.</div>
+    </div>
+    <div class="quest-item" style="border-left-color:#e74c3c">
+      <div class="quest-name">👑 Vanquish Ravana</div>
+      <div class="quest-desc">The demon king awaits in Lanka. Reach Lv 6.</div>
+    </div>
+  `;
+}
+
+function updateQuests() {
+  const pct = Math.min(100,(G.questKills/G.questGoal)*100);
+  const bar = document.getElementById('kill-progress');
+  const txt = document.getElementById('kill-progress-text');
+  if(bar) bar.style.width = pct+'%';
+  if(txt) txt.textContent = `${Math.min(G.questKills,G.questGoal)}/${G.questGoal}`;
+  if(G.questKills >= G.questGoal) {
+    const reward = 50;
+    G.gold += reward;
+    G.potions += 2;
+    addLog(`✅ Quest complete: Demon Slayer! +${reward} Gold, +2 Amrit!`,'special');
+    G.questKills = 0; G.questGoal = Math.round(G.questGoal * 1.5);
+    buildQuests();
+  }
+}
+
+// ══════════════════════════════════════════════════════
+//  BATTLE LOG
+// ══════════════════════════════════════════════════════
+function addLog(msg, type='') {
+  const log = document.getElementById('battle-log');
+  if(!log) return;
+  const line = document.createElement('div');
+  line.className = 'log-line ' + type;
+  line.textContent = msg;
+  log.appendChild(line);
+  log.scrollTop = log.scrollHeight;
+}
+
+// ══════════════════════════════════════════════════════
+//  LORE MODAL (quick implementation)
+// ══════════════════════════════════════════════════════
+function showLore() {
+  alert(`📜 THE SACRED LORE\n\n"In the age of Treta and Dvapara, when adharma rose like a tide across the three worlds, the Gods descended to restore cosmic balance. Shiva, Vishnu, Rama, Krishna, Hanuman, and Durga — each a pillar of dharma — chose mortal forms to battle the rising tide of asuras.\n\nYou are one of them.\n\nTraverse the sacred realms — from Kailash to Vaikuntha — defeating demons, collecting divine artifacts, and fulfilling your destiny.\n\nOM NAMAH SHIVAYA."`);
+}
+</script>
+</body>
+</html>

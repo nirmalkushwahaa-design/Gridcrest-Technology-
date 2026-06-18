@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { CtaBanner } from "@/components/CtaBanner";
 import { PageHero } from "@/components/PageHero";
-import heroInsight from "@/assets/insight-hero.png";
+import heroInsight from "@/assets/insight-hero.webp";
 
 type Tag = "News" | "Articles" | "Highlights";
 

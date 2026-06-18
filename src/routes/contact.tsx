@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import contactHeroImg from "@/assets/contact-hero.png";
-import contactEmailImg from "@/assets/contact-email.png";
-import contactPhoneImg from "@/assets/contact-phone.png";
+import contactHeroImg from "@/assets/contact-hero.webp";
+import contactEmailImg from "@/assets/contact-email.webp";
+import contactPhoneImg from "@/assets/contact-phone.webp";
 import { CtaBanner } from "@/components/CtaBanner";
 import { EyebrowChip, CategoryChip } from "@/components/ui/Chip";
 import { useState } from "react";

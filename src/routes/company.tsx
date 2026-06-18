@@ -2,15 +2,15 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { CtaBanner } from "@/components/CtaBanner";
 import { PageHero } from "@/components/PageHero";
 import milestoneActiveImg from "@/assets/milestone-active.svg";
-import leaderRamesh from "@/assets/Ramesh Kunhikannan Executive Chairman Kaynes Technology.png";
-import leaderJairam from "@/assets/Jairam P SAMPATH Director & Chief Financial Officer.png";
-import leaderAlexander from "@/assets/Mr. Alexander Koshy Director at Kaynes Technology.png";
-import leaderUser1 from "@/assets/USER 1.png";
-import leaderUser2 from "@/assets/USER 2.png";
-import leaderUser3 from "@/assets/USER 3.png";
-import leaderUser4 from "@/assets/USER 4.png";
-import leaderUser5 from "@/assets/USER 5.png";
-import aboutHeroImg from "@/assets/about-hero.png";
+import leaderRamesh from "@/assets/Ramesh Kunhikannan Executive Chairman Kaynes Technology.webp";
+import leaderJairam from "@/assets/Jairam P SAMPATH Director & Chief Financial Officer.webp";
+import leaderAlexander from "@/assets/Mr. Alexander Koshy Director at Kaynes Technology.webp";
+import leaderUser1 from "@/assets/USER 1.webp";
+import leaderUser2 from "@/assets/USER 2.webp";
+import leaderUser3 from "@/assets/USER 3.webp";
+import leaderUser4 from "@/assets/USER 4.webp";
+import leaderUser5 from "@/assets/USER 5.webp";
+import aboutHeroImg from "@/assets/about-hero.webp";
 import React, { useRef } from "react";
 import {
   ArrowRight,
