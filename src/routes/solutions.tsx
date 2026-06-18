@@ -13,6 +13,8 @@ import anantaConsumer from "@/assets/anantya-consumer.png";
 import anantaSynkra from "@/assets/anantya-synkra.png";
 import anantaWfm from "@/assets/anantya-wfm.png";
 import commModules from "@/assets/sol-communication-modules.png";
+import anantaPrepayment from "@/assets/Prepayment.png";
+import anantaBcs from "@/assets/BCS.png";
 import { useState, useEffect, useRef } from "react";
 import {
   ArrowRight,
@@ -331,6 +333,7 @@ const SOFTWARE = [
     tag: "Prepayment Engine",
     name: "Anantya Prepayment Engine",
     fullName: "Anantya Prepayment Engine",
+    img: anantaPrepayment,
     icon: CreditCard,
     desc: "Support high-volume recharge operations while automating credit management and service control workflows.",
     sub: "Deliver a frictionless prepaid experience for utilities and consumers.",
@@ -344,6 +347,7 @@ const SOFTWARE = [
     tag: "Engineering Tool",
     name: "Anantya BCS",
     fullName: "Anantya Base Computer Software (BCS)",
+    img: anantaBcs,
     icon: MonitorCog,
     desc: "Anantya BCS enables utilities, AMISPs, and field teams to securely access, configure, analyze, and manage DLMS/COSEM smart meters without requiring a full AMI infrastructure. Designed for meter testing, commissioning, diagnostics, and operational support, it provides direct visibility into meter data and performance.",
     sub: "Simplify meter operations with a powerful engineering and field support tool.",
@@ -447,7 +451,7 @@ function SolutionPortfolio() {
                 </div>
                 <div className="mt-7">
                   <h3 className="text-base font-bold" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>Standard Features</h3>
-                  <ul className="mt-3 grid grid-cols-2 gap-x-6 gap-y-2">
+                  <ul className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
                     {meter.features.map((f) => (
                       <li key={f} className="flex items-center gap-2 text-sm text-foreground/80">
                         <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
@@ -519,7 +523,7 @@ function SolutionPortfolio() {
                     {/* Gradient block — rounded with padding so it floats inside the card */}
                     <div className={`flex items-center justify-center p-5 ${imgRight ? "lg:order-2" : ""}`}>
                       <div
-                        className={`flex w-full min-h-[220px] lg:min-h-[360px] items-center justify-center rounded-2xl bg-gradient-to-br ${SW_GRADIENTS[i]} overflow-hidden p-6 lg:p-8`}
+                        className={`flex w-full min-h-[200px] lg:min-h-[360px] items-center justify-center rounded-2xl bg-gradient-to-br ${SW_GRADIENTS[i]} overflow-hidden p-6 lg:p-8`}
                       >
                         {(s as any).img ? (
                           <img src={(s as any).img} alt={s.name} className="w-full max-h-[200px] lg:max-h-[340px] object-contain select-none" draggable={false} />
@@ -536,7 +540,7 @@ function SolutionPortfolio() {
                     <div className={`flex flex-col justify-center p-8 lg:p-10 ${imgRight ? "lg:order-1" : ""}`}>
                       <h3 className="text-2xl font-normal tracking-tight" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>{s.fullName}</h3>
                       <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
-                      <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-2 border-t border-border pt-6">
+                      <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 border-t border-border pt-6">
                         {s.highlights.map((h) => (
                           <li key={h} className="flex items-center gap-2 text-sm text-foreground/80">
                             <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
@@ -568,7 +572,7 @@ function SolutionPortfolio() {
                 so utilities can focus on outcomes.
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {[
                 "Project Management", "Meter Installation",
                 "Network Operations", "Field Maintenance",

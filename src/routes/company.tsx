@@ -555,7 +555,7 @@ function MemberCard({ name, title, img }: { name: string; title: string; img: st
       <img
         src={img}
         alt={name}
-        className="w-full select-none"
+        className="w-3/4 sm:w-full select-none"
         draggable={false}
       />
 
