@@ -119,7 +119,7 @@ const MILESTONES = [
   { year: "2022",    title: "Power Grid Win",        text: "Major project secured from Power Grid Corporation of India." },
   { year: "2022-24", title: "Rapid Expansion",      text: "Rapid organisational growth and large-scale project expansion across India." },
   { year: "2024-25", title: "Kaynes Acquisition",   text: "Strategic acquisition by Kaynes Technologies, enabling industrial-scale manufacturing." },
-  { year: "2025-26", title: "GridCrest Launch",     text: "Rebranding and launch of GridCrest — one ecosystem, every layer of the grid.", active: true },
+  { year: "2026",    title: "GridCrest Launch",     text: "Rebranding and launch of GridCrest — one ecosystem, every layer of the grid.", active: true },
 ];
 
 const utilityPartners = [
@@ -497,7 +497,7 @@ function MilestonesSection() {
                     >
                       {m.year}
                     </time>
-                    <h3 className="my-2 text-sm font-semibold text-foreground">{m.title}</h3>
+                    <h3 className={`my-2 font-semibold text-foreground ${isActive ? "text-base" : "text-sm"}`}>{m.title}</h3>
                     <p className="text-xs leading-relaxed text-muted-foreground">{m.text}</p>
                   </div>
                 </li>

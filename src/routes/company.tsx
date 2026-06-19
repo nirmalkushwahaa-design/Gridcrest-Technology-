@@ -320,7 +320,7 @@ const MILESTONES = [
   { year: "2022",    title: "Power Grid Win",       text: "Major project secured from Power Grid Corporation of India." },
   { year: "2022-24", title: "Rapid Expansion",     text: "Rapid organisational growth and large-scale project expansion across India." },
   { year: "2024-25", title: "Kaynes Acquisition",  text: "Strategic acquisition by Kaynes Technologies, enabling industrial-scale manufacturing." },
-  { year: "2025-26", title: "GridCrest Launch",    text: "Rebranding and launch of GridCrest — one ecosystem, every layer of the grid.", active: true },
+  { year: "2026",    title: "GridCrest Launch",    text: "Rebranding and launch of GridCrest — one ecosystem, every layer of the grid.", active: true },
 ];
 
 function OurJourney() {
@@ -430,7 +430,7 @@ function OurJourney() {
                     >
                       {m.year}
                     </time>
-                    <h3 className="my-2 text-sm font-semibold text-foreground">{m.title}</h3>
+                    <h3 className={`my-2 font-semibold text-foreground ${isActive ? "text-base" : "text-sm"}`}>{m.title}</h3>
                     <p className="text-xs leading-relaxed text-muted-foreground">{m.text}</p>
                   </div>
                 </li>
@@ -511,15 +511,18 @@ function MissionVisionValues() {
 }
 
 /* ─── Leadership ─────────────────────────────────────────────────────────────── */
-const TOP_LEADERS = [
+const KAYNES_LEADERS = [
   { name: "Ramesh Kunhikannan", title: "Executive Chairman, Kaynes Technology", img: leaderRamesh },
   { name: "Jairam P Sampath",   title: "Director & Chief Financial Officer",    img: leaderJairam },
   { name: "Alexander Koshy",    title: "Director, Kaynes Technology",           img: leaderAlexander },
-  { name: "Leader Name",        title: "Title / Designation",                   img: leaderUser1 },
-  { name: "Leader Name",        title: "Title / Designation",                   img: leaderUser2 },
-  { name: "Leader Name",        title: "Title / Designation",                   img: leaderUser3 },
-  { name: "Leader Name",        title: "Title / Designation",                   img: leaderUser4 },
-  { name: "Leader Name",        title: "Title / Designation",                   img: leaderUser5 },
+];
+
+const GRID_MANAGEMENT = [
+  { name: "Leader Name", title: "Title / Designation", img: leaderUser1 },
+  { name: "Leader Name", title: "Title / Designation", img: leaderUser2 },
+  { name: "Leader Name", title: "Title / Designation", img: leaderUser3 },
+  { name: "Leader Name", title: "Title / Designation", img: leaderUser4 },
+  { name: "Leader Name", title: "Title / Designation", img: leaderUser5 },
 ];
 
 const KAYNES_TEAM = [
@@ -582,16 +585,28 @@ function LeadershipSection() {
   return (
     <section className="py-20">
       <div className="mx-auto max-w-7xl px-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">Leadership</p>
-        <h2 className="mt-3 max-w-xl text-4xl font-bold leading-tight tracking-tight lg:text-5xl">
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent text-center">Leadership</p>
+        <h2 className="mt-3 text-4xl font-bold leading-tight tracking-tight lg:text-5xl text-center">
           Leadership driving transformation.
         </h2>
-        <p className="mt-4 max-w-2xl text-muted-foreground">
+        <p className="mt-4 text-muted-foreground text-center">
           Experienced leaders across energy, manufacturing, software and digital infrastructure — shaping the next generation of intelligent utilities.
         </p>
 
-        <div className="mt-12 grid gap-[30px] sm:grid-cols-2 lg:grid-cols-4">
-          {TOP_LEADERS.map((m, i) => <MemberCard key={i} {...m} />)}
+        {/* Kaynes Leaders */}
+        <p className="mt-12 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground text-center">Kaynes Leaders</p>
+        <div className="mt-6 mx-auto grid gap-[30px] sm:grid-cols-2 lg:grid-cols-3" style={{ maxWidth: "calc(75% - 7.5px)" }}>
+          {KAYNES_LEADERS.map((m, i) => <MemberCard key={i} {...m} />)}
+        </div>
+
+        {/* Gridcrest Management */}
+        <p className="mt-14 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground text-center">Gridcrest Management</p>
+        <div className="mt-6 mx-auto flex flex-wrap justify-center gap-[30px]" style={{ maxWidth: "calc(75% - 7.5px)" }}>
+          {GRID_MANAGEMENT.map((m, i) => (
+            <div key={i} className="w-full sm:w-[calc(50%-15px)] lg:w-[calc(33.333%-20px)]">
+              <MemberCard {...m} />
+            </div>
+          ))}
         </div>
 
       </div>
