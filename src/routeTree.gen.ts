@@ -15,6 +15,7 @@ import { Route as SolutionsRouteImport } from './routes/solutions'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ManufacturingRouteImport } from './routes/manufacturing'
 import { Route as IndustriesRouteImport } from './routes/industries'
+import { Route as ExperienceRouteImport } from './routes/experience'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CompanyRouteImport } from './routes/company'
 import { Route as CareersRouteImport } from './routes/careers'
@@ -72,6 +73,11 @@ const ManufacturingRoute = ManufacturingRouteImport.update({
 const IndustriesRoute = IndustriesRouteImport.update({
   id: '/industries',
   path: '/industries',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExperienceRoute = ExperienceRouteImport.update({
+  id: '/experience',
+  path: '/experience',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -223,6 +229,7 @@ export interface FileRoutesByFullPath {
   '/careers': typeof CareersRouteWithChildren
   '/company': typeof CompanyRouteWithChildren
   '/contact': typeof ContactRouteWithChildren
+  '/experience': typeof ExperienceRoute
   '/industries': typeof IndustriesRouteWithChildren
   '/manufacturing': typeof ManufacturingRoute
   '/privacy': typeof PrivacyRoute
@@ -259,6 +266,7 @@ export interface FileRoutesByTo {
   '/careers': typeof CareersRouteWithChildren
   '/company': typeof CompanyRouteWithChildren
   '/contact': typeof ContactRouteWithChildren
+  '/experience': typeof ExperienceRoute
   '/industries': typeof IndustriesRouteWithChildren
   '/manufacturing': typeof ManufacturingRoute
   '/privacy': typeof PrivacyRoute
@@ -296,6 +304,7 @@ export interface FileRoutesById {
   '/careers': typeof CareersRouteWithChildren
   '/company': typeof CompanyRouteWithChildren
   '/contact': typeof ContactRouteWithChildren
+  '/experience': typeof ExperienceRoute
   '/industries': typeof IndustriesRouteWithChildren
   '/manufacturing': typeof ManufacturingRoute
   '/privacy': typeof PrivacyRoute
@@ -334,6 +343,7 @@ export interface FileRouteTypes {
     | '/careers'
     | '/company'
     | '/contact'
+    | '/experience'
     | '/industries'
     | '/manufacturing'
     | '/privacy'
@@ -370,6 +380,7 @@ export interface FileRouteTypes {
     | '/careers'
     | '/company'
     | '/contact'
+    | '/experience'
     | '/industries'
     | '/manufacturing'
     | '/privacy'
@@ -406,6 +417,7 @@ export interface FileRouteTypes {
     | '/careers'
     | '/company'
     | '/contact'
+    | '/experience'
     | '/industries'
     | '/manufacturing'
     | '/privacy'
@@ -443,6 +455,7 @@ export interface RootRouteChildren {
   CareersRoute: typeof CareersRouteWithChildren
   CompanyRoute: typeof CompanyRouteWithChildren
   ContactRoute: typeof ContactRouteWithChildren
+  ExperienceRoute: typeof ExperienceRoute
   IndustriesRoute: typeof IndustriesRouteWithChildren
   ManufacturingRoute: typeof ManufacturingRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -498,6 +511,13 @@ declare module '@tanstack/react-router' {
       path: '/industries'
       fullPath: '/industries'
       preLoaderRoute: typeof IndustriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/experience': {
+      id: '/experience'
+      path: '/experience'
+      fullPath: '/experience'
+      preLoaderRoute: typeof ExperienceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -789,6 +809,7 @@ const rootRouteChildren: RootRouteChildren = {
   CareersRoute: CareersRouteWithChildren,
   CompanyRoute: CompanyRouteWithChildren,
   ContactRoute: ContactRouteWithChildren,
+  ExperienceRoute: ExperienceRoute,
   IndustriesRoute: IndustriesRouteWithChildren,
   ManufacturingRoute: ManufacturingRoute,
   PrivacyRoute: PrivacyRoute,
