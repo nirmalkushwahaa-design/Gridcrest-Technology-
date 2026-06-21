@@ -516,8 +516,8 @@ const KAYNES_LEADERS = [
   { name: "Ramesh Kunhikannan", title: "Executive Chairman, Kaynes Technology", img: leaderRamesh },
   { name: "Jairam P Sampath",   title: "Director & Chief Financial Officer",    img: leaderJairam },
   { name: "Alexander Koshy",    title: "Director, Kaynes Technology",           img: leaderAlexander },
-  { name: "Leader Name",        title: "Title / Designation",                   img: leaderUser1, circleFill: "#FFD6E4" },
-  { name: "Leader Name",        title: "Title / Designation",                   img: leaderUser2, circleFill: "#FFD6E4" },
+  { name: "Leader Name",        title: "Title / Designation",                   img: leaderUser1, circleFill: "#F4F1FD" },
+  { name: "Leader Name",        title: "Title / Designation",                   img: leaderUser2, circleFill: "#F4F1FD" },
 ];
 
 const GRID_MANAGEMENT = [
@@ -579,7 +579,7 @@ function MemberCard({ name, title, img, bgColor = "#EBFDFF", circleFill, circleC
               draggable={false}
               className={`relative select-none ${
                 circleClip
-                  ? "w-[85%] rounded-full object-cover aspect-square"
+                  ? "w-[90%] rounded-full object-cover aspect-square"
                   : "w-full"
               }`}
             />
@@ -623,7 +623,7 @@ function LeadershipSection() {
         <div className="mt-6 flex flex-wrap justify-center gap-[30px]">
           {KAYNES_LEADERS.map((m, i) => (
             <div key={i} className="w-full sm:w-[calc(50%-15px)] lg:w-[calc(20%-24px)]">
-              <MemberCard {...m} bgColor="#F4F1FD" />
+              <MemberCard {...m} bgColor="#F4F1FD" circleClip />
             </div>
           ))}
         </div>
