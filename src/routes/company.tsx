@@ -11,6 +11,7 @@ import leaderUser3 from "@/assets/USER 3.webp";
 import leaderUser4 from "@/assets/USER 4.webp";
 import leaderUser5 from "@/assets/USER 5.webp";
 import aboutHeroImg from "@/assets/about-hero.webp";
+import companyCultureImg from "@/assets/company-culture.webp";
 import React, { useRef } from "react";
 import {
   ArrowRight,
@@ -515,6 +516,8 @@ const KAYNES_LEADERS = [
   { name: "Ramesh Kunhikannan", title: "Executive Chairman, Kaynes Technology", img: leaderRamesh },
   { name: "Jairam P Sampath",   title: "Director & Chief Financial Officer",    img: leaderJairam },
   { name: "Alexander Koshy",    title: "Director, Kaynes Technology",           img: leaderAlexander },
+  { name: "Leader Name",        title: "Title / Designation",                   img: leaderUser1, circleFill: "#FFD6E4" },
+  { name: "Leader Name",        title: "Title / Designation",                   img: leaderUser2, circleFill: "#FFD6E4" },
 ];
 
 const GRID_MANAGEMENT = [
@@ -543,24 +546,46 @@ const GRIDCREST_TEAM = [
   { name: "Kiran Desai",   title: "Head — Design & UX",        img: "https://i.pravatar.cc/150?img=52" },
 ];
 
-function MemberCard({ name, title, img }: { name: string; title: string; img: string }) {
+function MemberCard({ name, title, img, bgColor = "#EBFDFF", circleFill, circleClip }: {
+  name: string; title: string; img: string; bgColor?: string; circleFill?: string; circleClip?: boolean;
+}) {
   return (
     <div
       className="flex flex-col items-center overflow-hidden"
       style={{
         borderRadius: "178px 178px 14px 14px",
-        background: "linear-gradient(180deg, #EBFDFF 0%, #FFF 100%)",
+        background: `linear-gradient(180deg, ${bgColor} 0%, #FFF 100%)`,
         padding: "24px",
         gap: "24px",
       }}
     >
-      {/* Photo */}
-      <img
-        src={img}
-        alt={name}
-        className="w-3/4 sm:w-full select-none"
-        draggable={false}
-      />
+      {/* Photo area */}
+      <div className="relative w-full flex items-end justify-center">
+        {circleFill ? (
+          /* Solid placeholder circle */
+          <div
+            className="mx-auto rounded-full"
+            style={{ width: "90%", aspectRatio: "1 / 1", background: circleFill }}
+          />
+        ) : (
+          <>
+            <div
+              className="absolute left-1/2 -translate-x-1/2 top-0 rounded-full"
+              style={{ width: "90%", aspectRatio: "1 / 1", background: bgColor }}
+            />
+            <img
+              src={img}
+              alt={name}
+              draggable={false}
+              className={`relative select-none ${
+                circleClip
+                  ? "w-[85%] rounded-full object-cover aspect-square"
+                  : "w-full"
+              }`}
+            />
+          </>
+        )}
+      </div>
 
       {/* Text */}
       <div className="text-center">
@@ -593,18 +618,22 @@ function LeadershipSection() {
           Experienced leaders across energy, manufacturing, software and digital infrastructure — shaping the next generation of intelligent utilities.
         </p>
 
-        {/* Kaynes Leaders */}
-        <p className="mt-12 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground text-center">Kaynes Leaders</p>
-        <div className="mt-6 mx-auto grid gap-[30px] sm:grid-cols-2 lg:grid-cols-3" style={{ maxWidth: "calc(75% - 7.5px)" }}>
-          {KAYNES_LEADERS.map((m, i) => <MemberCard key={i} {...m} />)}
+        {/* Board Members */}
+        <p className="mt-12 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground text-center">Board Members</p>
+        <div className="mt-6 flex flex-wrap justify-center gap-[30px]">
+          {KAYNES_LEADERS.map((m, i) => (
+            <div key={i} className="w-full sm:w-[calc(50%-15px)] lg:w-[calc(20%-24px)]">
+              <MemberCard {...m} bgColor="#F4F1FD" />
+            </div>
+          ))}
         </div>
 
         {/* Gridcrest Management */}
         <p className="mt-14 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground text-center">Gridcrest Management</p>
-        <div className="mt-6 mx-auto flex flex-wrap justify-center gap-[30px]" style={{ maxWidth: "calc(75% - 7.5px)" }}>
+        <div className="mt-6 flex flex-wrap justify-center gap-[30px]">
           {GRID_MANAGEMENT.map((m, i) => (
-            <div key={i} className="w-full sm:w-[calc(50%-15px)] lg:w-[calc(33.333%-20px)]">
-              <MemberCard {...m} />
+            <div key={i} className="w-full sm:w-[calc(50%-15px)] lg:w-[calc(20%-24px)]">
+              <MemberCard {...m} circleClip />
             </div>
           ))}
         </div>
@@ -647,6 +676,19 @@ function PeopleAndCulture() {
               learning — creating an environment where individuals can grow while delivering
               meaningful impact.
             </p>
+
+            <div className="mt-6 space-y-4">
+              {CULTURE_PILLARS.map((p) => (
+                <div key={p.label} className="flex gap-3">
+                  <div className="mt-1 h-2 w-2 shrink-0 rounded-full bg-accent" />
+                  <div>
+                    <p className="text-sm font-semibold text-foreground">{p.label}</p>
+                    <p className="text-sm text-muted-foreground">{p.body}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
             <Link
               to="/contact"
               className="mt-7 inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:gap-2.5 transition-all"
@@ -656,17 +698,12 @@ function PeopleAndCulture() {
           </div>
 
           <div className="lg:col-span-7">
-            <div className="grid grid-cols-2 gap-5">
-              {CULTURE_PILLARS.map((p) => (
-                <div key={p.label} className="reveal-area rounded-2xl border border-border bg-card p-6">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent">
-                    <p.icon className="h-5 w-5" />
-                  </span>
-                  <h3 className="mt-4 text-base font-bold" data-no-reveal style={{ WebkitTextFillColor: "inherit" }}>{p.label}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{p.body}</p>
-                </div>
-              ))}
-            </div>
+            <img
+              src={companyCultureImg}
+              alt="Life at GridCrest"
+              className="w-full h-full min-h-[420px] rounded-2xl object-cover select-none"
+              draggable={false}
+            />
           </div>
         </div>
       </div>

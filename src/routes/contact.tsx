@@ -202,7 +202,7 @@ function ContactForm({ category }: { category: string }) {
         e.preventDefault();
         setSent(true);
       }}
-      className="rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-card)] lg:p-10"
+      className="rounded-3xl border border-border bg-card p-8 lg:p-10"
     >
       <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-accent">
         <Clock className="h-3.5 w-3.5" /> Replies in &lt; 1 business day
