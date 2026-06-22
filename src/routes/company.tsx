@@ -10,6 +10,7 @@ import leaderUser2 from "@/assets/USER 2.webp";
 import leaderUser3 from "@/assets/USER 3.webp";
 import leaderUser4 from "@/assets/USER 4.webp";
 import leaderUser5 from "@/assets/USER 5.webp";
+import leaderUser6 from "@/assets/USER 6.webp";
 import aboutHeroImg from "@/assets/about-hero.webp";
 import companyCultureImg from "@/assets/company-culture.webp";
 import React, { useRef } from "react";
@@ -521,7 +522,7 @@ const KAYNES_LEADERS = [
 ];
 
 const GRID_MANAGEMENT = [
-  { name: "Leader Name", title: "Title / Designation", img: leaderUser1 },
+  { name: "Leader Name", title: "Title / Designation", img: leaderUser6 },
   { name: "Leader Name", title: "Title / Designation", img: leaderUser2 },
   { name: "Leader Name", title: "Title / Designation", img: leaderUser3 },
   { name: "Leader Name", title: "Title / Designation", img: leaderUser4 },

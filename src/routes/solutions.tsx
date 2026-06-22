@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { CtaBanner } from "@/components/CtaBanner";
 import { PageHero } from "@/components/PageHero";
 import heroSolutions from "@/assets/solutions-hero.webp";
-import meterMe280 from "@/assets/meter-me280.webp";
+import meterMe280 from "@/assets/meter-me260.webp";
 import meterMt260 from "@/assets/meter-mt260.webp";
 import meterMt360 from "@/assets/meter-mt360.webp";
 import meterMt490 from "@/assets/meter-mt490.webp";
@@ -173,8 +173,8 @@ function EcosystemChips() {
 /* ─── SOLUTION PORTFOLIO ────────────────────────────────────────────────────── */
 const METERS = [
   {
-    id: "ME280",
-    label: "ME 280",
+    id: "ME260",
+    label: "ME 260",
     subtitle: "Single Phase",
     img: meterMe280,
     specs: [
@@ -415,8 +415,8 @@ function SolutionPortfolio() {
 
           <div className="mt-8">
             <div className="grid gap-6 lg:grid-cols-[580px_1fr]">
-              <div className="flex items-center justify-center rounded-3xl bg-[#f4f8fc] p-4 sm:p-8">
-                <img src={meter.img} alt={meter.label} className="h-full w-full max-h-[520px] object-contain select-none" draggable={false} />
+              <div className="flex items-center justify-center rounded-3xl border border-border p-2">
+                <img src={meter.img} alt={meter.label} className="h-full w-full max-h-[520px] object-contain select-none scale-110" draggable={false} />
               </div>
               <div className="p-8 lg:p-10">
                 <div className="flex flex-nowrap overflow-x-auto gap-2 pb-1">

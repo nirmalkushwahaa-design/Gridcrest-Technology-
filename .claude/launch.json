@@ -2,6 +2,13 @@
   "version": "0.0.1",
   "configurations": [
     {
+      "name": "ai-dashboard",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["C:\\AI\\dashboard\\server.py"],
+      "port": 4000,
+      "autoPort": false
+    },
+    {
       "name": "gridcrest-dev",
       "runtimeExecutable": "C:\\Users\\Neelk\\.bun\\bin\\bun.exe",
       "runtimeArgs": ["run", "dev"],
