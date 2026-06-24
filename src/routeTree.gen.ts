@@ -43,6 +43,13 @@ import { Route as CompanyGovernanceRouteImport } from './routes/company.governan
 import { Route as CompanyCultureRouteImport } from './routes/company.culture'
 import { Route as CareersStoriesRouteImport } from './routes/careers.stories'
 import { Route as CareersCultureRouteImport } from './routes/careers.culture'
+import { Route as DesignShowcaseRouteImport } from './routes/design-showcase'
+
+const DesignShowcaseRoute = DesignShowcaseRouteImport.update({
+  id: '/design-showcase',
+  path: '/design-showcase',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
@@ -220,6 +227,7 @@ const CareersCultureRoute = CareersCultureRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/design-showcase': typeof DesignShowcaseRoute
   '/careers': typeof CareersRouteWithChildren
   '/company': typeof CompanyRouteWithChildren
   '/contact': typeof ContactRouteWithChildren
@@ -256,6 +264,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/design-showcase': typeof DesignShowcaseRoute
   '/careers': typeof CareersRouteWithChildren
   '/company': typeof CompanyRouteWithChildren
   '/contact': typeof ContactRouteWithChildren
@@ -293,6 +302,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/design-showcase': typeof DesignShowcaseRoute
   '/careers': typeof CareersRouteWithChildren
   '/company': typeof CompanyRouteWithChildren
   '/contact': typeof ContactRouteWithChildren
@@ -331,6 +341,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/design-showcase'
     | '/careers'
     | '/company'
     | '/contact'
@@ -367,6 +378,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/design-showcase'
     | '/careers'
     | '/company'
     | '/contact'
@@ -403,6 +415,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/design-showcase'
     | '/careers'
     | '/company'
     | '/contact'
@@ -440,6 +453,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DesignShowcaseRoute: typeof DesignShowcaseRoute
   CareersRoute: typeof CareersRouteWithChildren
   CompanyRoute: typeof CompanyRouteWithChildren
   ContactRoute: typeof ContactRouteWithChildren
@@ -526,6 +540,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/design-showcase': {
+      id: '/design-showcase'
+      path: '/design-showcase'
+      fullPath: '/design-showcase'
+      preLoaderRoute: typeof DesignShowcaseRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/insight/': {
@@ -786,6 +807,7 @@ const SolutionsRouteWithChildren = SolutionsRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DesignShowcaseRoute: DesignShowcaseRoute,
   CareersRoute: CareersRouteWithChildren,
   CompanyRoute: CompanyRouteWithChildren,
   ContactRoute: ContactRouteWithChildren,
